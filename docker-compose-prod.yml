@@ -6,7 +6,7 @@ services:
             args:
                 ENV: prod 
 
-        container_name: frontend
+        container_name: frontend-prod
         ports:
             - "80:80"
             - "443:443"
