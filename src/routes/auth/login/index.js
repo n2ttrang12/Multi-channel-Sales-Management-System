@@ -1,15 +1,15 @@
-import React, {useState, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import {useNavigate} from "react-router";
-
 import { useAuth } from "global";
-import {Form, Spin} from "components";
-import {routerLinks} from "utils";
+import { Form, Spin } from "components";
+import { routerLinks } from "utils";
 import { ColumnLogin } from "columns/auth";
-import {UserService} from "services/user";
+import { UserService } from "services/user";
+import './index.less'
 
-const Page = ({location}) => {
+const Page = ({ location }) => {
   const { t } = useTranslation();
   const auth = useAuth();
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const Page = ({location}) => {
       setLoading(false);
       if (res.data) {
         auth.login(res.data);
-        navigate(routerLinks("Dashboard"), {replace: true});
+        navigate(routerLinks("Dashboard"), { replace: true });
       }
     } catch (err) {
       console.log("Error is:", err);
@@ -35,27 +35,28 @@ const Page = ({location}) => {
   };
 
   return (
-    <Fragment>
-      <div className="mb-8">
-        <h1 className="intro-x text-4xl mb-3 font-bold">{t("routes.auth.login.title")}</h1>
-        <h5 className="intro-x font-medium text-gray-300">{t("routes.auth.login.subTitle")}</h5>
+    <div className="relative bottom-0 right-0">
+      
+      <div className="mb-8 mt-14 ">
+        <h1 className=" text-4xl mb-8 font-bold text-cl text-center text-cyan-900">{'Đăng nhập'}</h1>
+        <h5 className=" font-medium  text-center text-cyan-900">{'Vui lòng đăng nhập bằng tài khoản được cung cấp bởi quản lý hệ thống'}</h5>
       </div>
       <Spin spinning={loading}>
         <Form
-          className="intro-x"
+          className=" w-3/4 mx-auto form-login"
           columns={ColumnLogin({ t })}
           textSubmit={t("routes.auth.login.Log In")}
           handSubmit={submit}
+          idSubmit={'submit-login'}
         />
       </Spin>
-      <div className="mt-3 intro-x">
-        Don't have an account?
-        <Link to={routerLinks("Login")}>
-          {t("routes.auth.login.Forgot Password")}
-        </Link>
+      <div className="intro-x pt-1 -mt-28 bottom-16 right-12 sm:right-[6rem] lg:right-16  md:mt-1 absolute xl:absolute  xl:pt-1 xl:-mt-32">
+        <p className="text-cyan-700 underline" >
+          {'Quên mật khẩu'}
+        </p>
       </div>
-    </Fragment>
+    </div>
   );
 };
-
+// to={routerLinks("ForgotPass")}
 export default Page;

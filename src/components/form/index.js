@@ -590,12 +590,12 @@ const Component = (
         {extendButton && extendButton(values)}
         {isShowCancel && (
           <button
-            className="bg-blue-500 text-white text-base p-2 w-full rounded-xl hover:bg-blue-400 mt-1"
+            className="bg-green-600 text-white text-base p-2 w-full rounded-lg hover:bg-green-400 mt-1"
             type="reset">{t("components.form.cancel")}</button>
         )}
         {textSubmit && (
           <button
-            className="bg-blue-500 text-white text-base p-2 w-full rounded-xl hover:bg-blue-400 mt-1"
+            className="bg-green-600 text-white text-base p-2 w-full rounded-lg hover:bg-green-400 mt-1"
             type="submit"
             id={idSubmit}
           >{textSubmit}</button>

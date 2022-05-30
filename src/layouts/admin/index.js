@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import classNames from "classnames";
 
 import { useAuth } from "global";
-import logo from "assets/images/logo.svg";
+import logo from "assets/images/logo.png";
 import avatar from "assets/images/avatar.jpeg";
 import us from "assets/svg/us.svg";
 import vn from "assets/svg/vn.svg";
