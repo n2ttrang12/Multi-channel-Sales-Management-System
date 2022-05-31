@@ -38,6 +38,8 @@
     "start:w": "set PORT=3335 && react-app-rewired start",
     "build:dev": "node ./update-build.js && env-cmd -f .env react-app-rewired build",
     "build:staging": "node ./update-build.js && env-cmd -f .env.staging react-app-rewired build",
+    "build:balance2": "node ./update-build.js && env-cmd -f .env.balance2 react-app-rewired build",
+    "build:uat": "node ./update-build.js && env-cmd -f .env.uat react-app-rewired build",
     "build:prod": "node ./update-build.js && env-cmd -f .env.prod react-app-rewired build",
     "test": "npx codeceptjs run"
   },
