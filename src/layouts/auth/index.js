@@ -48,12 +48,12 @@ const Layout = ({ children }) => {
     <div className='h-full overflow-scroll'>
       <div className="bg-white bg-cover bg-center h-full relative min-h-[600px] ">
         <div className="block lg:flex  h-full">
-          <div className="w-full lg:w-1/2  relative lg:flex justify-between flex-col hidden !bg-cyan-900"
+          <div className="w-full lg:w-1/2  relative lg:flex justify-between flex-col hidden !bg-green-900"
           >
             <div
               className={classNames(
                 imageURL,
-                "opacity-40 bg-cover bg-center w-full  lg:min-h-full  min-h-[600px] relative overflow-hidden flex justify-between flex-col"
+                "opacity-60 bg-cover bg-center w-full  lg:min-h-full  min-h-[600px] relative overflow-hidden flex justify-between flex-col"
               )}
             >
               <img src={logo} alt="logoUhouse" className="w-10 sm:w-20 p-4" />
