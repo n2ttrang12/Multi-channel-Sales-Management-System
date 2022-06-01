@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Select, Dropdown } from "antd";
-import { useTranslation } from "react-i18next";
+import { Dropdown } from "antd";
 import { useNavigate } from "react-router";
 import classNames from "classnames";
 
 import { useAuth } from "global";
 import logo from "assets/images/logo.svg";
+import arrow from "assets/images/arrow.svg";
 import avatar from "assets/images/avatar.jpeg";
-import us from "assets/svg/us.svg";
-import vn from "assets/svg/vn.svg";
 
 // import menus from "./menus";
 import "./index.less";
@@ -17,9 +15,8 @@ import { Avatar } from "components";
 import Menu from './menu'
 
 const Layout = ({ children }) => {
-  const { t, i18n } = useTranslation();
   // menuVertical, permission,
-  const { user, changeLanguage } = useAuth();
+  const { user, } = useAuth();
   const navigate = useNavigate();
 
   const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1024);
@@ -106,17 +103,21 @@ const Layout = ({ children }) => {
       <Header isCollapsed={isCollapsed} isDesktop={isDesktop} />
       <div
         className={classNames(
-          "t-10 rounded-tr-3xl flex items-center justify-between text-gray-800 hover:text-gray-500 h-20 fixed top-0 left-0 px-5 font-bold transition-all duration-300 ease-in-out z-10",
+          "t-10 rounded-tr-3xl flex items-center text-gray-800 hover:text-gray-500 h-20 fixed top-0 left-0 px-5 font-bold transition-all duration-300 ease-in-out z-10",
           {
-            'w-80': !isCollapsed && isDesktop,
-            'w-20': isCollapsed,
+            'w-80 justify-between': !isCollapsed && isDesktop,
+            'w-20 justify-center': isCollapsed,
             'bg-teal-900': isDesktop,
             'bg-blue-50': !isDesktop
           })}
       >
         <div >
           <a href="/" className="flex items-center">
-            <img className="w-10" src={logo} alt="" />
+            <img className={classNames(
+              'w-10',
+              {
+                'hidden': !!isCollapsed || !isDesktop
+              })} src={logo} alt="" />
             <div
               id={'name-application'}
               className={classNames(
@@ -128,16 +129,17 @@ const Layout = ({ children }) => {
             >
               BALANCE
             </div>
+
           </a>
         </div>
-
-        <div className={classNames("hamburger", { 'is-active': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop) })} onClick={() => set_isCollapsed(!isCollapsed)}>
-          <span className="line" /><span className="line" /><span className="line" />
+        {/* className={classNames("hamburger", )} */}
+        <div onClick={() => set_isCollapsed(!isCollapsed)}>
+          <img className={classNames("w-4 cursor-pointer", { 'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop) })} src={arrow} ></img>
         </div>
       </div>
       <div
         className={classNames("fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out",
-          {'w-80': !isCollapsed, 'w-20': isCollapsed, '-left-20': isCollapsed && !isDesktop})}
+          { 'w-80': !isCollapsed, 'w-20': isCollapsed, '-left-20': isCollapsed && !isDesktop })}
       >
 
         <Menu isCollapsed={isCollapsed} />

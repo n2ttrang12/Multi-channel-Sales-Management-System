@@ -17,7 +17,7 @@ const Layout = ({isCollapsed = false}) => {
           return (
             <li
               key={index}
-              className={classNames("flex items-center px-3 py-1 m-3", {'bg-white text-blue-500 rounded-2xl': location.pathname === routerLinks(item.name)})}
+              className={classNames("flex items-center px-3 py-1 m-3", {'bg-teal-700 text-white rounded-2xl': location.pathname === routerLinks(item.name)})}
               onClick={() => navigate(routerLinks(item.name))}
             >
               <i className={classNames('text-3xl mr-2.5', item.icon)} />
