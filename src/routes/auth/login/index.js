@@ -19,9 +19,10 @@ const Page = ({ location }) => {
   const submit = async (values) => {
     try {
       setLoading(true);
+      console.log(values);
       const res = await UserService.login({
         ...values,
-        isRemember: values.isRemember !== undefined,
+        username: values.email,
       });
       setLoading(false);
       if (res.data) {
@@ -37,23 +38,28 @@ const Page = ({ location }) => {
   return (
     <div className="relative bottom-0 right-0">
       
-      <div className="mb-8 mt-14 ">
-        <h1 className=" text-4xl mb-8 font-bold text-cl text-center text-cyan-900">{'Đăng nhập'}</h1>
-        <h5 className=" font-medium  text-center text-cyan-900">{'Vui lòng đăng nhập bằng tài khoản được cung cấp bởi quản lý hệ thống'}</h5>
+      <div className="mb-8 mt-14 title-auth">
+        <h1>{'Đăng nhập'}</h1>
+        <h5>{'Vui lòng đăng nhập bằng tài khoản được cung cấp bởi quản lý hệ thống'}</h5>
       </div>
       <Spin spinning={loading}>
         <Form
-          className=" w-3/4 mx-auto form-login"
+          className="w-3/4 mx-auto form-login"
           columns={ColumnLogin({ t })}
-          textSubmit={t("routes.auth.login.Log In")}
+          textSubmit={'Đăng nhập'}
           handSubmit={submit}
-          idSubmit={'submit-login'}
+          idSubmit={'submit-btn'}
         />
       </Spin>
-      <div className="intro-x pt-1 -mt-28 bottom-16 right-12 sm:right-[6rem] lg:right-16  md:mt-1 absolute xl:absolute  xl:pt-1 xl:-mt-32">
-        <p className="text-cyan-700 underline" >
+      <div className="intro-x pt-1 -mt-28 bottom-16 right-12 sm:right-[6rem] lg:right-16 
+       md:mt-1 absolute xl:absolute  xl:pt-1 xl:-mt-32"
+       
+       >
+        <Link className="text-cyan-700 underline" id="reset-pass-link" 
+        to={routerLinks("ForgotPass")}
+        >
           {'Quên mật khẩu'}
-        </p>
+        </Link>
       </div>
     </div>
   );

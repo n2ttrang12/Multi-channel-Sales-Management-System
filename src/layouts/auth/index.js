@@ -8,7 +8,6 @@ import './index.less'
 import logo from "assets/images/logo.png";
 
 const Layout = ({ children }) => {
-  const { t, i18n } = useTranslation();
   const { logout } = useAuth();
   const location = useLocation();
 
@@ -32,7 +31,15 @@ const Layout = ({ children }) => {
     case "/auth/login":
       imageURL = "bg-[url('assets/images/bg-login.png')]";
       break;
-
+    case "/auth/forgot-password":
+      imageURL = "bg-[url('assets/images/bg-forgot.png')]";
+      break;
+    case "/auth/send-otp":
+      imageURL = "bg-[url('assets/images/bg-otp.png')]";
+      break;
+    case "/auth/reset-password":
+      imageURL = "bg-[url('assets/images/bg-reset.png')]";
+      break;
     default:
       imageURL = "bg-[url('assets/images/bg-login.png')]";
       break;
@@ -41,12 +48,12 @@ const Layout = ({ children }) => {
     <div className='h-full overflow-scroll'>
       <div className="bg-white bg-cover bg-center h-full relative min-h-[600px] ">
         <div className="block lg:flex  h-full">
-          <div className="w-full lg:w-1/2  relative lg:flex justify-between flex-col hidden "
+          <div className="w-full lg:w-1/2  relative lg:flex justify-between flex-col hidden !bg-cyan-900"
           >
             <div
               className={classNames(
                 imageURL,
-                "bg-cover bg-center w-full  lg:min-h-full  min-h-[600px] relative overflow-hidden flex justify-between flex-col"
+                "opacity-40 bg-cover bg-center w-full  lg:min-h-full  min-h-[600px] relative overflow-hidden flex justify-between flex-col"
               )}
             >
               <img src={logo} alt="logoUhouse" className="w-10 sm:w-20 p-4" />

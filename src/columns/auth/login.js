@@ -1,7 +1,7 @@
 const Column = ({ t }) => {
   return [
     {
-      name: "username",
+      name: "email",
       title: 'Tên đăng nhập',
       formItem: {
         placeholder: t("columns.auth.login.Enter Username"),

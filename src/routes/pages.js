@@ -10,7 +10,22 @@ export const pages = [
         path: routerLinks("Login"),
         component: React.lazy(() => import("./auth/login")),
         title: "Login",
-      }
+      },
+      {
+        path: routerLinks("ForgotPass"),
+        component: React.lazy(() => import("./auth/forget-password")),
+        title: "Forgot Password",
+      },
+      {
+        path: routerLinks("ResetPass"),
+        component: React.lazy(() => import("./auth/reset-password")),
+        title: "Reset Password",
+      },
+      {
+        path: routerLinks("SendOTP"),
+        component: React.lazy(() => import("./auth/send-otp")),
+        title: "Send Otp",
+      },
     ],
   },
   {
