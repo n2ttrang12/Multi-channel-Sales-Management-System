@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import { ColumnLogin } from "columns/auth";
 import { UserService } from "services/user";
 import './index.less'
 
-const Page = ({ location }) => {
+const Page = () => {
   const { t } = useTranslation();
   const auth = useAuth();
   const navigate = useNavigate();

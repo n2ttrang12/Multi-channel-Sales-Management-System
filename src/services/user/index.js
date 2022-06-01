@@ -8,20 +8,20 @@ export const UserService = {
   nameLink: "User",
   login: async (values) => {
     try {
-      // const { data } = await axios.post(`${routerLinks(UserService.nameLink, "api")}/login`, values);
+      const { data } = await axios.post(`${routerLinks(UserService.nameLink, "api")}/sign-in`, values);
       return {
-        // ...data,
-        data: {
-          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZUlkIjoiMSIsInJvbGUiOiJVc2VyIiwibmJmIjoxNjI0MzY5Mjk3LCJleHAiOjE2MjQ0NTU2OTcsImlhdCI6MTYyNDM2OTI5NywiaXNzIjoiaHR0cHM6Ly90cnVuZy5uZXQubGV2aW5jaXRlc3QuY29tL2FwaS8ifQ.bGF2dbIZMwEEKbTuTjRJE_kkEyX0znDSQMji1bpIjQU",
-          avatarPath: "https://talkpro.edu.vn/wp-content/uploads/2017/11/avatar-girl-xinh-6.jpg",
-          createdBy: 1,
-          createdDate: "2021-03-17T16:12:50",
-          email: "admin@admin.com",
-          employeeId: 1,
-          id: 2,
-          isDisabled: false,
-          name: "Nguyễn Văn A",
-        },
+        ...data,
+        // data: {
+        //   token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZUlkIjoiMSIsInJvbGUiOiJVc2VyIiwibmJmIjoxNjI0MzY5Mjk3LCJleHAiOjE2MjQ0NTU2OTcsImlhdCI6MTYyNDM2OTI5NywiaXNzIjoiaHR0cHM6Ly90cnVuZy5uZXQubGV2aW5jaXRlc3QuY29tL2FwaS8ifQ.bGF2dbIZMwEEKbTuTjRJE_kkEyX0znDSQMji1bpIjQU",
+        //   avatarPath: "https://talkpro.edu.vn/wp-content/uploads/2017/11/avatar-girl-xinh-6.jpg",
+        //   createdBy: 1,
+        //   createdDate: "2021-03-17T16:12:50",
+        //   email: "admin@admin.com",
+        //   employeeId: 1,
+        //   id: 2,
+        //   isDisabled: false,
+        //   name: "Nguyễn Văn A",
+        // },
       };
     } catch (e) {
       console.error(e);
