@@ -57,14 +57,14 @@ const Layout = ({ children }) => {
 
   const Header = ({isCollapsed, isDesktop}) => (
     <header
-      className={classNames("bg-blue-50 w-full header h-20 transition-all duration-300 ease-in-out sticky top-0 block z-10", {
+      className={classNames("bg-white w-full header h-20 transition-all duration-300 ease-in-out sticky top-0 block z-10", {
         'pl-80': !isCollapsed && isDesktop, 'pl-32': isCollapsed && isDesktop, 'pl-28': !isDesktop
       })}>
-      <div className="flex items-center justify-end sm:justify-between px-5 h-20">
-        <Select value={i18n.language} onChange={(value) => changeLanguage(value)}>
+      <div className="flex items-center justify-end px-5 h-20">
+        {/* <Select value={i18n.language} onChange={(value) => changeLanguage(value)}>
           <Select.Option value="en"><img src={us} alt="US" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.English')}</Select.Option>
           <Select.Option value="vi"><img src={vn} alt="VN" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.Vietnam')}</Select.Option>
-        </Select>
+        </Select> */}
         <div className="flex items-center">
           <div className="mr-5 relative flex group">
             <div
@@ -110,7 +110,7 @@ const Layout = ({ children }) => {
           {
             'w-80': !isCollapsed && isDesktop,
             'w-20': isCollapsed,
-            'bg-blue-100': isDesktop,
+            'bg-teal-900': isDesktop,
             'bg-blue-50': !isDesktop
           })}
       >
@@ -136,7 +136,7 @@ const Layout = ({ children }) => {
         </div>
       </div>
       <div
-        className={classNames("fixed z-10 top-20 left-0 h-screen bg-blue-100 transition-all duration-300 ease-in-out",
+        className={classNames("fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out",
           {'w-80': !isCollapsed, 'w-20': isCollapsed, '-left-20': isCollapsed && !isDesktop})}
       >
 
