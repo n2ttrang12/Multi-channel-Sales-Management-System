@@ -4,7 +4,7 @@ const Column = ({ t }) => {
       name: "email",
       title: 'Tên đăng nhập',
       formItem: {
-        placeholder: t("columns.auth.login.Enter Username"),
+        placeholder: 'Nhập tên đăng nhập',
         rules: [{ type: "required" }],
       },
     },
@@ -12,7 +12,7 @@ const Column = ({ t }) => {
       name: "password",
       title: 'Mật khẩu',
       formItem: {
-        placeholder: t("columns.auth.login.Enter Password"),
+        placeholder: 'Nhập mật khẩu',
         type: "password",
         rules: [{ type: "required" }, { type: "minLength", value: 6 }],
       },
