@@ -118,6 +118,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
 
   return (
     <TreeSelect
+      treeNodeFilterProp={'title'}
       listHeight={200}
       treeDataSimpleMode
       allowClear={true}
@@ -157,7 +158,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
       tagRender={(props) => {
         const item = handleGetData(_list, props.value);
         const arrayValue = value.map(item => item.value);
-        if (!!item.length && ((arrayValue.indexOf(item[0].value) === -1)
+        if (arrayValue.indexOf(props.value) > -1 && !!item.length && ((arrayValue.indexOf(item[0].value) === -1)
           || (arrayValue.indexOf(item[0].value) === arrayValue.indexOf(props.value)))
         ) {
           const arraySlice = arrayValue.slice(0, arrayValue.indexOf(props.value));

@@ -3,7 +3,16 @@ import {Spin} from "components";
 import {v4} from "uuid";
 import {smoothDnD} from "./smooth-dnd";
 
-const Component = ({idRequest, Get, Put, ChangeColumn, onClick, allowSetStatus = true}) => {
+const Component = (
+  {
+    idRequest,
+    Get,
+    Put,
+    ChangeColumn,
+    allowSetStatus = true,
+    renderItem = (subItem) => <strong>{subItem.task_name}</strong>
+  }
+) => {
   const [listData, setListData] = useState([]);
   const [id] = useState(v4());
   const [isLoading, set_isLoading] = useState(true);
@@ -101,15 +110,8 @@ const Component = ({idRequest, Get, Put, ChangeColumn, onClick, allowSetStatus =
                 {item?.allowActions?.allowEdit && <i style={{color: item.frontColor}} className="move-drag las  la-lg la-arrows-alt" />}
               </div>
               <div id={item.id} className="drag-vertical">
-                {item.tasks.map((subItem, subIndex) => (
-                  <div
-                    className="p-2 bg-white rounded-xl"
-                    key={item.id + subIndex}
-                    onClick={() => !!onClick && onClick(subItem)}
-                  >
-                    <strong>{subItem.task_name}</strong>
-                  </div>
-                ))}
+                {item.tasks.map((subItem, subIndex) => renderItem(item, subItem, subIndex)
+                )}
               </div>
             </div>
           ))}

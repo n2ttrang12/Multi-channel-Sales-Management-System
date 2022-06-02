@@ -2,6 +2,7 @@ import {useCallback, useEffect, useState} from "react";
 import { Form, DatePicker, Checkbox, Radio, Switch, Slider } from "antd";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
+import classNames from "classnames";
 
 import { useAuth } from "global";
 import {Upload} from "components";
@@ -26,7 +27,8 @@ const Component = (
     extendTopForm = null,
     extendFirstForm = null,
     extendButton = null,
-    idSubmit = 'idSubmit'
+    idSubmit = 'idSubmit',
+    classGroupButton= 'justify-center items-center'
   }
 ) => {
   const { t } = useTranslation();
@@ -180,9 +182,14 @@ const Component = (
         );
       case "checkbox":
         return formItem.list ? (
-          <Checkbox.Group options={formItem.list} />
+          <Checkbox.Group
+            options={formItem.list}
+            onChange={(value) => formItem.onChange && formItem.onChange(value, form)}
+          />
         ) : (
-          <Checkbox>{formItem.label}</Checkbox>
+          <Checkbox
+            onChange={(value) => formItem.onChange && formItem.onChange(value.target.checked, form)}
+          >{formItem.label}</Checkbox>
         );
       case "radio":
         return <Radio.Group options={formItem.list} buttonStyle={formItem.style} optionType={!!formItem.style ? "button" : ''} />;
@@ -194,6 +201,7 @@ const Component = (
         />;
       case "select":
         return <Select
+          onChange={(value) => formItem.onChange && formItem.onChange(value, form)}
           placeholder={formItem.placeholder || t("components.form.Enter") + " " + item.title.toLowerCase()}
           formItem={formItem}
           form={form}
@@ -486,7 +494,7 @@ const Component = (
               ) {
                 return (
                   <div
-                    className={'col-span-12 sm:col-span-'+(column.formItem.col ? column.formItem.col : 12)}
+                    className={'col-span-12' + (' sm:col-span-' +(column.formItem.colTablet ? column.formItem.colTablet : (column.formItem.col ? column.formItem.col : 12))) + (' lg:col-span-' +(column.formItem.col ? column.formItem.col : 12))}
                     key={index}
                   >
                     {generateForm(column, index)}
@@ -542,7 +550,7 @@ const Component = (
               break;
             default:
               if (!values[item.name]) {
-                values[item.name] = item.value || '';
+                values[item.name] = item.value;
               }
               break;
           }
@@ -586,7 +594,7 @@ const Component = (
       </div>
       {extendForm && extendForm(values)}
 
-      <div className={'flex justify-center items-center'}>
+      <div className={classNames('flex', classGroupButton)}>
         {extendButton && extendButton(values)}
         {isShowCancel && (
           <button

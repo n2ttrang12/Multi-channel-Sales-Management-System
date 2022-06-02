@@ -19,6 +19,7 @@ const Component = ({value, onChange}) => {
     trigger="click"
   >
     <button
+      type={'button'}
       className="w-full h-10 rounded-xl"
       style={{backgroundColor: _color, borderColor: _borderColor}}
     > </button>

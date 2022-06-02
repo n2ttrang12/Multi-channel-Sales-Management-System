@@ -190,7 +190,7 @@ const Component = (
       <span onClick={() => ref.current.click()}>
         {onlyImage
           ? (value ? <Spin spinning={isLoading}>{!!prop.children ? prop.children : <Avatar size={150} src={value?.thumb || value} />}</Spin> : <div className="avatar-uploader"><i className="las la-plus la-3x" /></div>) :
-          (showBtnUpload && <button className="bg-blue-500 text-white px-4 h-10 rounded-xl hover:bg-blue-400 inline-flex items-center mb-3"><i className="las la-upload mr-1"/> {t('components.form.Upload')}</button>)}
+          (showBtnUpload && <button type={'button'} className="bg-blue-500 text-white px-4 h-10 rounded-xl hover:bg-blue-400 inline-flex items-center mb-3"><i className="las la-upload mr-1"/> {t('components.form.Upload')}</button>)}
       </span>
     </div>
 
@@ -228,6 +228,7 @@ const Component = (
                 {extendButton(file)}
                 {!!showBtnDownload(file) && (
                   <button
+                    type={'button'}
                     className="embed border border-gray-300 text-xs rounded-lg mr-2"
                     onClick={() => handleDownload(file)}
                   >
@@ -252,6 +253,7 @@ const Component = (
                     cancelText={t("components.datatable.cancel")}
                   >
                     <button
+                      type={'button'}
                       className="embed border border-gray-300 text-xs rounded-lg mr-2"
                     >
                       <RemoveIcon/>

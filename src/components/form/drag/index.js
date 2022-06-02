@@ -131,6 +131,7 @@ const Component = (
           {(((!!allowActions && !item.allowActions) || !!item.allowActions?.allowEdit || (typeof item.id === 'string' && item.id.length === 40)) && conditionEdit(item)) && (
             <Tooltip title={t("routes.admin.Layout.Edit")}>
               <button
+                type={'button'}
                 className={classNames('embed border border-gray-300 text-xs rounded-lg', {'mr-2': !!conditionDelete(item)})}
                 onClick={() => handleEditForm(item)}
               >
@@ -148,7 +149,7 @@ const Component = (
                 cancelText={t("components.datatable.cancel")}
                 onConfirm={() => handleDelete(item.id, item)}
               >
-                <button className="embed border border-gray-300 text-xs rounded-lg">
+                <button type={'button'} className="embed border border-gray-300 text-xs rounded-lg">
                   <RemoveIcon />
                 </button>
               </Popconfirm>
@@ -167,6 +168,7 @@ const Component = (
         <div className="flex justify-end">
           {!readOnly && !!showAddNew && (
             <button
+              type={'button'}
               className={classNames("bg-blue-500 text-white px-4 h-10 rounded-xl hover:bg-blue-400 inline-flex items-center", {"mr-2": !!onMoreAdd})}
               onClick={() => handleEditForm(initAddNew)}
             >

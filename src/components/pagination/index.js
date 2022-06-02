@@ -98,6 +98,7 @@ const Component = (
         <div className="flex flex-wrap justify-center duration-300 transition-all">
           {listOfPageItem.current.map((page, index) => (
             <button
+              type={'button'}
               key={index}
               className={classNames('text-center duration-300 transition-all py-1 px-2.5 text-sm font-medium leading-normal', {
                 'text-blue-700 hover:text-blue-500': pageIndex !== page.index,

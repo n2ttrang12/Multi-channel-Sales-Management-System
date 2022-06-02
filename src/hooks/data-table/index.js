@@ -115,12 +115,14 @@ const Hook = (
   const groupButton = (confirm, clearFilters, key, value) => (
     <div className="grid grid-cols-2 gap-1">
       <button
+        type={'button'}
         className="bg-blue-100 px-4 py-2.5 rounded-xl hover:bg-blue-500 hover:text-white"
         onClick={() => clearFilters()}
       >
         {t('components.datatable.reset')}
       </button>
       <button
+        type={'button'}
         className="bg-blue-500 text-white px-4 py-2.5 rounded-xl hover:bg-blue-400 inline-flex items-center"
         onClick={() => confirm(value)}
       >
@@ -192,6 +194,7 @@ const Hook = (
         <RangePicker
           renderExtraFooter={() =>(
             <button
+              type={'button'}
               className="bg-blue-100 w-full px-3 py-1 rounded-xl hover:bg-blue-500 hover:text-white"
               onClick={() => document.activeElement.blur()}
             >
@@ -280,11 +283,6 @@ const Hook = (
       return (
         <div className="intro-x">
           <div className="flex justify-between mb-2.5">
-            {!!leftHeader && (
-              <div className="mb-7">
-                {leftHeader}
-              </div>
-            )}
             {!!showSearch && (
               <div className="relative">
                 <input
@@ -295,6 +293,11 @@ const Hook = (
                   onChange={(event) => handleTableChange(null, params[filter], params[sort], event.target.value)}
                 />
                 <i className="text-lg las la-search absolute top-1.5 right-3 z-10" />
+              </div>
+            )}
+            {!!leftHeader && (
+              <div>
+                {leftHeader}
               </div>
             )}
             {!!rightHeader && (

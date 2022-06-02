@@ -15,7 +15,7 @@ const Hook = (
   const [firstChange, set_firstChange] = useState(false);
 
   const [handleShow, Modal] = HookModal({
-    widthModal, isLoading, setIsLoading, firstChange, idElement: 'modal-form-' + idElement,
+    widthModal, isLoading, setIsLoading, firstChange, idElement: 'modal-form-' + idElement, textSubmit,
     title:(data) => title(data),
     onOk: async (data) => {
       return form.validateFields().then((async values => {

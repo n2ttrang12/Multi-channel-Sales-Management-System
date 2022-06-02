@@ -1,16 +1,20 @@
 import React, {createRef, useEffect, useState} from 'react';
 import {Popover} from "antd";
+import classNames from "classnames";
 
-const Component = ({title, className = '', children, showArrow = true, popover = false}) => {
+const Component = ({title, className = '', classNameParent = '', children, showArrow = true, popover = false}) => {
   const ref = createRef();
   const arrow = createRef();
   const [visible, set_visible] = useState(false);
 
   useEffect(() => {
     if (visible !== popover) {
+      if (popover) {
+        ref.current.style.removeProperty('height')
+      }
       setTimeout(() => {
         set_visible(popover);
-      }, 150)
+      }, 150);
     }
   }, [popover, visible, set_visible])
 
@@ -38,11 +42,20 @@ const Component = ({title, className = '', children, showArrow = true, popover =
   );
 
   return (
-    <li>
+    <li className={classNameParent}>
       {!visible ? titleBlock : (
         <Popover content={children} placement="rightTop">{titleBlock}</Popover>
       )}
-      <ul className="transition-all duration-300 ease-in-out overflow-hidden h-0 collapse" ref={ref}>{children} </ul>
+      <ul
+        className={classNames(
+          'transition-all duration-300 ease-in-out overflow-hidden h-0 collapse',
+          {
+            'scale-0 h-0': visible,
+            'scale-1': !visible
+          }
+        )}
+        ref={ref}
+      >{children}</ul>
     </li>
   );
 };

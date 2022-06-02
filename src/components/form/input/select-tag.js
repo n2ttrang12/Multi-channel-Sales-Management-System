@@ -67,7 +67,7 @@ const Component = ({tag, onChange, form, value,...prop}) => {
       tagRender={({ label, value, closable, onClose }) => {
         return label && (
           <div className="bg-blue-100 rounded-xl py-1 px-2 relative mr-2.5 -left-2.5">
-            <button className="absolute rounded-full -top-1 -right-2 bg-red-100 text-red-500 p-0.5 leading-none z-10" onClick={onClose}>
+            <button type={'button'}  className="absolute rounded-full -top-1 -right-2 bg-red-100 text-red-500 p-0.5 leading-none z-10" onClick={onClose}>
               <i className="las la-times" />
             </button>
 
