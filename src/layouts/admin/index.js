@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import classNames from "classnames";
 
 import { useAuth } from "global";
-import logo from "assets/images/logo.svg";
+import logo from "assets/images/logo.png";
 import arrow from "assets/images/arrow.svg";
 import avatar from "assets/images/avatar.jpeg";
 
