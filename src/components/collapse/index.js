@@ -19,18 +19,20 @@ const Component = ({title, className = '', classNameParent = '', children, showA
   }, [popover, visible, set_visible])
 
   const onClick = () => {
-    if (ref.current.style.height === 'auto') {
-      ref.current.style.height = ref.current.offsetHeight + 'px';
-    }
-    setTimeout(() => {
-      arrow.current.classList[!ref.current.style.height ? 'add' : 'remove']('rotate-90');
-      ref.current.style.height = !ref.current.style.height ? ref.current.scrollHeight + "px" : '';
-      if (ref.current.style.height) {
-        setTimeout(() => {
-          ref.current.style.height = 'auto'
-        }, 150);
+    if (!popover) {
+      if (ref.current.style.height === 'auto') {
+        ref.current.style.height = ref.current.offsetHeight + 'px';
       }
-    })
+      setTimeout(() => {
+        arrow.current?.classList[!ref.current.style.height ? 'add' : 'remove']('rotate-90');
+        ref.current.style.height = !ref.current.style.height ? ref.current.scrollHeight + "px" : '';
+        if (ref.current.style.height) {
+          setTimeout(() => {
+            ref.current.style.height = 'auto'
+          }, 150);
+        }
+      })
+    }
   }
 
   const titleBlock = (

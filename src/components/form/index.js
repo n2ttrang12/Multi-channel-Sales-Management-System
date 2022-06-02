@@ -14,6 +14,7 @@ const Component = (
     className,
     columns,
     textSubmit,
+    textCancel = 'components.form.modal.cancel',
     handSubmit,
     values = {},
     form,
@@ -599,7 +600,7 @@ const Component = (
         {isShowCancel && (
           <button
             className="bg-blue-500 text-white text-base p-2 w-full rounded-xl hover:bg-blue-400 mt-1"
-            type="reset">{t("components.form.cancel")}</button>
+            type="reset">{t(textCancel)}</button>
         )}
         {textSubmit && (
           <button
