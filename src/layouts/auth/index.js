@@ -1,17 +1,14 @@
-import React, {useEffect, useRef, useCallback} from 'react';
-import {Select} from "antd";
-import {useTranslation} from "react-i18next";
-import {useAuth} from "global";
+import React, { useEffect, useRef, useCallback } from 'react';
+import { useAuth } from "global";
+import classNames from "classnames";
+import { useLocation } from "react-router-dom";
+import footerImage from "assets/images/footer.png"
+import './index.less'
+import logo from "assets/images/logo.png";
 
-import logo from "assets/images/logo.svg";
-import us from "assets/svg/us.svg";
-import vn from "assets/svg/vn.svg";
-
-import './index.less';
-
-const Layout = ({children}) => {
-  const { t, i18n } = useTranslation();
-  const {changeLanguage, logout} = useAuth();
+const Layout = ({ children }) => {
+  const { logout } = useAuth();
+  const location = useLocation();
 
   const mount = useRef(false)
   const initFunction = useCallback(async () => {
@@ -22,65 +19,60 @@ const Layout = ({children}) => {
   }, [logout])
 
   useEffect(() => {
-    if(!mount.current) {
+    if (!mount.current) {
       mount.current = true;
       initFunction();
     }
   }, [mount, initFunction]);
+  let imageURL = "";
 
-  if (['en', 'vi'].indexOf(i18n.language) === -1) {
-    if (i18n.language === 'vi-VN') {
-      changeLanguage('vi');
-    } else {
-      changeLanguage('en');
-    }
+  switch (location.pathname) {
+    case "/auth/login":
+      imageURL = "bg-[url('assets/images/bg-login.png')]";
+      break;
+    case "/auth/forgot-password":
+      imageURL = "bg-[url('assets/images/bg-forgot.png')]";
+      break;
+    case "/auth/send-otp":
+      imageURL = "bg-[url('assets/images/bg-otp.png')]";
+      break;
+    case "/auth/reset-password":
+      imageURL = "bg-[url('assets/images/bg-reset.png')]";
+      break;
+    default:
+      imageURL = "bg-[url('assets/images/bg-login.png')]";
+      break;
   }
-
   return (
-    <div className="layout-auth bg-cover bg-center p-20 relative z-10">
-      <div className="container mx-auto block lg:flex bg-white rounded-xl overflow-hidden">
-        <div className="w-full lg:w-3/5 p-10 into relative z-10 overflow-hidden flex justify-between flex-col">
-          <div className="mb-5">
-            <h2 className="font-bold text-3xl -intro-x">
-              <a href="/" className="flex items-center text-white hover:text-yellow-500">
-                <img className="w-14 mr-3 brightness-0 invert" src={logo} alt=""/> Admin
-              </a>
-            </h2>
-          </div>
-          <div className="">
-            <h2 className="-intro-x font-bold text-3xl text-white mb-3">Welcome To Admin</h2>
-            <p className="-intro-x text-white mb-4">It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a
-              more-or-less normal distribution of letters</p>
-            <div className="-intro-x mb-4">
-              <a href="/"
-                 className="bg-blue-300 bg-opacity-50 text-white rounded-md py-2 px-3 inline-block leading-none mr-2">
-                <i className="lab la-facebook-f text-xl" />
-              </a>
-              <a href="/"
-                 className="bg-blue-300 bg-opacity-50 text-white rounded-md py-2 px-3 inline-block leading-none mr-2">
-                <i className="lab la-twitter text-xl" />
-              </a>
-              <a href="/"
-                 className="bg-blue-300 bg-opacity-50 text-white rounded-md py-2 px-3 inline-block leading-none">
-                <i className="lab la-linkedin-in text-xl" />
-              </a>
+    <div className='h-full overflow-scroll'>
+      <div className="bg-white bg-cover bg-center h-full relative min-h-[600px] ">
+        <div className="block lg:flex  h-full">
+          <div className="w-full lg:w-1/2  relative lg:flex justify-between flex-col hidden !bg-green-900"
+          >
+            <div
+              className={classNames(
+                imageURL,
+                "opacity-60 bg-cover bg-center w-full  lg:min-h-full  min-h-[600px] relative overflow-hidden flex justify-between flex-col"
+              )}
+            >
+              <img src={logo} alt="logoUhouse" className="w-10 sm:w-20 p-4" />
+
             </div>
-            <p className="-intro-x text-white">Copyright © Designed &amp; Developed by <a
-              href="https://reactjs.org/">react</a></p>
+          </div>
+          <div className="mx-auto p-10 flex flex-col ">
+            {children}
           </div>
         </div>
-        <div className="w-full lg:w-2/5 p-10 flex justify-center flex-col">
-          {children}
-          <div className="intro-x text-center mt-5">
-            <Select value={i18n.language} onChange={(value) => changeLanguage(value)}>
-              <Select.Option value="en"><img src={us} alt="US" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.English')}</Select.Option>
-              <Select.Option value="vi"><img src={vn} alt="VN" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.Vietnam')}</Select.Option>
-            </Select>
+        <div className='absolute w-full z-10 bottom-0 h-28'
+          style={{ backgroundImage: 'url(' + footerImage + ')', backgroundSize: 'cover' }}
+        >
+          <div className='absolute -translate-x-1/2  top-1/2 left-1/2 text-white'>
+            <p className='hidden sm:block'>Powered By ARI Technology Co ., JSC </p>
           </div>
         </div>
       </div>
     </div>
+
   );
 };
 export default Layout;
