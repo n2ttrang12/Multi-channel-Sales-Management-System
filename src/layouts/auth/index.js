@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import { useTranslation } from "react-i18next";
 import { useAuth } from "global";
 import classNames from "classnames";
 import { useLocation } from "react-router-dom";
