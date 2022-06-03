@@ -54,7 +54,7 @@ const Layout = ({ children }) => {
 
   const Header = ({ isCollapsed, isDesktop }) => (
     <header
-      className={classNames("bg-grey-100 w-full header h-20 transition-all duration-300 ease-in-out sticky top-0 block z-10", {
+      className={classNames("bg-gray-100 w-full header h-20 transition-all duration-300 ease-in-out sticky top-0 block z-10", {
         'pl-80': !isCollapsed && isDesktop, 'pl-32': isCollapsed && isDesktop, 'pl-28': !isDesktop
       })}>
       <div className="flex items-center justify-end px-5 h-20">
