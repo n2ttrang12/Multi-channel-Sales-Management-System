@@ -54,10 +54,10 @@ const Layout = ({ children }) => {
 
   const Header = ({ isCollapsed, isDesktop }) => (
     <header
-      className={classNames("bg-gray-100 w-full header h-20 transition-all duration-300 ease-in-out sticky top-0 block z-10", {
+      className={classNames("bg-gray-100 w-full header h-16 transition-all duration-300 ease-in-out sticky top-0 block z-10", {
         'pl-80': !isCollapsed && isDesktop, 'pl-32': isCollapsed && isDesktop, 'pl-28': !isDesktop
       })}>
-      <div className="flex items-center justify-end px-5 h-20">
+      <div className="flex items-center justify-end px-5 h-16">
         {/* <Select value={i18n.language} onChange={(value) => changeLanguage(value)}>
           <Select.Option value="en"><img src={us} alt="US" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.English')}</Select.Option>
           <Select.Option value="vi"><img src={vn} alt="VN" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.Vietnam')}</Select.Option>
@@ -86,10 +86,7 @@ const Layout = ({ children }) => {
               className="flex items-center"
               id={'dropdown-profile'}
             >
-              <div className="text-right leading-none mr-3 hidden sm:block">
-                <div className="font-bold text-black text-lg leading-snug mb-0.5">{user?.name}</div>
-                <div className="text-gray-500">admin@admin.com</div>
-              </div>
+             
               <Avatar src={avatar} size={10} />
             </section>
           </Dropdown>
@@ -145,7 +142,7 @@ const Layout = ({ children }) => {
         <Menu isCollapsed={isCollapsed} />
 
       </div>
-      <div className={classNames("ml-80 px-5 transition-all duration-300 ease-in-out z-10",
+      <div className={classNames("bg-gray-100 ml-80 px-5 transition-all duration-300 ease-in-out z-10",
         { 'ml-80': !isCollapsed && isDesktop, 'ml-20': isCollapsed && isDesktop })}>
         {children}
         <div className="text-center bg-blue-50 mt-10">
