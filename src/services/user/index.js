@@ -49,4 +49,40 @@ export const UserService = {
     }
   },
  
+  forgotPass: async (values) => {
+    try {
+      const { data } = await axios.put(
+        `${routerLinks(UserService.nameLink, "api")}/forgot-password`, values
+      );
+      return data;
+    } catch (e) {
+      if (e.response.data.message) Message.error(e.response.data.message);
+      return false;
+    }
+  },
+
+  sendOtp: async (values) => {
+    try {
+      const { data } = await axios.put(
+        `${routerLinks(UserService.nameLink, "api")}/verify-forgot-password`, values
+      );
+      return data;
+    } catch (e) {
+      if (e.response.data.message) Message.error(e.response.data.message);
+      return false;
+    }
+  },
+
+  setPass: async (values) => {
+    try {
+      console.log(values);
+      const { data } = await axios.put(
+        `${routerLinks(UserService.nameLink, "api")}/set-password`, values
+      );
+      return data;
+    } catch (e) {
+      if (e.response.data.message) Message.error(e.response.data.message);
+      return false;
+    }
+  },
 };
