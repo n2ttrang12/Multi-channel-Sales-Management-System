@@ -10,7 +10,7 @@ const Column = ({ t }) => {
           {
             type: "custom", validator: (form) => ({
               validator: async (rule, value) => {
-                if (form.getFieldValue('rePassword') && ( value !== form.getFieldValue('rePassword'))) {
+                if (form.getFieldValue('passwordComfirm') && ( value !== form.getFieldValue('passwordComfirm'))) {
                   return Promise.reject(
                     'Xác nhận mật khẩu không chính xác'
                   );
@@ -42,7 +42,7 @@ const Column = ({ t }) => {
       }
     },
     {
-      name: 'rePassword',
+      name: 'passwordComfirm',
       title: 'Xác nhận mật khẩu',
       formItem: {
         placeholder: 'Xác nhận mật khẩu',

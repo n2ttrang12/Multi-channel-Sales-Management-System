@@ -1,5 +1,5 @@
 import React, {useState,  Fragment} from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import {Message} from "components";
 import {Form, Spin} from "components";
@@ -8,24 +8,27 @@ import { UserService } from "services/user";
 import { ColumnResetPassword } from "columns/auth";
 import './index.less'
 
-const Page = ({location}) => {
+const Page = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
 
 
   const submit = async (values) => {
     try {
       setLoading(true); 
-      const res = await UserService.forgotPass({
+      const res = await UserService.setPass({
         ...values,
-        // isRemember: values.isRemember !== undefined,
+        email: location.state.email,
+        uuid: location.state.uuid
       });
-      if (res.data.uuid) {
-        setLoading(false);
-      Message.dialogSendOTP('', () => navigate(routerLinks("SendOTP"), { state:{ uuid: res.data.uuid, email:values.emailOrPhoneNumber} }) );
+      if (res.statusCode === 200) {
+        Message.success("Đổi mật khẩu thành công!")
+        navigate(routerLinks("Login"));
       }
+      setLoading(false);
 
     } catch (err) {
       setLoading(false);

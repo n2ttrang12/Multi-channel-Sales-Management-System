@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import {Message} from "components";
 import {Form, Spin} from "components";
 import {routerLinks} from "utils";
-// import { UserService } from "services/user";
+import { UserService } from "services/user";
 import { ColumnForgetPassword } from "columns/auth";
 import { Link } from "react-router-dom";
 
@@ -18,16 +18,13 @@ const Page = ({location}) => {
   const submit = async (values) => {
     try {
       setLoading(true); 
-      // const res = await UserService.forgotPass({
-      //   ...values,
-      //   // isRemember: values.isRemember !== undefined,
-      // });
-      // if (res.data.uuid) {
+      const res = await UserService.forgotPass({
+        ...values
+      });
+      if (res.data.uuid) {
         setLoading(false);
-        navigate(routerLinks("SendOTP"))
-      // Message.success('', () => navigate(routerLinks("SendOTP"), {  }) );
-      // }
-
+        navigate(routerLinks("SendOTP"),{state: { uuid: res.data.uuid, email: values.email }})
+      }
     } catch (err) {
       console.log(err);
       setLoading(false);

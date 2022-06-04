@@ -1,32 +1,31 @@
 import React, {useState,  Fragment} from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import {Message} from "components";
 import {Form, Spin} from "components";
 import {routerLinks} from "utils";
-// import { UserService } from "services/user";
+import { UserService } from "services/user";
 import { ColumnSendOtp } from "columns/auth";
 import { Link } from "react-router-dom";
 
-const Page = ({location}) => {
+const Page = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [loading, setLoading] = useState(false);
 
-
   const submit = async (values) => {
     try {
-      // setLoading(true); 
-      // const res = await UserService.forgotPass({
-      //   ...values,
-      //   // isRemember: values.isRemember !== undefined,
-      // });
-      // if (res.data.uuid) {
-      //   setLoading(false);
-      // }
-      // Message.success('', () =>  );
-      navigate(routerLinks("ResetPass"),)
+      setLoading(true); 
+      const res = await UserService.sendOtp({
+        ...values,
+        uuid: location.state.uuid,
+        email: location.state.email
+      });
+      if (res.statusCode === 200) {
+        navigate(routerLinks("ResetPass"),{state: { uuid: res.data.uuid, email: location.state.email }})
+      }
     } catch (err) {
       setLoading(false);
       await Message.error(err.response.data.message);
