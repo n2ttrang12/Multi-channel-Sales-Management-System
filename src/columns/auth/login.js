@@ -2,27 +2,19 @@ const Column = ({ t }) => {
   return [
     {
       name: "email",
-      title: t("columns.auth.login.Username"),
+      title: 'Tên đăng nhập',
       formItem: {
-        placeholder: t("columns.auth.login.Enter Username"),
-        rules: [{ type: "required" }, { type: "email" }],
+        placeholder: 'Nhập tên đăng nhập',
+        rules: [{ type: "required" }],
       },
     },
     {
       name: "password",
-      title: t("columns.auth.login.password"),
+      title: 'Mật khẩu',
       formItem: {
-        placeholder: t("columns.auth.login.Enter Password"),
+        placeholder: 'Nhập mật khẩu',
         type: "password",
         rules: [{ type: "required" }, { type: "minLength", value: 6 }],
-      },
-    },
-    {
-      name: "isRemember",
-      title: "",
-      formItem: {
-        type: "checkbox",
-        label: t("columns.auth.login.remember"),
       },
     },
   ];

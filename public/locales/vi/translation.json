@@ -60,7 +60,9 @@
     }
   },
   "titles": {
-    "ResetPassword": "Đặt lại mật khẩu",
+    "Reset Password": "Đặt lại mật khẩu",
+    "Forgot Password": "Quên mật khẩu",
+    "Send Otp": "Quên mật khẩu",
     "Login": "Đăng nhập",
     "Register": "Đăng ký",
     "Manage": "Quản lý",

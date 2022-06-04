@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import classNames from "classnames";
 
 import { useAuth } from "global";
-import logo from "assets/images/logo.svg";
+import logo from "assets/images/logo.png";
 import arrow from "assets/images/arrow.svg";
 import avatar from "assets/images/avatar.jpeg";
 
@@ -44,24 +44,19 @@ const Layout = ({ children }) => {
     return () => window.removeEventListener("resize", handleResize, true);
   }, [isCollapsed, isDesktop]);
 
-  /*  let _menus = menus();
-  
-    const arrayTitle = history.location.pathname
-      .substring(1, history.location.pathname.length)
-      .split("/")
-      .map((str) => str[0].toUpperCase() + str.substring(1, str.length).toLowerCase());
-    let tempTitle = "";*/
 
   const Header = ({ isCollapsed, isDesktop }) => (
     <header
       className={classNames("bg-gray-100 w-full header h-16 transition-all duration-300 ease-in-out sticky top-0 block z-10", {
         'pl-80': !isCollapsed && isDesktop, 'pl-32': isCollapsed && isDesktop, 'pl-28': !isDesktop
       })}>
-      <div className="flex items-center justify-end px-5 h-16">
+      {/* <div className="flex items-center justify-end px-5 h-16"> */}
         {/* <Select value={i18n.language} onChange={(value) => changeLanguage(value)}>
           <Select.Option value="en"><img src={us} alt="US" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.English')}</Select.Option>
           <Select.Option value="vi"><img src={vn} alt="VN" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.Vietnam')}</Select.Option>
         </Select> */}
+      <div className="flex items-center justify-end px-5 h-20">
+
         <div className="flex items-center">
           <div className="mr-5 relative flex group">
             <div
@@ -131,7 +126,9 @@ const Layout = ({ children }) => {
         </div>
         {/* className={classNames("hamburger", )} */}
         <div onClick={() => set_isCollapsed(!isCollapsed)}>
-          <img className={classNames("w-4 cursor-pointer", { 'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop) })} src={arrow} ></img>
+          <img className={classNames("w-4 cursor-pointer", 
+          { 'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop) })} 
+          src={arrow} alt="" ></img>
         </div>
       </div>
       <div
