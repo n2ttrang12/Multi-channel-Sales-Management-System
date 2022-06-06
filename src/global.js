@@ -36,7 +36,7 @@ const Global = ({ children }) => {
   const login = (data) => {
     localStorage.setItem(keyUser, JSON.stringify(data));
     setUser(data)
-    localStorage.setItem(keyToken, data.token);
+    localStorage.setItem(keyToken, data.accessToken);
     localStorage.setItem(keyRefreshToken, data.refreshToken);
   };
 
