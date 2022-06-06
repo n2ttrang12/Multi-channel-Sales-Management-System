@@ -151,6 +151,7 @@ const Component = (
           className="ant-input px-4 py-3 w-full rounded-xl text-gray-600 bg-white border border-solid"
           rows="4"
           maxLength="1000"
+          disabled={formItem.readonly && typeof values[item.name] !== "undefined"}
           placeholder={formItem.placeholder || t("components.form.Enter") + " " + item.title.toLowerCase()}
         />;
       case "slider_number":

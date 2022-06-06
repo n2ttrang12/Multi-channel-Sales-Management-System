@@ -1,36 +1,96 @@
 import { t } from "i18next";
 
 const Component = {
-  success: (message) => import('sweetalert2').then(({default: Swal}) => Swal.fire({
+  success: (
+    {
+      text,
+      title = t("components.message.Success"),
+      cancelButtonText = t("components.message.Close"),
+      showCloseButton = true,
+      showCancelButton = true,
+      showConfirmButton = false,
+      padding = 0,
+    }
+  ) => import('sweetalert2').then(({default: Swal}) => Swal.fire({
     icon: "success",
-    title: t("components.message.Success"),
-    text: message,
-    showConfirmButton: false,
-    timer: 1500,
+    title,
+    text,
+    cancelButtonText,
+    showCloseButton,
+    showCancelButton,
+    showConfirmButton,
+    padding,
   })),
-  warning: (message) => import('sweetalert2').then(({default: Swal}) => Swal.fire({
+  warning: (
+    {
+      text,
+      title = t("components.message.Warning"),
+      cancelButtonText = t("components.message.Close"),
+      confirmButtonText = t("components.message.Ok"),
+      showCloseButton = true,
+      showCancelButton = true,
+      showConfirmButton = true,
+      padding = 0,
+    }
+  ) => import('sweetalert2').then(({default: Swal}) => Swal.fire({
     icon: 'warning',
-    title: message,
+    title,
+    text,
+    cancelButtonText,
+    confirmButtonText,
+    showCloseButton,
+    showCancelButton,
+    showConfirmButton,
+    padding,
   })),
-  error: (message) => import('sweetalert2').then(({default: Swal}) => Swal.fire({
+  error: (
+    {
+      text,
+      title = t("components.message.Fail"),
+      cancelButtonText = t("components.message.Close"),
+      showCloseButton = true,
+      showCancelButton = true,
+      showConfirmButton = false,
+      padding = 0,
+    }
+  ) => import('sweetalert2').then(({default: Swal}) => Swal.fire({
     icon: "error",
-    title: t("components.message.Fail"),
-    text: message,
-    padding: 0,
-    showCloseButton: true,
-    showCancelButton: true,
-    showConfirmButton: false,
-    cancelButtonText: t("components.message.Close"),
-    focusCancel: true,
+    title,
+    text,
+    cancelButtonText,
+    showCloseButton,
+    showCancelButton,
+    showConfirmButton,
+    padding,
+    focusCancel: showCancelButton,
   })),
-  confirm: (message, onConfirm, onDenied = () => null) => import('sweetalert2').then(({default: Swal}) => Swal.fire({
-    text: message,
+  confirm: (
+    {
+      text,
+      title = '',
+      cancelButtonText = t("components.message.Close"),
+      confirmButtonText =  t("components.message.Ok"),
+      onConfirm,
+      onDenied = () => null,
+      confirmButtonColor = '#3b82f6',
+      cancelButtonColor = '#ef4444',
+      showCloseButton = true,
+      showCancelButton = true,
+      showConfirmButton = true,
+      padding = 0,
+    }
+  ) => import('sweetalert2').then(({default: Swal}) => Swal.fire({
     icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3b82f6',
-    cancelButtonColor: '#ef4444',
-    confirmButtonText: 'Ok',
-    cancelButtonText: 'Cancel'
+    text,
+    title,
+    cancelButtonText,
+    confirmButtonText,
+    confirmButtonColor,
+    cancelButtonColor,
+    showCancelButton,
+    showConfirmButton,
+    showCloseButton,
+    padding,
   }).then((result) => {
     if (result.isConfirmed) {
       onConfirm();

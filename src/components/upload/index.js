@@ -93,7 +93,9 @@ const Component = (
           for (let i = 0; i < target.files.length; i++) {
             const file = target.files[i];
             if (maxSize && file.size > maxSize * 1024 * 1024) {
-              await Message.warning(`${file.name} (${((file.size)/ (1024*1024)).toFixed(1)}mb): ${t("components.form.ruleMaxSize", {max: maxSize})}`);
+              await Message.warning({
+                text: `${file.name} (${((file.size) / (1024 * 1024)).toFixed(1)}mb): ${t("components.form.ruleMaxSize", {max: maxSize})}`
+              });
               return false;
             }
 
@@ -151,7 +153,7 @@ const Component = (
                   })]);
                 } catch (e) {
                   set_isLoading(false);
-                  if (e.response.data.message) Message.error(e.response.data.message);
+                  if (e.response.data.message) Message.error({text: e.response.data.message});
                   set_listFiles(listFiles.filter(_item => _item.id !== dataFile.id));
                 }
               } else {

@@ -14,7 +14,13 @@ const { RangePicker } = DatePicker;
 
 const Hook = (
   {
-    isLoading, setIsLoading, Get, id = () => true, showList = true, footer = () => null, defaultRequest = {},
+    isLoading,
+    setIsLoading,
+    Get,
+    id = () => true,
+    showList = true,
+    footer = () => null,
+    defaultRequest = {},
     pageIndex = 'page',
     pageSize = 'perPage',
     sort = 'sorts',
@@ -34,6 +40,11 @@ const Hook = (
     emptyText = <div>No Data</div>,
     loadFirst = false,
     onRow = () => {},
+    pageSizeOptions = [10, 20, 30, 40],
+    pageSizeRender = (sizePage) => sizePage + ' / page',
+    pageSizeWidth = '115px',
+    paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
+    idElement = 'idTable',
     ...prop
   }
 ) => {
@@ -286,6 +297,7 @@ const Hook = (
             {!!showSearch && (
               <div className="relative">
                 <input
+                  id={idElement + '_input_search'}
                   className="w-52 h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-4"
                   defaultValue={params.fullTextSearch}
                   type="text"
@@ -323,8 +335,15 @@ const Hook = (
                 {...prop}
               />
               {showPagination && <Pagination
-                total={totalData} pageIndex={+params[pageIndex]} pageSize={+params[pageSize]} pageSizeOptions={[10, 20, 30, 40]}
+                total={totalData}
+                pageIndex={+params[pageIndex]}
+                pageSize={+params[pageSize]}
+                pageSizeOptions={pageSizeOptions}
+                pageSizeRender={pageSizeRender}
+                pageSizeWidth={pageSizeWidth}
                 queryParams={(pagination) => handleTableChange(pagination, params[filter], params[sort], params.fullTextSearch)}
+                paginationDescription={paginationDescription}
+                idElement={idElement}
               />}
             </Fragment>
           )}

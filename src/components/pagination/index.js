@@ -6,6 +6,9 @@ const Component = (
   {
     total = 4, pageSizeOptions = [], pageSize = 10, pageIndex = 1,
     queryParams = () => {},
+    pageSizeRender = (sizePage) => sizePage + ' / page', pageSizeWidth = '115px',
+    paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
+    idElement = 'pagination'
   }
 ) => {
   const listOfPageItem = useRef([]);
@@ -31,12 +34,31 @@ const Component = (
     buildIndexes();
   }
 
-  const onPageIndexChange = (index) => {
+  const onPageIndexChange = ({type, index}) => {
+    switch (type) {
+      case 'prev':
+        index = pageIndex - 1;
+        break;
+      case 'prev_10':
+        index = pageIndex - 10;
+        break;
+      case 'next':
+        index = pageIndex + 1;
+        break;
+      case 'next_10':
+        index = pageIndex + 10;
+        break;
+      default:
+    }
     queryParams({pageSize, current: index});
   }
 
   const getListOfPageItem = (pageIndex, lastIndex) => {
     const concatWithPrevNext = (listOfPage) => {
+      const prev10Item = {
+        type: 'prev_10',
+        disabled: pageIndex - 10 < 0
+      };
       const prevItem = {
         type: 'prev',
         disabled: pageIndex === 1
@@ -45,14 +67,18 @@ const Component = (
         type: 'next',
         disabled: pageIndex === lastIndex
       };
-      return [prevItem, ...listOfPage, nextItem];
+      const next10Item = {
+        type: 'next_10',
+        disabled: pageIndex + 10 > lastIndex
+      };
+      return [prev10Item, prevItem, ...listOfPage, nextItem, next10Item];
     };
     const generatePage = (start, end) => {
       const list = [];
       for (let i = start; i <= end; i++) {
         list.push({
           index: i,
-          type: 'page'
+          type: 'page_' + i
         });
       }
       return list;
@@ -83,15 +109,15 @@ const Component = (
       return concatWithPrevNext(generateRangeItem(pageIndex, lastIndex));
     }
   }
-
+  console.log(listOfPageItem);
   return total > 0 && (
     <div className="flex items-center justify-between mt-3 select-none">
       <div>
-        <Select defaultValue={pageSize} className="min-w-[115px]" onChange={(value) => onPageSizeChange(value)}>
-          {pageSizeOptions.map((item, index) => <Select.Option key={index} value={item}>{item} / page</Select.Option>)}
+        <Select id={idElement + '_page_size'}  defaultValue={pageSize} style={{minWidth: pageSizeWidth}} onChange={(value) => onPageSizeChange(value)}>
+          {pageSizeOptions.map((item, index) => <Select.Option key={index} value={item}>{pageSizeRender(item)}</Select.Option>)}
         </Select>
         <span className="ml-3 text-black">
-          {ranges[0]}-{ranges[1]} of {total} items
+          {paginationDescription(ranges[0], ranges[1], total)}
         </span>
       </div>
       <div className="flex justify-center border border-gray-100 p-1 rounded-xl bg-white">
@@ -100,16 +126,20 @@ const Component = (
             <button
               type={'button'}
               key={index}
+              disabled={page.disabled}
+              id={idElement + '_' +page.type}
               className={classNames('text-center duration-300 transition-all py-1 px-2.5 text-sm font-medium leading-normal', {
                 'text-blue-700 hover:text-blue-500': pageIndex !== page.index,
                 'bg-blue-500 rounded-full text-white hover:text-white': pageIndex === page.index,
                 'pointer-events-none': page.disabled || ['next_5', 'prev_5'].includes(page.type)
               })}
-              onClick={() => onPageIndexChange(page.type === 'prev' ? pageIndex - 1 : (page.type === 'next' ? pageIndex + 1 : page.index))}
+              onClick={() => onPageIndexChange(page)}
             >
               {page.type === 'prev' && <i className="las la-angle-left text-sm" />}
               {page.type === 'next' && <i className="las la-angle-right text-sm" />}
-              {page.type === 'page' && page.index}
+              {page.type === 'prev_10' && <i className="las la-angle-double-left text-sm" />}
+              {page.type === 'next_10' && <i className="las la-angle-double-right text-sm" />}
+              {page.type.indexOf('page') === 0 && page.index}
               {(page.type === 'prev_5' || page.type === 'next_5') && '...'}
             </button>
           ))}
