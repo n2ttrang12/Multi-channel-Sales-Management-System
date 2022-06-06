@@ -33,48 +33,70 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Google Sans', -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+  font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   @apply text-sm overflow-x-hidden text-gray-500 bg-blue-50;
 }
-* > {
+
+*> {
   .loop-intro-x(9);
 }
 
 .loop-intro-x(@counter) when (@counter > 0) {
-  .loop-intro-x((@counter - 1));    // next iteration
-  .intro-x:nth-child(@{counter}) { @apply translate-x-12; }
-  .-intro-x:nth-child(@{counter}) { @apply -translate-x-12; }
-  .-intro-x:nth-child(@{counter}), .intro-x:nth-child(@{counter}) {
+  .loop-intro-x((@counter - 1)); // next iteration
+
+  .intro-x:nth-child(@{counter}) {
+    @apply translate-x-12;
+  }
+
+  .-intro-x:nth-child(@{counter}) {
+    @apply -translate-x-12;
+  }
+
+  .-intro-x:nth-child(@{counter}),
+  .intro-x:nth-child(@{counter}) {
     opacity: 0;
     z-index: (10 - @counter);
     animation: intro-x-animation .4s ease-in-out .33333s;
     animation-fill-mode: forwards;
-    animation-delay: ~"0.@{counter}s"
+    animation-delay:~"0.@{counter}s"
   }
 }
 
 @keyframes intro-x-animation {
-  to { @apply opacity-100 -translate-x-0; }
+  to {
+    @apply opacity-100 -translate-x-0;
+  }
 }
 
 .ant-btn {
-@apply border border-gray-300 text-sm rounded-lg mr-2 px-2;
+  @apply border border-gray-300 text-sm rounded-lg mr-2 px-2;
 
-  &.ant-btn-primary { @apply bg-blue-500 text-white; }
+  &.ant-btn-primary {
+    @apply bg-blue-500 text-white;
+  }
 }
 
 
-#root { @apply h-screen; }
-body { @apply overflow-hidden; }
+#root {
+  @apply h-screen;
+}
+
+body {
+  @apply overflow-hidden;
+}
+
 .ant-input {
   @apply bg-gray-100;
 }
-.ant-select-dropdown{
-  @apply !py-0 rounded-xl text-gray-500;
+
+.ant-select-dropdown {
+  @apply  !py-0 rounded-xl text-gray-500;
+
   .ant-select-item-option {
-  @apply text-gray-500;
+    @apply text-gray-500;
   }
-  .ant-select-item-option-selected{
+
+  .ant-select-item-option-selected {
     @apply bg-gray-100;
   }
- }
+}
