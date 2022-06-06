@@ -58,9 +58,33 @@ main {
   }
 }
 
-input{
-  @apply !bg-gray-100;
+
+.ant-form-item-control-input-content{
+  input{
+    @apply bg-gray-100;
+  }
+  .ant-select-selector{
+    @apply !bg-gray-100;
+  }
 }
-.ant-select-selector{
-  @apply !bg-gray-100;
+
+//Table
+.ant-table-thead{
+  .ant-table-cell{
+    @apply border-0;
+  }
+  .ant-table-cell::before{
+    @apply hidden;
+  }
+  tr{
+    th{
+      @apply !bg-gray-100;
+      .ant-dropdown-trigger{
+        @apply hidden;
+      }
+      .ant-table-column-sorter {
+        @apply hidden;
+      }
+    }
+  }
 }
