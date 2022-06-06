@@ -21,7 +21,7 @@ const Layout = ({isCollapsed = false}) => {
               onClick={() => navigate(routerLinks(item.name))}
             >
               <i className={classNames('text-3xl mr-2.5', item.icon)} />
-              <span className={classNames('transition-all duration-300 ease-in-out font-bold', {'opacity-100': !isCollapsed, 'opacity-0 text-[0]': isCollapsed})}>
+              <span className={classNames('text-base  transition-all duration-300 ease-in-out font-bold', {'opacity-100': !isCollapsed, 'opacity-0 text-[0]': isCollapsed})}>
                 {item.name}
               </span>
             </li>
@@ -33,7 +33,7 @@ const Layout = ({isCollapsed = false}) => {
               title={(
                 <Fragment>
                   <i className={classNames('text-3xl mr-2.5', item.icon)} />
-                  <span className={classNames('transition-all duration-300 ease-in-out font-bold', {'opacity-100': !isCollapsed, 'opacity-0 text-[0]': isCollapsed})}>
+                  <span className={classNames('text-base transition-all duration-300 ease-in-out font-bold', {'opacity-100': !isCollapsed, 'opacity-0 text-[0]': isCollapsed})}>
                     {item.name}
                   </span>
                 </Fragment>
@@ -42,11 +42,11 @@ const Layout = ({isCollapsed = false}) => {
               showArrow={!isCollapsed}
               popover={isCollapsed}
             >
-              <Fragment>
+              <div className="px-4 mx-4">
                 {item.child.map((subItem, index) => (
-                    <li key={index} className="py-2" onClick={() => navigate(routerLinks(subItem.name))}>{subItem.name}</li>
+                    <li key={index}  className={classNames("py-2 my-2 font-bold text-base", {'bg-teal-700 text-white rounded-2xl': location.pathname === routerLinks(subItem.name)})} onClick={() => navigate(routerLinks(subItem.name))}>{subItem.name}</li>
                 ))}
-              </Fragment>
+              </div>
             </Collapse>
           )
         }

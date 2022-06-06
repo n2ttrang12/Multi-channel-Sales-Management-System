@@ -6,6 +6,11 @@ const Util = (name, type) => {
     SendOTP: "/auth/send-otp",
     Dashboard: "/",
     User: "/user",
+    Category: "/category",
+    "Danh mục": "/category",
+    CategoryCreate: "/category/create",
+    CategoryEdit: "/category/edit",
+    CategoryDetail: "/category/detail",
   }; // 💬 generate link to here
 
   const apis = {
