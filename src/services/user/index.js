@@ -13,7 +13,7 @@ export const UserService = {
      
     } catch (e) {
       console.error(e);
-      if (e.response.data.message) { Message.error(e.response.data.message) } else {
+      if (e.response.data.message) { Message.error({text:e.response.data.message}) } else {
         Message.error('Có lỗi xảy ra trong quá trình đăng nhập')
       };
       return false;
@@ -33,7 +33,10 @@ export const UserService = {
       }
       return null
     } catch (e) {
-      if (e.response.data.message) Message.error(e.response.data.message);
+      console.log(e);
+      if (e.response.data.message) {Message.error({text:e.response.data.message});} else {
+        Message.error('Có lỗi xảy ra trong quá trình đăng nhập')
+      };
       return false;
     }
   },
@@ -44,7 +47,10 @@ export const UserService = {
       );
       return data;
     } catch (e) {
-      if (e.response.data.message) Message.error(e.response.data.message);
+      console.log(e);
+      if (e.response.data.message){ Message.error({text:e.response.data.message})}else {
+        Message.error('Có lỗi xảy ra trong quá trình đăng xuất')
+      };
       return false;
     }
   },
@@ -56,7 +62,11 @@ export const UserService = {
       );
       return data;
     } catch (e) {
-      if (e.response.data.message) Message.error(e.response.data.message);
+      console.log(e);
+      if (e.response.data.message) {Message.error({text:e.response.data.message});}
+      else {
+        Message.error('Có lỗi xảy ra trong quá trình thao tác')
+      };
       return false;
     }
   },
@@ -68,7 +78,11 @@ export const UserService = {
       );
       return data;
     } catch (e) {
-      if (e.response.data.message) Message.error(e.response.data.message);
+      console.log(e);
+      if (e.response.data.message) {Message.error({text:e.response.data.message})}
+      else {
+        Message.error('Có lỗi xảy ra trong quá trình thao tác')
+      };
       return false;
     }
   },
@@ -81,7 +95,11 @@ export const UserService = {
       );
       return data;
     } catch (e) {
-      if (e.response.data.message) Message.error(e.response.data.message);
+      console.log(e);
+      if (e.response.data.message) {Message.error({text:e.response.data.message})}
+      else {
+        Message.error('Có lỗi xảy ra trong quá trình thao tác')
+      };
       return false;
     }
   },
