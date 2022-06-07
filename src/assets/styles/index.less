@@ -134,3 +134,24 @@ body {
 .ant-table-row-level-0:nth-child(odd):hover{
   @apply !bg-gray-100;
 }
+#idTable_prev_10, #idTable_prev, #idTable_next, #idTable_next_10{
+  @apply !text-teal-900;
+}
+
+//alert popup
+.swal2-popup{
+  @apply !pb-0 rounded-tr-xl rounded-tl-xl;
+  .swal2-actions{
+    @apply !w-full bg-gray-100 !py-2 rounded-br-xl rounded-bl-xl;
+    .swal2-confirm{
+      @apply !bg-red-500;
+    }
+    .swal2-cancel {
+      border: 1px solid !important;
+      @apply text-teal-900 !bg-white;
+    }
+  }
+}
+.ant-table-tbody > tr.ant-table-placeholder:hover > td{
+ @apply bg-transparent;
+}
