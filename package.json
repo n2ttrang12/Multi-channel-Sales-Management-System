@@ -38,9 +38,9 @@
     "start:w": "set PORT=3335 && react-app-rewired start",
     "build:dev": "node ./update-build.js && env-cmd -f .env react-app-rewired build",
     "build:staging": "node ./update-build.js && env-cmd -f .env.staging react-app-rewired build",
-    "build:balance2": "node ./update-build.js && env-cmd -f .env.balance2 react-app-rewired build",
-    "build:uat": "node ./update-build.js && env-cmd -f .env.uat react-app-rewired build",
     "build:prod": "node ./update-build.js && env-cmd -f .env.prod react-app-rewired build",
+    "format": "prettier --write \"{src,public}/**/*.js\"",
+    "lint": "eslint \"{src,public}/**/*.js\" --fix",
     "test": "npx codeceptjs run"
   },
   "eslintConfig": {
@@ -65,9 +65,20 @@
     "@playwright/test": "^1.20.0",
     "autoprefixer": "^10.4.1",
     "codeceptjs": "^3.3.0",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-n": "^15.2.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "postcss": "^8.4.5",
+    "prettier": "^2.6.2",
     "react-app-rewired": "^2.1.11",
     "tailwindcss": "^3.0.8"
   }

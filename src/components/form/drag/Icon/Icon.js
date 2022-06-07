@@ -7,9 +7,7 @@ class Icon extends Component {
     // eslint-disable-next-line no-unused-vars
     const { children, className, ...props } = this.props;
 
-    return (
-      <i className={cx('nestable-icon', className)} {...props} />
-    );
+    return <i className={cx('nestable-icon', className)} {...props} />;
   }
 }
 

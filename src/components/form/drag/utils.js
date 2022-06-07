@@ -9,22 +9,23 @@ export const closest = (target, selector) => {
 
 export const getOffsetRect = (elem) => {
   // (1)
-  var box = elem.getBoundingClientRect();
+  const box = elem.getBoundingClientRect();
 
-  var body = document.body;
-  var docElem = document.documentElement;
+  const body = document.body;
+  const docElem = document.documentElement;
 
   // (2)
-  var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
-  var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
+  const scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
+  const scrollLeft =
+    window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
 
   // (3)
-  var clientTop = docElem.clientTop || body.clientTop || 0;
-  var clientLeft = docElem.clientLeft || body.clientLeft || 0;
+  const clientTop = docElem.clientTop || body.clientTop || 0;
+  const clientLeft = docElem.clientLeft || body.clientLeft || 0;
 
   // (4)
-  var top = box.top + scrollTop - clientTop;
-  var left = box.left + scrollLeft - clientLeft;
+  const top = box.top + scrollTop - clientTop;
+  const left = box.left + scrollLeft - clientLeft;
 
   return { top: Math.round(top), left: Math.round(left) };
 };
@@ -43,31 +44,30 @@ export const getTotalScroll = (elem) => {
 
 export const getTransformProps = (x, y) => {
   return {
-    transform: 'translate(' + x + 'px, ' + y + 'px)'
+    transform: 'translate(' + x + 'px, ' + y + 'px)',
   };
 };
 
 export const listWithChildren = (list, childrenProp) => {
-  return list.filter(item => !!item).map(item => {
-    return {
-      ...item,
-      [childrenProp]: item[childrenProp]
-        ? listWithChildren(item[childrenProp], childrenProp)
-        : []
-    };
-  });
+  return list
+    .filter((item) => !!item)
+    .map((item) => {
+      return {
+        ...item,
+        [childrenProp]: item[childrenProp]
+          ? listWithChildren(item[childrenProp], childrenProp)
+          : [],
+      };
+    });
 };
 
-export const getAllNonEmptyNodesIds = (items, {idProp, childrenProp}) => {
+export const getAllNonEmptyNodesIds = (items, { idProp, childrenProp }) => {
   let childrenIds = [];
-  let ids = items
-    .filter(item => item[childrenProp].length)
-    .map(item => {
+  const ids = items
+    .filter((item) => item[childrenProp].length)
+    .map((item) => {
       childrenIds = childrenIds.concat(
-        getAllNonEmptyNodesIds(
-          item[childrenProp],
-          {idProp, childrenProp}
-        )
+        getAllNonEmptyNodesIds(item[childrenProp], { idProp, childrenProp }),
       );
       return item[idProp];
     });
@@ -75,6 +75,9 @@ export const getAllNonEmptyNodesIds = (items, {idProp, childrenProp}) => {
   return ids.concat(childrenIds);
 };
 export const hasSomeParentTheClass = (element, classname) => {
-  if (element.className && element.className.split(' ').indexOf(classname) >= 0) return true;
-  return element.parentNode && hasSomeParentTheClass(element.parentNode, classname);
+  if (element.className && element.className.split(' ').indexOf(classname) >= 0)
+    return true;
+  return (
+    element.parentNode && hasSomeParentTheClass(element.parentNode, classname)
+  );
 };

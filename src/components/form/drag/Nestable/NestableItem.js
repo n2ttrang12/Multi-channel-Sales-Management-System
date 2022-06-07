@@ -12,6 +12,7 @@ class NestableItem extends Component {
     index: PropTypes.number,
     depth: PropTypes.number,
   };
+
   static defaultProps = {
     depth: 0,
   };
@@ -60,35 +61,33 @@ class NestableItem extends Component {
     }
 
     if (handler) {
-      wrappedHandler = <span className="nestable-item-handler" {...handlerProps}>{handler}</span>;
+      wrappedHandler = (
+        <span className="nestable-item-handler" {...handlerProps}>
+          {handler}
+        </span>
+      );
       // wrappedHandler = React.cloneElement(handler, handlerProps);
     } else {
       rowProps = {
         ...rowProps,
-        ...handlerProps
+        ...handlerProps,
       };
     }
 
-    const collapseIcon = hasChildren
-      ? (
-        <span onClick={() => options.onToggleCollapse(item)}>
-          {renderCollapseIcon({ isCollapsed })}
-        </span>
-      )
-      : null;
+    const collapseIcon = hasChildren ? (
+      <span onClick={() => options.onToggleCollapse(item)}>
+        {renderCollapseIcon({ isCollapsed })}
+      </span>
+    ) : null;
 
     const baseClassName = 'nestable-item' + (isCopy ? '-copy' : '');
     const itemProps = {
-      className: cx(
-          baseClassName,
-          baseClassName + '-' + item[idProp],
-          {
-            'is-dragging': isDragging,
-            [baseClassName + '--with-children']: hasChildren,
-            [baseClassName + '--children-open']: hasChildren && !isCollapsed,
-            [baseClassName + '--children-collapsed']: hasChildren && isCollapsed,
-          }
-      )
+      className: cx(baseClassName, baseClassName + '-' + item[idProp], {
+        'is-dragging': isDragging,
+        [baseClassName + '--with-children']: hasChildren,
+        [baseClassName + '--children-open']: hasChildren && !isCollapsed,
+        [baseClassName + '--children-collapsed']: hasChildren && isCollapsed,
+      }),
     };
 
     const content = renderItem({
