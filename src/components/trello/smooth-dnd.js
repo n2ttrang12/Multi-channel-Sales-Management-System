@@ -1,36 +1,36 @@
 /* eslint-disable */
 !(function (e, t) {
-  'object' == typeof exports && 'undefined' != typeof module
+  "object" == typeof exports && "undefined" != typeof module
     ? t(exports)
-    : 'function' == typeof define && define.amd
-    ? define(['exports'], t)
+    : "function" == typeof define && define.amd
+    ? define(["exports"], t)
     : t(((e = e || self).SmoothDnD = {}));
 })(this, function (e) {
-  'use strict';
+  "use strict";
   var l,
     t,
-    r = 'smooth-dnd-container-instance',
-    f = 'smooth-dnd-draggable-wrapper',
-    o = 'animated',
-    p = '__smooth_dnd_draggable_translation_value',
-    u = '__smooth_dnd_draggable_visibility_value',
-    v = 'smooth-dnd-ghost',
-    g = 'smooth-dnd-container',
-    d = 'smooth-dnd-extra-size-for-insertion',
-    h = 'smooth-dnd-stretcher-element',
-    y = 'smooth-dnd-stretcher-instance',
-    s = 'smooth-dnd-disable-touch-action',
-    c = 'smooth-dnd-no-user-select',
-    i = 'smooth-dnd-prevent-auto-scroll-class',
-    b = 'smooth-dnd-drop-preview-default-class',
-    w = 'smooth-dnd-drop-preview-inner-class',
-    x = 'smooth-dnd-drop-preview-constant-class',
-    E = 'smooth-dnd-drop-preview-flex-container-class',
+    r = "smooth-dnd-container-instance",
+    f = "smooth-dnd-draggable-wrapper",
+    o = "animated",
+    p = "__smooth_dnd_draggable_translation_value",
+    u = "__smooth_dnd_draggable_visibility_value",
+    v = "smooth-dnd-ghost",
+    g = "smooth-dnd-container",
+    d = "smooth-dnd-extra-size-for-insertion",
+    h = "smooth-dnd-stretcher-element",
+    y = "smooth-dnd-stretcher-instance",
+    s = "smooth-dnd-disable-touch-action",
+    c = "smooth-dnd-no-user-select",
+    i = "smooth-dnd-prevent-auto-scroll-class",
+    b = "smooth-dnd-drop-preview-default-class",
+    w = "smooth-dnd-drop-preview-inner-class",
+    x = "smooth-dnd-drop-preview-constant-class",
+    E = "smooth-dnd-drop-preview-flex-container-class",
     n = Object.freeze({
       containerInstance: r,
-      defaultGroupName: '@@smooth-dnd-default-group@@',
+      defaultGroupName: "@@smooth-dnd-default-group@@",
       wrapperClass: f,
-      defaultGrabHandleClass: 'smooth-dnd-default-grap-handle',
+      defaultGrabHandleClass: "smooth-dnd-default-grap-handle",
       animationClass: o,
       translationValue: p,
       visibilityValue: u,
@@ -39,7 +39,7 @@
       extraSizeForInsertion: d,
       stretcherElementClass: h,
       stretcherElementInstance: y,
-      isDraggableDetached: 'smoth-dnd-is-draggable-detached',
+      isDraggableDetached: "smoth-dnd-is-draggable-detached",
       disbaleTouchActions: s,
       noUserSelectClass: c,
       preventAutoScrollClass: i,
@@ -50,8 +50,8 @@
     }),
     C = {
       groupName: void 0,
-      behaviour: 'move',
-      orientation: 'vertical',
+      behaviour: "move",
+      orientation: "vertical",
       getChildPayload: void 0,
       animationDuration: 250,
       autoScrollEnabled: !0,
@@ -61,16 +61,16 @@
   var __targetElement = null;
   function a(e) {
     return (a =
-      'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
+      "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
         ? function (e) {
             return typeof e;
           }
         : function (e) {
             return e &&
-              'function' == typeof Symbol &&
+              "function" == typeof Symbol &&
               e.constructor === Symbol &&
               e !== Symbol.prototype
-              ? 'symbol'
+              ? "symbol"
               : typeof e;
           })(e);
   }
@@ -101,20 +101,20 @@
       (function (e) {
         if (
           Symbol.iterator in Object(e) ||
-          '[object Arguments]' === Object.prototype.toString.call(e)
+          "[object Arguments]" === Object.prototype.toString.call(e)
         )
           return Array.from(e);
       })(e) ||
       (function () {
-        throw new TypeError('Invalid attempt to spread non-iterable instance');
+        throw new TypeError("Invalid attempt to spread non-iterable instance");
       })()
     );
   }
 
-  ((t = l || (l = {})).x = 'x'), (t.y = 'y'), (t.xy = 'xy');
+  ((t = l || (l = {})).x = "x"), (t.y = "y"), (t.xy = "xy");
 
   function S(e, t, n) {
-    return 'x' === n
+    return "x" === n
       ? {
           left: Math.max(e.left, t.left),
           top: e.top,
@@ -132,19 +132,19 @@
   function O(e) {
     var t = window.getComputedStyle(e),
       n = t.overflow;
-    if ('auto' === n || 'scroll' === n) return l.xy;
-    var o = t['overflow-x'],
-      r = 'auto' === o || 'scroll' === o,
-      i = t['overflow-y'],
-      a = 'auto' === i || 'scroll' === i;
+    if ("auto" === n || "scroll" === n) return l.xy;
+    var o = t["overflow-x"],
+      r = "auto" === o || "scroll" === o,
+      i = t["overflow-y"],
+      a = "auto" === i || "scroll" === i;
     return r && a ? l.xy : r ? l.x : a ? l.y : null;
   }
 
   function R(e, t) {
     var n = window.getComputedStyle(e),
       o = n.overflow,
-      r = n['overflow-'.concat(t)];
-    return 'auto' === o || 'scroll' === o || 'auto' === r || 'scroll' === r;
+      r = n["overflow-".concat(t)];
+    return "auto" === o || "scroll" === o || "auto" === r || "scroll" === r;
   }
 
   var A = function (e, t) {
@@ -158,11 +158,11 @@
     I = function (e) {
       var t = e.getBoundingClientRect(),
         n = { left: t.left, right: t.right, top: t.top, bottom: t.bottom };
-      if (P(e, 'x') && !B(e, 'x')) {
+      if (P(e, "x") && !B(e, "x")) {
         var o = n.right - n.left;
         n.right = n.right + e.scrollWidth - o;
       }
-      if (P(e, 'y') && !B(e, 'y')) {
+      if (P(e, "y") && !B(e, "y")) {
         var r = n.bottom - n.top;
         n.bottom = n.bottom + e.scrollHeight - r;
       }
@@ -171,18 +171,18 @@
     B = function (e, t) {
       var n = window.getComputedStyle(e),
         o = n.overflow,
-        r = n['overflow-'.concat(t)];
+        r = n["overflow-".concat(t)];
       return (
-        'auto' === o ||
-        'scroll' === o ||
-        'hidden' === o ||
-        'auto' === r ||
-        'scroll' === r ||
-        'hidden' === r
+        "auto" === o ||
+        "scroll" === o ||
+        "hidden" === o ||
+        "auto" === r ||
+        "scroll" === r ||
+        "hidden" === r
       );
     },
     P = function (e, t) {
-      return 'x' === t
+      return "x" === t
         ? e.scrollWidth > e.clientWidth
         : e.scrollHeight > e.clientHeight;
     },
@@ -190,8 +190,8 @@
       var n = e,
         o = t || I(e);
       for (n = e.parentElement; n; )
-        P(n, 'x') && B(n, 'x') && (o = S(o, n.getBoundingClientRect(), 'x')),
-          P(n, 'y') && B(n, 'y') && (o = S(o, n.getBoundingClientRect(), 'y')),
+        P(n, "x") && B(n, "x") && (o = S(o, n.getBoundingClientRect(), "x")),
+          P(n, "y") && B(n, "y") && (o = S(o, n.getBoundingClientRect(), "y")),
           (n = n.parentElement);
       return o;
     },
@@ -207,7 +207,7 @@
             )
               return { v: t };
           })();
-          if ('object' === a(t)) return t.v;
+          if ("object" === a(t)) return t.v;
         }
         o = o.parentElement;
       }
@@ -224,7 +224,7 @@
       return (
         -1 <
         e.className
-          .split(' ')
+          .split(" ")
           .map(function (e) {
             return e;
           })
@@ -233,18 +233,18 @@
     },
     M = function (e, t) {
       if (e) {
-        var n = e.className.split(' ').filter(function (e) {
+        var n = e.className.split(" ").filter(function (e) {
           return e;
         });
-        -1 === n.indexOf(t) && (n.unshift(t), (e.className = n.join(' ')));
+        -1 === n.indexOf(t) && (n.unshift(t), (e.className = n.join(" ")));
       }
     },
     j = function (e, t) {
       if (e) {
-        var n = e.className.split(' ').filter(function (e) {
+        var n = e.className.split(" ").filter(function (e) {
           return e && e !== t;
         });
-        e.className = n.join(' ');
+        e.className = n.join(" ");
       }
     },
     _ = function (e, t) {
@@ -285,8 +285,8 @@
         i = n.droppedElement,
         a = null;
       if ((null !== o && ((a = _(s, o)), c.splice(o, 1)), null !== r)) {
-        var l = window.document.createElement('div');
-        (l.className = ''.concat(f)),
+        var l = window.document.createElement("div");
+        (l.className = "".concat(f)),
           l.appendChild(__targetElement.firstElementChild),
           F(s, l, r),
           r >= c.length ? c.push(l) : c.splice(r, 0, l);
@@ -308,38 +308,38 @@
       },
     }),
     G = {
-      size: 'offsetWidth',
-      distanceToParent: 'offsetLeft',
-      translate: 'transform',
-      begin: 'left',
-      end: 'right',
-      dragPosition: 'x',
-      scrollSize: 'scrollWidth',
-      offsetSize: 'offsetWidth',
-      scrollValue: 'scrollLeft',
-      scale: 'scaleX',
-      setSize: 'width',
+      size: "offsetWidth",
+      distanceToParent: "offsetLeft",
+      translate: "transform",
+      begin: "left",
+      end: "right",
+      dragPosition: "x",
+      scrollSize: "scrollWidth",
+      offsetSize: "offsetWidth",
+      scrollValue: "scrollLeft",
+      scale: "scaleX",
+      setSize: "width",
       setters: {
         translate: function (e) {
-          return 'translate3d('.concat(e, 'px, 0, 0)');
+          return "translate3d(".concat(e, "px, 0, 0)");
         },
       },
     },
     W = {
-      size: 'offsetHeight',
-      distanceToParent: 'offsetTop',
-      translate: 'transform',
-      begin: 'top',
-      end: 'bottom',
-      dragPosition: 'y',
-      scrollSize: 'scrollHeight',
-      offsetSize: 'offsetHeight',
-      scrollValue: 'scrollTop',
-      scale: 'scaleY',
-      setSize: 'height',
+      size: "offsetHeight",
+      distanceToParent: "offsetTop",
+      translate: "transform",
+      begin: "top",
+      end: "bottom",
+      dragPosition: "y",
+      scrollSize: "scrollHeight",
+      offsetSize: "offsetHeight",
+      scrollValue: "scrollTop",
+      scale: "scaleY",
+      setSize: "height",
       setters: {
         translate: function (e) {
-          return 'translate3d(0,'.concat(e, 'px, 0)');
+          return "translate3d(0,".concat(e, "px, 0)");
         },
       },
     };
@@ -355,7 +355,7 @@
             e[o[t]] = o.setters[t] ? o.setters[t](n) : n;
           },
         };
-      })('horizontal' === s ? G : W),
+      })("horizontal" === s ? G : W),
       c = { translation: 0 };
 
     function t() {
@@ -379,17 +379,17 @@
       var t = e;
       if (t.tagName) {
         var n = t.getBoundingClientRect();
-        return 'vertical' === s ? n.bottom - n.top : n.right - n.left;
+        return "vertical" === s ? n.bottom - n.top : n.right - n.left;
       }
-      return o.get(e, 'size') * o.get(c, 'scale');
+      return o.get(e, "size") * o.get(c, "scale");
     }
 
     function a(e) {
-      return o.get(e, 'dragPosition');
+      return o.get(e, "dragPosition");
     }
 
     return (
-      window.addEventListener('resize', function () {
+      window.addEventListener("resize", function () {
         r(n);
       }),
       setTimeout(function () {
@@ -405,36 +405,36 @@
           };
         },
         getBeginEndOfDOMRect: function (e) {
-          return { begin: o.get(e, 'begin'), end: o.get(e, 'end') };
+          return { begin: o.get(e, "begin"), end: o.get(e, "end") };
         },
         getBeginEndOfContainer: function () {
           return {
-            begin: o.get(c.rect, 'begin') + c.translation,
-            end: o.get(c.rect, 'end') + c.translation,
+            begin: o.get(c.rect, "begin") + c.translation,
+            end: o.get(c.rect, "end") + c.translation,
           };
         },
         getBeginEndOfContainerVisibleRect: function () {
           return {
-            begin: o.get(c.visibleRect, 'begin') + c.translation,
-            end: o.get(c.visibleRect, 'end') + c.translation,
+            begin: o.get(c.visibleRect, "begin") + c.translation,
+            end: o.get(c.visibleRect, "end") + c.translation,
           };
         },
         getBeginEnd: function (e) {
           var t =
             (function (e) {
               return (
-                (o.get(e, 'distanceToParent') + (e[p] || 0)) * o.get(c, 'scale')
+                (o.get(e, "distanceToParent") + (e[p] || 0)) * o.get(c, "scale")
               );
             })(e) +
-            (o.get(c.rect, 'begin') + c.translation) -
-            o.get(n, 'scrollValue');
-          return { begin: t, end: t + i(e) * o.get(c, 'scale') };
+            (o.get(c.rect, "begin") + c.translation) -
+            o.get(n, "scrollValue");
+          return { begin: t, end: t + i(e) * o.get(c, "scale") };
         },
         getAxisValue: a,
         setTranslation: function (e, t) {
           t
-            ? o.set(e.style, 'translate', t)
-            : e.style.removeProperty('transform'),
+            ? o.set(e.style, "translate", t)
+            : e.style.removeProperty("transform"),
             (e[p] = t);
         },
         getTranslation: function (e) {
@@ -443,8 +443,8 @@
         setVisibility: function (e, t) {
           (void 0 !== e[u] && e[u] === t) ||
             (t
-              ? e.style.removeProperty('visibility')
-              : (e.style.visibility = 'hidden'),
+              ? e.style.removeProperty("visibility")
+              : (e.style.visibility = "hidden"),
             (e[u] = t));
         },
         isVisible: function (e) {
@@ -458,31 +458,31 @@
             a = n.bottom;
           a - r < 2 && (a = r + 30);
           var l = c.rect;
-          return 'vertical' === s
+          return "vertical" === s
             ? e > l.left && e < l.right && r < t && t < a
             : o < e && e < i && t > l.top && t < l.bottom;
         },
         setSize: function (e, t) {
-          o.set(e, 'setSize', t);
+          o.set(e, "setSize", t);
         },
         getTopLeftOfElementBegin: function (e) {
           var t = 0;
           return {
             top:
-              'horizontal' === s
+              "horizontal" === s
                 ? ((t = e), c.rect.top)
                 : ((t = c.rect.left), e),
             left: t,
           };
         },
         getScrollSize: function (e) {
-          return o.get(e, 'scrollSize');
+          return o.get(e, "scrollSize");
         },
         getScrollValue: function (e) {
-          return o.get(e, 'scrollValue');
+          return o.get(e, "scrollValue");
         },
         setScrollValue: function (e, t) {
-          return o.set(e, 'scrollValue', t);
+          return o.set(e, "scrollValue", t);
         },
         invalidate: t,
         invalidateRects: function () {
@@ -492,7 +492,7 @@
           return a(e);
         },
         setBegin: function (e, t) {
-          o.set(e, 'begin', t);
+          o.set(e, "begin", t);
         },
       }
     );
@@ -509,14 +509,14 @@
       u = e.x,
       d = e.y;
     if (u < a || l < u || d < s || c < d) return null;
-    i = 'x' === t ? ((o = a), (r = l), u) : ((o = s), (r = c), d);
+    i = "x" === t ? ((o = a), (r = l), u) : ((o = s), (r = c), d);
     var f = r - o,
       g = 400 < f ? 100 : f / 4;
     return r - i < g
-      ? { direction: 'end', speedFactor: (g - (r - i)) / g }
+      ? { direction: "end", speedFactor: (g - (r - i)) / g }
       : i - o < g
       ? {
-          direction: 'begin',
+          direction: "begin",
           speedFactor: (g - (i - o)) / g,
         }
       : null;
@@ -524,7 +524,7 @@
 
   function J(l) {
     var s =
-        1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 'y',
+        1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : "y",
       c = null,
       u = null,
       d = null,
@@ -544,13 +544,13 @@
                   r,
                   i = (t / 1e3) * f;
                 (o = s),
-                  (r = i = 'begin' === d ? 0 - i : i),
+                  (r = i = "begin" === d ? 0 - i : i),
                   (n = l) &&
                     (n !== window
-                      ? 'x' === o
+                      ? "x" === o
                         ? (n.scrollLeft += r)
                         : (n.scrollTop += r)
-                      : 'x' === o
+                      : "x" === o
                       ? n.scrollBy(r, 0)
                       : n.scrollBy(0, r)),
                   (c = null),
@@ -584,14 +584,14 @@
                 var r = {};
                 switch (o) {
                   case l.xy:
-                    (r.x = { animator: J(n, 'x') }),
-                      (r.y = { animator: J(n, 'y') });
+                    (r.x = { animator: J(n, "x") }),
+                      (r.y = { animator: J(n, "y") });
                     break;
                   case l.x:
-                    r.x = { animator: J(n, 'x') };
+                    r.x = { animator: J(n, "x") };
                     break;
                   case l.y:
-                    r.y = { animator: J(n, 'y') };
+                    r.y = { animator: J(n, "y") };
                 }
                 t.push({
                   axisAnimations: r,
@@ -621,8 +621,8 @@
             e.forEach(function (e) {
               var t = e.axisAnimations,
                 n = (0, e.getRect)();
-              t.x && ((t.x.scrollParams = U(o, 'x', n)), (e.cachedRect = n)),
-                t.y && ((t.y.scrollParams = U(o, 'y', n)), (e.cachedRect = n));
+              t.x && ((t.x.scrollParams = U(o, "x", n)), (e.cachedRect = n)),
+                t.y && ((t.y.scrollParams = U(o, "y", n)), (e.cachedRect = n));
             });
           })(r, t.mousePosition),
             r.forEach(function (e) {
@@ -668,7 +668,7 @@
         }
       };
     };
-  'undefined' != typeof window &&
+  "undefined" != typeof window &&
     ((Q = Element) &&
       Q.prototype &&
       !Q.prototype.matches &&
@@ -690,7 +690,7 @@
     (Z = Node || Element) &&
       Z.prototype &&
       null == Z.prototype.firstElementChild &&
-      Object.defineProperty(Z.prototype, 'firstElementChild', {
+      Object.defineProperty(Z.prototype, "firstElementChild", {
         get: function () {
           for (var e, t = this.childNodes, n = 0; (e = t[n++]); )
             if (1 === e.nodeType) return e;
@@ -701,9 +701,9 @@
       (Array.prototype.some = function (e) {
         if (null == this)
           throw new TypeError(
-            'Array.prototype.some called on null or undefined',
+            "Array.prototype.some called on null or undefined"
           );
-        if ('function' != typeof e) throw new TypeError();
+        if ("function" != typeof e) throw new TypeError();
         for (
           var t = Object(this),
             n = t.length >>> 0,
@@ -715,82 +715,82 @@
           if (r in t && e.call(o, t[r], r, t)) return !0;
         return !1;
       }));
-  var te = { overflow: 'hidden', display: 'block' },
-    ne = { height: '100%', display: 'table-cell', 'vertical-align': 'top' },
+  var te = { overflow: "hidden", display: "block" },
+    ne = { height: "100%", display: "table-cell", "vertical-align": "top" },
     oe =
-      (m(($ = {}), '.'.concat(g), {
-        position: 'relative',
-        'min-height': '30px',
-        'min-width': '30px',
+      (m(($ = {}), ".".concat(g), {
+        position: "relative",
+        "min-height": "30px",
+        "min-width": "30px",
       }),
-      m($, '.'.concat(g, '.horizontal'), { display: 'table' }),
-      m($, '.'.concat(g, '.horizontal > .').concat(h), {
-        display: 'inline-block',
+      m($, ".".concat(g, ".horizontal"), { display: "table" }),
+      m($, ".".concat(g, ".horizontal > .").concat(h), {
+        display: "inline-block",
       }),
-      m($, '.'.concat(g, '.horizontal > .').concat(f), ne),
-      m($, '.'.concat(g, '.vertical > .').concat(f), te),
-      m($, '.'.concat(f), { 'box-sizing': 'border-box' }),
-      m($, '.'.concat(f, '.horizontal'), ne),
-      m($, '.'.concat(f, '.vertical'), te),
-      m($, '.'.concat(f, '.animated'), { transition: 'transform ease' }),
-      m($, '.'.concat(v), { 'box-sizing': 'border-box' }),
-      m($, '.'.concat(v, '.animated'), { transition: 'all ease-in-out' }),
-      m($, '.'.concat(v, ' *'), { 'pointer-events': 'none' }),
-      m($, '.'.concat(s, ' *'), {
-        'touch-action': 'none',
-        '-ms-touch-action': 'none',
+      m($, ".".concat(g, ".horizontal > .").concat(f), ne),
+      m($, ".".concat(g, ".vertical > .").concat(f), te),
+      m($, ".".concat(f), { "box-sizing": "border-box" }),
+      m($, ".".concat(f, ".horizontal"), ne),
+      m($, ".".concat(f, ".vertical"), te),
+      m($, ".".concat(f, ".animated"), { transition: "transform ease" }),
+      m($, ".".concat(v), { "box-sizing": "border-box" }),
+      m($, ".".concat(v, ".animated"), { transition: "all ease-in-out" }),
+      m($, ".".concat(v, " *"), { "pointer-events": "none" }),
+      m($, ".".concat(s, " *"), {
+        "touch-action": "none",
+        "-ms-touch-action": "none",
       }),
-      m($, '.'.concat(c), {
-        '-webkit-touch-callout': 'none',
-        '-webkit-user-select': 'none',
-        '-khtml-user-select': 'none',
-        '-moz-user-select': 'none',
-        '-ms-user-select': 'none',
-        'user-select': 'none',
+      m($, ".".concat(c), {
+        "-webkit-touch-callout": "none",
+        "-webkit-user-select": "none",
+        "-khtml-user-select": "none",
+        "-moz-user-select": "none",
+        "-ms-user-select": "none",
+        "user-select": "none",
       }),
-      m($, '.'.concat(w), { flex: '1' }),
-      m($, '.'.concat(g, '.horizontal > .').concat(x), {
-        height: '100%',
-        overflow: 'hidden',
-        display: 'table-cell',
-        'vertical-align': 'top',
+      m($, ".".concat(w), { flex: "1" }),
+      m($, ".".concat(g, ".horizontal > .").concat(x), {
+        height: "100%",
+        overflow: "hidden",
+        display: "table-cell",
+        "vertical-align": "top",
       }),
-      m($, '.'.concat(g, '.vertical > .').concat(x), {
-        overflow: 'hidden',
-        display: 'block',
-        width: '100%',
+      m($, ".".concat(g, ".vertical > .").concat(x), {
+        overflow: "hidden",
+        display: "block",
+        width: "100%",
       }),
-      m($, '.'.concat(E), {
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        'justify-content': 'stretch',
-        'align-items': 'stretch',
+      m($, ".".concat(E), {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        "justify-content": "stretch",
+        "align-items": "stretch",
       }),
-      m($, '.'.concat(b), {
-        'background-color': 'rgba(150, 150, 150, 0.1)',
-        border: '1px solid #ccc',
+      m($, ".".concat(b), {
+        "background-color": "rgba(150, 150, 150, 0.1)",
+        border: "1px solid #ccc",
       }),
       $);
 
   function re(o) {
     return Object.keys(o).reduce(function (e, t) {
       var n = o[t];
-      return 'object' === a(n)
-        ? ''.concat(e).concat(t, '{').concat(re(n), '}')
-        : ''.concat(e).concat(t, ':').concat(n, ';');
-    }, '');
+      return "object" === a(n)
+        ? "".concat(e).concat(t, "{").concat(re(n), "}")
+        : "".concat(e).concat(t, ":").concat(n, ";");
+    }, "");
   }
 
   function ie(e) {
-    if (e && 'undefined' != typeof window) {
+    if (e && "undefined" != typeof window) {
       var t =
           window.document.head ||
-          window.document.getElementsByTagName('head')[0],
-        n = window.document.createElement('style'),
-        o = re({ 'body *': { cursor: ''.concat(e, ' !important') } });
+          window.document.getElementsByTagName("head")[0],
+        n = window.document.createElement("style"),
+        o = re({ "body *": { cursor: "".concat(e, " !important") } });
       return (
-        (n.type = 'text/css'),
+        (n.type = "text/css"),
         n.styleSheet
           ? (n.styleSheet.cssText = o)
           : n.appendChild(window.document.createTextNode(o)),
@@ -803,9 +803,9 @@
 
   var ae,
     le,
-    se = ['mousedown', 'touchstart'],
-    ce = ['mousemove', 'touchmove'],
-    ue = ['mouseup', 'touchend'],
+    se = ["mousedown", "touchstart"],
+    ce = ["mousemove", "touchmove"],
+    ue = ["mouseup", "touchend"],
     de = null,
     fe = null,
     ge = null,
@@ -842,7 +842,7 @@
         },
       }),
     Se =
-      'undefined' != typeof window &&
+      "undefined" != typeof window &&
       !!(
         window.navigator.userAgent.match(/Android/i) ||
         window.navigator.userAgent.match(/webOS/i) ||
@@ -854,7 +854,7 @@
       );
 
   function Oe() {
-    'undefined' != typeof window &&
+    "undefined" != typeof window &&
       se.forEach(function (e) {
         window.document.addEventListener(e, Ve, { passive: !1 });
       });
@@ -879,21 +879,21 @@
       function (e, t, n) {
         (Ae = Je(e)),
           (Be = n),
-          (Ie = 'number' == typeof t ? t : Se ? 200 : 0) &&
+          (Ie = "number" == typeof t ? t : Se ? 200 : 0) &&
             (Pe = setTimeout(Fe, Ie)),
           ce.forEach(
             function (e) {
               return window.document.addEventListener(e, Le);
             },
-            { passive: !1 },
+            { passive: !1 }
           ),
           ue.forEach(
             function (e) {
               return window.document.addEventListener(e, Me);
             },
-            { passive: !1 },
+            { passive: !1 }
           ),
-          window.document.addEventListener('drag', je, { passive: !1 });
+          window.document.addEventListener("drag", je, { passive: !1 });
       });
 
   function Le(e) {
@@ -920,15 +920,15 @@
         function (e) {
           return window.document.removeEventListener(e, Le);
         },
-        { passive: !1 },
+        { passive: !1 }
       ),
       ue.forEach(
         function (e) {
           return window.document.removeEventListener(e, Me);
         },
-        { passive: !1 },
+        { passive: !1 }
       ),
-      window.document.removeEventListener('drag', je, { passive: !1 });
+      window.document.removeEventListener("drag", je, { passive: !1 });
   }
 
   function Fe() {
@@ -940,9 +940,9 @@
     if (
       !ve &&
       (void 0 === t.button || 0 === t.button) &&
-      (fe = N(t.target, '.' + f))
+      (fe = N(t.target, "." + f))
     ) {
-      var n = N(fe, '.' + g),
+      var n = N(fe, "." + g),
         o = pe.filter(function (e) {
           return e.element === n;
         })[0],
@@ -955,10 +955,10 @@
         o.layout.invalidate(),
           M(window.document.body, s),
           M(window.document.body, c);
-        window.document.addEventListener('mouseup', function e() {
+        window.document.addEventListener("mouseup", function e() {
           j(window.document.body, s),
             j(window.document.body, c),
-            window.document.removeEventListener('mouseup', e);
+            window.document.removeEventListener("mouseup", e);
         });
       }
       a &&
@@ -980,7 +980,7 @@
     var t = Je(e);
     if (me) {
       var n = me.container.getOptions();
-      'contain' === n.behaviour
+      "contain" === n.behaviour
         ? (function (e) {
             var t,
               n,
@@ -991,19 +991,19 @@
               l =
                 1 < arguments.length && void 0 !== arguments[1]
                   ? arguments[1]
-                  : 'vertical',
+                  : "vertical",
               s = me.container.layout.getBeginEndOfContainerVisibleRect();
             r =
-              'vertical' === l
-                ? ((t = a), (n = 'y'), (o = 'top'), me.size.offsetHeight)
-                : ((t = i), (n = 'x'), (o = 'left'), me.size.offsetWidth);
+              "vertical" === l
+                ? ((t = a), (n = "y"), (o = "top"), me.size.offsetHeight)
+                : ((t = i), (n = "x"), (o = "left"), me.size.offsetWidth);
             var c = s.begin,
               u = s.end - r,
               d = Math.max(c, Math.min(u, t + ge.positionDelta[o]));
             (ge.topLeft[n] = d),
               (me.position[n] = Math.max(
                 s.begin,
-                Math.min(s.end, t + ge.centerDelta[n]),
+                Math.min(s.end, t + ge.centerDelta[n])
               )),
               (me.mousePosition[n] = Math.max(s.begin, Math.min(s.end, t))),
               me.position[n] < s.begin + r / 2 &&
@@ -1011,11 +1011,11 @@
               me.position[n] > s.end - r / 2 && (me.position[n] = s.end - 2);
           })(t, n.orientation)
         : Ee
-        ? 'y' === Ee
+        ? "y" === Ee
           ? ((ge.topLeft.y = t.clientY + ge.positionDelta.top),
             (me.position.y = t.clientY + ge.centerDelta.y),
             (me.mousePosition.y = t.clientY))
-          : 'x' === Ee &&
+          : "x" === Ee &&
             ((ge.topLeft.x = t.clientX + ge.positionDelta.left),
             (me.position.x = t.clientX + ge.centerDelta.x),
             (me.mousePosition.x = t.clientX))
@@ -1064,10 +1064,10 @@
       Ce &&
         ((function (e) {
           e &&
-            'undefined' != typeof window &&
+            "undefined" != typeof window &&
             (
               window.document.head ||
-              window.document.getElementsByTagName('head')[0]
+              window.document.getElementsByTagName("head")[0]
             ).removeChild(e);
         })(Ce),
         (Ce = null)),
@@ -1077,7 +1077,7 @@
         (ye = !0),
         (function (e) {
           function i() {
-            j(ge.ghost, 'animated'),
+            j(ge.ghost, "animated"),
               (ge.ghost.style.transitionDuration = null),
               Re().removeChild(ge.ghost),
               e();
@@ -1086,7 +1086,7 @@
           function t(e, t, n) {
             var o = e.top,
               r = e.left;
-            M(ge.ghost, 'animated'),
+            M(ge.ghost, "animated"),
               n && M(ge.ghost.firstElementChild, n),
               (ge.topLeft.x = r),
               (ge.topLeft.y = o),
@@ -1097,7 +1097,7 @@
           }
 
           function n(e, t) {
-            M(ge.ghost, 'animated'),
+            M(ge.ghost, "animated"),
               nt(e, 0.9, !0),
               setTimeout(function () {
                 t();
@@ -1115,7 +1115,7 @@
               t(
                 o.getDragResult().shadowBeginEnd.rect,
                 Math.max(150, o.getOptions().animationDuration / 2),
-                o.getOptions().dropClass,
+                o.getOptions().dropClass
               );
             else i();
           } else {
@@ -1127,7 +1127,7 @@
                 l = a.behaviour,
                 s = a.removeOnDropOut;
               if (
-                ('move' !== l && 'contain' !== l) ||
+                ("move" !== l && "contain" !== l) ||
                 (!he && s) ||
                 !r.getDragResult()
               )
@@ -1141,7 +1141,7 @@
                       left: c.lastVisibleRect.left,
                     },
                     r.getOptions().animationDuration,
-                    r.getOptions().dropClass,
+                    r.getOptions().dropClass
                   );
                 else {
                   var u = r.getDragResult(),
@@ -1164,7 +1164,7 @@
                   t(
                     g.getTopLeftOfElementBegin(m),
                     r.getOptions().animationDuration,
-                    r.getOptions().dropClass,
+                    r.getOptions().dropClass
                   );
                 }
               }
@@ -1283,26 +1283,26 @@
             g = d.top + (d.bottom - d.top) / 2,
             m = e.cloneNode(!0);
           return (
-            (m.style.zIndex = '1000'),
-            (m.style.boxSizing = 'border-box'),
-            (m.style.position = 'fixed'),
-            (m.style.top = '0px'),
-            (m.style.left = '0px'),
+            (m.style.zIndex = "1000"),
+            (m.style.boxSizing = "border-box"),
+            (m.style.position = "fixed"),
+            (m.style.top = "0px"),
+            (m.style.left = "0px"),
             (m.style.transform = null),
-            m.style.removeProperty('transform'),
+            m.style.removeProperty("transform"),
             n.shouldUseTransformForGhost()
-              ? (m.style.transform = 'translate3d('
-                  .concat(l, 'px, ')
-                  .concat(s, 'px, 0)'))
-              : ((m.style.top = ''.concat(s, 'px')),
-                (m.style.left = ''.concat(l, 'px'))),
-            (m.style.width = c - l + 'px'),
-            (m.style.height = u - s + 'px'),
-            (m.style.overflow = 'visible'),
+              ? (m.style.transform = "translate3d("
+                  .concat(l, "px, ")
+                  .concat(s, "px, 0)"))
+              : ((m.style.top = "".concat(s, "px")),
+                (m.style.left = "".concat(l, "px"))),
+            (m.style.width = c - l + "px"),
+            (m.style.height = u - s + "px"),
+            (m.style.overflow = "visible"),
             (m.style.transition = null),
-            m.style.removeProperty('transition'),
-            (m.style.pointerEvents = 'none'),
-            (m.style.userSelect = 'none'),
+            m.style.removeProperty("transition"),
+            (m.style.pointerEvents = "none"),
+            (m.style.userSelect = "none"),
             n.getOptions().dragClass
               ? setTimeout(function () {
                   M(m.firstElementChild, n.getOptions().dragClass);
@@ -1310,7 +1310,7 @@
                   Ce = ie(e);
                 })
               : (Ce = ie(o)),
-            M(m, n.getOptions().orientation || 'vertical'),
+            M(m, n.getOptions().orientation || "vertical"),
             M(m, v),
             {
               ghost: m,
@@ -1358,29 +1358,29 @@
       a = i.x,
       l = i.y,
       s = !me.container || me.container.shouldUseTransformForGhost(),
-      c = s ? 'translate3d('.concat(a, 'px,').concat(l, 'px, 0)') : null;
+      c = s ? "translate3d(".concat(a, "px,").concat(l, "px, 0)") : null;
     if (
       (1 !== t &&
         (c = c
-          ? ''.concat(c, ' scale(').concat(t, ')')
-          : 'scale('.concat(t, ')')),
+          ? "".concat(c, " scale(").concat(t, ")")
+          : "scale(".concat(t, ")")),
       0 < e)
     )
       return (
-        (ge.ghost.style.transitionDuration = e + 'ms'),
+        (ge.ghost.style.transitionDuration = e + "ms"),
         void requestAnimationFrame(function () {
           c && (r.style.transform = c),
-            s || ((r.style.left = a + 'px'), (r.style.top = l + 'px')),
+            s || ((r.style.left = a + "px"), (r.style.top = l + "px")),
             (tt = null),
-            n && (r.style.opacity = '0');
+            n && (r.style.opacity = "0");
         })
       );
     null === tt &&
       (tt = requestAnimationFrame(function () {
         c && (r.style.transform = c),
-          s || ((r.style.left = a + 'px'), (r.style.top = l + 'px')),
+          s || ((r.style.left = a + "px"), (r.style.top = l + "px")),
           (tt = null),
-          n && (r.style.opacity = '0');
+          n && (r.style.opacity = "0");
       }));
   }
 
@@ -1405,16 +1405,16 @@
     }
   }
 
-  'undefined' != typeof window &&
+  "undefined" != typeof window &&
     (function () {
-      if ('undefined' != typeof window) {
+      if ("undefined" != typeof window) {
         var e =
             window.document.head ||
-            window.document.getElementsByTagName('head')[0],
-          t = window.document.createElement('style');
-        t.id = 'smooth-dnd-style-definitions';
+            window.document.getElementsByTagName("head")[0],
+          t = window.document.createElement("style");
+        t.id = "smooth-dnd-style-definitions";
         var n = re(oe);
-        (t.type = 'text/css'),
+        (t.type = "text/css"),
           t.styleSheet
             ? (t.styleSheet.cssText = n)
             : t.appendChild(window.document.createTextNode(n)),
@@ -1468,8 +1468,8 @@
         ? arguments[2]
         : C.animationDuration;
     t
-      ? (M(e, o), (e.style.transitionDuration = n + 'ms'))
-      : (j(e, o), e.style.removeProperty('transition-duration'));
+      ? (M(e, o), (e.style.transitionDuration = n + "ms"))
+      : (j(e, o), e.style.removeProperty("transition-duration"));
   }
 
   function at(n) {
@@ -1481,9 +1481,9 @@
           L(e, f) ||
             (t = (function (e) {
               if (It.wrapChild) {
-                var t = window.document.createElement('div');
+                var t = window.document.createElement("div");
                 return (
-                  (t.className = ''.concat(f)),
+                  (t.className = "".concat(f)),
                   e.parentElement.insertBefore(t, e),
                   t.appendChild(e),
                   t
@@ -1578,7 +1578,7 @@
       return (
         null == i &&
           t.container.element === o &&
-          'copy' !== r().behaviour &&
+          "copy" !== r().behaviour &&
           (n = i = t.elementIndex),
         { removedIndex: n }
       );
@@ -1669,7 +1669,7 @@
         i = t.dropPlaceholderContainer,
         a = p();
       if (a.dropPlaceholder) {
-        var l = 'boolean' == typeof a.dropPlaceholder ? {} : a.dropPlaceholder,
+        var l = "boolean" == typeof a.dropPlaceholder ? {} : a.dropPlaceholder,
           s = l.animationDuration,
           c = l.className,
           u = l.showOnTop;
@@ -1680,17 +1680,17 @@
             { dropPlaceholderContainer: void 0 }
           );
         if (!i) {
-          var d = document.createElement('div'),
-            f = document.createElement('div');
+          var d = document.createElement("div"),
+            f = document.createElement("div");
           (f.className = E),
-            (d.className = ''.concat(w, ' ').concat(c || b)),
-            ((i = document.createElement('div')).className = ''.concat(x)),
-            (i.style.position = 'absolute'),
-            void 0 !== s && (i.style.transition = 'all '.concat(s, 'ms ease')),
+            (d.className = "".concat(w, " ").concat(c || b)),
+            ((i = document.createElement("div")).className = "".concat(x)),
+            (i.style.position = "absolute"),
+            void 0 !== s && (i.style.transition = "all ".concat(s, "ms ease")),
             i.appendChild(f),
             f.appendChild(d),
-            g.setSize(i.style, n + 'px'),
-            (i.style.pointerEvents = 'none'),
+            g.setSize(i.style, n + "px"),
+            (i.style.pointerEvents = "none"),
             u ? m.appendChild(i) : m.insertBefore(i, m.firstElementChild);
         }
         return (
@@ -1698,7 +1698,7 @@
             o.dropArea &&
             g.setBegin(
               i.style,
-              o.dropArea.begin - g.getBeginEndOfContainer().begin + 'px',
+              o.dropArea.begin - g.getBeginEndOfContainer().begin + "px"
             ),
           (v = r),
           { dropPlaceholderContainer: i }
@@ -1784,11 +1784,11 @@
                   ? f.getBeginEnd(d[d.length - 1]).end - d[d.length - 1][p]
                   : i.begin;
             if (a < l + r) {
-              (m = window.document.createElement('div')).className =
-                h + ' ' + g().orientation;
+              (m = window.document.createElement("div")).className =
+                h + " " + g().orientation;
               var s = 0 < d.length ? r + l - a : r;
               return (
-                f.setSize(m.style, ''.concat(s, 'px')),
+                f.setSize(m.style, "".concat(s, "px")),
                 u.appendChild(m),
                 (u[y] = m),
                 { containerBoxChanged: !0 }
@@ -1943,7 +1943,7 @@
   }
 
   function Ot(e) {
-    return 'drop-zone' === e.getOptions().behaviour
+    return "drop-zone" === e.getOptions().behaviour
       ? Rt(e)(ct, ut, dt, ft, gt, mt, pt, Dt, St)
       : Rt(e)(ct, ut, dt, ft, gt, ht, yt, bt, wt, xt, Et, vt, Ct, Dt, St);
   }
@@ -1967,7 +1967,7 @@
             elementSize: null,
             pos: null,
             shadowBeginEnd: null,
-          },
+          }
         ));
       };
     };
@@ -1982,7 +1982,7 @@
           var n = at(e),
             o = t();
           return (
-            M(e, ''.concat(g, ' ').concat(o.orientation)),
+            M(e, "".concat(g, " ").concat(o.orientation)),
             {
               element: e,
               draggables: n,
@@ -1999,16 +1999,16 @@
           function e() {
             o &&
               (o.forEach(function (e) {
-                return e.removeEventListener('scroll', n);
+                return e.removeEventListener("scroll", n);
               }),
-              window.removeEventListener('scroll', n));
+              window.removeEventListener("scroll", n));
           }
 
           return (
             (function () {
               var e = t;
               for (; e; )
-                (R(e, 'x') || R(e, 'y')) && o.push(e), (e = e.parentElement);
+                (R(e, "x") || R(e, "y")) && o.push(e), (e = e.parentElement);
             })(),
             {
               dispose: function () {
@@ -2017,9 +2017,9 @@
               start: function () {
                 o &&
                   (o.forEach(function (e) {
-                    return e.addEventListener('scroll', n);
+                    return e.addEventListener("scroll", n);
                   }),
-                  window.addEventListener('scroll', n));
+                  window.addEventListener("scroll", n));
               },
               stop: e,
             }
@@ -2054,8 +2054,8 @@
               return n.shouldAcceptDrop(e.getOptions(), t);
             var o = e.getOptions();
             return (
-              'copy' !== n.behaviour &&
-              N(r, '.' + f) !== e.element &&
+              "copy" !== n.behaviour &&
+              N(r, "." + f) !== e.element &&
               (e.element === r ||
                 !(!o.groupName || o.groupName !== n.groupName))
             );
@@ -2165,7 +2165,7 @@
   function Pt(e, t) {
     return (
       console.warn(
-        'default export is deprecated. please use named export "smoothDnD"',
+        'default export is deprecated. please use named export "smoothDnD"'
       ),
       It(e, t)
     );
@@ -2177,14 +2177,14 @@
     (Pt.isDragging = function () {
       return It.isDragging();
     }),
-    Bt(Pt, It, 'useTransformForGhost'),
-    Bt(Pt, It, 'maxScrollSpeed'),
-    Bt(Pt, It, 'wrapChild'),
-    Bt(Pt, It, 'dropHandler'),
+    Bt(Pt, It, "useTransformForGhost"),
+    Bt(Pt, It, "maxScrollSpeed"),
+    Bt(Pt, It, "wrapChild"),
+    Bt(Pt, It, "dropHandler"),
     (e.smoothDnD = It),
     (e.constants = n),
     (e.dropHandlers = k),
     (e.default = Pt),
-    Object.defineProperty(e, '__esModule', { value: !0 });
+    Object.defineProperty(e, "__esModule", { value: !0 });
 });
 /* eslint-enable */

@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
-import { Form } from 'antd';
+import React, { Fragment } from "react";
+import { Form } from "antd";
 
-const Components = ({ text_add = 'Add field', fieldsName = [], name }) => {
+const Components = ({ text_add = "Add field", fieldsName = [], name }) => {
   return (
     <Form.List name={name}>
       {(fields, { add, remove }) => (
@@ -13,7 +13,7 @@ const Components = ({ text_add = 'Add field', fieldsName = [], name }) => {
                   {...restField}
                   name={[name, ele.name]}
                   key={index}
-                  className={'w-full'}
+                  className={"w-full"}
                 >
                   <input
                     className="border border-gray-400 rounded-xl w-full h-10 text-gray-600 bg-white px-4 ant-input"

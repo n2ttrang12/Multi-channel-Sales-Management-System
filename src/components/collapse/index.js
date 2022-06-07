@@ -1,11 +1,11 @@
-import React, { createRef, useEffect, useState } from 'react';
-import { Popover } from 'antd';
-import classNames from 'classnames';
+import React, { createRef, useEffect, useState } from "react";
+import { Popover } from "antd";
+import classNames from "classnames";
 
 const Component = ({
   title,
-  className = '',
-  classNameParent = '',
+  className = "",
+  classNameParent = "",
   children,
   showArrow = true,
   popover = false,
@@ -17,7 +17,7 @@ const Component = ({
   useEffect(() => {
     if (visible !== popover) {
       if (popover) {
-        ref.current.style.removeProperty('height');
+        ref.current.style.removeProperty("height");
       }
       setTimeout(() => {
         set_visible(popover);
@@ -27,19 +27,19 @@ const Component = ({
 
   const onClick = () => {
     if (!popover) {
-      if (ref.current.style.height === 'auto') {
-        ref.current.style.height = ref.current.offsetHeight + 'px';
+      if (ref.current.style.height === "auto") {
+        ref.current.style.height = ref.current.offsetHeight + "px";
       }
       setTimeout(() => {
-        arrow.current?.classList[!ref.current.style.height ? 'add' : 'remove'](
-          'rotate-90',
+        arrow.current?.classList[!ref.current.style.height ? "add" : "remove"](
+          "rotate-90"
         );
         ref.current.style.height = !ref.current.style.height
-          ? ref.current.scrollHeight + 'px'
-          : '';
+          ? ref.current.scrollHeight + "px"
+          : "";
         if (ref.current.style.height) {
           setTimeout(() => {
-            ref.current.style.height = 'auto';
+            ref.current.style.height = "auto";
           }, 150);
         }
       });
@@ -69,11 +69,11 @@ const Component = ({
       )}
       <ul
         className={classNames(
-          'transition-all duration-300 ease-in-out overflow-hidden h-0 collapse',
+          "transition-all duration-300 ease-in-out overflow-hidden h-0 collapse",
           {
-            'scale-0 h-0': visible,
-            'scale-1': !visible,
-          },
+            "scale-0 h-0": visible,
+            "scale-1": !visible,
+          }
         )}
         ref={ref}
       >

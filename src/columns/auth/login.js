@@ -2,17 +2,17 @@ const Column = ({ t }) => {
   return [
     {
       name: "email",
-      title: 'Tên đăng nhập',
+      title: "Tên đăng nhập",
       formItem: {
-        placeholder: 'Nhập tên đăng nhập',
+        placeholder: "Nhập tên đăng nhập",
         rules: [{ type: "required" }],
       },
     },
     {
       name: "password",
-      title: 'Mật khẩu',
+      title: "Mật khẩu",
       formItem: {
-        placeholder: 'Nhập mật khẩu',
+        placeholder: "Nhập mật khẩu",
         type: "password",
         rules: [{ type: "required" }, { type: "minLength", value: 6 }],
       },

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, forwardRef, useLayoutEffect } from 'react';
+import React, { useEffect, useRef, forwardRef, useLayoutEffect } from "react";
 
 const Editor = forwardRef(
   ({ config, id, name, onBlur, onChange, tabIndex, value, editorRef }, ref) => {
@@ -6,7 +6,7 @@ const Editor = forwardRef(
 
     useLayoutEffect(() => {
       if (ref) {
-        if (typeof ref === 'function') {
+        if (typeof ref === "function") {
           ref(textArea.current);
         } else {
           ref.current = textArea.current;
@@ -15,25 +15,25 @@ const Editor = forwardRef(
     }, [textArea, ref]);
 
     useEffect(() => {
-      import('jodit').then(({ Jodit }) => {
+      import("jodit").then(({ Jodit }) => {
         const element = textArea.current;
         textArea.current = Jodit.make(element, config);
         textArea.current.workplace.tabIndex = tabIndex || -1;
 
         // adding event handlers
         textArea.current.events.on(
-          'blur',
-          (value) => onBlur && onBlur(textArea?.current?.value),
+          "blur",
+          (value) => onBlur && onBlur(textArea?.current?.value)
         );
         textArea.current.events.on(
-          'change',
-          (value) => onChange && onChange(value),
+          "change",
+          (value) => onChange && onChange(value)
         );
 
         if (id) element.id = id;
         if (name) element.name = name;
 
-        if (typeof editorRef === 'function') {
+        if (typeof editorRef === "function") {
           editorRef(textArea.current);
         }
 
@@ -51,7 +51,7 @@ const Editor = forwardRef(
     }, [value]);
 
     return <textarea ref={textArea} />;
-  },
+  }
 );
-Editor.displayName = 'Search';
+Editor.displayName = "Search";
 export default Editor;

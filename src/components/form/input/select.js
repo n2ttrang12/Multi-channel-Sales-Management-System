@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Select } from 'antd';
-import axios from 'axios';
+import React, { useState, useEffect, useCallback } from "react";
+import { Select } from "antd";
+import axios from "axios";
 
 const Component = ({
   formItem,
@@ -31,28 +31,24 @@ const Component = ({
         }
       } else if (formItem.renderList) {
         set_list(
-          formItem.renderList(
-            form.getFieldValue,
-            fullTextSearch,
-            formItem.list,
-          ),
+          formItem.renderList(form.getFieldValue, fullTextSearch, formItem.list)
         );
       } else if (formItem.list) {
         set_list(
           formItem.list.filter(
             (item) =>
               item.label.toUpperCase().indexOf(fullTextSearch.toUpperCase()) >
-              -1,
-          ),
+              -1
+          )
         );
       }
     },
-    [form, formItem, value],
+    [form, formItem, value]
   );
 
   const initFunction = useCallback(async () => {
     if (formItem.api || formItem.renderList) {
-      await loadData('');
+      await loadData("");
     }
   }, [formItem, loadData]);
 
@@ -67,7 +63,7 @@ const Component = ({
       filterOption={false}
       showSearch
       allowClear
-      onBlur={() => loadData('')}
+      onBlur={() => loadData("")}
       onSearch={(value) => loadData(value)}
       value={value}
       onChange={onChange}

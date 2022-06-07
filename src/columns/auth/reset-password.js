@@ -1,85 +1,83 @@
 const Column = ({ t }) => {
   return [
     {
-      name: 'password',
-      title: 'Mật khẩu',
+      name: "password",
+      title: "Mật khẩu",
       formItem: {
-        placeholder: 'Nhập mật khẩu',
-        type: 'password',
+        placeholder: "Nhập mật khẩu",
+        type: "password",
         rules: [
           {
-            type: "custom", validator: (form) => ({
+            type: "custom",
+            validator: (form) => ({
               validator: async (rule, value) => {
-                if (form.getFieldValue('passwordComfirm') && ( value !== form.getFieldValue('passwordComfirm'))) {
-                  return Promise.reject(
-                    'Xác nhận mật khẩu không chính xác'
-                  );
+                if (
+                  form.getFieldValue("passwordComfirm") &&
+                  value !== form.getFieldValue("passwordComfirm")
+                ) {
+                  return Promise.reject("Xác nhận mật khẩu không chính xác");
                 }
                 if (!!value && value.trim() !== "" && value.length >= 8) {
                   let countvalidator = 0;
-                  if (
-                    (new RegExp(/\s/).test(value))
-                  )
+                  if (new RegExp(/\s/).test(value))
                     return Promise.reject(
-                      'Mật khẩu không được có khoảng trắng'
+                      "Mật khẩu không được có khoảng trắng"
                     );
                   else countvalidator++;
                   if (
-                    !(new RegExp(/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z]).*$/).test(value))
+                    !new RegExp(/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z]).*$/).test(
+                      value
+                    )
                   )
-                    return Promise.reject(
-                      'Mật khẩu chưa đạt yêu cầu'
-                    );
+                    return Promise.reject("Mật khẩu chưa đạt yêu cầu");
                   else countvalidator++;
                   if (countvalidator === 2) return Promise.resolve();
                 } else return Promise.resolve();
               },
-            })
-          }
+            }),
+          },
 
-          , { type: "required" }, { type: "password" },
+          { type: "required" },
+          { type: "password" },
         ],
-      }
+      },
     },
     {
-      name: 'passwordComfirm',
-      title: 'Xác nhận mật khẩu',
+      name: "passwordComfirm",
+      title: "Xác nhận mật khẩu",
       formItem: {
-        placeholder: 'Xác nhận mật khẩu',
-        type: 'password',
+        placeholder: "Xác nhận mật khẩu",
+        type: "password",
         rules: [
           {
-            type: "custom", validator: (form) => ({
+            type: "custom",
+            validator: (form) => ({
               validator: async (rule, value) => {
-                if (value !== form.getFieldValue('password')) {
-                  return Promise.reject(
-                    'Xác nhận mật khẩu không chính xác'
-                  );
+                if (value !== form.getFieldValue("password")) {
+                  return Promise.reject("Xác nhận mật khẩu không chính xác");
                 }
                 if (!!value && value.trim() !== "" && value.length >= 8) {
                   let countvalidator = 0;
-                  if (
-                    (new RegExp(/\s/).test(value))
-                  )
+                  if (new RegExp(/\s/).test(value))
                     return Promise.reject(
-                      'Mật khẩu không được có khoảng trắng'
+                      "Mật khẩu không được có khoảng trắng"
                     );
                   else countvalidator++;
                   if (
-                    !(new RegExp(/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z]).*$/).test(value))
+                    !new RegExp(/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z]).*$/).test(
+                      value
+                    )
                   )
-                    return Promise.reject(
-                      'Mật khẩu chưa đạt yêu cầu'
-                    );
+                    return Promise.reject("Mật khẩu chưa đạt yêu cầu");
                   else countvalidator++;
                   if (countvalidator === 2) return Promise.resolve();
                 } else return Promise.resolve();
               },
-            })
+            }),
           },
-          { type: 'required' },
-        ]
-      }
+          { type: "required" },
+        ],
+      },
     },
   ];
 };

@@ -8,14 +8,18 @@ export const UserService = {
   nameLink: "User",
   login: async (values) => {
     try {
-      const { data } = await axios.post(`${routerLinks(UserService.nameLink, "api")}/sign-in`, values);
+      const { data } = await axios.post(
+        `${routerLinks(UserService.nameLink, "api")}/sign-in`,
+        values
+      );
       return data;
-     
     } catch (e) {
       console.error(e);
-      if (e.response.data.message) { Message.error({text:e.response.data.message}) } else {
-        Message.error('Có lỗi xảy ra trong quá trình đăng nhập')
-      };
+      if (e.response.data.message) {
+        Message.error({ text: e.response.data.message });
+      } else {
+        Message.error("Có lỗi xảy ra trong quá trình đăng nhập");
+      }
       return false;
     }
   },
@@ -25,18 +29,22 @@ export const UserService = {
       if (refreshToken) {
         const { data } = await axios.post(
           `${routerLinks(UserService.nameLink, "api")}/refresh-token`,
-          {}, { params: { refreshToken: "Bearer " + refreshToken } }
+          {},
+          { params: { refreshToken: "Bearer " + refreshToken } }
         );
-        axios.defaults.headers.common["Authorization"] = "Bearer " + data.accessToken;
+        axios.defaults.headers.common["Authorization"] =
+          "Bearer " + data.accessToken;
         localStorage.setItem(keyToken, data.accessToken);
         return data;
       }
-      return null
+      return null;
     } catch (e) {
       console.log(e);
-      if (e.response.data.message) {Message.error({text:e.response.data.message});} else {
-        Message.error('Có lỗi xảy ra trong quá trình đăng nhập')
-      };
+      if (e.response.data.message) {
+        Message.error({ text: e.response.data.message });
+      } else {
+        Message.error("Có lỗi xảy ra trong quá trình đăng nhập");
+      }
       return false;
     }
   },
@@ -48,25 +56,29 @@ export const UserService = {
       return data;
     } catch (e) {
       console.log(e);
-      if (e.response.data.message){ Message.error({text:e.response.data.message})}else {
-        Message.error('Có lỗi xảy ra trong quá trình đăng xuất')
-      };
+      if (e.response.data.message) {
+        Message.error({ text: e.response.data.message });
+      } else {
+        Message.error("Có lỗi xảy ra trong quá trình đăng xuất");
+      }
       return false;
     }
   },
- 
+
   forgotPass: async (values) => {
     try {
       const { data } = await axios.put(
-        `${routerLinks(UserService.nameLink, "api")}/forgot-password`, values
+        `${routerLinks(UserService.nameLink, "api")}/forgot-password`,
+        values
       );
       return data;
     } catch (e) {
       console.log(e);
-      if (e.response.data.message) {Message.error({text:e.response.data.message});}
-      else {
-        Message.error('Có lỗi xảy ra trong quá trình thao tác')
-      };
+      if (e.response.data.message) {
+        Message.error({ text: e.response.data.message });
+      } else {
+        Message.error("Có lỗi xảy ra trong quá trình thao tác");
+      }
       return false;
     }
   },
@@ -74,15 +86,17 @@ export const UserService = {
   sendOtp: async (values) => {
     try {
       const { data } = await axios.put(
-        `${routerLinks(UserService.nameLink, "api")}/verify-forgot-password`, values
+        `${routerLinks(UserService.nameLink, "api")}/verify-forgot-password`,
+        values
       );
       return data;
     } catch (e) {
       console.log(e);
-      if (e.response.data.message) {Message.error({text:e.response.data.message})}
-      else {
-        Message.error('Có lỗi xảy ra trong quá trình thao tác')
-      };
+      if (e.response.data.message) {
+        Message.error({ text: e.response.data.message });
+      } else {
+        Message.error("Có lỗi xảy ra trong quá trình thao tác");
+      }
       return false;
     }
   },
@@ -91,15 +105,17 @@ export const UserService = {
     try {
       console.log(values);
       const { data } = await axios.put(
-        `${routerLinks(UserService.nameLink, "api")}/set-password`, values
+        `${routerLinks(UserService.nameLink, "api")}/set-password`,
+        values
       );
       return data;
     } catch (e) {
       console.log(e);
-      if (e.response.data.message) {Message.error({text:e.response.data.message})}
-      else {
-        Message.error('Có lỗi xảy ra trong quá trình thao tác')
-      };
+      if (e.response.data.message) {
+        Message.error({ text: e.response.data.message });
+      } else {
+        Message.error("Có lỗi xảy ra trong quá trình thao tác");
+      }
       return false;
     }
   },

@@ -1,5 +1,5 @@
 import React from "react";
-import {routerLinks} from "utils";
+import { routerLinks } from "utils";
 
 export const pages = [
   {
@@ -48,7 +48,7 @@ export const pages = [
         title: "User",
       },
     ], // 💬 generate link to here
-  }
+  },
 ];
 
 export const arrayPaths = [];

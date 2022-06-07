@@ -1,3 +1,3 @@
 import ColumnUser from "./user";
 
-export {ColumnUser};
+export { ColumnUser };

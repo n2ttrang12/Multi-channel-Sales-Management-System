@@ -44,7 +44,7 @@ export const getTotalScroll = (elem) => {
 
 export const getTransformProps = (x, y) => {
   return {
-    transform: 'translate(' + x + 'px, ' + y + 'px)',
+    transform: "translate(" + x + "px, " + y + "px)",
   };
 };
 
@@ -67,7 +67,7 @@ export const getAllNonEmptyNodesIds = (items, { idProp, childrenProp }) => {
     .filter((item) => item[childrenProp].length)
     .map((item) => {
       childrenIds = childrenIds.concat(
-        getAllNonEmptyNodesIds(item[childrenProp], { idProp, childrenProp }),
+        getAllNonEmptyNodesIds(item[childrenProp], { idProp, childrenProp })
       );
       return item[idProp];
     });
@@ -75,7 +75,7 @@ export const getAllNonEmptyNodesIds = (items, { idProp, childrenProp }) => {
   return ids.concat(childrenIds);
 };
 export const hasSomeParentTheClass = (element, classname) => {
-  if (element.className && element.className.split(' ').indexOf(classname) >= 0)
+  if (element.className && element.className.split(" ").indexOf(classname) >= 0)
     return true;
   return (
     element.parentNode && hasSomeParentTheClass(element.parentNode, classname)

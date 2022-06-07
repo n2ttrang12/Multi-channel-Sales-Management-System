@@ -1,5 +1,5 @@
-import React, {useRef} from "react";
-import {timeBuild} from "./variable";
+import React, { useRef } from "react";
+import { timeBuild } from "./variable";
 
 function withClearCache(Component) {
   function ClearCacheComponent(props) {

@@ -1,9 +1,9 @@
 import { Popconfirm, Tooltip } from "antd";
 import EditIcon from "assets/svg/edit.js";
 import RemoveIcon from "assets/svg/remove.js";
-import React, {Fragment} from "react";
-import {Avatar} from "components";
-import {routerLinks} from "utils";
+import React, { Fragment } from "react";
+import { Avatar } from "components";
+import { routerLinks } from "utils";
 const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
   return [
     {
@@ -13,10 +13,16 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
         filter: { type: "search" },
         sorter: true,
         onCell: (data) => ({
-          style: {paddingTop: '0.25rem', paddingBottom: 0},
+          style: { paddingTop: "0.25rem", paddingBottom: 0 },
           onClick: async () => {},
         }),
-        render: (text) => text && <Avatar src="https://hinhanhdep.org/wp-content/uploads/2016/07/anh-avatar-girl-xinh.jpg" text={text} />
+        render: (text) =>
+          text && (
+            <Avatar
+              src="https://hinhanhdep.org/wp-content/uploads/2016/07/anh-avatar-girl-xinh.jpg"
+              text={text}
+            />
+          ),
       },
       formItem: {
         rules: [{ type: "required" }],
@@ -26,12 +32,12 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
       name: "vehicles",
       title: t("danh sách xe"),
       formItem: {
-        name:"vehicles",
-        type:"addable",
-        text_add:t("Add vehicle"),
-        fieldsName:[
-          {name:"vehicleBrand",placeholder:"Hiệu xe"},
-          {name:"licensePlate",placeholder:"Biển số xe"},
+        name: "vehicles",
+        type: "addable",
+        text_add: t("Add vehicle"),
+        fieldsName: [
+          { name: "vehicleBrand", placeholder: "Hiệu xe" },
+          { name: "licensePlate", placeholder: "Biển số xe" },
         ],
       },
     },
@@ -48,7 +54,7 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
       title: t("Color"),
       name: "color",
       formItem: {
-        type: 'color_button',
+        type: "color_button",
         rules: [{ type: "required" }],
       },
     },
@@ -58,22 +64,37 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
       tableItem: {
         filter: { type: "search" },
         sorter: true,
-        onCell: () => ({style: {paddingTop: '0.25rem', paddingBottom: 0}}),
-        render: (text) => text && <Avatar isGroup keySrc='avatarPath' keyName="fullName" text={[{
-          "fullName": "Văn A",
-        }, {
-          "fullName": "Quỳnh B",
-        }, {
-          "fullName": "Lê F",
-        }, {
-          "fullName": "Tân C",
-          "avatarPath": "https://hinhanhdep.org/wp-content/uploads/2016/07/anh-avatar-girl-xinh.jpg"
-        }, {
-          "fullName": "Nguyễn D",
-        }]}/>,
+        onCell: () => ({ style: { paddingTop: "0.25rem", paddingBottom: 0 } }),
+        render: (text) =>
+          text && (
+            <Avatar
+              isGroup
+              keySrc="avatarPath"
+              keyName="fullName"
+              text={[
+                {
+                  fullName: "Văn A",
+                },
+                {
+                  fullName: "Quỳnh B",
+                },
+                {
+                  fullName: "Lê F",
+                },
+                {
+                  fullName: "Tân C",
+                  avatarPath:
+                    "https://hinhanhdep.org/wp-content/uploads/2016/07/anh-avatar-girl-xinh.jpg",
+                },
+                {
+                  fullName: "Nguyễn D",
+                },
+              ]}
+            />
+          ),
       },
       formItem: {
-        type: 'textarea',
+        type: "textarea",
         rules: [{ type: "required" }],
       },
     },
@@ -82,9 +103,12 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
       name: "Currency",
       formItem: {
         mask: {
-          'alias': 'numeric', 'groupSeparator': ',', 'digitsOptional': false, 'prefix': '$ ',
-          'placeholder': '0',
-        }
+          alias: "numeric",
+          groupSeparator: ",",
+          digitsOptional: false,
+          prefix: "$ ",
+          placeholder: "0",
+        },
       },
     },
     {
@@ -117,10 +141,14 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
         rules: [{ type: "required" }],
         type: "tag",
         col: 24,
-        convert: (data) => (data?.map ? data.map((_item) => _item?.id || _item) : data),
+        convert: (data) =>
+          data?.map ? data.map((_item) => _item?.id || _item) : data,
         tag: {
           api: routerLinks("User", "api") + "/brief",
-          params: (form, fullTextSearch, value) => ({fullTextSearch, filter: {containEmployees: value ? value : []}}),
+          params: (form, fullTextSearch, value) => ({
+            fullTextSearch,
+            filter: { containEmployees: value ? value : [] },
+          }),
           avatar: "avatarPath",
           label: "fullName",
           value: "id",
@@ -139,31 +167,35 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
       tableItem: {
         width: 180,
         align: "center",
-        onCell: () => ({style: {paddingTop: '0.25rem', paddingBottom: 0}}),
-        render: (text, data) => (<Fragment>
-          <Tooltip title={t("routes.admin.Layout.Edit")}>
-            <button
-              className="embed border border-gray-300 text-xs rounded-lg mr-2"
-              onClick={() => handleEdit(data)}
-            >
-              <EditIcon />
-            </button>
-          </Tooltip>
-          <Tooltip title={t("routes.admin.Layout.Delete")}>
-            <Popconfirm
-              placement="left"
-              title={t("components.datatable.areYouSureWant")}
-              icon={<i className="las la-question-circle text-2xl text-yellow-500 absolute -top-0.5 -left-1" />}
-              onConfirm={() => handleDelete(data.id)}
-              okText={t("components.datatable.ok")}
-              cancelText={t("components.datatable.cancel")}
-            >
-              <button className="embed border border-gray-300 text-xs rounded-lg mr-2">
-                <RemoveIcon />
+        onCell: () => ({ style: { paddingTop: "0.25rem", paddingBottom: 0 } }),
+        render: (text, data) => (
+          <Fragment>
+            <Tooltip title={t("routes.admin.Layout.Edit")}>
+              <button
+                className="embed border border-gray-300 text-xs rounded-lg mr-2"
+                onClick={() => handleEdit(data)}
+              >
+                <EditIcon />
               </button>
-            </Popconfirm>
-          </Tooltip>
-        </Fragment>),
+            </Tooltip>
+            <Tooltip title={t("routes.admin.Layout.Delete")}>
+              <Popconfirm
+                placement="left"
+                title={t("components.datatable.areYouSureWant")}
+                icon={
+                  <i className="las la-question-circle text-2xl text-yellow-500 absolute -top-0.5 -left-1" />
+                }
+                onConfirm={() => handleDelete(data.id)}
+                okText={t("components.datatable.ok")}
+                cancelText={t("components.datatable.cancel")}
+              >
+                <button className="embed border border-gray-300 text-xs rounded-lg mr-2">
+                  <RemoveIcon />
+                </button>
+              </Popconfirm>
+            </Tooltip>
+          </Fragment>
+        ),
       },
     },
   ];

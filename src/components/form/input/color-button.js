@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Popover } from 'antd';
-import { SketchPicker } from 'react-color';
+import React, { useState, useEffect } from "react";
+import { Popover } from "antd";
+import { SketchPicker } from "react-color";
 
-import { pickTextColorBasedOnBgColorAdvanced } from 'utils';
+import { pickTextColorBasedOnBgColorAdvanced } from "utils";
 
 const Component = ({ value, onChange }) => {
-  const [_color, set_color] = useState(value || '#000000');
+  const [_color, set_color] = useState(value || "#000000");
   const [_borderColor, set_borderColor] = useState(null);
   useEffect(() => {
     set_borderColor(
-      pickTextColorBasedOnBgColorAdvanced(_color, '#EFF5FF', '#555555'),
+      pickTextColorBasedOnBgColorAdvanced(_color, "#EFF5FF", "#555555")
     );
   }, [_color]);
 
@@ -27,11 +27,11 @@ const Component = ({ value, onChange }) => {
       trigger="click"
     >
       <button
-        type={'button'}
+        type={"button"}
         className="w-full h-10 rounded-xl"
         style={{ backgroundColor: _color, borderColor: _borderColor }}
       >
-        {' '}
+        {" "}
       </button>
     </Popover>
   );

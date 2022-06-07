@@ -1,23 +1,23 @@
-const Util = ({id, label, series, color, legend, grid = {}, xAxis = {}}) => {
-  import("echarts").then(echarts => {
+const Util = ({ id, label, series, color, legend, grid = {}, xAxis = {} }) => {
+  import("echarts").then((echarts) => {
     const element = document.getElementById(id);
     if (element) {
       echarts.init(element).setOption({
         color,
         legend,
         grid: {
-          top: '0',
-          left: '0',
-          bottom: '0',
-          right: '0',
+          top: "0",
+          left: "0",
+          bottom: "0",
+          right: "0",
           ...grid,
         },
         tooltip: {
-          trigger: 'axis',
+          trigger: "axis",
         },
         xAxis: [
           {
-            type: 'category',
+            type: "category",
             boundaryGap: false,
             axisLabel: { show: false },
             axisLine: { show: false },
@@ -30,7 +30,7 @@ const Util = ({id, label, series, color, legend, grid = {}, xAxis = {}}) => {
         yAxis: [
           {
             boundaryGap: false,
-            type: 'value',
+            type: "value",
             axisLabel: { show: false },
             splitLine: { show: false },
             axisLine: { show: false },

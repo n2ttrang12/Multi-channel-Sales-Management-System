@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Form as FormAnt } from 'antd';
+import React, { useState } from "react";
+import { Form as FormAnt } from "antd";
 
-import { Form } from 'components';
-import { convertFormValue } from 'utils';
-import { HookModal } from 'hooks';
+import { Form } from "components";
+import { convertFormValue } from "utils";
+import { HookModal } from "hooks";
 
 const Hook = ({
   parentID = () => {},
@@ -33,7 +33,7 @@ const Hook = ({
     isLoading,
     setIsLoading,
     firstChange,
-    idElement: 'modal-form-' + idElement,
+    idElement: "modal-form-" + idElement,
     textSubmit,
     title: (data) => title(data),
     onOk: async (data) => {

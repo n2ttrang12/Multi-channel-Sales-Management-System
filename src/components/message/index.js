@@ -1,18 +1,18 @@
-import { t } from 'i18next';
+import { t } from "i18next";
 
 const Component = {
   success: ({
     text,
-    title = t('components.message.Success'),
-    cancelButtonText = t('components.message.Close'),
+    title = t("components.message.Success"),
+    cancelButtonText = t("components.message.Close"),
     showCloseButton = true,
     showCancelButton = true,
     showConfirmButton = false,
     padding = 0,
   }) =>
-    import('sweetalert2').then(({ default: Swal }) =>
+    import("sweetalert2").then(({ default: Swal }) =>
       Swal.fire({
-        icon: 'success',
+        icon: "success",
         title,
         text,
         cancelButtonText,
@@ -20,21 +20,21 @@ const Component = {
         showCancelButton,
         showConfirmButton,
         padding,
-      }),
+      })
     ),
   warning: ({
     text,
-    title = t('components.message.Warning'),
-    cancelButtonText = t('components.message.Close'),
-    confirmButtonText = t('components.message.Ok'),
+    title = t("components.message.Warning"),
+    cancelButtonText = t("components.message.Close"),
+    confirmButtonText = t("components.message.Ok"),
     showCloseButton = true,
     showCancelButton = true,
     showConfirmButton = true,
     padding = 0,
   }) =>
-    import('sweetalert2').then(({ default: Swal }) =>
+    import("sweetalert2").then(({ default: Swal }) =>
       Swal.fire({
-        icon: 'warning',
+        icon: "warning",
         title,
         text,
         cancelButtonText,
@@ -43,20 +43,20 @@ const Component = {
         showCancelButton,
         showConfirmButton,
         padding,
-      }),
+      })
     ),
   error: ({
     text,
-    title = t('components.message.Fail'),
-    cancelButtonText = t('components.message.Close'),
+    title = t("components.message.Fail"),
+    cancelButtonText = t("components.message.Close"),
     showCloseButton = true,
     showCancelButton = true,
     showConfirmButton = false,
     padding = 0,
   }) =>
-    import('sweetalert2').then(({ default: Swal }) =>
+    import("sweetalert2").then(({ default: Swal }) =>
       Swal.fire({
-        icon: 'error',
+        icon: "error",
         title,
         text,
         cancelButtonText,
@@ -65,25 +65,25 @@ const Component = {
         showConfirmButton,
         padding,
         focusCancel: showCancelButton,
-      }),
+      })
     ),
   confirm: ({
     text,
-    title = '',
-    cancelButtonText = t('components.message.Close'),
-    confirmButtonText = t('components.message.Ok'),
+    title = "",
+    cancelButtonText = t("components.message.Close"),
+    confirmButtonText = t("components.message.Ok"),
     onConfirm,
     onDenied = () => null,
-    confirmButtonColor = '#3b82f6',
-    cancelButtonColor = '#ef4444',
+    confirmButtonColor = "#3b82f6",
+    cancelButtonColor = "#ef4444",
     showCloseButton = true,
     showCancelButton = true,
     showConfirmButton = true,
     padding = 0,
   }) =>
-    import('sweetalert2').then(({ default: Swal }) =>
+    import("sweetalert2").then(({ default: Swal }) =>
       Swal.fire({
-        icon: 'warning',
+        icon: "warning",
         text,
         title,
         cancelButtonText,
@@ -100,7 +100,7 @@ const Component = {
         } else if (result.isDenied) {
           onDenied();
         }
-      }),
+      })
     ),
 };
 export default Component;

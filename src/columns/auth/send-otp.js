@@ -1,14 +1,12 @@
-const Column = ({t}) => {
+const Column = ({ t }) => {
   return [
     {
-      name: 'otp',
-      title: 'Mã Otp',
+      name: "otp",
+      title: "Mã Otp",
       formItem: {
-        placeholder: 'Mã Otp',
-        rules: [
-          { type: 'required' },
-        ]
-      }
+        placeholder: "Mã Otp",
+        rules: [{ type: "required" }],
+      },
     },
   ];
 };
