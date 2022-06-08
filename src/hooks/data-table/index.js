@@ -10,8 +10,9 @@ import { Table, Radio, Checkbox, DatePicker } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 import moment from 'moment';
-import { Pagination } from 'components';
+import classNames from 'classnames';
 
+import { Pagination } from 'components';
 import {
   checkTextToShort,
   cleanObjectKeyNull,
@@ -28,7 +29,7 @@ const Hook = ({
   Get,
   id = () => true,
   showList = true,
-  footer = () => null,
+  footer,
   defaultRequest = {},
   pageIndex = 'page',
   pageSize = 'perPage',
@@ -55,6 +56,7 @@ const Hook = ({
   paginationDescription = (from, to, total) =>
     from + '-' + to + ' of ' + total + ' items',
   idElement = 'idTable',
+  className = 'data-table',
   ...prop
 }) => {
   const [idTable] = useState('temp-' + v4());
@@ -399,7 +401,7 @@ const Hook = ({
         }));
       }
       return (
-        <div className="intro-x">
+        <div className={classNames('intro-x', className)}>
           <div className="flex justify-between mb-2.5">
             {!!showSearch && (
               <div className="relative">
@@ -476,7 +478,7 @@ const Hook = ({
               )}
             </Fragment>
           )}
-          <div className="footer">{footer(objData)}</div>
+          {!!footer && <div className="footer">{footer(objData)}</div>}
         </div>
       );
     },

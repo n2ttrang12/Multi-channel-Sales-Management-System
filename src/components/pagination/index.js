@@ -117,11 +117,11 @@ const Component = ({
       return concatWithPrevNext(generateRangeItem(pageIndex, lastIndex));
     }
   };
-  console.log(listOfPageItem);
+
   return (
     total > 0 && (
-      <div className="flex items-center justify-between mt-3 select-none">
-        <div>
+      <div className="pagination flex items-center justify-between mt-3 select-none">
+        <div className={'left'}>
           <Select
             id={idElement + '_page_size'}
             defaultValue={pageSize}
@@ -138,7 +138,7 @@ const Component = ({
             {paginationDescription(ranges[0], ranges[1], total)}
           </span>
         </div>
-        <div className="flex justify-center border border-gray-100 p-1 rounded-xl bg-white">
+        <div className="right flex justify-center border border-gray-100 p-1 rounded-xl bg-white">
           <div className="flex flex-wrap justify-center duration-300 transition-all">
             {listOfPageItem.current.map((page, index) => (
               <button

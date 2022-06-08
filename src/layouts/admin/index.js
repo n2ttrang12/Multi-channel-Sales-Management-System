@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
     }
     window.addEventListener('resize', handleResize, true);
     import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
-      PerfectScrollbar(document.getElementById('root'), {
+      new PerfectScrollbar(document.getElementById('root'), {
         suppressScrollX: true,
       });
     });

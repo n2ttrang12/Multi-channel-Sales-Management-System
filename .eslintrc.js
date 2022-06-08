@@ -16,6 +16,7 @@ module.exports = {
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
     "camelcase": "off",
+    "no-new": "off",
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
     "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
   },

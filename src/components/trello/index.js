@@ -90,11 +90,6 @@ const Component = ({
               ));
           },
         });
-        import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
-          PerfectScrollbar(document.getElementById(id + 'wrapper'), {
-            suppressScrollY: true,
-          });
-        });
         set_isLoading(false);
       }
     });
@@ -109,39 +104,37 @@ const Component = ({
 
   return (
     <Spin spinning={isLoading}>
-      <div id={id + 'wrapper'} className="overflow-auto relative">
-        <div
-          id={id}
-          className="drag-horizontal"
-          style={{ minWidth: listData.length * 300 + 'px', minHeight: '200px' }}
-        >
-          {listData.map((item) => (
-            <div
-              className="group-card"
-              style={{ backgroundColor: item.backgroundColor }}
-              key={item.id}
-            >
-              <div className="flex justify-between p-2">
-                <h3>
-                  <span style={{ color: item.frontColor }}>
-                    {item.name} ({item.tasks.length})
-                  </span>
-                </h3>
-                {item?.allowActions?.allowEdit && (
-                  <i
-                    style={{ color: item.frontColor }}
-                    className="move-drag las  la-lg la-arrows-alt"
-                  />
-                )}
-              </div>
-              <div id={item.id} className="drag-vertical">
-                {item.tasks.map((subItem, subIndex) =>
-                  renderItem(item, subItem, subIndex),
-                )}
-              </div>
+      <div
+        id={id}
+        className="drag-horizontal"
+        style={{ minWidth: listData.length * 300 + 'px', minHeight: '200px' }}
+      >
+        {listData.map((item) => (
+          <div
+            className="group-card"
+            style={{ backgroundColor: item.backgroundColor }}
+            key={item.id}
+          >
+            <div className="flex justify-between p-2">
+              <h3>
+                <span style={{ color: item.frontColor }}>
+                  {item.name} ({item.tasks.length})
+                </span>
+              </h3>
+              {item?.allowActions?.allowEdit && (
+                <i
+                  style={{ color: item.frontColor }}
+                  className="move-drag las  la-lg la-arrows-alt"
+                />
+              )}
             </div>
-          ))}
-        </div>
+            <div id={item.id} className="drag-vertical">
+              {item.tasks.map((subItem, subIndex) =>
+                renderItem(item, subItem, subIndex),
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </Spin>
   );
