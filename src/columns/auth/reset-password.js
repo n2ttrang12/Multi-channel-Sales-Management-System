@@ -11,7 +11,7 @@ const Column = ({ t }) => {
             type: 'custom',
             validator: (form) => ({
               validator: async (rule, value) => {
-                if(value?.toString()?.length < 8){
+                if (value?.toString()?.length < 8) {
                   return Promise.reject(
                     new Error('Mật khẩu yêu cầu có 8 ký tự trở lên'),
                   );
