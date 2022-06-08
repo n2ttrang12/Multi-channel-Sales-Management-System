@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useCallback, useState } from "react";
-import { Select } from "antd";
-import classNames from "classnames";
+import React, { useEffect, useRef, useCallback, useState } from 'react';
+import { Select } from 'antd';
+import classNames from 'classnames';
 
 const Component = ({
   total = 4,
@@ -8,11 +8,11 @@ const Component = ({
   pageSize = 10,
   pageIndex = 1,
   queryParams = () => {},
-  pageSizeRender = (sizePage) => sizePage + " / page",
-  pageSizeWidth = "115px",
+  pageSizeRender = (sizePage) => sizePage + ' / page',
+  pageSizeWidth = '115px',
   paginationDescription = (from, to, total) =>
-    from + "-" + to + " of " + total + " items",
-  idElement = "pagination",
+    from + '-' + to + ' of ' + total + ' items',
+  idElement = 'pagination',
 }) => {
   const listOfPageItem = useRef([]);
   const [ranges, setRanges] = useState([]);
@@ -40,16 +40,16 @@ const Component = ({
 
   const onPageIndexChange = ({ type, index }) => {
     switch (type) {
-      case "prev":
+      case 'prev':
         index = pageIndex - 1;
         break;
-      case "prev_10":
+      case 'prev_10':
         index = pageIndex - 10;
         break;
-      case "next":
+      case 'next':
         index = pageIndex + 1;
         break;
-      case "next_10":
+      case 'next_10':
         index = pageIndex + 10;
         break;
       default:
@@ -60,19 +60,19 @@ const Component = ({
   const getListOfPageItem = (pageIndex, lastIndex) => {
     const concatWithPrevNext = (listOfPage) => {
       const prev10Item = {
-        type: "prev_10",
+        type: 'prev_10',
         disabled: pageIndex - 10 < 0,
       };
       const prevItem = {
-        type: "prev",
+        type: 'prev',
         disabled: pageIndex === 1,
       };
       const nextItem = {
-        type: "next",
+        type: 'next',
         disabled: pageIndex === lastIndex,
       };
       const next10Item = {
-        type: "next_10",
+        type: 'next_10',
         disabled: pageIndex + 10 > lastIndex,
       };
       return [prev10Item, prevItem, ...listOfPage, nextItem, next10Item];
@@ -82,7 +82,7 @@ const Component = ({
       for (let i = start; i <= end; i++) {
         list.push({
           index: i,
-          type: "page_" + i,
+          type: 'page_' + i,
         });
       }
       return list;
@@ -94,10 +94,10 @@ const Component = ({
       const generateRangeItem = (selected, last) => {
         let listOfRange = [];
         const prevFiveItem = {
-          type: "prev_5",
+          type: 'prev_5',
         };
         const nextFiveItem = {
-          type: "next_5",
+          type: 'next_5',
         };
         const firstPageItem = generatePage(1, 1);
         const lastPageItem = generatePage(lastIndex, lastIndex);
@@ -123,7 +123,7 @@ const Component = ({
       <div className="flex items-center justify-between mt-3 select-none">
         <div>
           <Select
-            id={idElement + "_page_size"}
+            id={idElement + '_page_size'}
             defaultValue={pageSize}
             style={{ minWidth: pageSizeWidth }}
             onChange={(value) => onPageSizeChange(value)}
@@ -142,37 +142,37 @@ const Component = ({
           <div className="flex flex-wrap justify-center duration-300 transition-all">
             {listOfPageItem.current.map((page, index) => (
               <button
-                type={"button"}
+                type={'button'}
                 key={index}
                 disabled={page.disabled}
-                id={idElement + "_" + page.type}
+                id={idElement + '_' + page.type}
                 className={classNames(
-                  "text-center duration-300 transition-all py-1 px-2.5 text-sm font-medium leading-normal",
+                  'text-center duration-300 transition-all py-1 px-2.5 text-sm font-medium leading-normal',
                   {
-                    "text-blue-700 hover:text-blue-500":
+                    'text-blue-700 hover:text-blue-500':
                       pageIndex !== page.index,
-                    "bg-blue-500 rounded-full text-white hover:text-white":
+                    'bg-blue-500 rounded-full text-white hover:text-white':
                       pageIndex === page.index,
-                    "pointer-events-none":
-                      page.disabled || ["next_5", "prev_5"].includes(page.type),
-                  }
+                    'pointer-events-none':
+                      page.disabled || ['next_5', 'prev_5'].includes(page.type),
+                  },
                 )}
                 onClick={() => onPageIndexChange(page)}
               >
-                {page.type === "prev" && (
+                {page.type === 'prev' && (
                   <i className="las la-angle-left text-sm" />
                 )}
-                {page.type === "next" && (
+                {page.type === 'next' && (
                   <i className="las la-angle-right text-sm" />
                 )}
-                {page.type === "prev_10" && (
+                {page.type === 'prev_10' && (
                   <i className="las la-angle-double-left text-sm" />
                 )}
-                {page.type === "next_10" && (
+                {page.type === 'next_10' && (
                   <i className="las la-angle-double-right text-sm" />
                 )}
-                {page.type.indexOf("page") === 0 && page.index}
-                {(page.type === "prev_5" || page.type === "next_5") && "..."}
+                {page.type.indexOf('page') === 0 && page.index}
+                {(page.type === 'prev_5' || page.type === 'next_5') && '...'}
               </button>
             ))}
           </div>

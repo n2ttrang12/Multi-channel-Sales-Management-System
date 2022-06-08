@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
-import { timeBuild } from "./variable";
+import React, { useRef } from 'react';
+import { timeBuild } from './variable';
 
 function withClearCache(Component) {
   function ClearCacheComponent(props) {
     const componentMounted = useRef(false);
     if (!componentMounted.current) {
-      fetch("/meta.json")
+      fetch('/meta.json')
         .then((response) => response.json())
         .then((meta) => {
           const latestVersionDate = meta.buildDate;

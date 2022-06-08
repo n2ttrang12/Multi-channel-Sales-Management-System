@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Dropdown } from "antd";
-import { useNavigate } from "react-router";
-import classNames from "classnames";
+import React, { useState, useEffect } from 'react';
+import { Dropdown } from 'antd';
+import { useNavigate } from 'react-router';
+import classNames from 'classnames';
 
-import logo from "assets/images/logo.png";
-import arrow from "assets/images/arrow.svg";
-import avatar from "assets/images/avatar.jpeg";
+import logo from 'assets/images/logo.png';
+import arrow from 'assets/images/arrow.svg';
+import avatar from 'assets/images/avatar.jpeg';
 
 // import menus from "./menus";
-import "./index.less";
-import { routerLinks } from "utils";
-import { Avatar } from "components";
-import Menu from "./menu";
+import './index.less';
+import { routerLinks } from 'utils';
+import { Avatar } from 'components';
+import Menu from './menu';
 
 const Layout = ({ children }) => {
   // menuVertical, permission,
@@ -31,25 +31,25 @@ const Layout = ({ children }) => {
         set_isDesktop(false);
       }
     }
-    window.addEventListener("resize", handleResize, true);
-    import("perfect-scrollbar").then(({ default: PerfectScrollbar }) => {
-      new PerfectScrollbar(document.getElementById("root"), {
+    window.addEventListener('resize', handleResize, true);
+    import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
+      PerfectScrollbar(document.getElementById('root'), {
         suppressScrollX: true,
       });
     });
 
-    return () => window.removeEventListener("resize", handleResize, true);
+    return () => window.removeEventListener('resize', handleResize, true);
   }, [isCollapsed, isDesktop]);
 
   const Header = ({ isCollapsed, isDesktop }) => (
     <header
       className={classNames(
-        "bg-gray-100 w-full header h-16 transition-all duration-300 ease-in-out sticky top-0 block z-10",
+        'bg-gray-100 w-full header h-16 transition-all duration-300 ease-in-out sticky top-0 block z-10',
         {
-          "pl-80": !isCollapsed && isDesktop,
-          "pl-32": isCollapsed && isDesktop,
-          "pl-28": !isDesktop,
-        }
+          'pl-80': !isCollapsed && isDesktop,
+          'pl-32': isCollapsed && isDesktop,
+          'pl-28': !isDesktop,
+        },
       )}
     >
       {/* <div className="flex items-center justify-end px-5 h-16"> */}
@@ -72,13 +72,13 @@ const Layout = ({ children }) => {
             <i className="las la-comment text-4xl text-gray-500" />
           </div>
           <Dropdown
-            trigger={["hover", "click"]}
+            trigger={['hover', 'click']}
             overlay={
               <ul className="bg-blue-50">
                 <li
                   className="p-2 hover:bg-blue-100"
                   onClick={() =>
-                    navigate(routerLinks("Login"), { replace: true })
+                    navigate(routerLinks('Login'), { replace: true })
                   }
                 >
                   Sign Out
@@ -87,7 +87,7 @@ const Layout = ({ children }) => {
             }
             placement="bottomRight"
           >
-            <section className="flex items-center" id={"dropdown-profile"}>
+            <section className="flex items-center" id={'dropdown-profile'}>
               <Avatar src={avatar} size={10} />
             </section>
           </Dropdown>
@@ -100,32 +100,32 @@ const Layout = ({ children }) => {
       <Header isCollapsed={isCollapsed} isDesktop={isDesktop} />
       <div
         className={classNames(
-          "t-10 rounded-tr-3xl flex items-center text-gray-800 hover:text-gray-500 h-20 fixed top-0 left-0 px-5 font-bold transition-all duration-300 ease-in-out z-10",
+          't-10 rounded-tr-3xl flex items-center text-gray-800 hover:text-gray-500 h-20 fixed top-0 left-0 px-5 font-bold transition-all duration-300 ease-in-out z-10',
           {
-            "w-80 justify-between": !isCollapsed && isDesktop,
-            "w-20 justify-center": isCollapsed,
-            "bg-teal-900": isDesktop,
-            "bg-blue-50": !isDesktop,
-          }
+            'w-80 justify-between': !isCollapsed && isDesktop,
+            'w-20 justify-center': isCollapsed,
+            'bg-teal-900': isDesktop,
+            'bg-blue-50': !isDesktop,
+          },
         )}
       >
         <div>
           <a href="/" className="flex items-center">
             <img
-              className={classNames("w-10", {
+              className={classNames('w-10', {
                 hidden: !!isCollapsed || !isDesktop,
               })}
               src={logo}
               alt=""
             />
             <div
-              id={"name-application"}
+              id={'name-application'}
               className={classNames(
-                "transition-all text-white duration-300 ease-in-out absolute left-16 w-48 overflow-ellipsis overflow-hidden ml-2",
+                'transition-all text-white duration-300 ease-in-out absolute left-16 w-48 overflow-ellipsis overflow-hidden ml-2',
                 {
-                  "opacity-100 text-3xl": !isCollapsed && !!isDesktop,
-                  "opacity-0 text-[0px] invisible": !!isCollapsed || !isDesktop,
-                }
+                  'opacity-100 text-3xl': !isCollapsed && !!isDesktop,
+                  'opacity-0 text-[0px] invisible': !!isCollapsed || !isDesktop,
+                },
               )}
             >
               BALANCE
@@ -135,8 +135,8 @@ const Layout = ({ children }) => {
         {/* className={classNames("hamburger", )} */}
         <div onClick={() => set_isCollapsed(!isCollapsed)}>
           <img
-            className={classNames("w-4 cursor-pointer", {
-              "rotate-180":
+            className={classNames('w-4 cursor-pointer', {
+              'rotate-180':
                 (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
             })}
             src={arrow}
@@ -146,23 +146,23 @@ const Layout = ({ children }) => {
       </div>
       <div
         className={classNames(
-          "fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out",
+          'fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out',
           {
-            "w-80": !isCollapsed,
-            "w-20": isCollapsed,
-            "-left-20": isCollapsed && !isDesktop,
-          }
+            'w-80': !isCollapsed,
+            'w-20': isCollapsed,
+            '-left-20': isCollapsed && !isDesktop,
+          },
         )}
       >
         <Menu isCollapsed={isCollapsed} />
       </div>
       <div
         className={classNames(
-          "bg-gray-100 ml-80 px-5 transition-all duration-300 ease-in-out z-10",
+          'bg-gray-100 ml-80 px-5 transition-all duration-300 ease-in-out z-10',
           {
-            "ml-80": !isCollapsed && isDesktop,
-            "ml-20": isCollapsed && isDesktop,
-          }
+            'ml-80': !isCollapsed && isDesktop,
+            'ml-20': isCollapsed && isDesktop,
+          },
         )}
       >
         {children}

@@ -1,12 +1,11 @@
-import React, { useState, Fragment } from "react";
-import { useNavigate, useLocation } from "react-router";
-import { useTranslation } from "react-i18next";
-import { Message } from "components";
-import { Form, Spin } from "components";
-import { routerLinks } from "utils";
-import { UserService } from "services/user";
-import { ColumnResetPassword } from "columns/auth";
-import "./index.less";
+import React, { useState, Fragment } from 'react';
+import { useNavigate, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { Message, Form, Spin } from 'components';
+import { routerLinks } from 'utils';
+import { UserService } from 'services/user';
+import { ColumnResetPassword } from 'columns/auth';
+import './index.less';
 
 const Page = () => {
   const { t } = useTranslation();
@@ -24,8 +23,8 @@ const Page = () => {
         uuid: location.state.uuid,
       });
       if (res.statusCode === 200) {
-        Message.success("Đổi mật khẩu thành công!");
-        navigate(routerLinks("Login"));
+        Message.success('Đổi mật khẩu thành công!');
+        navigate(routerLinks('Login'));
       }
       setLoading(false);
     } catch (err) {
@@ -37,10 +36,10 @@ const Page = () => {
   return (
     <Fragment>
       <div className="mb-8 mt-14 title-auth">
-        <h1>{"Đặt Lại Mật Khẩu"}</h1>
+        <h1>{'Đặt Lại Mật Khẩu'}</h1>
         <h5>
           {
-            "Mật khẩu yêu cầu có 8 ký tự trở lên, có ít nhất 1 chữ hoa và 1 chữ số."
+            'Mật khẩu yêu cầu có 8 ký tự trở lên, có ít nhất 1 chữ hoa và 1 chữ số.'
           }
         </h5>
       </div>
@@ -48,9 +47,9 @@ const Page = () => {
         <Form
           className="w-3/4 mx-auto form-login"
           columns={ColumnResetPassword({ t })}
-          textSubmit={"Đổi mật khẩu"}
+          textSubmit={'Đổi mật khẩu'}
           handSubmit={submit}
-          idSubmit={"submit-btn"}
+          idSubmit={'submit-btn'}
         />
       </Spin>
       {/* <div className="text-center mt-4"

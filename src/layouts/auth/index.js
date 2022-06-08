@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useCallback } from "react";
-import { useAuth } from "global";
-import classNames from "classnames";
-import { useLocation } from "react-router-dom";
-import footerImage from "assets/images/footer.png";
-import "./index.less";
-import logo from "assets/images/logo.png";
+import React, { useEffect, useRef, useCallback } from 'react';
+import { useAuth } from 'global';
+import classNames from 'classnames';
+import { useLocation } from 'react-router-dom';
+import footerImage from 'assets/images/footer.png';
+import './index.less';
+import logo from 'assets/images/logo.png';
 
 const Layout = ({ children }) => {
   const { logout } = useAuth();
@@ -24,19 +24,19 @@ const Layout = ({ children }) => {
       initFunction();
     }
   }, [mount, initFunction]);
-  let imageURL = "";
+  let imageURL = '';
 
   switch (location.pathname) {
-    case "/auth/login":
+    case '/auth/login':
       imageURL = "bg-[url('assets/images/bg-login.png')]";
       break;
-    case "/auth/forgot-password":
+    case '/auth/forgot-password':
       imageURL = "bg-[url('assets/images/bg-forgot.png')]";
       break;
-    case "/auth/send-otp":
+    case '/auth/send-otp':
       imageURL = "bg-[url('assets/images/bg-otp.png')]";
       break;
-    case "/auth/reset-password":
+    case '/auth/reset-password':
       imageURL = "bg-[url('assets/images/bg-reset.png')]";
       break;
     default:
@@ -51,7 +51,7 @@ const Layout = ({ children }) => {
             <div
               className={classNames(
                 imageURL,
-                "opacity-60 bg-cover bg-center w-full  lg:min-h-full  min-h-[600px] relative overflow-hidden flex justify-between flex-col"
+                'opacity-60 bg-cover bg-center w-full  lg:min-h-full  min-h-[600px] relative overflow-hidden flex justify-between flex-col',
               )}
             >
               <img src={logo} alt="logoUhouse" className="w-10 sm:w-20 p-4" />
@@ -62,13 +62,13 @@ const Layout = ({ children }) => {
         <div
           className="absolute w-full z-10 bottom-0 h-28"
           style={{
-            backgroundImage: "url(" + footerImage + ")",
-            backgroundSize: "cover",
+            backgroundImage: 'url(' + footerImage + ')',
+            backgroundSize: 'cover',
           }}
         >
           <div className="absolute -translate-x-1/2  top-1/2 left-1/2 text-white">
             <p className="hidden sm:block">
-              Powered By ARI Technology Co ., JSC{" "}
+              Powered By ARI Technology Co ., JSC{' '}
             </p>
           </div>
         </div>

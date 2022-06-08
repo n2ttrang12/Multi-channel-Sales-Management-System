@@ -4,9 +4,9 @@ import React, {
   Fragment,
   useCallback,
   useRef,
-} from "react";
-import { TreeSelect, Checkbox } from "antd";
-import axios from "axios";
+} from 'react';
+import { TreeSelect, Checkbox } from 'antd';
+import axios from 'axios';
 
 const Component = ({ formItem, placeholder, onChange, value, form }) => {
   const [_list, set_list] = useState(formItem.list || []);
@@ -29,7 +29,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
                 : { fullTextSearch },
             });
             const listData = data.data.map(formItem.api.format);
-            if (formItem.mode === "multiple" && value?.length) {
+            if (formItem.mode === 'multiple' && value?.length) {
               const array = formItem.api.convertData
                 ? formItem.api.convertData(listData)
                 : listData;
@@ -42,19 +42,19 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
         set_list(formItem.renderList(form.getFieldValue));
       }
     },
-    [form, formItem, value]
+    [form, formItem, value],
   );
 
   const initFunction = useCallback(async () => {
     if (
       value?.length > 0 &&
-      !value?.filter((item) => typeof item === "object")?.length
+      !value?.filter((item) => typeof item === 'object')?.length
     ) {
       onChange(value.map((item) => ({ value: item, label: item })));
     }
     if (_list.length === 0) {
       if (formItem.api || formItem.renderList) {
-        await loadData("");
+        await loadData('');
       }
     }
     if (value.length > 0 && value.length === allValue.current.length) {
@@ -105,7 +105,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
   };
 
   const totalChildren = (obj, length, arrayValue) => {
-    if (obj.value.indexOf("__") === -1 && arrayValue.indexOf(obj.value) > -1) {
+    if (obj.value.indexOf('__') === -1 && arrayValue.indexOf(obj.value) > -1) {
       length += 1;
     }
     if (obj?.children?.length) {
@@ -129,26 +129,26 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
 
   return (
     <TreeSelect
-      treeNodeFilterProp={"title"}
+      treeNodeFilterProp={'title'}
       listHeight={200}
       treeDataSimpleMode
       allowClear={true}
       onChange={(data) => {
         if (formItem.api?.loadData) {
-          if (formItem.mode !== "multiple") {
+          if (formItem.mode !== 'multiple') {
             const _data = _list.filter((_item) => _item.id === data.value)[0];
             onChange({ ..._data, label: _data.fullTitle });
           } else {
             onChange(
               data.map((__item) => {
                 const _data = _list.filter(
-                  (_item) => _item.id === __item.value
+                  (_item) => _item.id === __item.value,
                 )[0];
                 if (_data) {
                   return { ..._data, label: _data.fullTitle };
                 }
                 return __item;
-              })
+              }),
             );
           }
         } else {
@@ -157,7 +157,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
       }}
       dropdownRender={(originNode) => (
         <Fragment>
-          {formItem.mode === "multiple" && (
+          {formItem.mode === 'multiple' && (
             <Fragment>
               <Checkbox
                 checked={checkAll}
@@ -176,7 +176,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
       labelInValue={true}
       value={value || []}
       placeholder={placeholder}
-      treeCheckable={formItem.mode === "multiple"}
+      treeCheckable={formItem.mode === 'multiple'}
       loadData={loadDataTree}
       treeData={_list}
       tagRender={(props) => {
@@ -191,7 +191,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
         ) {
           const arraySlice = arrayValue.slice(
             0,
-            arrayValue.indexOf(props.value)
+            arrayValue.indexOf(props.value),
           );
           let checkShow = true;
           if (
@@ -215,7 +215,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
             checkShow && (
               <div className="bg-blue-100 rounded-xl py-1 px-2 relative mr-2.5 -left-2.5">
                 <button
-                  type={"button"}
+                  type={'button'}
                   className="absolute rounded-full -top-1 -right-2 bg-red-100 text-red-500 p-0.5 leading-none z-10"
                   onClick={() => onChange(clearTag(item[0], value))}
                 >
@@ -228,7 +228,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
         }
         return null;
       }}
-      placement={"bottomLeft"}
+      placement={'bottomLeft'}
       showCheckedStrategy={TreeSelect.SHOW_ALL}
     />
   );

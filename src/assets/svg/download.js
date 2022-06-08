@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 const Svg = (props) => {
   return (
@@ -15,7 +15,7 @@ const Svg = (props) => {
     >
       <style>
         {
-          "#download_svg__Layer_1:hover #download_svg__action{transform:translateY(-4px)}#download_svg__Layer_1:hover path{fill:#203457}"
+          '#download_svg__Layer_1:hover #download_svg__action{transform:translateY(-4px)}#download_svg__Layer_1:hover path{fill:#203457}'
         }
       </style>
       <path
@@ -26,7 +26,7 @@ const Svg = (props) => {
       />
       <path
         style={{
-          transition: "all .3s ease",
+          transition: 'all .3s ease',
         }}
         id="download_svg__action"
         d="M8.3,0.8v10.1L4.8,7.5C4.5,7.2,4,7.2,3.7,7.5s-0.3,0.8,0,1.1l4.9,4.8c0.3,0.3,0.8,0.3,1.1,0l4.9-4.9

@@ -1,10 +1,10 @@
-import { Collapse } from "components";
-import React, { Fragment } from "react";
-import classNames from "classnames";
-import { routerLinks } from "utils";
-import { useNavigate, useLocation } from "react-router";
-import "./index.less";
-import listMenu from "../menus";
+import { Collapse } from 'components';
+import React, { Fragment } from 'react';
+import classNames from 'classnames';
+import { routerLinks } from 'utils';
+import { useNavigate, useLocation } from 'react-router';
+import './index.less';
+import listMenu from '../menus';
 
 const Layout = ({ isCollapsed = false }) => {
   const navigate = useNavigate();
@@ -18,23 +18,23 @@ const Layout = ({ isCollapsed = false }) => {
             <li
               key={index}
               className={classNames(
-                "text-gray-300 flex items-center px-3 py-1 m-3",
+                'text-gray-300 flex items-center px-3 py-1 m-3',
                 {
-                  "bg-teal-700 text-white rounded-2xl  ":
+                  'bg-teal-700 text-white rounded-2xl  ':
                     location.pathname === routerLinks(item.name),
-                }
+                },
               )}
               onClick={() => navigate(routerLinks(item.name))}
             >
-              <i className={classNames("text-3xl mr-2.5", item.icon)} />
+              <i className={classNames('text-3xl mr-2.5', item.icon)} />
               <span
                 className={classNames(
-                  "text-gray-300 text-base  transition-all duration-300 ease-in-out font-bold",
+                  'text-gray-300 text-base  transition-all duration-300 ease-in-out font-bold',
                   {
-                    "opacity-100": !isCollapsed,
-                    "opacity-0 text-[0]": isCollapsed,
-                    "!text-white": location.pathname === routerLinks(item.name),
-                  }
+                    'opacity-100': !isCollapsed,
+                    'opacity-0 text-[0]': isCollapsed,
+                    '!text-white': location.pathname === routerLinks(item.name),
+                  },
                 )}
               >
                 {item.name}
@@ -47,14 +47,14 @@ const Layout = ({ isCollapsed = false }) => {
               key={index}
               title={
                 <Fragment>
-                  <i className={classNames("text-3xl mr-2.5", item.icon)} />
+                  <i className={classNames('text-3xl mr-2.5', item.icon)} />
                   <span
                     className={classNames(
-                      "text-gray-300 text-base transition-all duration-300 ease-in-out font-bold",
+                      'text-gray-300 text-base transition-all duration-300 ease-in-out font-bold',
                       {
-                        "opacity-100": !isCollapsed,
-                        "opacity-0 text-[0]": isCollapsed,
-                      }
+                        'opacity-100': !isCollapsed,
+                        'opacity-0 text-[0]': isCollapsed,
+                      },
                     )}
                   >
                     {item.name}
@@ -70,11 +70,11 @@ const Layout = ({ isCollapsed = false }) => {
                   <li
                     key={index}
                     className={classNames(
-                      "py-2 text-gray-300 my-2 font-bold text-base",
+                      'py-2 text-gray-300 my-2 font-bold text-base',
                       {
-                        "bg-teal-700 !text-white rounded-2xl text-white ":
+                        'bg-teal-700 !text-white rounded-2xl text-white ':
                           location.pathname === routerLinks(subItem.name),
-                      }
+                      },
                     )}
                     onClick={() => navigate(routerLinks(subItem.name))}
                   >

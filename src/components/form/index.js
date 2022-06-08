@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Form, DatePicker, Checkbox, Radio, Switch, Slider } from "antd";
-import { useTranslation } from "react-i18next";
-import moment from "moment";
-import classNames from "classnames";
+import React, { useCallback, useEffect, useState } from 'react';
+import { Form, DatePicker, Checkbox, Radio, Switch, Slider } from 'antd';
+import { useTranslation } from 'react-i18next';
+import moment from 'moment';
+import classNames from 'classnames';
 
-import { useAuth } from "global";
-import { Upload } from "components";
-import { convertFormValue } from "utils";
+import { useAuth } from 'global';
+import { Upload } from 'components';
+import { convertFormValue } from 'utils';
 import {
   ColorButton,
   Editor,
@@ -17,13 +17,13 @@ import {
   Password,
   Mask,
   Addable,
-} from "./input";
+} from './input';
 
 const Component = ({
   className,
   columns,
   textSubmit,
-  textCancel = "components.form.modal.cancel",
+  textCancel = 'components.form.modal.cancel',
   handSubmit,
   values = {},
   form,
@@ -36,8 +36,8 @@ const Component = ({
   extendTopForm = null,
   extendFirstForm = null,
   extendButton = null,
-  idSubmit = "idSubmit",
-  classGroupButton = "justify-center items-center",
+  idSubmit = 'idSubmit',
+  classGroupButton = 'justify-center items-center',
 }) => {
   const { t } = useTranslation();
   const $cols = [...Array(col).keys()];
@@ -56,7 +56,7 @@ const Component = ({
         ) {
           return item;
         }
-        if (!!item.formItem && item.formItem.type === "title") {
+        if (!!item.formItem && item.formItem.type === 'title') {
           if (!$columns) {
             $columns = [[item]];
           } else {
@@ -66,7 +66,7 @@ const Component = ({
           $columns &&
           $columns.length &&
           !!$columns[$columns.length - 1][0] &&
-          $columns[$columns.length - 1][0].formItem.type === "title"
+          $columns[$columns.length - 1][0].formItem.type === 'title'
         ) {
           $columns.push([item]);
         } else {
@@ -81,31 +81,31 @@ const Component = ({
           }
         }
 
-        if (item.formItem.type === "password" && !!item.formItem.confirm) {
+        if (item.formItem.type === 'password' && !!item.formItem.confirm) {
           const rules = [
             {
-              type: "custom",
+              type: 'custom',
               validator: ({ getFieldValue }) => ({
                 validator(rule, value) {
                   if (!value || getFieldValue(item.name) === value) {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    t("components.form.rulesConfirmPassword")
+                    t('components.form.rulesConfirmPassword'),
                   );
                 },
               }),
             },
           ];
           if (item.formItem.confirmRequired) {
-            rules.push({ type: "required" });
+            rules.push({ type: 'required' });
           }
           const confirmItem = {
-            name: "confirm" + item.name,
+            name: 'confirm' + item.name,
             title:
-              t("components.form.confirm") + " " + item.title.toLowerCase(),
+              t('components.form.confirm') + ' ' + item.title.toLowerCase(),
             formItem: {
-              type: "password",
+              type: 'password',
               rules,
             },
           };
@@ -135,55 +135,55 @@ const Component = ({
 
   const generateInput = (formItem, item, values) => {
     switch (formItem.type) {
-      case "hidden":
+      case 'hidden':
         break;
       // case "media":
       //   return <Media limit={formItem.limit} />;
-      case "addable":
+      case 'addable':
         return <Addable {...formItem} />;
-      case "editor":
+      case 'editor':
         return <Editor readOnly={formItem.disabled} />;
-      case "color_button":
+      case 'color_button':
         return <ColorButton />;
-      case "upload":
+      case 'upload':
         return <Upload {...formItem} />;
-      case "table_transfer":
+      case 'table_transfer':
         return <TableTransfer formItem={formItem} form={form} />;
-      case "password":
+      case 'password':
         return (
           <Password
             placeholder={
               formItem.placeholder ||
-              t("components.form.Enter") + " " + item.title.toLowerCase()
+              t('components.form.Enter') + ' ' + item.title.toLowerCase()
             }
             disabled={
-              formItem.disabled && typeof values[item.name] !== "undefined"
+              formItem.disabled && typeof values[item.name] !== 'undefined'
             }
           />
         );
-      case "textarea":
+      case 'textarea':
         return (
           <textarea
             className="ant-input px-4 py-3 w-full rounded-xl text-gray-600 bg-white border border-solid"
             rows="4"
             maxLength="1000"
             disabled={
-              formItem.disabled && typeof values[item.name] !== "undefined"
+              formItem.disabled && typeof values[item.name] !== 'undefined'
             }
             placeholder={
               formItem.placeholder ||
-              t("components.form.Enter") + " " + item.title.toLowerCase()
+              t('components.form.Enter') + ' ' + item.title.toLowerCase()
             }
           />
         );
-      case "slider_number":
+      case 'slider_number':
         return (
           <Slider
             range
             tipFormatter={(value) =>
               (value
-                ? value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                : "0") + (formItem.symbol ? formItem.symbol : "")
+                ? value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                : '0') + (formItem.symbol ? formItem.symbol : '')
             }
             max={formItem.max ? formItem.max : 9999999}
             defaultValue={
@@ -193,12 +193,12 @@ const Component = ({
             }
           />
         );
-      case "date":
+      case 'date':
         return (
           <DatePicker
             format={
-              (!formItem.picker || formItem.picker === "date") &&
-              formatDate + (formItem.showTime ? " HH:mm" : "")
+              (!formItem.picker || formItem.picker === 'date') &&
+              formatDate + (formItem.showTime ? ' HH:mm' : '')
             }
             onChange={(date) =>
               formItem.onChange && formItem.onChange(date, form)
@@ -207,14 +207,14 @@ const Component = ({
               formItem.disabledDate && formItem.disabledDate(current, form)
             }
             showTime={formItem.showTime}
-            picker={formItem.picker || "date"}
+            picker={formItem.picker || 'date'}
             disabled={!!formItem.disabled && formItem.disabled(values)}
           />
         );
-      case "date_range":
+      case 'date_range':
         return (
           <DatePicker.RangePicker
-            format={formatDate + (formItem.showTime ? " HH:mm" : "")}
+            format={formatDate + (formItem.showTime ? ' HH:mm' : '')}
             disabledDate={(current) =>
               formItem.disabledDate && formItem.disabledDate(current, form)
             }
@@ -228,7 +228,7 @@ const Component = ({
             disabled={!!formItem.disabled && formItem.disabled(values)}
           />
         );
-      case "checkbox":
+      case 'checkbox':
         return formItem.list ? (
           <Checkbox.Group
             options={formItem.list}
@@ -245,25 +245,25 @@ const Component = ({
             {formItem.label}
           </Checkbox>
         );
-      case "radio":
+      case 'radio':
         return (
           <Radio.Group
             options={formItem.list}
             buttonStyle={formItem.style}
-            optionType={formItem.style ? "button" : ""}
+            optionType={formItem.style ? 'button' : ''}
           />
         );
-      case "tag":
+      case 'tag':
         return (
           <SelectTag
             tag={formItem.tag}
             form={form}
             disabled={
-              formItem.disabled && typeof values[item.name] !== "undefined"
+              formItem.disabled && typeof values[item.name] !== 'undefined'
             }
           />
         );
-      case "select":
+      case 'select':
         return (
           <Select
             onChange={(value) =>
@@ -271,27 +271,27 @@ const Component = ({
             }
             placeholder={
               formItem.placeholder ||
-              t("components.form.Enter") + " " + item.title.toLowerCase()
+              t('components.form.Enter') + ' ' + item.title.toLowerCase()
             }
             formItem={formItem}
             form={form}
             disabled={
-              formItem.disabled && typeof values[item.name] !== "undefined"
+              formItem.disabled && typeof values[item.name] !== 'undefined'
             }
           />
         );
-      case "tree_select":
+      case 'tree_select':
         return (
           <TreeSelect
             formItem={formItem}
             form={form}
             placeholder={
               formItem.placeholder ||
-              t("components.form.Enter") + " " + item.title.toLowerCase()
+              t('components.form.Enter') + ' ' + item.title.toLowerCase()
             }
           />
         );
-      case "switch":
+      case 'switch':
         return (
           <Switch
             checkedChildren={<i className="las la-lg la-check" />}
@@ -308,11 +308,11 @@ const Component = ({
             maxLength={formItem.maxLength}
             placeholder={
               formItem.placeholder ||
-              t("components.form.Enter") + " " + item.title.toLowerCase()
+              t('components.form.Enter') + ' ' + item.title.toLowerCase()
             }
             onBlur={(e) => formItem.onBlur && formItem.onBlur(e, form)}
             disabled={
-              formItem.disabled && typeof values[item.name] !== "undefined"
+              formItem.disabled && typeof values[item.name] !== 'undefined'
             }
           />
         );
@@ -320,31 +320,31 @@ const Component = ({
   };
   const generateForm = (item, index) => {
     if (item.formItem) {
-      if (item.formItem.type === "title") {
+      if (item.formItem.type === 'title') {
         return <h4>{item.title}</h4>;
       }
       const rules = [];
       switch (item.formItem.type) {
-        case "number":
+        case 'number':
           rules.push(() => ({
             validator(_, value) {
               if (!value || /^[1-9]*\d+(\.\d{1,2})?$/.test(value)) {
                 return Promise.resolve();
               }
               return Promise.reject(
-                new Error(t("components.form.only number"))
+                new Error(t('components.form.only number')),
               );
             },
           }));
           break;
-        case "only_number":
+        case 'only_number':
           rules.push(() => ({
             validator(_, value) {
               if (!value || /^[0-9]+$/.test(value)) {
                 return Promise.resolve();
               }
               return Promise.reject(
-                new Error(t("components.form.only number"))
+                new Error(t('components.form.only number')),
               );
             },
           }));
@@ -357,9 +357,9 @@ const Component = ({
           .filter((item) => !!item)
           .map((rule) => {
             switch (rule.type) {
-              case "required":
+              case 'required':
                 if (!rule.message) {
-                  rule.message = t("components.form.ruleRequired");
+                  rule.message = t('components.form.ruleRequired');
                 }
                 rules.push({
                   required: true,
@@ -368,13 +368,13 @@ const Component = ({
                 if (!item.formItem.type) {
                   rules.push({
                     whitespace: true,
-                    message: t("components.form.ruleRequired"),
+                    message: t('components.form.ruleRequired'),
                   });
                 }
                 break;
-              case "email":
+              case 'email':
                 if (!rule.message) {
-                  rule.message = t("components.form.ruleEmail");
+                  rule.message = t('components.form.ruleEmail');
                 }
                 rules.push(() => ({
                   validator(_, value) {
@@ -382,11 +382,11 @@ const Component = ({
                       /^(([^<>()[\]\\.,;:$%^&*\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     if (
                       !value ||
-                      (typeof value === "string" && regexEmail.test(value))
+                      (typeof value === 'string' && regexEmail.test(value))
                     ) {
                       return Promise.resolve();
                     } else if (
-                      typeof value === "object" &&
+                      typeof value === 'object' &&
                       value.length > 0 &&
                       value.filter((item) => !regexEmail.test(item)).length ===
                         0
@@ -397,26 +397,26 @@ const Component = ({
                   },
                 }));
                 break;
-              case "min":
+              case 'min':
                 if (!rule.message) {
                   switch (item.formItem.type) {
-                    case "number":
-                      rule.message = t("components.form.ruleMin", {
+                    case 'number':
+                      rule.message = t('components.form.ruleMin', {
                         min: rule.value,
                       });
                       break;
-                    case "only_number":
-                      rule.message = t("components.form.ruleMinNumberLength", {
+                    case 'only_number':
+                      rule.message = t('components.form.ruleMinNumberLength', {
                         min: rule.value,
                       });
                       break;
                     default:
-                      rule.message = t("components.form.ruleMinLength", {
+                      rule.message = t('components.form.ruleMinLength', {
                         min: rule.value,
                       });
                   }
                 }
-                if (item.formItem.type === "number") {
+                if (item.formItem.type === 'number') {
                   rules.push(() => ({
                     validator(_, value) {
                       if (!value || /^0$|^-?[1-9]\d*(\.\d+)?$/.test(value)) {
@@ -431,33 +431,33 @@ const Component = ({
                   }));
                 } else {
                   rules.push({
-                    type: item.formItem.type === "number" ? "number" : "string",
+                    type: item.formItem.type === 'number' ? 'number' : 'string',
                     min: rule.value,
                     message: rule.message,
                   });
                 }
 
                 break;
-              case "max":
+              case 'max':
                 if (!rule.message) {
                   switch (item.formItem.type) {
-                    case "number":
-                      rule.message = t("components.form.ruleMax", {
+                    case 'number':
+                      rule.message = t('components.form.ruleMax', {
                         max: rule.value,
                       });
                       break;
-                    case "only_number":
-                      rule.message = t("components.form.ruleMaxNumberLength", {
+                    case 'only_number':
+                      rule.message = t('components.form.ruleMaxNumberLength', {
                         max: rule.value,
                       });
                       break;
                     default:
-                      rule.message = t("components.form.ruleMaxLength", {
+                      rule.message = t('components.form.ruleMaxLength', {
                         max: rule.value,
                       });
                   }
                 }
-                if (item.formItem.type === "number") {
+                if (item.formItem.type === 'number') {
                   rules.push(() => ({
                     validator(_, value) {
                       if (!value || /^0$|^-?[1-9]\d*(\.\d+)?$/.test(value)) {
@@ -472,25 +472,25 @@ const Component = ({
                   }));
                 } else {
                   rules.push({
-                    type: item.formItem.type === "number" ? "number" : "string",
+                    type: item.formItem.type === 'number' ? 'number' : 'string',
                     max: rule.value,
                     message: rule.message,
                   });
                 }
 
                 break;
-              case "url":
+              case 'url':
                 if (!rule.message) {
-                  rule.message = t("components.form.incorrectPathFormat");
+                  rule.message = t('components.form.incorrectPathFormat');
                 }
                 rules.push({
-                  type: "url",
+                  type: 'url',
                   message: rule.message,
                 });
                 break;
-              case "only_text":
+              case 'only_text':
                 if (!rule.message) {
-                  rule.message = t("components.form.only text");
+                  rule.message = t('components.form.only text');
                 }
                 rules.push(() => ({
                   validator(_, value) {
@@ -501,9 +501,9 @@ const Component = ({
                   },
                 }));
                 break;
-              case "only_text_space":
+              case 'only_text_space':
                 if (!rule.message) {
-                  rule.message = t("components.form.only text");
+                  rule.message = t('components.form.only text');
                 }
                 rules.push(() => ({
                   validator(_, value) {
@@ -514,11 +514,11 @@ const Component = ({
                   },
                 }));
                 break;
-              case "password":
+              case 'password':
                 rules.push(() => ({
                   validator: async (rule, value) => {
                     if (
-                      !!value && value.trim() !== "" && value.length > rule.min
+                      !!value && value.trim() !== '' && value.length > rule.min
                         ? rule.min - 1
                         : 0
                     ) {
@@ -526,13 +526,13 @@ const Component = ({
                         return Promise.resolve();
                       else
                         return Promise.reject(
-                          t("components.form.rulePassword")
+                          t('components.form.rulePassword'),
                         );
                     } else return Promise.resolve();
                   },
                 }));
                 break;
-              case "custom":
+              case 'custom':
                 rules.push(rule.validator);
                 break;
               default:
@@ -545,7 +545,7 @@ const Component = ({
         key: index,
         label: item.title,
         name: item.name,
-        labelAlign: "left",
+        labelAlign: 'left',
       };
       if (rules.length) {
         otherProps.rules = rules;
@@ -555,12 +555,12 @@ const Component = ({
       }
 
       if (
-        item.formItem.type === "switch" ||
-        item.formItem.type === "checkbox"
+        item.formItem.type === 'switch' ||
+        item.formItem.type === 'checkbox'
       ) {
-        otherProps.valuePropName = "checked";
+        otherProps.valuePropName = 'checked';
       }
-      if (item.formItem.type === "hidden") {
+      if (item.formItem.type === 'hidden') {
         otherProps.hidden = true;
       }
 
@@ -569,7 +569,7 @@ const Component = ({
       //     {generateInput(item.formItem, item, values)}
       //   </Form.Item>
       // );
-      return item.formItem.type !== "addable" ? (
+      return item.formItem.type !== 'addable' ? (
         <Form.Item {...otherProps} className={item.formItem.wrapClassName}>
           {generateInput(item.formItem, item, values)}
           {/* {item?.formItem?.additional? (<span className="ant-form-text ml-2">{item.formItem.additional}</span>) : null} */}
@@ -581,11 +581,11 @@ const Component = ({
     return null;
   };
   const generateCol = _columns.map(($column, i) => (
-    <div className={"grid gap-x-5"} key={i}>
+    <div className={'grid gap-x-5'} key={i}>
       {$cols.map(($col, j) => {
         return (
           <div
-            className={"grid gap-x-5 grid-cols-12 sm:grid-cols-" + 12 / col}
+            className={'grid gap-x-5 grid-cols-12 sm:grid-cols-' + 12 / col}
             key={j}
           >
             {$column.map((column, index) => {
@@ -596,14 +596,14 @@ const Component = ({
                 return (
                   <div
                     className={
-                      "col-span-12" +
-                      (" sm:col-span-" +
+                      'col-span-12' +
+                      (' sm:col-span-' +
                         (column.formItem.colTablet
                           ? column.formItem.colTablet
                           : column.formItem.col
                           ? column.formItem.col
                           : 12)) +
-                      (" lg:col-span-" +
+                      (' lg:col-span-' +
                         (column.formItem.col ? column.formItem.col : 12))
                     }
                     key={index}
@@ -629,7 +629,7 @@ const Component = ({
   const handleConvertData = (values) => {
     columns
       .filter(
-        (item) => !!item && !!item.formItem
+        (item) => !!item && !!item.formItem,
         // && (!item.formItem.condition || item.formItem.condition(values, form))
       )
       .map((item) => {
@@ -637,14 +637,14 @@ const Component = ({
           values[item.name] = item.formItem.convert(values[item.name]);
         } else {
           switch (item.formItem.type) {
-            case "date":
+            case 'date':
               if (values && values[item.name]) {
                 values[item.name] = moment(values[item.name]);
               } else if (item.formItem.value) {
                 values[item.name] = moment(item.value);
               }
               break;
-            case "date_range":
+            case 'date_range':
               if (values && values[item.name]) {
                 values[item.name] = [
                   moment(values[item.name][0]),
@@ -652,7 +652,7 @@ const Component = ({
                 ];
               }
               break;
-            case "number":
+            case 'number':
               if (values[item.name]) {
                 values[item.name] = parseFloat(values[item.name]);
               }
@@ -672,7 +672,7 @@ const Component = ({
     <Form
       className={className}
       form={form}
-      layout={!widthLabel ? "vertical" : "horizontal"}
+      layout={!widthLabel ? 'vertical' : 'horizontal'}
       onFinish={handFinish}
       initialValues={handleConvertData(values)}
       onValuesChange={async (objValue) => {
@@ -695,17 +695,17 @@ const Component = ({
     >
       <div
         className={
-          "sm:col-span-1 sm:col-span-2 sm:col-span-3 sm:col-span-4 sm:col-span-5 sm:col-span-6 sm:col-span-7 sm:col-span-8 sm:col-span-9 sm:col-span-10 sm:col-span-11 sm:col-span-12"
+          'sm:col-span-1 sm:col-span-2 sm:col-span-3 sm:col-span-4 sm:col-span-5 sm:col-span-6 sm:col-span-7 sm:col-span-8 sm:col-span-9 sm:col-span-10 sm:col-span-11 sm:col-span-12'
         }
       />
       {extendTopForm && extendTopForm(values)}
-      <div className={"flex items-center"}>
+      <div className={'flex items-center'}>
         {extendFirstForm && extendFirstForm(values)}
-        <div className={"grow"}>{generateCol}</div>
+        <div className={'grow'}>{generateCol}</div>
       </div>
       {extendForm && extendForm(values)}
 
-      <div className={classNames("flex", classGroupButton)}>
+      <div className={classNames('flex', classGroupButton)}>
         {extendButton && extendButton(values)}
         {isShowCancel && (
           <button

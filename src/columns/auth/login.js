@@ -1,20 +1,20 @@
 const Column = ({ t }) => {
   return [
     {
-      name: "email",
-      title: "Tên đăng nhập",
+      name: 'email',
+      title: 'Tên đăng nhập',
       formItem: {
-        placeholder: "Nhập tên đăng nhập",
-        rules: [{ type: "required" }],
+        placeholder: 'Nhập tên đăng nhập',
+        rules: [{ type: 'required' }],
       },
     },
     {
-      name: "password",
-      title: "Mật khẩu",
+      name: 'password',
+      title: 'Mật khẩu',
       formItem: {
-        placeholder: "Nhập mật khẩu",
-        type: "password",
-        rules: [{ type: "required" }, { type: "minLength", value: 6 }],
+        placeholder: 'Nhập mật khẩu',
+        type: 'password',
+        rules: [{ type: 'required' }, { type: 'minLength', value: 6 }],
       },
     },
   ];

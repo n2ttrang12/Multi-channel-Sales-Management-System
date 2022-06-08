@@ -1,42 +1,42 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Spin } from "components";
+import React, { useState, useEffect, useCallback } from 'react';
+import { Spin } from 'components';
 import Timeline, {
   TimelineHeaders,
   SidebarHeader,
   DateHeader,
   TimelineMarkers,
   CustomMarker,
-} from "react-calendar-timeline";
-import moment from "moment";
+} from 'react-calendar-timeline';
+import moment from 'moment';
 
 const Component = ({
   Get,
   onClick,
   isLoading = false,
   isGroup = false,
-  title = "Task list",
-  defaultTimeStart = moment().add(-2, "days"),
-  defaultTimeEnd = moment().add(2, "days"),
-  primaryColor = "#3b5998",
-  selectedColor = "#0088FE",
-  textColor = "#FFFFFF",
+  title = 'Task list',
+  defaultTimeStart = moment().add(-2, 'days'),
+  defaultTimeEnd = moment().add(2, 'days'),
+  primaryColor = '#3b5998',
+  selectedColor = '#0088FE',
+  textColor = '#FFFFFF',
 }) => {
   const keys = {
-    groupIdKey: "id",
-    groupTitleKey: "title",
-    groupRightTitleKey: "rightTitle",
-    itemIdKey: "id",
-    itemTitleKey: "title",
-    itemDivTitleKey: "title",
-    itemGroupKey: "group",
-    itemTimeStartKey: "start",
-    itemTimeEndKey: "end",
-    groupLabelKey: "title",
+    groupIdKey: 'id',
+    groupTitleKey: 'title',
+    groupRightTitleKey: 'rightTitle',
+    itemIdKey: 'id',
+    itemTitleKey: 'title',
+    itemDivTitleKey: 'title',
+    itemGroupKey: 'group',
+    itemTimeStartKey: 'start',
+    itemTimeEndKey: 'end',
+    groupLabelKey: 'title',
   };
   const [groups, set_groups] = useState([
     {
       id: 1,
-      title: "group 1",
+      title: 'group 1',
       root: true,
       parent: null,
       hasChildren: true,
@@ -47,9 +47,9 @@ const Component = ({
     {
       id: 1,
       group: 1,
-      title: "item 1",
+      title: 'item 1',
       start: moment(),
-      end: moment().add(1, "hour"),
+      end: moment().add(1, 'hour'),
     },
   ]);
   const [openGroups, set_openGroups] = useState({});
@@ -64,7 +64,7 @@ const Component = ({
         for (let i = 0; i < groupCount; i++) {
           groups.push({
             id: `${i + 1}`,
-            title: "Nguyên Văn " + i,
+            title: 'Nguyên Văn ' + i,
           });
         }
 
@@ -72,17 +72,17 @@ const Component = ({
         for (let i = 0; i < itemCount; i++) {
           const startDate = moment().subtract(
             Math.floor(Math.random() * daysInPast),
-            "days"
+            'days',
           );
           const endValue = moment().add(
             Math.floor(Math.random() * daysInPast),
-            "days"
+            'days',
           );
 
           items.push({
-            id: i + "",
+            id: i + '',
             group: (i % groups.length) + 1,
-            title: "Title sample",
+            title: 'Title sample',
             start: startDate,
             end: endValue,
           });
@@ -138,7 +138,7 @@ const Component = ({
             <div
               onClick={() => toggleGroup(group.id)}
               style={{
-                cursor: "pointer",
+                cursor: 'pointer',
                 paddingLeft: group.levelChildren * 15,
               }}
             >
@@ -146,7 +146,7 @@ const Component = ({
                 <i className="las la-angle-down" />
               ) : (
                 <i className="las la-angle-right" />
-              )}{" "}
+              )}{' '}
               {group.title}
             </div>
           ) : (
@@ -168,10 +168,10 @@ const Component = ({
     const { left: leftResizeProps, right: rightResizeProps } = getResizeProps();
     const backgroundColor = itemContext.selected
       ? itemContext.dragging
-        ? "red"
+        ? 'red'
         : selectedColor
       : item.bgColor || primaryColor;
-    const color = itemContext.resizing ? "red" : item.color || textColor;
+    const color = itemContext.resizing ? 'red' : item.color || textColor;
     // noinspection JSUnusedGlobalSymbols
     return (
       <div
@@ -188,10 +188,10 @@ const Component = ({
         <div
           style={{
             height: itemContext.dimensions.height,
-            overflow: "hidden",
+            overflow: 'hidden',
             paddingLeft: 3,
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
           }}
         >
           {itemContext.title}
@@ -229,12 +229,12 @@ const Component = ({
           <DateHeader />
         </TimelineHeaders>
         <TimelineMarkers>
-          <CustomMarker date={+moment().endOf("days")}>
+          <CustomMarker date={+moment().endOf('days')}>
             {({ styles }) => {
               const customStyles = {
                 ...styles,
-                backgroundColor: "#9AC43D",
-                width: "6px",
+                backgroundColor: '#9AC43D',
+                width: '6px',
               };
               return <div style={customStyles} />;
             }}

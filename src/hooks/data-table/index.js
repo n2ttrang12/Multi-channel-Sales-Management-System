@@ -4,19 +4,19 @@ import React, {
   useRef,
   Fragment,
   useCallback,
-} from "react";
-import { v4 } from "uuid";
-import { Table, Radio, Checkbox, DatePicker } from "antd";
-import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router";
-import moment from "moment";
-import { Pagination } from "components";
+} from 'react';
+import { v4 } from 'uuid';
+import { Table, Radio, Checkbox, DatePicker } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router';
+import moment from 'moment';
+import { Pagination } from 'components';
 
 import {
   checkTextToShort,
   cleanObjectKeyNull,
   getQueryStringParams,
-} from "utils";
+} from 'utils';
 
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
@@ -30,11 +30,11 @@ const Hook = ({
   showList = true,
   footer = () => null,
   defaultRequest = {},
-  pageIndex = "page",
-  pageSize = "perPage",
-  sort = "sorts",
-  filter = "filter",
-  fullTextSearch = "fullTextSearch",
+  pageIndex = 'page',
+  pageSize = 'perPage',
+  sort = 'sorts',
+  filter = 'filter',
+  fullTextSearch = 'fullTextSearch',
   columns = [],
   loading = false,
   showPagination = true,
@@ -44,20 +44,20 @@ const Hook = ({
   save = true,
   searchPlaceholder,
   subHeader,
-  xScroll = "100%",
+  xScroll = '100%',
   yScroll = null,
   emptyText = <div>No Data</div>,
   loadFirst = false,
   onRow = () => {},
   pageSizeOptions = [10, 20, 30, 40],
-  pageSizeRender = (sizePage) => sizePage + " / page",
-  pageSizeWidth = "115px",
+  pageSizeRender = (sizePage) => sizePage + ' / page',
+  pageSizeWidth = '115px',
   paginationDescription = (from, to, total) =>
-    from + "-" + to + " of " + total + " items",
-  idElement = "idTable",
+    from + '-' + to + ' of ' + total + ' items',
+  idElement = 'idTable',
   ...prop
 }) => {
-  const [idTable] = useState("temp-" + v4());
+  const [idTable] = useState('temp-' + v4());
   const [objData, setObjData] = useState({});
   const [dataSource, setDataSource] = useState([]);
   const [totalData, setTotalData] = useState(0);
@@ -68,7 +68,7 @@ const Hook = ({
           [pageIndex]: 1,
           [pageSize]: 10,
           ...defaultRequest,
-        }
+        },
   );
 
   const { t } = useTranslation();
@@ -108,18 +108,18 @@ const Hook = ({
         setIsLoading && setIsLoading(false);
       }
     },
-    [Get, id, idTable, pageIndex, setIsLoading, showList]
+    [Get, id, idTable, pageIndex, setIsLoading, showList],
   );
 
   const params =
-    save && location.search && location.search.indexOf(pageIndex + "=") > -1
+    save && location.search && location.search.indexOf(pageIndex + '=') > -1
       ? getQueryStringParams(location.search)
       : param.current;
 
-  if (params[filter] && typeof params[filter] === "string") {
+  if (params[filter] && typeof params[filter] === 'string') {
     params[filter] = JSON.parse(params[filter]);
   }
-  if (params[sort] && typeof params[sort] === "string") {
+  if (params[sort] && typeof params[sort] === 'string') {
     params[sort] = JSON.parse(params[sort]);
   }
 
@@ -157,19 +157,19 @@ const Hook = ({
   const groupButton = (confirm, clearFilters, key, value) => (
     <div className="grid grid-cols-2 gap-1">
       <button
-        type={"button"}
+        type={'button'}
         className="bg-blue-100 px-4 py-2.5 rounded-xl hover:bg-blue-500 hover:text-white"
         onClick={() => clearFilters()}
       >
-        {t("components.datatable.reset")}
+        {t('components.datatable.reset')}
       </button>
       <button
-        type={"button"}
+        type={'button'}
         className="bg-blue-500 text-white px-4 py-2.5 rounded-xl hover:bg-blue-400 inline-flex items-center"
         onClick={() => confirm(value)}
       >
         <i className="las la-search mr-1" />
-        {t("components.datatable.search")}
+        {t('components.datatable.search')}
       </button>
     </div>
   );
@@ -187,7 +187,7 @@ const Hook = ({
           className="w-full h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-4 mb-1"
           value={selectedKeys}
           type="text"
-          placeholder={t("components.datatable.pleaseEnterValueToSearch")}
+          placeholder={t('components.datatable.pleaseEnterValueToSearch')}
           onChange={(e) => setSelectedKeys(e.target.value)}
         />
         {groupButton(confirm, clearFilters, key, selectedKeys)}
@@ -196,7 +196,7 @@ const Hook = ({
     filterIcon: (filtered) => (
       <i
         className="las la-lg la-search"
-        style={{ color: filtered ? "#3699FF" : undefined }}
+        style={{ color: filtered ? '#3699FF' : undefined }}
       />
     ),
     onFilterDropdownVisibleChange: (visible) => {
@@ -217,7 +217,7 @@ const Hook = ({
         <RadioGroup
           options={filters}
           value={selectedKeys}
-          onChange={(e) => setSelectedKeys(e.target.value + "")}
+          onChange={(e) => setSelectedKeys(e.target.value + '')}
         />
         {groupButton(confirm, clearFilters, key, selectedKeys)}
       </Fragment>
@@ -225,7 +225,7 @@ const Hook = ({
     filterIcon: (filtered) => (
       <i
         className="las la-lg la-dot-circle"
-        style={{ color: filtered ? "#3699FF" : undefined }}
+        style={{ color: filtered ? '#3699FF' : undefined }}
       />
     ),
   });
@@ -249,7 +249,7 @@ const Hook = ({
     filterIcon: (filtered) => (
       <i
         className="las la-lg la-check-square"
-        style={{ color: filtered ? "#3699FF" : undefined }}
+        style={{ color: filtered ? '#3699FF' : undefined }}
       />
     ),
   });
@@ -265,14 +265,14 @@ const Hook = ({
         <RangePicker
           renderExtraFooter={() => (
             <button
-              type={"button"}
+              type={'button'}
               className="bg-blue-100 w-full px-3 py-1 rounded-xl hover:bg-blue-500 hover:text-white"
               onClick={() => document.activeElement.blur()}
             >
-              {t("components.datatable.ok")}
+              {t('components.datatable.ok')}
             </button>
           )}
-          format={["DD/MM/YYYY", "DD/MM/YY"]}
+          format={['DD/MM/YYYY', 'DD/MM/YY']}
           value={
             !!selectedKeys && selectedKeys.length
               ? [moment(selectedKeys[0]), moment(selectedKeys[1])]
@@ -286,7 +286,7 @@ const Hook = ({
     filterIcon: (filtered) => (
       <i
         className="las la-lg la-calendar"
-        style={{ color: filtered ? "#3699FF" : undefined }}
+        style={{ color: filtered ? '#3699FF' : undefined }}
       />
     ),
   });
@@ -302,19 +302,19 @@ const Hook = ({
         }
 
         switch (item.filter.type) {
-          case "radio":
+          case 'radio':
             item = {
               ...item,
               ...getColumnSearchRadio(item.filter.list, col.name),
             };
             break;
-          case "checkbox":
+          case 'checkbox':
             item = {
               ...item,
               ...getColumnSearchCheckbox(item.filter.list, col.name),
             };
             break;
-          case "date":
+          case 'date':
             item = { ...item, ...getColumnSearchDate(col.name) };
             break;
           default:
@@ -325,11 +325,11 @@ const Hook = ({
 
       if (item.sorter && params[sort] && params[sort][col.name]) {
         item.defaultSortOrder =
-          params[sort][col.name] === "ASC"
-            ? "ascend"
-            : params[sort][col.name] === "DESC"
-            ? "descend"
-            : "";
+          params[sort][col.name] === 'ASC'
+            ? 'ascend'
+            : params[sort][col.name] === 'DESC'
+            ? 'descend'
+            : '';
       }
       if (!item.render) {
         item.render = (text) => checkTextToShort(text);
@@ -346,7 +346,7 @@ const Hook = ({
     pagination,
     filters = {},
     sorts,
-    tempFullTextSearch
+    tempFullTextSearch,
   ) => {
     let tempPageIndex = pagination ? pagination.current : params[pageIndex];
     const tempPageSize = pagination ? pagination.pageSize : params[pageSize];
@@ -355,11 +355,11 @@ const Hook = ({
       sorts && sorts?.field && sorts?.order
         ? {
             [sorts.field]:
-              sorts.order === "ascend"
-                ? "ASC"
-                : sorts.order === "descend"
-                ? "DESC"
-                : "",
+              sorts.order === 'ascend'
+                ? 'ASC'
+                : sorts.order === 'descend'
+                ? 'DESC'
+                : '',
           }
         : sorts?.field
         ? null
@@ -383,7 +383,7 @@ const Hook = ({
     });
     if (save) {
       navigate(
-        location.pathname + "?" + new URLSearchParams(tempParams).toString()
+        location.pathname + '?' + new URLSearchParams(tempParams).toString(),
       );
     }
     onChange && onChange(tempParams);
@@ -404,20 +404,20 @@ const Hook = ({
             {!!showSearch && (
               <div className="relative">
                 <input
-                  id={idElement + "_input_search"}
+                  id={idElement + '_input_search'}
                   className="w-52 h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-4"
                   defaultValue={params.fullTextSearch}
                   type="text"
                   placeholder={
                     searchPlaceholder ||
-                    t("components.datatable.pleaseEnterValueToSearch")
+                    t('components.datatable.pleaseEnterValueToSearch')
                   }
                   onChange={(event) =>
                     handleTableChange(
                       null,
                       params[filter],
                       params[sort],
-                      event.target.value
+                      event.target.value,
                     )
                   }
                 />
@@ -467,7 +467,7 @@ const Hook = ({
                       pagination,
                       params[filter],
                       params[sort],
-                      params.fullTextSearch
+                      params.fullTextSearch,
                     )
                   }
                   paginationDescription={paginationDescription}

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import { useAuth } from "global";
-import { Form, Spin } from "components";
-import { routerLinks } from "utils";
-import { ColumnLogin } from "columns/auth";
-import { UserService } from "services/user";
-import "./index.less";
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import { useAuth } from 'global';
+import { Form, Spin } from 'components';
+import { routerLinks } from 'utils';
+import { ColumnLogin } from 'columns/auth';
+import { UserService } from 'services/user';
+import './index.less';
 
 const Page = () => {
   const { t } = useTranslation();
@@ -27,10 +27,10 @@ const Page = () => {
       setLoading(false);
       if (res.data) {
         auth.login(res.data);
-        navigate(routerLinks("Dashboard"), { replace: true });
+        navigate(routerLinks('Dashboard'), { replace: true });
       }
     } catch (err) {
-      console.log("Error is:", err);
+      console.log('Error is:', err);
       setLoading(false);
     }
   };
@@ -38,10 +38,10 @@ const Page = () => {
   return (
     <div className="relative bottom-0 right-0">
       <div className="mb-8 mt-14 title-auth">
-        <h1>{"Đăng nhập"}</h1>
+        <h1>{'Đăng nhập'}</h1>
         <h5>
           {
-            "Vui lòng đăng nhập bằng tài khoản được cung cấp bởi quản lý hệ thống"
+            'Vui lòng đăng nhập bằng tài khoản được cung cấp bởi quản lý hệ thống'
           }
         </h5>
       </div>
@@ -49,9 +49,9 @@ const Page = () => {
         <Form
           className="w-3/4 mx-auto form-login"
           columns={ColumnLogin({ t })}
-          textSubmit={"Đăng nhập"}
+          textSubmit={'Đăng nhập'}
           handSubmit={submit}
-          idSubmit={"submit-btn"}
+          idSubmit={'submit-btn'}
         />
       </Spin>
       <div
@@ -61,9 +61,9 @@ const Page = () => {
         <Link
           className="text-cyan-700 underline"
           id="reset-pass-link"
-          to={routerLinks("ForgotPass")}
+          to={routerLinks('ForgotPass')}
         >
-          {"Quên mật khẩu"}
+          {'Quên mật khẩu'}
         </Link>
       </div>
     </div>

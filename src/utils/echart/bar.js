@@ -7,19 +7,19 @@ const Util = ({
   legend = {},
   xAxis = {},
 }) => {
-  import("echarts").then((echarts) => {
+  import('echarts').then((echarts) => {
     const element = document.getElementById(id);
     if (element) {
       echarts.init(element).setOption({
         tooltip: {
-          trigger: "axis",
+          trigger: 'axis',
           ...tooltip,
         },
         grid: {
-          top: "40px",
-          left: "40px",
-          bottom: "30px",
-          right: "40px",
+          top: '40px',
+          left: '40px',
+          bottom: '30px',
+          right: '40px',
           ...grid,
         },
         legend: {
@@ -27,7 +27,7 @@ const Util = ({
           ...legend,
         },
         xAxis: {
-          type: "category",
+          type: 'category',
           boundaryGap: false,
           axisLabel: {
             show: true,
@@ -35,7 +35,7 @@ const Util = ({
           axisLine: {
             show: true,
             lineStyle: {
-              color: "#000000",
+              color: '#000000',
             },
           },
           splitLine: {
@@ -44,7 +44,7 @@ const Util = ({
           axisTick: {
             show: true,
             lineStyle: {
-              color: "#000000",
+              color: '#000000',
             },
           },
           ...xAxis,
@@ -52,7 +52,7 @@ const Util = ({
         },
         yAxis: {
           show: false,
-          type: "value",
+          type: 'value',
         },
         series,
       });

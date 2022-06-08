@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from 'moment';
 
 const Util = (columns, values, form) => {
   columns.map((item) => {
@@ -10,32 +10,32 @@ const Util = (columns, values, form) => {
           item.formItem.condition(values[item.name], form))
       ) {
         switch (item.formItem.type) {
-          case "switch":
-            if (typeof values[item.name] === "undefined") {
+          case 'switch':
+            if (typeof values[item.name] === 'undefined') {
               values[item.name] = false;
             }
             break;
-          case "upload":
+          case 'upload':
             if (values[item.name] && item.formItem.action === undefined) {
               values[item.name] = values[item.name]
-                .filter((_item) => _item.status === "done" || !_item.status)
+                .filter((_item) => _item.status === 'done' || !_item.status)
                 .map(
-                  (_item) => _item.response?.data?.id || _item.uid || _item.id
+                  (_item) => _item.response?.data?.id || _item.uid || _item.id,
                 );
             }
             break;
-          case "date":
+          case 'date':
             if (values[item.name]) {
               values[item.name] = moment(values[item.name]).format(
-                "YYYY-MM-DDTHH:mm:ss"
+                'YYYY-MM-DDTHH:mm:ss',
               );
             }
             break;
-          case "date_range":
+          case 'date_range':
             if (values[item.name]) {
               values[item.name] = [
-                moment(values[item.name][0]).format("YYYY-MM-DDTHH:mm:ss"),
-                moment(values[item.name][1]).format("YYYY-MM-DDTHH:mm:ss"),
+                moment(values[item.name][0]).format('YYYY-MM-DDTHH:mm:ss'),
+                moment(values[item.name][1]).format('YYYY-MM-DDTHH:mm:ss'),
               ];
             }
             break;
@@ -48,7 +48,7 @@ const Util = (columns, values, form) => {
         }
       }
     } else {
-      values[item.name] = "";
+      values[item.name] = '';
     }
     return item;
   });

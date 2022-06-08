@@ -1,4 +1,4 @@
-import { colorGlobal, letterGlobal } from "variable";
+import { colorGlobal, letterGlobal } from 'variable';
 
 const Util = (text) => {
   text = text.trim();

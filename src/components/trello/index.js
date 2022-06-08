@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Spin } from "components";
-import { v4 } from "uuid";
-import { smoothDnD } from "./smooth-dnd";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Spin } from 'components';
+import { v4 } from 'uuid';
+import { smoothDnD } from './smooth-dnd';
 
 const Component = ({
   idRequest,
@@ -38,7 +38,7 @@ const Component = ({
               {
                 groupName: id,
                 getChildPayload: (index) => index,
-                lockAxis: allowSetStatus ? undefined : "xy",
+                lockAxis: allowSetStatus ? undefined : 'xy',
                 onDrop: async ({ removedIndex, addedIndex }) => {
                   if (allowSetStatus) {
                     if (removedIndex !== null) {
@@ -57,7 +57,7 @@ const Component = ({
                       data[_addedIndexColumn].tasks.splice(
                         _addedIndex,
                         0,
-                        _item
+                        _item,
                       );
                       _removedIndex = null;
                       _addedIndex = null;
@@ -66,7 +66,7 @@ const Component = ({
                     }
                   }
                 },
-              }
+              },
             );
           }
         }
@@ -76,8 +76,8 @@ const Component = ({
     setTimeout(async () => {
       if (divId) {
         smoothDnD(divId, {
-          orientation: "horizontal",
-          dragHandleSelector: ".move-drag",
+          orientation: 'horizontal',
+          dragHandleSelector: '.move-drag',
           getChildPayload: (index) => index,
           onDrop: async ({ addedIndex, payload }) => {
             const column = data[payload];
@@ -86,12 +86,12 @@ const Component = ({
             !!ChangeColumn &&
               (await ChangeColumn(
                 idRequest,
-                data.map((item, index) => ({ id: item.id, position: index }))
+                data.map((item, index) => ({ id: item.id, position: index })),
               ));
           },
         });
-        import("perfect-scrollbar").then(({ default: PerfectScrollbar }) => {
-          PerfectScrollbar(document.getElementById(id + "wrapper"), {
+        import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
+          PerfectScrollbar(document.getElementById(id + 'wrapper'), {
             suppressScrollY: true,
           });
         });
@@ -109,11 +109,11 @@ const Component = ({
 
   return (
     <Spin spinning={isLoading}>
-      <div id={id + "wrapper"} className="overflow-auto relative">
+      <div id={id + 'wrapper'} className="overflow-auto relative">
         <div
           id={id}
           className="drag-horizontal"
-          style={{ minWidth: listData.length * 300 + "px", minHeight: "200px" }}
+          style={{ minWidth: listData.length * 300 + 'px', minHeight: '200px' }}
         >
           {listData.map((item) => (
             <div
@@ -136,7 +136,7 @@ const Component = ({
               </div>
               <div id={item.id} className="drag-vertical">
                 {item.tasks.map((subItem, subIndex) =>
-                  renderItem(item, subItem, subIndex)
+                  renderItem(item, subItem, subIndex),
                 )}
               </div>
             </div>

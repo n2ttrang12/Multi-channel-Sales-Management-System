@@ -1,3 +1,3 @@
-import ColumnUser from "./user";
+import ColumnUser from './user';
 
 export { ColumnUser };

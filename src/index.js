@@ -1,21 +1,21 @@
-import { Suspense, lazy } from "react";
-import i18n from "i18next";
-import XHR from "i18next-xhr-backend";
-import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import ReactDOM from "react-dom";
-import axios from "axios";
+import React, { Suspense, lazy } from 'react';
+import i18n from 'i18next';
+import XHR from 'i18next-xhr-backend';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
 
-import AuthProvider from "global";
-import { Spin, Message } from "components";
-import Router from "routes";
-import { routerLinks } from "utils";
-import { linkApi } from "variable";
+import AuthProvider from 'global';
+import { Spin, Message } from 'components';
+import Router from 'routes';
+import { routerLinks } from 'utils';
+import { linkApi } from 'variable';
 
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import reportWebVitals from "./reportWebVitals";
-import withClearCache from "./clear-cache";
-import { UserService } from "./services/user";
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import reportWebVitals from './reportWebVitals';
+import withClearCache from './clear-cache';
+import { UserService } from './services/user';
 
 const ClearCacheComponent = withClearCache(Router);
 
@@ -29,7 +29,7 @@ axios.interceptors.response.use(
         error.response.data.errors === 401) ||
       error.response.status === 401
     ) {
-      window.location.hash = "#" + routerLinks("Login");
+      window.location.hash = '#' + routerLinks('Login');
     } else if (
       (!!error.response &&
         !!error.response.data.errors &&
@@ -43,7 +43,7 @@ axios.interceptors.response.use(
     }
     Message.error(error.response.data.message);
     return Promise.reject(error);
-  }
+  },
 );
 i18n
   .use(XHR)
@@ -51,15 +51,15 @@ i18n
   .use(initReactI18next)
   .init({
     backend: {
-      loadPath: "./locales/{{lng}}/{{ns}}.json",
+      loadPath: './locales/{{lng}}/{{ns}}.json',
     },
-    fallbackLng: "en",
-    whitelist: ["en", "vi"],
+    fallbackLng: 'en',
+    whitelist: ['en', 'vi'],
     interpolation: {
       escapeValue: false,
     },
   });
-const Styling = lazy(() => import("styling"));
+const Styling = lazy(() => import('styling'));
 function App() {
   return (
     <Suspense
@@ -78,7 +78,7 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));
 serviceWorkerRegistration.register();
 
 // If you want to start measuring performance in your app, pass a function

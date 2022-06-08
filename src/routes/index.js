@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import { HashRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { HashRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 
-import { useAuth } from "global";
+import { useAuth } from 'global';
 
-import { pages } from "./pages";
+import { pages } from './pages';
 
 const Layout = ({ layout: Layout, isPublic }) => {
   const auth = useAuth();
@@ -20,10 +20,10 @@ const Page = ({ title, component: Comp, ...props }) => {
   const auth = useAuth();
 
   useEffect(() => {
-    auth.setTitlePage("titles." + title || "");
+    auth.setTitlePage('titles.' + title || '');
   }, [title, auth]);
 
-  if (typeof Comp === "string") {
+  if (typeof Comp === 'string') {
     return <Navigate to={Comp} />;
   }
   return <Comp {...props} />;

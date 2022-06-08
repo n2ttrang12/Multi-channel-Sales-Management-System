@@ -1,6 +1,6 @@
 const Util = (obj) => {
-  for (let propName in obj) {
-    if (obj.hasOwnProperty(propName)) {
+  for (const propName in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, propName)) {
       if (obj[propName] === null || obj[propName] === undefined) {
         delete obj[propName];
       }

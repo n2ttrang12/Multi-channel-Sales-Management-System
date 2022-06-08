@@ -1,8 +1,8 @@
-import { Popover } from "antd";
-import React from "react";
+import { Popover } from 'antd';
+import React from 'react';
 
 const Util = (text) => {
-  return typeof text !== "string" || text.length < 50 ? (
+  return typeof text !== 'string' || text.length < 50 ? (
     text
   ) : (
     <span>

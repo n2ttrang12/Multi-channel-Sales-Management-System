@@ -1,13 +1,13 @@
-import React, { useState, Fragment } from "react";
-import { Popconfirm, Tooltip } from "antd";
-import { v4 } from "uuid";
-import { useTranslation } from "react-i18next";
-import classNames from "classnames";
+import React, { useState, Fragment } from 'react';
+import { Popconfirm, Tooltip } from 'antd';
+import { v4 } from 'uuid';
+import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
 
-import { HookModalForm } from "hooks";
-import Nestable from "./Nestable";
-import EditIcon from "assets/svg/edit";
-import RemoveIcon from "assets/svg/remove";
+import { HookModalForm } from 'hooks';
+import Nestable from './Nestable';
+import EditIcon from 'assets/svg/edit';
+import RemoveIcon from 'assets/svg/remove';
 
 const Component = ({
   condition,
@@ -42,7 +42,7 @@ const Component = ({
 }) => {
   const { t } = useTranslation();
   const [titleConfirmDelete, set_titleConfirmDelete] = useState(
-    t("components.datatable.areYouSureWant")
+    t('components.datatable.areYouSureWant'),
   );
   let position = 0;
   const [isLoading, setIsLoading] = useState(false);
@@ -79,9 +79,9 @@ const Component = ({
   const handleSubmit = async (values, id) => {
     if (id !== undefined) {
       onSave && onSave(findItemById(values, id, items), id, values);
-    } else if (typeof values === "object") {
+    } else if (typeof values === 'object') {
       if (!values?.id) {
-        values.id = v4() + "-11c";
+        values.id = v4() + '-11c';
       }
       items.push(values);
       onSave && onSave(items, null, values);
@@ -114,7 +114,7 @@ const Component = ({
 
   const [handleEditForm, ModalForm] = HookModalForm({
     title: (data) =>
-      !data?.id ? t("routes.admin.Layout.Add") : t("routes.admin.Layout.Edit"),
+      !data?.id ? t('routes.admin.Layout.Add') : t('routes.admin.Layout.Edit'),
     isLoading,
     setIsLoading,
     columns,
@@ -139,22 +139,22 @@ const Component = ({
         </div>
         {!readOnly && (
           <div
-            className={classNames("pr-1 flex items-center justify-end pt-1", {
-              "w-20": !!conditionDelete(item),
-              "w-10": !conditionDelete(item),
+            className={classNames('pr-1 flex items-center justify-end pt-1', {
+              'w-20': !!conditionDelete(item),
+              'w-10': !conditionDelete(item),
             })}
           >
             {extendButton && extendButton(item)}
             {((!!allowActions && !item.allowActions) ||
               !!item.allowActions?.allowEdit ||
-              (typeof item.id === "string" && item.id.length === 40)) &&
+              (typeof item.id === 'string' && item.id.length === 40)) &&
               conditionEdit(item) && (
-                <Tooltip title={t("routes.admin.Layout.Edit")}>
+                <Tooltip title={t('routes.admin.Layout.Edit')}>
                   <button
-                    type={"button"}
+                    type={'button'}
                     className={classNames(
-                      "embed border border-gray-300 text-xs rounded-lg",
-                      { "mr-2": !!conditionDelete(item) }
+                      'embed border border-gray-300 text-xs rounded-lg',
+                      { 'mr-2': !!conditionDelete(item) },
                     )}
                     onClick={() => handleEditForm(item)}
                   >
@@ -164,28 +164,28 @@ const Component = ({
               )}
             {((!!allowActions && !item.allowActions) ||
               !!item.allowActions?.allowDelete ||
-              (typeof item.id === "string" && item.id.length === 40)) &&
+              (typeof item.id === 'string' && item.id.length === 40)) &&
               conditionDelete(item) && (
-                <Tooltip title={t("routes.admin.Layout.Delete")}>
+                <Tooltip title={t('routes.admin.Layout.Delete')}>
                   <Popconfirm
                     onVisibleChange={(visible) =>
                       changeTitleConfirmDelete &&
                       changeTitleConfirmDelete(
                         visible,
                         item,
-                        set_titleConfirmDelete
+                        set_titleConfirmDelete,
                       )
                     }
                     title={titleConfirmDelete}
                     icon={
                       <i className="las la-question-circle text-2xl text-yellow-500 absolute -top-0.5 -left-1" />
                     }
-                    okText={t("components.datatable.ok")}
-                    cancelText={t("components.datatable.cancel")}
+                    okText={t('components.datatable.ok')}
+                    cancelText={t('components.datatable.cancel')}
                     onConfirm={() => handleDelete(item.id, item)}
                   >
                     <button
-                      type={"button"}
+                      type={'button'}
                       className="embed border border-gray-300 text-xs rounded-lg"
                     >
                       <RemoveIcon />
@@ -204,15 +204,15 @@ const Component = ({
         <div className="flex justify-end">
           {!readOnly && !!showAddNew && (
             <button
-              type={"button"}
+              type={'button'}
               className={classNames(
-                "bg-blue-500 text-white px-4 h-10 rounded-xl hover:bg-blue-400 inline-flex items-center",
-                { "mr-2": !!onMoreAdd }
+                'bg-blue-500 text-white px-4 h-10 rounded-xl hover:bg-blue-400 inline-flex items-center',
+                { 'mr-2': !!onMoreAdd },
               )}
               onClick={() => handleEditForm(initAddNew)}
             >
               <i className="las la-plus mr-1" />
-              {t("routes.admin.Layout.Add")}
+              {t('routes.admin.Layout.Add')}
             </button>
           )}
           {onMoreAdd && onMoreAdd(items)}

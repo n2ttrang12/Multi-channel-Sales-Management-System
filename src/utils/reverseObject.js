@@ -2,7 +2,7 @@ const Util = (object) => {
   const newObject = {};
   const keys = [];
 
-  for (let key in object) {
+  for (const key in object) {
     keys.push(key);
   }
 

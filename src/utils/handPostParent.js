@@ -1,5 +1,5 @@
-import axios from "axios";
-import { Message } from "components";
+import axios from 'axios';
+import { Message } from 'components';
 
 const Util = async (url, { data, requestDelete }) => {
   const requestPut = [];
@@ -10,7 +10,7 @@ const Util = async (url, { data, requestDelete }) => {
       if (array[i].children && array[i].children.length > 0) {
         array[i].children = await loop(array[i].children);
       }
-      let dataRequest = { ...array[i] };
+      const dataRequest = { ...array[i] };
       delete dataRequest.children;
       if (dataRequest.id.length === 40) {
         delete dataRequest.id;

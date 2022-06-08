@@ -2,7 +2,7 @@ const Util = (bgColor) => {
   if (bgColor) {
     let color = String(bgColor)
       .toUpperCase()
-      .replace(/[^0-9a-f]/gi, "");
+      .replace(/[^0-9a-f]/gi, '');
     if (color.length < 6) {
       color = color[0] + color[0] + color[1] + color[1] + color[2] + color[2];
     }
@@ -32,13 +32,13 @@ const pSBC = (p, c0, c1, l) => {
     h,
     i = parseInt,
     m = Math.round,
-    a = typeof c1 == "string";
+    a = typeof c1 == 'string';
   if (
-    typeof p != "number" ||
+    typeof p != 'number' ||
     p < -1 ||
     p > 1 ||
-    typeof c0 != "string" ||
-    (c0[0] != "r" && c0[0] != "#") ||
+    typeof c0 != 'string' ||
+    (c0[0] != 'r' && c0[0] != '#') ||
     (c1 && !a)
   )
     return null;
@@ -47,10 +47,10 @@ const pSBC = (p, c0, c1, l) => {
       x = {};
     if (n > 9) {
       // eslint-disable-next-line no-unused-expressions
-      ([r, g, b, a] = d = d.split(",")), (n = d.length);
+      ([r, g, b, a] = d = d.split(',')), (n = d.length);
       if (n < 3 || n > 4) return null;
       // eslint-disable-next-line no-unused-expressions
-      (x.r = i(r[3] == "a" ? r.slice(5) : r.slice(4))),
+      (x.r = i(r[3] == 'a' ? r.slice(5) : r.slice(4))),
         (x.g = i(g)),
         (x.b = i(b)),
         (x.a = a ? parseFloat(a) : -1);
@@ -58,14 +58,14 @@ const pSBC = (p, c0, c1, l) => {
       if (n == 8 || n == 6 || n < 4) return null;
       if (n < 6)
         d =
-          "#" +
+          '#' +
           d[1] +
           d[1] +
           d[2] +
           d[2] +
           d[3] +
           d[3] +
-          (n > 4 ? d[4] + d[4] : "");
+          (n > 4 ? d[4] + d[4] : '');
       d = i(d.slice(1), 16);
       // eslint-disable-next-line no-unused-expressions
       if (n == 9 || n == 5)
@@ -80,11 +80,11 @@ const pSBC = (p, c0, c1, l) => {
   };
   // eslint-disable-next-line no-unused-expressions
   (h = c0.length > 9),
-    (h = a ? (c1.length > 9 ? true : c1 == "c" ? !h : false) : h),
+    (h = a ? (c1.length > 9 ? true : c1 == 'c' ? !h : false) : h),
     (f = pSBCr(c0)),
     (P = p < 0),
     (t =
-      c1 && c1 != "c"
+      c1 && c1 != 'c'
         ? pSBCr(c1)
         : P
         ? {
@@ -114,19 +114,19 @@ const pSBC = (p, c0, c1, l) => {
     (a = f ? (a < 0 ? t : t < 0 ? a : a * P + t * p) : 0);
   if (h)
     return (
-      "rgb" +
-      (f ? "a(" : "(") +
+      'rgb' +
+      (f ? 'a(' : '(') +
       r +
-      "," +
+      ',' +
       g +
-      "," +
+      ',' +
       b +
-      (f ? "," + m(a * 1000) / 1000 : "") +
-      ")"
+      (f ? ',' + m(a * 1000) / 1000 : '') +
+      ')'
     );
   else
     return (
-      "#" +
+      '#' +
       (4294967296 + r * 16777216 + g * 65536 + b * 256 + (f ? m(a * 255) : 0))
         .toString(16)
         .slice(1, f ? undefined : -2)

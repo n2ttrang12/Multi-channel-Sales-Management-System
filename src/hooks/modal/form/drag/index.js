@@ -1,6 +1,6 @@
-import React from "react";
-import { FormDrag } from "components";
-import { HookModal } from "hooks";
+import React from 'react';
+import { FormDrag } from 'components';
+import { HookModal } from 'hooks';
 
 const Hook = ({
   onReload,
@@ -21,7 +21,7 @@ const Hook = ({
     setIsLoading,
     title: (data) => title(data),
     onOk: SaveAll,
-    idElement: "modal-drag-" + idElement,
+    idElement: 'modal-drag-' + idElement,
   });
 
   const handleShow = async () => {

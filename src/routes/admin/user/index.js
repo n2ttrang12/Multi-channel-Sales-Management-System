@@ -4,14 +4,14 @@ import React, {
   useEffect,
   useCallback,
   useRef,
-} from "react";
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router";
+} from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router';
 
-import { useAuth } from "global";
-import { HookDataTable, HookModalForm, HookModalDrag } from "hooks";
-import { ColumnUser } from "columns/user";
-import { UserService } from "services/user";
+import { useAuth } from 'global';
+import { HookDataTable, HookModalForm, HookModalDrag } from 'hooks';
+import { ColumnUser } from 'columns/user';
+import { UserService } from 'services/user';
 
 const Page = () => {
   const { t } = useTranslation();
@@ -27,12 +27,12 @@ const Page = () => {
       mount.current = true;
       set_listGender([
         {
-          value: "Male",
-          label: "Male",
+          value: 'Male',
+          label: 'Male',
         },
         {
-          value: "Female",
-          label: "Female",
+          value: 'Female',
+          label: 'Female',
         },
       ]);
     }
@@ -43,30 +43,30 @@ const Page = () => {
   }, [initFunction, pathname]);
 
   const [handleShowDrag, ModalDrag] = HookModalDrag({
-    title: () => t("Vai trò"),
+    title: () => t('Vai trò'),
     isLoading,
     setIsLoading,
     columns: ColumnUser({ t }),
     Get: () => [
       {
-        id: "1",
-        name: "Biên tập viên",
+        id: '1',
+        name: 'Biên tập viên',
       },
       {
-        id: "2",
-        name: "Người dùng",
+        id: '2',
+        name: 'Người dùng',
       },
       {
-        id: "3",
-        name: "Quản trị viên",
+        id: '3',
+        name: 'Quản trị viên',
       },
       {
-        id: "4",
-        name: "Thanh tra",
+        id: '4',
+        name: 'Thanh tra',
       },
       {
-        id: "5",
-        name: "Trưởng phòng",
+        id: '5',
+        name: 'Trưởng phòng',
       },
     ],
     Put: UserService.put,
@@ -75,12 +75,12 @@ const Page = () => {
     GetById: UserService.getById,
     widthForm: 1200,
     isReloadLoadToSave: true,
-    idElement: "role",
+    idElement: 'role',
   });
 
   const [handleEdit, ModalForm, handleDelete] = HookModalForm({
     title: (data) =>
-      !data?.id ? t("Tạo mới người dùng") : t("Chỉnh sửa người dùng"),
+      !data?.id ? t('Tạo mới người dùng') : t('Chỉnh sửa người dùng'),
     isLoading,
     setIsLoading,
     handleChange: async () => await handleChange(),
@@ -94,7 +94,7 @@ const Page = () => {
     Put: UserService.put,
     Delete: UserService.delete,
     widthModal: 600,
-    idElement: "user",
+    idElement: 'user',
   });
 
   const [handleChange, DataTable] = HookDataTable({
@@ -117,14 +117,14 @@ const Page = () => {
           onClick={() => handleShowDrag()}
         >
           <i className="las la-plus mr-1" />
-          {t("Vai trò")}
+          {t('Vai trò')}
         </button>
         <button
           className="bg-blue-500 text-white px-4 py-2.5 rounded-xl hover:bg-blue-400 inline-flex items-center"
           onClick={() => handleEdit()}
         >
           <i className="las la-plus mr-1" />
-          {t("Tạo mới")}
+          {t('Tạo mới')}
         </button>
       </Fragment>
     ),

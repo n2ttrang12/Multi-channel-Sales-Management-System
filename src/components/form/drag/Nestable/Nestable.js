@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import shallowCompare from "react-addons-shallow-compare";
-import update from "react-addons-update";
-import cx from "classnames";
-import { v4 } from "uuid";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import shallowCompare from 'react-addons-shallow-compare';
+import update from 'react-addons-update';
+import cx from 'classnames';
+import { v4 } from 'uuid';
 
 import {
   closest,
@@ -12,9 +12,9 @@ import {
   getTransformProps,
   listWithChildren,
   hasSomeParentTheClass,
-} from "../utils";
+} from '../utils';
 
-import NestableItem from "./NestableItem";
+import NestableItem from './NestableItem';
 
 class Nestable extends Component {
   constructor(props) {
@@ -53,10 +53,10 @@ class Nestable extends Component {
   };
 
   static defaultProps = {
-    childrenProp: "children",
+    childrenProp: 'children',
     collapsed: false,
     group: v4(),
-    idProp: "id",
+    idProp: 'id',
     items: [],
     maxDepth: 10,
     onChange: () => {},
@@ -78,7 +78,7 @@ class Nestable extends Component {
     const isPropsUpdated = shallowCompare(
       { props: prevProps, state: {} },
       this.props,
-      {}
+      {},
     );
 
     if (isPropsUpdated) {
@@ -107,15 +107,15 @@ class Nestable extends Component {
   // Methods
   // ––––––––––––––––––––––––––––––––––––
   startTrackMouse = () => {
-    document.addEventListener("mousemove", this.onMouseMove);
-    document.addEventListener("mouseup", this.onDragEnd);
-    document.addEventListener("keydown", this.onKeyDown);
+    document.addEventListener('mousemove', this.onMouseMove);
+    document.addEventListener('mouseup', this.onDragEnd);
+    document.addEventListener('keydown', this.onKeyDown);
   };
 
   stopTrackMouse = () => {
-    document.removeEventListener("mousemove", this.onMouseMove);
-    document.removeEventListener("mouseup", this.onDragEnd);
-    document.removeEventListener("keydown", this.onKeyDown);
+    document.removeEventListener('mousemove', this.onMouseMove);
+    document.removeEventListener('mouseup', this.onDragEnd);
+    document.removeEventListener('keydown', this.onKeyDown);
     this.elCopyStyles = null;
   };
 
@@ -166,7 +166,7 @@ class Nestable extends Component {
     // has previous sibling and isn't at max depth
     if (itemIndex > 0 && newDepth <= maxDepth) {
       const prevSibling = this.getItemByPath(
-        pathFrom.slice(0, -1).concat(itemIndex - 1)
+        pathFrom.slice(0, -1).concat(itemIndex - 1),
       );
 
       // previous sibling is not collapsed
@@ -326,7 +326,7 @@ class Nestable extends Component {
         return this.getRealNextPath(
           prevPath,
           nextPath.slice(0, -1),
-          dragItemSize
+          dragItemSize,
         );
       }
 
@@ -335,7 +335,7 @@ class Nestable extends Component {
           return i === npLastIndex ? nextIndex + 1 : nextIndex;
         }
 
-        if (typeof prevPath[i] !== "number") {
+        if (typeof prevPath[i] !== 'number') {
           return nextIndex;
         }
 
@@ -404,7 +404,7 @@ class Nestable extends Component {
       e.stopPropagation();
     }
 
-    this.el = closest(e.target, ".nestable-item");
+    this.el = closest(e.target, '.nestable-item');
 
     this.startTrackMouse();
     this.onMouseMove(e);
@@ -430,7 +430,7 @@ class Nestable extends Component {
     const { clientX, clientY } = e;
     const transformProps = getTransformProps(clientX, clientY);
     const elCopy = document.querySelector(
-      ".nestable-" + group + " .nestable-drag-layer > .nestable-list"
+      '.nestable-' + group + ' .nestable-drag-layer > .nestable-list',
     );
 
     if (!this.elCopyStyles) {
@@ -536,7 +536,7 @@ class Nestable extends Component {
     const { group, idProp } = this.props;
     const { dragItem } = this.state;
     const el = document.querySelector(
-      ".nestable-" + group + " .nestable-item-" + dragItem[idProp]
+      '.nestable-' + group + ' .nestable-item-' + dragItem[idProp],
     );
     let listStyles = {};
     if (el) {
@@ -550,8 +550,8 @@ class Nestable extends Component {
     }
 
     const options = this.getItemOptions();
-    const top = hasSomeParentTheClass(this.el, "ant-modal-content")
-      ? getTotalScroll(this.el).top + "px"
+    const top = hasSomeParentTheClass(this.el, 'ant-modal-content')
+      ? getTotalScroll(this.el).top + 'px'
       : 0;
 
     return (
@@ -570,8 +570,8 @@ class Nestable extends Component {
 
     return (
       <div
-        className={cx(className, "nestable", "nestable-" + group, {
-          "is-drag-active": dragItem,
+        className={cx(className, 'nestable', 'nestable-' + group, {
+          'is-drag-active': dragItem,
         })}
       >
         <ol className="nestable-list nestable-group">

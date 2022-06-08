@@ -1,8 +1,8 @@
 /* eslint-disable */
-import firebase from "firebase/app";
-import "firebase/messaging";
+import firebase from 'firebase/app';
+import 'firebase/messaging';
 
-import { firebaseConfig } from "utils/variable";
+import { firebaseConfig } from 'utils/variable';
 
 let defaultApp;
 let messaging;

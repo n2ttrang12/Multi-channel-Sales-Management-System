@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 const svg = (props) => {
   return (
@@ -15,7 +15,7 @@ const svg = (props) => {
     >
       <style>
         {
-          "#remove_svg__Layer_1:hover #remove_svg__action{transform:translateY(-3.2px) rotate(6deg) translateX(.5px)}#remove_svg__Layer_1:hover path{fill:#f64e60}"
+          '#remove_svg__Layer_1:hover #remove_svg__action{transform:translateY(-3.2px) rotate(6deg) translateX(.5px)}#remove_svg__Layer_1:hover path{fill:#f64e60}'
         }
       </style>
       <g fill={555555}>
@@ -24,7 +24,7 @@ const svg = (props) => {
           d="M14.9,2.9h-3.7c-0.1-1.4-1.3-2.5-2.7-2.4C7.2,0.5,6.1,1.6,6,2.9H2.1c-0.4,0-0.7,0.3-0.7,0.7s0.3,0.7,0.7,0.7h12.7
 		c0.4,0,0.7-0.3,0.7-0.7C15.6,3.3,15.2,2.9,14.9,2.9z M8.6,2c0.6,0,1.1,0.4,1.2,1H7.4C7.5,2.4,8,2,8.6,2z"
           style={{
-            transition: "all .3s ease",
+            transition: 'all .3s ease',
           }}
         />
         <path
