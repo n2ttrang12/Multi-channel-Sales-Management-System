@@ -34,7 +34,7 @@ const Component = ({ tag, onChange, form, value, ...prop }) => {
         })),
       );
     },
-    [tag],
+    [tag, form.getFieldValue],
   );
 
   useEffect(() => {

@@ -13,6 +13,7 @@ const Component = ({
   paginationDescription = (from, to, total) =>
     from + '-' + to + ' of ' + total + ' items',
   idElement = 'pagination',
+  className = 'pagination',
 }) => {
   const listOfPageItem = useRef([]);
   const [ranges, setRanges] = useState([]);
@@ -120,7 +121,12 @@ const Component = ({
 
   return (
     total > 0 && (
-      <div className="pagination flex items-center justify-between mt-3 select-none">
+      <div
+        className={classNames(
+          className,
+          'flex items-center justify-between mt-3 select-none',
+        )}
+      >
         <div className={'left'}>
           <Select
             id={idElement + '_page_size'}

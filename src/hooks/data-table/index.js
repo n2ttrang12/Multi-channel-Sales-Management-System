@@ -401,7 +401,7 @@ const Hook = ({
         }));
       }
       return (
-        <div className={classNames('intro-x', className)}>
+        <div className={classNames(className, 'intro-x')}>
           <div className="flex justify-between mb-2.5">
             {!!showSearch && (
               <div className="relative">
