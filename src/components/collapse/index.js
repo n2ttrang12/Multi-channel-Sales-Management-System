@@ -1,6 +1,7 @@
 import React, { createRef, useEffect, useState } from 'react';
 import { Popover } from 'antd';
 import classNames from 'classnames';
+import {v4} from "uuid";
 
 const Component = ({
   title,
@@ -9,10 +10,12 @@ const Component = ({
   children,
   showArrow = true,
   popover = false,
+  isExpand = false
 }) => {
   const ref = createRef();
   const arrow = createRef();
   const [visible, set_visible] = useState(false);
+  const [id] = useState('collapse_' + v4());
 
   useEffect(() => {
     if (visible !== popover) {
@@ -24,6 +27,14 @@ const Component = ({
       }, 150);
     }
   }, [ref, popover, visible, set_visible]);
+
+  useEffect(() => {
+    if (isExpand) {
+      setTimeout(() => {
+        document.getElementById(id).click();
+      })
+    }
+  }, [])
 
   const onClick = () => {
     if (!popover) {
@@ -47,7 +58,7 @@ const Component = ({
   };
 
   const titleBlock = (
-    <div className={className} onClick={onClick}>
+    <div className={className} onClick={onClick} id={id}>
       {title}
       {showArrow && (
         <i
