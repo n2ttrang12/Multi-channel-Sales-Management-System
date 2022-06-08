@@ -34,7 +34,7 @@ const Component = ({
         document.getElementById(id).click();
       })
     }
-  }, [])
+  }, [id, isExpand])
 
   const onClick = () => {
     if (!popover) {
