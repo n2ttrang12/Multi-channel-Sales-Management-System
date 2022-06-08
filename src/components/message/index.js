@@ -9,10 +9,12 @@ const Component = {
     showCancelButton = true,
     showConfirmButton = false,
     padding = 0,
+    timer = 3000,
   }) =>
     import('sweetalert2').then(({ default: Swal }) =>
       Swal.fire({
         icon: 'success',
+        timer,
         title,
         text,
         cancelButtonText,

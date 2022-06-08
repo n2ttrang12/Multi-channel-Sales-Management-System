@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Select } from 'antd';
-// import axios from "axios";
+import axios from 'axios';
 
 import { Avatar } from 'components';
 
@@ -8,51 +8,15 @@ const Component = ({ tag, onChange, form, value, ...prop }) => {
   const [_options, set_options] = useState([]);
   const loadData = useCallback(
     async (fullTextSearch = '', value) => {
-      // const {data} = await axios.get(tag.api, {params: tag.params ? tag.params(form.getFieldValue, fullTextSearch,value && value.filter(item => !!item)) : {fullTextSearch}});
-      const data = {
-        data: [
-          {
-            id: 1,
-            fullName: 'Yuliana Maddox',
-            avatarPath: null,
-          },
-          {
-            id: 2,
-            fullName: 'Rory Mercer',
-            avatarPath: null,
-          },
-          {
-            id: 3,
-            fullName: 'Gregory Hampton',
-            avatarPath: 'https://i.pravatar.cc/50',
-          },
-          {
-            id: 4,
-            fullName: 'Lauryn Mata',
-            avatarPath: null,
-          },
-          {
-            id: 5,
-            fullName: 'Landin Warren',
-            avatarPath: null,
-          },
-          {
-            id: 6,
-            fullName: 'Nathalia Cameron',
-            avatarPath: 'https://i.pravatar.cc/50',
-          },
-          {
-            id: 7,
-            fullName: 'Monserrat Boone',
-            avatarPath: null,
-          },
-          {
-            id: 8,
-            fullName: 'Bridget Krueger',
-            avatarPath: null,
-          },
-        ],
-      };
+      const { data } = await axios.get(tag.api, {
+        params: tag.params
+          ? tag.params(
+              form.getFieldValue,
+              fullTextSearch,
+              value && value.filter((item) => !!item),
+            )
+          : { fullTextSearch },
+      });
       set_options(
         data.data.map((item, index) => ({
           label: tag.avatar ? (
