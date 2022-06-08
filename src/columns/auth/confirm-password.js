@@ -6,7 +6,7 @@ const Column = ({ t }) => {
       formItem: {
         type: 'password',
         placeholder: t('columns.auth.login.Enter new password'),
-        rules: [{ type: 'required' }, { type: 'minLength', value: 6 }],
+        rules: [{ type: 'required' }, { type: 'minLength', value: 8 }],
       },
     },
     {
@@ -17,7 +17,7 @@ const Column = ({ t }) => {
         type: 'password',
         rules: [
           { type: 'required' },
-          { type: 'minLength', value: 6 },
+          { type: 'minLength', value: 8 },
           // { type: 'password', min: 6 },
         ],
       },
