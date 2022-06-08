@@ -11,6 +11,11 @@ const Column = ({ t }) => {
             type: 'custom',
             validator: (form) => ({
               validator: async (rule, value) => {
+                if(value?.toString()?.length < 8){
+                  return Promise.reject(
+                    new Error('Mật khẩu yêu cầu có 8 ký tự trở lên'),
+                  );
+                }
                 if (
                   form.getFieldValue('passwordComfirm') &&
                   value !== form.getFieldValue('passwordComfirm')
@@ -26,7 +31,7 @@ const Column = ({ t }) => {
                       new Error('Mật khẩu không được có khoảng trắng'),
                     );
                   else countvalidator++;
-                  if (!/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z]).*$/.test(value))
+                  if (!/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z])?.*$/.test(value))
                     return Promise.reject(
                       new Error('Mật khẩu chưa đạt yêu cầu'),
                     );
@@ -36,7 +41,6 @@ const Column = ({ t }) => {
               },
             }),
           },
-
           { type: 'required' },
           { type: 'password' },
         ],
