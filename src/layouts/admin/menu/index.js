@@ -24,7 +24,6 @@ const Layout = ({ isCollapsed = false }) => {
       refMenu.current.scrollTop = 0;
     }
   }, [isCollapsed]);
-
   return (
     <ul
       className="menu relative h-[calc(100vh-5rem)]"
@@ -48,7 +47,7 @@ const Layout = ({ isCollapsed = false }) => {
               <i className={classNames('text-3xl mr-2.5', item.icon)} />
               <span
                 className={classNames(
-                  'text-gray-300 text-base  transition-all duration-300 ease-in-out font-bold',
+                  'text-gray-300 text-base  transition-all duration-300 ease-in-out font-medium',
                   {
                     'opacity-100': !isCollapsed,
                     'opacity-0 text-[0]': isCollapsed,
@@ -66,13 +65,16 @@ const Layout = ({ isCollapsed = false }) => {
               key={index}
               title={
                 <Fragment>
-                  <i className={classNames('text-3xl mr-2.5', item.icon)} />
+                  <i className={classNames('text-3xl mr-2.5', item.icon,
+                  // {'text-white ': location.pathname === routerLinks(item.name)},
+                  )} />
                   <span
                     className={classNames(
-                      'text-gray-300 text-base transition-all duration-300 ease-in-out font-bold',
+                      'text-gray-300 text-base transition-all duration-300 ease-in-out font-medium',
                       {
                         'opacity-100': !isCollapsed,
                         'opacity-0 text-[0]': isCollapsed,
+                        '!text-white ': location.pathname === routerLinks(item.name),
                       },
                     )}
                   >
@@ -80,7 +82,7 @@ const Layout = ({ isCollapsed = false }) => {
                   </span>
                 </Fragment>
               }
-              className="flex items-center px-6 py-1"
+              className="flex items-center px-6 py-1 text-gray-300"
               showArrow={!isCollapsed}
               popover={isCollapsed}
               isExpand={location.pathname.indexOf(routerLinks(item.name)) === 0}
@@ -90,9 +92,9 @@ const Layout = ({ isCollapsed = false }) => {
                   <li
                     key={index}
                     className={classNames(
-                      'py-2 text-gray-300 my-2 font-bold text-base',
+                      'py-2 text-gray-300 my-2 font-medium text-base',
                       {
-                        'bg-teal-700 !text-white rounded-2xl text-white ':
+                        'bg-teal-700 !text-white rounded-2xl  ':
                           location.pathname === routerLinks(subItem.name),
                       },
                     )}

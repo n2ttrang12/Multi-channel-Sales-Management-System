@@ -138,6 +138,19 @@ body {
   @apply !text-teal-900;
 }
 
+//pagination
+.data-table {
+  .right{
+    @apply bg-transparent;
+    .bg-blue-500{
+      @apply !bg-teal-900 text-white;
+    }
+    button{
+      @apply h-8 rounded-xl text-teal-900;
+    }
+  }
+}
+
 //alert popup
 .swal2-popup{
   @apply !pb-0 rounded-tr-xl rounded-tl-xl;
@@ -158,3 +171,4 @@ body {
 .ant-table-content .ant-table-thead > tr > th {
   @apply font-normal;
 }
+
