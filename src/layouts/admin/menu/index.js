@@ -65,16 +65,21 @@ const Layout = ({ isCollapsed = false }) => {
               key={index}
               title={
                 <Fragment>
-                  <i className={classNames('text-3xl mr-2.5', item.icon,
-                  // {'text-white ': location.pathname === routerLinks(item.name)},
-                  )} />
+                  <i
+                    className={classNames(
+                      'text-3xl mr-2.5',
+                      item.icon,
+                      // {'text-white ': location.pathname === routerLinks(item.name)},
+                    )}
+                  />
                   <span
                     className={classNames(
                       'text-gray-300 text-base transition-all duration-300 ease-in-out font-medium',
                       {
                         'opacity-100': !isCollapsed,
                         'opacity-0 text-[0]': isCollapsed,
-                        '!text-white ': location.pathname === routerLinks(item.name),
+                        '!text-white ':
+                          location.pathname === routerLinks(item.name),
                       },
                     )}
                   >

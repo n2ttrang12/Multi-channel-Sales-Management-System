@@ -93,6 +93,9 @@
       }
     }
   },
+  "layout": {
+    "footer": "Công ty TNHH phần mềm React. ©{{year}}"
+  },
   "routes": {
     "auth": {
       "login": {

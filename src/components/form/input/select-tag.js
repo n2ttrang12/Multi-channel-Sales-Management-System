@@ -57,8 +57,9 @@ const Component = ({ tag, onChange, form, value, ...prop }) => {
           label && (
             <div className="bg-blue-100 rounded-xl py-1 px-2 relative mr-2.5 -left-2.5">
               <button
+                disabled={prop.disabled}
                 type={'button'}
-                className="absolute rounded-full -top-1 -right-2 bg-red-100 text-red-500 p-0.5 leading-none z-10"
+                className="absolute rounded-full -top-1 -right-2 bg-red-100 text-red-500 p-0.5 leading-none z-auto"
                 onClick={onClose}
               >
                 <i className="las la-times" />

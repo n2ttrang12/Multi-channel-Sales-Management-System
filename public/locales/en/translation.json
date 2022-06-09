@@ -86,6 +86,9 @@
       }
     }
   },
+  "layout": {
+    "footer": "React Software Ltd. ©{{year}}"
+  },
   "routes": {
     "auth": {
       "login": {

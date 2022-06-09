@@ -6,16 +6,20 @@ import classNames from 'classnames';
 import logo from 'assets/images/logo.png';
 import arrow from 'assets/images/arrow.svg';
 import avatar from 'assets/images/avatar.jpeg';
+import { useTranslation } from 'react-i18next';
 
 // import menus from "./menus";
 import './index.less';
+import { useAuth } from 'global';
 import { routerLinks } from 'utils';
 import { Avatar } from 'components';
 import Menu from './menu';
 
 const Layout = ({ children }) => {
   // menuVertical, permission,
+  const { changeLanguage } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1024);
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
@@ -37,6 +41,7 @@ const Layout = ({ children }) => {
         suppressScrollX: true,
       });
     });
+    changeLanguage('vi');
 
     return () => window.removeEventListener('resize', handleResize, true);
   }, []);
@@ -166,9 +171,9 @@ const Layout = ({ children }) => {
         )}
       >
         {children}
-        <div className="text-center bg-blue-50 mt-10">
-          React Software Ltd. ©{new Date().getFullYear()}
-        </div>
+        <footer className="text-center bg-blue-50 mt-10 -mx-5">
+          {t('layout.footer', { year: new Date().getFullYear() })}
+        </footer>
       </div>
       <div className="hidden h-7 w-7 leading-7" />
     </main>
