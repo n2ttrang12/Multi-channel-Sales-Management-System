@@ -1,5 +1,10 @@
 module.exports = {
   plugins: ["react", "prettier", "import", "jsx-a11y", "react-hooks"],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -17,8 +22,8 @@ module.exports = {
     "no-underscore-dangle": 0,
     "camelcase": "off",
     "no-new": "off",
-    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+    "react-hooks/exhaustive-deps": "off",
+    "react-hooks/rules-of-hooks": "error",
   },
   "globals": {
     "window": true,

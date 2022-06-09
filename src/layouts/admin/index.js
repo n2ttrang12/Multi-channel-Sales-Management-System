@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
     });
 
     return () => window.removeEventListener('resize', handleResize, true);
-  }, [isCollapsed, isDesktop]);
+  }, []);
 
   const Header = ({ isCollapsed, isDesktop }) => (
     <header

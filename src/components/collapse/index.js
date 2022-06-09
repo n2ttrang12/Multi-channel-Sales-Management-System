@@ -1,7 +1,7 @@
 import React, { createRef, useEffect, useState } from 'react';
 import { Popover } from 'antd';
 import classNames from 'classnames';
-import {v4} from "uuid";
+import { v4 } from 'uuid';
 
 const Component = ({
   title,
@@ -10,7 +10,7 @@ const Component = ({
   children,
   showArrow = true,
   popover = false,
-  isExpand = false
+  isExpand = false,
 }) => {
   const ref = createRef();
   const arrow = createRef();
@@ -26,15 +26,12 @@ const Component = ({
         set_visible(popover);
       }, 150);
     }
-  }, [ref, popover, visible, set_visible]);
-
-  useEffect(() => {
-    if (isExpand) {
+    if (!popover && isExpand) {
       setTimeout(() => {
         document.getElementById(id).click();
-      })
+      }, 150);
     }
-  }, [id, isExpand])
+  }, [popover]);
 
   const onClick = () => {
     if (!popover) {

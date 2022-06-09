@@ -1,5 +1,5 @@
 import { Collapse } from 'components';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { routerLinks } from 'utils';
 import { useNavigate, useLocation } from 'react-router';
@@ -9,9 +9,28 @@ import listMenu from '../menus';
 const Layout = ({ isCollapsed = false }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const refMenu = useRef();
+
+  useEffect(() => {
+    import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
+      new PerfectScrollbar(document.getElementById('menu-sidebar'), {
+        suppressScrollX: true,
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isCollapsed) {
+      refMenu.current.scrollTop = 0;
+    }
+  }, [isCollapsed]);
 
   return (
-    <ul className="menu">
+    <ul
+      className="menu relative h-[calc(100vh-5rem)]"
+      id={'menu-sidebar'}
+      ref={refMenu}
+    >
       {listMenu().map((item, index) => {
         if (!item.child) {
           return (
@@ -64,6 +83,7 @@ const Layout = ({ isCollapsed = false }) => {
               className="flex items-center px-6 py-1"
               showArrow={!isCollapsed}
               popover={isCollapsed}
+              isExpand={location.pathname.indexOf(routerLinks(item.name)) === 0}
             >
               <div className="px-4 mx-4">
                 {item.child.map((subItem, index) => (
