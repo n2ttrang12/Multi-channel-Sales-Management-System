@@ -94,7 +94,7 @@
     }
   },
   "layout": {
-    "footer": "Công ty TNHH phần mềm React. ©{{year}}"
+    "footer": "Copyright ©{{year}} ARI Technology Co ., JSC. All rights reserved."
   },
   "routes": {
     "auth": {
