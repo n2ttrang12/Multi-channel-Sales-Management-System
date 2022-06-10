@@ -135,7 +135,23 @@ body {
   @apply !bg-gray-100;
 }
 #idTable_prev_10, #idTable_prev, #idTable_next, #idTable_next_10{
-  @apply !text-teal-900;
+  @apply text-teal-900;
+}
+
+//pagination
+.data-table {
+  .right{
+    @apply bg-transparent;
+    .pointer-events-none{
+      @apply !text-gray-300;
+    }
+    .bg-blue-500{
+      @apply !bg-teal-900 text-white;
+    }
+    button{
+      @apply h-8 rounded-xl text-teal-900;
+    }
+  }
 }
 
 //pagination
