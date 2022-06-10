@@ -1,21 +1,23 @@
 import Addable from './addable';
-import Editor from './editor';
-import Mask from './mask';
 import ColorButton from './color-button';
+import Editor from './editor';
+import DatePicker from './date-picker';
+import Password from './password';
+import Mask from './mask';
 import SelectTag from './select-tag';
 import Select from './select';
 import TreeSelect from './tree-select';
 import TableTransfer from './table-transfer';
-import Password from './password';
 
 export {
+  Addable,
   ColorButton,
-  Mask,
   Editor,
+  DatePicker,
+  Password,
+  Mask,
   SelectTag,
   Select,
   TreeSelect,
   TableTransfer,
-  Password,
-  Addable,
 };

@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Form, DatePicker, Checkbox, Radio, Switch, Slider } from 'antd';
+import {
+  Form,
+  Checkbox,
+  Radio,
+  Switch,
+  Slider,
+  DatePicker as DateAntDesign,
+} from 'antd';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import classNames from 'classnames';
@@ -17,6 +24,7 @@ import {
   Password,
   Mask,
   Addable,
+  DatePicker,
 } from './input';
 
 const Component = ({
@@ -213,7 +221,7 @@ const Component = ({
         );
       case 'date_range':
         return (
-          <DatePicker.RangePicker
+          <DateAntDesign.RangePicker
             format={formatDate + (formItem.showTime ? ' HH:mm' : '')}
             disabledDate={(current) =>
               formItem.disabledDate && formItem.disabledDate(current, form)
