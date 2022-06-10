@@ -1,7 +1,8 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import { Popover } from 'antd';
 import classNames from 'classnames';
 import { v4 } from 'uuid';
+import { useLocation } from 'react-router-dom';
 
 const Component = ({
   title,
@@ -16,6 +17,13 @@ const Component = ({
   const arrow = createRef();
   const [visible, set_visible] = useState(false);
   const [id] = useState('collapse_' + v4());
+  const [visiblePopover, set_visiblePopover] = useState(false);
+  const visibleChild = useRef(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    set_visiblePopover(false);
+  }, [location]);
 
   useEffect(() => {
     if (visible !== popover) {
@@ -39,12 +47,8 @@ const Component = ({
         ref.current.style.height = ref.current.offsetHeight + 'px';
       }
       setTimeout(() => {
-        arrow.current?.classList[!ref.current.style.height ? 'add' : 'remove'](
-          'rotate-90',
-        );
-        ref.current.style.height = !ref.current.style.height
-          ? ref.current.scrollHeight + 'px'
-          : '';
+        arrow.current?.classList[!ref.current.style.height ? 'add' : 'remove']('rotate-90');
+        ref.current.style.height = !ref.current.style.height ? ref.current.scrollHeight + 'px' : '';
         if (ref.current.style.height) {
           setTimeout(() => {
             ref.current.style.height = 'auto';
@@ -58,10 +62,7 @@ const Component = ({
     <div className={className} onClick={onClick} id={id}>
       {title}
       {showArrow && (
-        <i
-          className="las la-angle-right absolute right-3 transition-all duration-300 ease-in-out"
-          ref={arrow}
-        />
+        <i className="las la-angle-right absolute right-3 transition-all duration-300 ease-in-out" ref={arrow} />
       )}
     </div>
   );
@@ -71,18 +72,48 @@ const Component = ({
       {!visible ? (
         titleBlock
       ) : (
-        <Popover content={children} placement="rightTop">
+        <Popover
+          content={
+            <div
+              onMouseEnter={() => {
+                visibleChild.current = true;
+              }}
+              onMouseLeave={() => {
+                if (window.innerWidth > 1024) {
+                  visibleChild.current = false;
+                  setTimeout(() => {
+                    if (visibleChild.current === false) {
+                      set_visiblePopover(false);
+                    }
+                  }, 200);
+                }
+              }}
+            >
+              {children}
+            </div>
+          }
+          placement="rightTop"
+          visible={visiblePopover}
+          onMouseEnter={() => set_visiblePopover(true)}
+          onMouseLeave={() => {
+            if (window.innerWidth > 1024) {
+              visibleChild.current = false;
+              setTimeout(() => {
+                if (visibleChild.current === false) {
+                  set_visiblePopover(false);
+                }
+              }, 200);
+            }
+          }}
+        >
           {titleBlock}
         </Popover>
       )}
       <ul
-        className={classNames(
-          'transition-all duration-300 ease-in-out overflow-hidden h-0 collapse',
-          {
-            'scale-0 h-0': visible,
-            'scale-1': !visible,
-          },
-        )}
+        className={classNames('transition-all duration-300 ease-in-out overflow-hidden h-0 collapse', {
+          'scale-0 h-0': visible,
+          'scale-1': !visible,
+        })}
         ref={ref}
       >
         {children}
