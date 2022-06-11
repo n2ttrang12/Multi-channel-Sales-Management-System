@@ -36,9 +36,7 @@ const Page = ({ location }) => {
     <Fragment>
       <div className="mb-8 mt-14 title-auth">
         <h1>{'Quên Mật Khẩu'}</h1>
-        <h5>
-          {'Vui lòng nhập e-mail của bạn. Mã xác minh OTP sẽ được gửi cho bạn'}
-        </h5>
+        <h5>{'Vui lòng nhập e-mail của bạn. Mã xác minh OTP sẽ được gửi cho bạn'}</h5>
       </div>
       <Spin spinning={loading}>
         <Form
@@ -51,11 +49,7 @@ const Page = ({ location }) => {
       </Spin>
       <div className="text-center mt-4">
         {/* absolute xl:absolute */}
-        <Link
-          className="text-cyan-700 underline"
-          to={routerLinks('Login')}
-          id="back"
-        >
+        <Link className="text-cyan-700 underline" to={routerLinks('Login')} id="back">
           {'Quay trở lại Đăng nhập'}
         </Link>
       </div>

@@ -41,9 +41,7 @@ const Component = ({
   ...propForm
 }) => {
   const { t } = useTranslation();
-  const [titleConfirmDelete, set_titleConfirmDelete] = useState(
-    t('components.datatable.areYouSureWant'),
-  );
+  const [titleConfirmDelete, set_titleConfirmDelete] = useState(t('components.datatable.areYouSureWant'));
   let position = 0;
   const [isLoading, setIsLoading] = useState(false);
 
@@ -113,8 +111,7 @@ const Component = ({
   };
 
   const [handleEditForm, ModalForm] = HookModalForm({
-    title: (data) =>
-      !data?.id ? t('routes.admin.Layout.Add') : t('routes.admin.Layout.Edit'),
+    title: (data) => (!data?.id ? t('routes.admin.Layout.Add') : t('routes.admin.Layout.Edit')),
     isLoading,
     setIsLoading,
     columns,
@@ -129,10 +126,7 @@ const Component = ({
 
   const renderRow = (item, collapseIcon) =>
     (!condition || condition(item)) && (
-      <div
-        className="item-drag flex justify-between items-center"
-        key={item.id}
-      >
+      <div className="item-drag flex justify-between items-center" key={item.id}>
         <div className="flex flex-1 items-center justify-between py-2 pl-3">
           {!!collapseIcon && <div className="w-7">{collapseIcon}</div>}
           {showName ? showName(item, handleEditForm) : item.name}
@@ -152,10 +146,9 @@ const Component = ({
                 <Tooltip title={t('routes.admin.Layout.Edit')}>
                   <button
                     type={'button'}
-                    className={classNames(
-                      'embed border border-gray-300 text-xs rounded-lg',
-                      { 'mr-2': !!conditionDelete(item) },
-                    )}
+                    className={classNames('embed border border-gray-300 text-xs rounded-lg', {
+                      'mr-2': !!conditionDelete(item),
+                    })}
                     onClick={() => handleEditForm(item)}
                   >
                     <EditIcon />
@@ -169,25 +162,15 @@ const Component = ({
                 <Tooltip title={t('routes.admin.Layout.Delete')}>
                   <Popconfirm
                     onVisibleChange={(visible) =>
-                      changeTitleConfirmDelete &&
-                      changeTitleConfirmDelete(
-                        visible,
-                        item,
-                        set_titleConfirmDelete,
-                      )
+                      changeTitleConfirmDelete && changeTitleConfirmDelete(visible, item, set_titleConfirmDelete)
                     }
                     title={titleConfirmDelete}
-                    icon={
-                      <i className="las la-question-circle text-2xl text-yellow-500 absolute -top-0.5 -left-1" />
-                    }
+                    icon={<i className="las la-question-circle text-2xl text-yellow-500 absolute -top-0.5 -left-1" />}
                     okText={t('components.datatable.ok')}
                     cancelText={t('components.datatable.cancel')}
                     onConfirm={() => handleDelete(item.id, item)}
                   >
-                    <button
-                      type={'button'}
-                      className="embed border border-gray-300 text-xs rounded-lg"
-                    >
+                    <button type={'button'} className="embed border border-gray-300 text-xs rounded-lg">
                       <RemoveIcon />
                     </button>
                   </Popconfirm>
@@ -229,9 +212,7 @@ const Component = ({
             collapsed={true}
             confirmChange={(item) => conditionDrag(item)}
             onChange={handChangePosition}
-            renderItem={({ item, collapseIcon }) =>
-              isAllowDrag(item) && renderRow(item, collapseIcon)
-            }
+            renderItem={({ item, collapseIcon }) => isAllowDrag(item) && renderRow(item, collapseIcon)}
           />
         </Fragment>
       )}

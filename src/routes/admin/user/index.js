@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  Fragment,
-  useEffect,
-  useCallback,
-  useRef,
-} from 'react';
+import React, { useState, Fragment, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 
@@ -79,8 +73,7 @@ const Page = () => {
   });
 
   const [handleEdit, ModalForm, handleDelete] = HookModalForm({
-    title: (data) =>
-      !data?.id ? t('Tạo mới người dùng') : t('Chỉnh sửa người dùng'),
+    title: (data) => (!data?.id ? t('Tạo mới người dùng') : t('Chỉnh sửa người dùng')),
     isLoading,
     setIsLoading,
     handleChange: async () => await handleChange(),

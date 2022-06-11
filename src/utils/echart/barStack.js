@@ -2,34 +2,15 @@ const Util = ({ id }) => {
   import('echarts').then((echarts) => {
     const element = document.getElementById(id);
     if (element) {
-      const label = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dev',
-      ];
+      const label = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dev'];
       const data = {
         korea: [150, 190, 228, 274, 212, 249, 278, 104, 219, 257, 115, 127],
         japan: [164, 285, 115, 281, 295, 124, 125, 262, 177, 160, 267, 253],
-        china: [
-          184, 281, 114, 190, 199, 101, 239, 216, 231, 132, 102, 244, 257,
-        ],
-        unitedStates: [
-          216, 169, 214, 215, 138, 162, 105, 212, 119, 124, 158, 210,
-        ],
+        china: [184, 281, 114, 190, 199, 101, 239, 216, 231, 132, 102, 244, 257],
+        unitedStates: [216, 169, 214, 215, 138, 162, 105, 212, 119, 124, 158, 210],
         vietnam: [150, 190, 228, 274, 212, 249, 278, 104, 219, 257, 115, 127],
         global: [164, 285, 115, 281, 295, 124, 125, 262, 177, 160, 267, 253],
-        malaysia: [
-          184, 281, 114, 190, 199, 101, 239, 216, 231, 132, 102, 244, 257,
-        ],
+        malaysia: [184, 281, 114, 190, 199, 101, 239, 216, 231, 132, 102, 244, 257],
         india: [216, 169, 214, 215, 138, 162, 105, 212, 119, 124, 158, 210],
       };
       const values = Object.values(data);
@@ -58,16 +39,7 @@ const Util = ({ id }) => {
         legend: {
           icon: 'circle',
           orient: 'horizontal',
-          data: [
-            'Korea',
-            'Japan',
-            'China',
-            'United States',
-            'Vietnam',
-            'Global',
-            'Malaysia',
-            'India',
-          ],
+          data: ['Korea', 'Japan', 'China', 'United States', 'Vietnam', 'Global', 'Malaysia', 'India'],
         },
         grid: {
           left: '20px',

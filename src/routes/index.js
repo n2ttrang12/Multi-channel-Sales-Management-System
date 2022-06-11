@@ -32,17 +32,9 @@ const Pages = () => (
   <HashRouter>
     <Routes>
       {pages.map(({ layout, isPublic, child }, index) => (
-        <Route
-          key={index}
-          element={<Layout layout={layout} isPublic={isPublic} />}
-        >
+        <Route key={index} element={<Layout layout={layout} isPublic={isPublic} />}>
           {child.map(({ path, title, component }, subIndex) => (
-            <Route
-              exact
-              key={path + subIndex}
-              path={path}
-              element={<Page title={title} component={component} />}
-            />
+            <Route exact key={path + subIndex} path={path} element={<Page title={title} component={component} />} />
           ))}
         </Route>
       ))}

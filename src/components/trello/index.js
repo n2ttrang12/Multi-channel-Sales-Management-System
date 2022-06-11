@@ -33,41 +33,33 @@ const Component = ({
         if (item.allowActions?.allowEdit) {
           const childId = document.getElementById(item.id);
           if (childId) {
-            domListData.current[item.id] = smoothDnD(
-              document.getElementById(item.id),
-              {
-                groupName: id,
-                getChildPayload: (index) => index,
-                lockAxis: allowSetStatus ? undefined : 'xy',
-                onDrop: async ({ removedIndex, addedIndex }) => {
-                  if (allowSetStatus) {
-                    if (removedIndex !== null) {
-                      _removedIndex = removedIndex;
-                      _removedIndexColumn = indexData;
-                    }
-                    if (addedIndex !== null) {
-                      _addedIndex = addedIndex;
-                      _addedIndexColumn = indexData;
-                    }
-                    if (_removedIndex !== null && _addedIndex !== null) {
-                      const _item = {
-                        ...data[_removedIndexColumn].tasks[_removedIndex],
-                      };
-                      data[_removedIndexColumn].tasks.splice(_removedIndex, 1);
-                      data[_addedIndexColumn].tasks.splice(
-                        _addedIndex,
-                        0,
-                        _item,
-                      );
-                      _removedIndex = null;
-                      _addedIndex = null;
-                      !!Put &&
-                        (await Put(_item.id, data[_addedIndexColumn].id));
-                    }
+            domListData.current[item.id] = smoothDnD(document.getElementById(item.id), {
+              groupName: id,
+              getChildPayload: (index) => index,
+              lockAxis: allowSetStatus ? undefined : 'xy',
+              onDrop: async ({ removedIndex, addedIndex }) => {
+                if (allowSetStatus) {
+                  if (removedIndex !== null) {
+                    _removedIndex = removedIndex;
+                    _removedIndexColumn = indexData;
                   }
-                },
+                  if (addedIndex !== null) {
+                    _addedIndex = addedIndex;
+                    _addedIndexColumn = indexData;
+                  }
+                  if (_removedIndex !== null && _addedIndex !== null) {
+                    const _item = {
+                      ...data[_removedIndexColumn].tasks[_removedIndex],
+                    };
+                    data[_removedIndexColumn].tasks.splice(_removedIndex, 1);
+                    data[_addedIndexColumn].tasks.splice(_addedIndex, 0, _item);
+                    _removedIndex = null;
+                    _addedIndex = null;
+                    !!Put && (await Put(_item.id, data[_addedIndexColumn].id));
+                  }
+                }
               },
-            );
+            });
           }
         }
         return item;
@@ -104,17 +96,9 @@ const Component = ({
 
   return (
     <Spin spinning={isLoading}>
-      <div
-        id={id}
-        className="drag-horizontal"
-        style={{ minWidth: listData.length * 300 + 'px', minHeight: '200px' }}
-      >
+      <div id={id} className="drag-horizontal" style={{ minWidth: listData.length * 300 + 'px', minHeight: '200px' }}>
         {listData.map((item) => (
-          <div
-            className="group-card"
-            style={{ backgroundColor: item.backgroundColor }}
-            key={item.id}
-          >
+          <div className="group-card" style={{ backgroundColor: item.backgroundColor }} key={item.id}>
             <div className="flex justify-between p-2">
               <h3>
                 <span style={{ color: item.frontColor }}>
@@ -122,16 +106,11 @@ const Component = ({
                 </span>
               </h3>
               {item?.allowActions?.allowEdit && (
-                <i
-                  style={{ color: item.frontColor }}
-                  className="move-drag las  la-lg la-arrows-alt"
-                />
+                <i style={{ color: item.frontColor }} className="move-drag las  la-lg la-arrows-alt" />
               )}
             </div>
             <div id={item.id} className="drag-vertical">
-              {item.tasks.map((subItem, subIndex) =>
-                renderItem(item, subItem, subIndex),
-              )}
+              {item.tasks.map((subItem, subIndex) => renderItem(item, subItem, subIndex))}
             </div>
           </div>
         ))}

@@ -70,14 +70,8 @@ const Component = ({
 
         let items = [];
         for (let i = 0; i < itemCount; i++) {
-          const startDate = moment().subtract(
-            Math.floor(Math.random() * daysInPast),
-            'days',
-          );
-          const endValue = moment().add(
-            Math.floor(Math.random() * daysInPast),
-            'days',
-          );
+          const startDate = moment().subtract(Math.floor(Math.random() * daysInPast), 'days');
+          const endValue = moment().add(Math.floor(Math.random() * daysInPast), 'days');
 
           items.push({
             id: i + '',
@@ -95,9 +89,7 @@ const Component = ({
       const { groups, items } = generateData();
       const newGroups = groups.map((group) => {
         const isRoot = (parseInt(group.id) - 1) % 3 === 0;
-        const parent = isRoot
-          ? null
-          : Math.floor((parseInt(group.id) - 1) / 3) * 3 + 1;
+        const parent = isRoot ? null : Math.floor((parseInt(group.id) - 1) / 3) * 3 + 1;
         return Object.assign({}, group, {
           root: isRoot,
           parent,
@@ -118,10 +110,7 @@ const Component = ({
       openGroups[id] = true;
     } else {
       for (const key in openGroups) {
-        if (
-          Object.prototype.hasOwnProperty.call(openGroups, key) &&
-          key.indexOf(id) > -1
-        ) {
+        if (Object.prototype.hasOwnProperty.call(openGroups, key) && key.indexOf(id) > -1) {
           openGroups[key] = false;
         }
       }
@@ -142,29 +131,16 @@ const Component = ({
                 paddingLeft: group.levelChildren * 15,
               }}
             >
-              {openGroups[group.id] ? (
-                <i className="las la-angle-down" />
-              ) : (
-                <i className="las la-angle-right" />
-              )}{' '}
+              {openGroups[group.id] ? <i className="las la-angle-down" /> : <i className="las la-angle-right" />}{' '}
               {group.title}
             </div>
           ) : (
-            <div
-              style={{ paddingLeft: isGroup ? group.levelChildren * 15 : 0 }}
-            >
-              {group.title}
-            </div>
+            <div style={{ paddingLeft: isGroup ? group.levelChildren * 15 : 0 }}>{group.title}</div>
           ),
       });
     });
 
-  const itemRenderer = ({
-    item,
-    itemContext,
-    getItemProps,
-    getResizeProps,
-  }) => {
+  const itemRenderer = ({ item, itemContext, getItemProps, getResizeProps }) => {
     const { left: leftResizeProps, right: rightResizeProps } = getResizeProps();
     const backgroundColor = itemContext.selected
       ? itemContext.dragging

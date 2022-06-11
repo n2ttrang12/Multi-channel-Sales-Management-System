@@ -66,10 +66,7 @@
             return typeof e;
           }
         : function (e) {
-            return e &&
-              'function' == typeof Symbol &&
-              e.constructor === Symbol &&
-              e !== Symbol.prototype
+            return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
               ? 'symbol'
               : typeof e;
           })(e);
@@ -93,16 +90,12 @@
     return (
       (function (e) {
         if (Array.isArray(e)) {
-          for (var t = 0, n = new Array(e.length); t < e.length; t++)
-            n[t] = e[t];
+          for (var t = 0, n = new Array(e.length); t < e.length; t++) n[t] = e[t];
           return n;
         }
       })(e) ||
       (function (e) {
-        if (
-          Symbol.iterator in Object(e) ||
-          '[object Arguments]' === Object.prototype.toString.call(e)
-        )
+        if (Symbol.iterator in Object(e) || '[object Arguments]' === Object.prototype.toString.call(e))
           return Array.from(e);
       })(e) ||
       (function () {
@@ -172,19 +165,10 @@
       var n = window.getComputedStyle(e),
         o = n.overflow,
         r = n['overflow-'.concat(t)];
-      return (
-        'auto' === o ||
-        'scroll' === o ||
-        'hidden' === o ||
-        'auto' === r ||
-        'scroll' === r ||
-        'hidden' === r
-      );
+      return 'auto' === o || 'scroll' === o || 'hidden' === o || 'auto' === r || 'scroll' === r || 'hidden' === r;
     },
     P = function (e, t) {
-      return 'x' === t
-        ? e.scrollWidth > e.clientWidth
-        : e.scrollHeight > e.clientHeight;
+      return 'x' === t ? e.scrollWidth > e.clientWidth : e.scrollHeight > e.clientHeight;
     },
     T = function (e, t) {
       var n = e,
@@ -251,16 +235,13 @@
       return e.removeChild(e.children[t]);
     },
     F = function (e, t, n) {
-      n >= e.children.length
-        ? e.appendChild(t)
-        : e.insertBefore(t, e.children[n]);
+      n >= e.children.length ? e.appendChild(t) : e.insertBefore(t, e.children[n]);
     },
     V = function () {
       window.getSelection
         ? window.getSelection().empty
           ? window.getSelection().empty()
-          : window.getSelection().removeAllRanges &&
-            window.getSelection().removeAllRanges()
+          : window.getSelection().removeAllRanges && window.getSelection().removeAllRanges()
         : window.document.selection && window.document.selection.empty();
     },
     X = function (e) {
@@ -363,9 +344,7 @@
         (function (e) {
           var t = e.getBoundingClientRect();
           (c.scaleX = e.offsetWidth ? (t.right - t.left) / e.offsetWidth : 1),
-            (c.scaleY = e.offsetHeight
-              ? (t.bottom - t.top) / e.offsetHeight
-              : 1);
+            (c.scaleY = e.offsetHeight ? (t.bottom - t.top) / e.offsetHeight : 1);
         })(n);
     }
 
@@ -422,9 +401,7 @@
         getBeginEnd: function (e) {
           var t =
             (function (e) {
-              return (
-                (o.get(e, 'distanceToParent') + (e[p] || 0)) * o.get(c, 'scale')
-              );
+              return (o.get(e, 'distanceToParent') + (e[p] || 0)) * o.get(c, 'scale');
             })(e) +
             (o.get(c.rect, 'begin') + c.translation) -
             o.get(n, 'scrollValue');
@@ -432,20 +409,14 @@
         },
         getAxisValue: a,
         setTranslation: function (e, t) {
-          t
-            ? o.set(e.style, 'translate', t)
-            : e.style.removeProperty('transform'),
-            (e[p] = t);
+          t ? o.set(e.style, 'translate', t) : e.style.removeProperty('transform'), (e[p] = t);
         },
         getTranslation: function (e) {
           return e[p];
         },
         setVisibility: function (e, t) {
           (void 0 !== e[u] && e[u] === t) ||
-            (t
-              ? e.style.removeProperty('visibility')
-              : (e.style.visibility = 'hidden'),
-            (e[u] = t));
+            (t ? e.style.removeProperty('visibility') : (e.style.visibility = 'hidden'), (e[u] = t));
         },
         isVisible: function (e) {
           return void 0 === e[u] || e[u];
@@ -468,10 +439,7 @@
         getTopLeftOfElementBegin: function (e) {
           var t = 0;
           return {
-            top:
-              'horizontal' === s
-                ? ((t = e), c.rect.top)
-                : ((t = c.rect.left), e),
+            top: 'horizontal' === s ? ((t = e), c.rect.top) : ((t = c.rect.left), e),
             left: t,
           };
         },
@@ -523,8 +491,7 @@
   }
 
   function J(l) {
-    var s =
-        1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 'y',
+    var s = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 'y',
       c = null,
       u = null,
       d = null,
@@ -574,8 +541,7 @@
     Z,
     $,
     ee = function (e) {
-      var u =
-          1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 1500,
+      var u = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 1500,
         r = e.reduce(function (e, t) {
           var n = (function (e) {
             for (var t = [], n = e.element; n; ) {
@@ -584,8 +550,7 @@
                 var r = {};
                 switch (o) {
                   case l.xy:
-                    (r.x = { animator: J(n, 'x') }),
-                      (r.y = { animator: J(n, 'y') });
+                    (r.x = { animator: J(n, 'x') }), (r.y = { animator: J(n, 'y') });
                     break;
                   case l.x:
                     r.x = { animator: J(n, 'x') };
@@ -680,8 +645,7 @@
         Q.prototype.webkitMatchesSelector ||
         function (e) {
           for (
-            var t = (this.document || this.ownerDocument).querySelectorAll(e),
-              n = t.length;
+            var t = (this.document || this.ownerDocument).querySelectorAll(e), n = t.length;
             0 <= --n && t.item(n) !== this;
 
           );
@@ -692,23 +656,16 @@
       null == Z.prototype.firstElementChild &&
       Object.defineProperty(Z.prototype, 'firstElementChild', {
         get: function () {
-          for (var e, t = this.childNodes, n = 0; (e = t[n++]); )
-            if (1 === e.nodeType) return e;
+          for (var e, t = this.childNodes, n = 0; (e = t[n++]); ) if (1 === e.nodeType) return e;
           return null;
         },
       }),
     Array.prototype.some ||
       (Array.prototype.some = function (e) {
-        if (null == this)
-          throw new TypeError(
-            'Array.prototype.some called on null or undefined',
-          );
+        if (null == this) throw new TypeError('Array.prototype.some called on null or undefined');
         if ('function' != typeof e) throw new TypeError();
         for (
-          var t = Object(this),
-            n = t.length >>> 0,
-            o = 2 <= arguments.length ? arguments[1] : void 0,
-            r = 0;
+          var t = Object(this), n = t.length >>> 0, o = 2 <= arguments.length ? arguments[1] : void 0, r = 0;
           r < n;
           r++
         )
@@ -784,16 +741,12 @@
 
   function ie(e) {
     if (e && 'undefined' != typeof window) {
-      var t =
-          window.document.head ||
-          window.document.getElementsByTagName('head')[0],
+      var t = window.document.head || window.document.getElementsByTagName('head')[0],
         n = window.document.createElement('style'),
         o = re({ 'body *': { cursor: ''.concat(e, ' !important') } });
       return (
         (n.type = 'text/css'),
-        n.styleSheet
-          ? (n.styleSheet.cssText = o)
-          : n.appendChild(window.document.createTextNode(o)),
+        n.styleSheet ? (n.styleSheet.cssText = o) : n.appendChild(window.document.createTextNode(o)),
         t.appendChild(n),
         n
       );
@@ -861,9 +814,7 @@
   }
 
   function Re() {
-    return me && me.ghostParent
-      ? me.ghostParent
-      : (fe && fe.parentElement) || window.document.body;
+    return me && me.ghostParent ? me.ghostParent : (fe && fe.parentElement) || window.document.body;
   }
 
   var Ae,
@@ -879,8 +830,7 @@
       function (e, t, n) {
         (Ae = Je(e)),
           (Be = n),
-          (Ie = 'number' == typeof t ? t : Se ? 200 : 0) &&
-            (Pe = setTimeout(Fe, Ie)),
+          (Ie = 'number' == typeof t ? t : Se ? 200 : 0) && (Pe = setTimeout(Fe, Ie)),
           ce.forEach(
             function (e) {
               return window.document.addEventListener(e, Le);
@@ -900,10 +850,8 @@
     var t = Je(e),
       n = t.clientX,
       o = t.clientY;
-    if (Ie)
-      (Math.abs(Ae.clientX - n) > ze || Math.abs(Ae.clientY - o) > ze) && _e();
-    else if (Math.abs(Ae.clientX - n) > Te || Math.abs(Ae.clientY - o) > Te)
-      return Fe();
+    if (Ie) (Math.abs(Ae.clientX - n) > ze || Math.abs(Ae.clientY - o) > ze) && _e();
+    else if (Math.abs(Ae.clientX - n) > Te || Math.abs(Ae.clientY - o) > Te) return Fe();
   }
 
   function Me() {
@@ -937,11 +885,7 @@
 
   function Ve(e) {
     var t = Je(e);
-    if (
-      !ve &&
-      (void 0 === t.button || 0 === t.button) &&
-      (fe = N(t.target, '.' + f))
-    ) {
+    if (!ve && (void 0 === t.button || 0 === t.button) && (fe = N(t.target, '.' + f))) {
       var n = N(fe, '.' + g),
         o = pe.filter(function (e) {
           return e.element === n;
@@ -949,16 +893,10 @@
         r = o.getOptions().dragHandleSelector,
         i = o.getOptions().nonDragAreaSelector,
         a = !0;
-      if (
-        (r && !N(t.target, r) && (a = !1), i && N(t.target, i) && (a = !1), a)
-      ) {
-        o.layout.invalidate(),
-          M(window.document.body, s),
-          M(window.document.body, c);
+      if ((r && !N(t.target, r) && (a = !1), i && N(t.target, i) && (a = !1), a)) {
+        o.layout.invalidate(), M(window.document.body, s), M(window.document.body, c);
         window.document.addEventListener('mouseup', function e() {
-          j(window.document.body, s),
-            j(window.document.body, c),
-            window.document.removeEventListener('mouseup', e);
+          j(window.document.body, s), j(window.document.body, c), window.document.removeEventListener('mouseup', e);
         });
       }
       a &&
@@ -988,10 +926,7 @@
               r,
               i = e.clientX,
               a = e.clientY,
-              l =
-                1 < arguments.length && void 0 !== arguments[1]
-                  ? arguments[1]
-                  : 'vertical',
+              l = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 'vertical',
               s = me.container.layout.getBeginEndOfContainerVisibleRect();
             r =
               'vertical' === l
@@ -1001,13 +936,9 @@
               u = s.end - r,
               d = Math.max(c, Math.min(u, t + ge.positionDelta[o]));
             (ge.topLeft[n] = d),
-              (me.position[n] = Math.max(
-                s.begin,
-                Math.min(s.end, t + ge.centerDelta[n]),
-              )),
+              (me.position[n] = Math.max(s.begin, Math.min(s.end, t + ge.centerDelta[n]))),
               (me.mousePosition[n] = Math.max(s.begin, Math.min(s.end, t))),
-              me.position[n] < s.begin + r / 2 &&
-                (me.position[n] = s.begin + 2),
+              me.position[n] < s.begin + r / 2 && (me.position[n] = s.begin + 2),
               me.position[n] > s.end - r / 2 && (me.position[n] = s.end - 2);
           })(t, n.orientation)
         : Ee
@@ -1039,8 +970,7 @@
       (ke = !(Ye = 20)),
       (Ge = null),
       function () {
-        for (var e = arguments.length, t = new Array(e), n = 0; n < e; n++)
-          t[n] = arguments[n];
+        for (var e = arguments.length, t = new Array(e), n = 0; n < e; n++) t[n] = arguments[n];
         Ge && clearTimeout(Ge),
           ke && !Ge
             ? He.call.apply(He, [null].concat(t))
@@ -1065,10 +995,7 @@
         ((function (e) {
           e &&
             'undefined' != typeof window &&
-            (
-              window.document.head ||
-              window.document.getElementsByTagName('head')[0]
-            ).removeChild(e);
+            (window.document.head || window.document.getElementsByTagName('head')[0]).removeChild(e);
         })(Ce),
         (Ce = null)),
       me &&
@@ -1077,10 +1004,7 @@
         (ye = !0),
         (function (e) {
           function i() {
-            j(ge.ghost, 'animated'),
-              (ge.ghost.style.transitionDuration = null),
-              Re().removeChild(ge.ghost),
-              e();
+            j(ge.ghost, 'animated'), (ge.ghost.style.transitionDuration = null), Re().removeChild(ge.ghost), e();
           }
 
           function t(e, t, n) {
@@ -1108,10 +1032,7 @@
             var o = pe.filter(function (e) {
               return e.element === me.targetElement;
             })[0];
-            if (
-              !(p = o.getOptions()).shouldAnimateDrop ||
-              p.shouldAnimateDrop(me.container.getOptions(), me.payload)
-            )
+            if (!(p = o.getOptions()).shouldAnimateDrop || p.shouldAnimateDrop(me.container.getOptions(), me.payload))
               t(
                 o.getDragResult().shadowBeginEnd.rect,
                 Math.max(150, o.getOptions().animationDuration / 2),
@@ -1126,11 +1047,7 @@
               var a = r.getOptions(),
                 l = a.behaviour,
                 s = a.removeOnDropOut;
-              if (
-                ('move' !== l && 'contain' !== l) ||
-                (!he && s) ||
-                !r.getDragResult()
-              )
+              if (('move' !== l && 'contain' !== l) || (!he && s) || !r.getDragResult())
                 n(r.getOptions().animationDuration, i);
               else {
                 var c = r.layout.getContainerRectangles();
@@ -1157,15 +1074,8 @@
                       shadowBeginEnd: void 0,
                     },
                   });
-                  var m =
-                    0 < d
-                      ? g.getBeginEnd(r.draggables[d - 1]).end
-                      : g.getBeginEndOfContainer().begin;
-                  t(
-                    g.getTopLeftOfElementBegin(m),
-                    r.getOptions().animationDuration,
-                    r.getOptions().dropClass,
-                  );
+                  var m = 0 < d ? g.getBeginEnd(r.draggables[d - 1]).end : g.getBeginEndOfContainer().begin;
+                  t(g.getTopLeftOfElementBegin(m), r.getOptions().animationDuration, r.getOptions().dropClass);
                 }
               }
             } else n(C.animationDuration, i);
@@ -1173,8 +1083,7 @@
           var p;
         })(function () {
           $e((ve = !1));
-          for (var e = de || [], t = e.shift(); void 0 !== t; )
-            t.handleDrop(me), (t = e.shift());
+          for (var e = de || [], t = e.shift(); void 0 !== t; ) t.handleDrop(me), (t = e.shift());
           (we = Ee = me = ge = fe = de = null), (ye = !1);
         }));
   }
@@ -1225,10 +1134,7 @@
       var t = o ? e.getOptions().onDragStart : e.getOptions().onDragEnd;
       if (t) {
         var n = { isSource: e === me.container, payload: me.payload };
-        e.isDragRelevant(me.container, me.payload)
-          ? (n.willAcceptDrop = !0)
-          : (n.willAcceptDrop = !1),
-          t(n);
+        e.isDragRelevant(me.container, me.payload) ? (n.willAcceptDrop = !0) : (n.willAcceptDrop = !1), t(n);
       }
     });
   }
@@ -1240,9 +1146,7 @@
         return fe.parentElement === e.element;
       })[0];
       n.setDraggables(),
-        (Ee = n.getOptions().lockAxis
-          ? n.getOptions().lockAxis.toLowerCase()
-          : null),
+        (Ee = n.getOptions().lockAxis ? n.getOptions().lockAxis.toLowerCase() : null),
         (me = (function (t) {
           var e = pe.filter(function (e) {
               return t.parentElement === e.element;
@@ -1258,9 +1162,7 @@
               offsetWidth: r.right - r.left,
             },
             elementIndex: n,
-            payload: e.getOptions().getChildPayload
-              ? e.getOptions().getChildPayload(n)
-              : void 0,
+            payload: e.getOptions().getChildPayload ? e.getOptions().getChildPayload(n) : void 0,
             targetElement: null,
             position: { x: 0, y: 0 },
             groupName: e.getOptions().groupName,
@@ -1291,11 +1193,8 @@
             (m.style.transform = null),
             m.style.removeProperty('transform'),
             n.shouldUseTransformForGhost()
-              ? (m.style.transform = 'translate3d('
-                  .concat(l, 'px, ')
-                  .concat(s, 'px, 0)'))
-              : ((m.style.top = ''.concat(s, 'px')),
-                (m.style.left = ''.concat(l, 'px'))),
+              ? (m.style.transform = 'translate3d('.concat(l, 'px, ').concat(s, 'px, 0)'))
+              : ((m.style.top = ''.concat(s, 'px')), (m.style.left = ''.concat(l, 'px'))),
             (m.style.width = c - l + 'px'),
             (m.style.height = u - s + 'px'),
             (m.style.overflow = 'visible'),
@@ -1359,13 +1258,7 @@
       l = i.y,
       s = !me.container || me.container.shouldUseTransformForGhost(),
       c = s ? 'translate3d('.concat(a, 'px,').concat(l, 'px, 0)') : null;
-    if (
-      (1 !== t &&
-        (c = c
-          ? ''.concat(c, ' scale(').concat(t, ')')
-          : 'scale('.concat(t, ')')),
-      0 < e)
-    )
+    if ((1 !== t && (c = c ? ''.concat(c, ' scale(').concat(t, ')') : 'scale('.concat(t, ')')), 0 < e))
       return (
         (ge.ghost.style.transitionDuration = e + 'ms'),
         void requestAnimationFrame(function () {
@@ -1408,16 +1301,12 @@
   'undefined' != typeof window &&
     (function () {
       if ('undefined' != typeof window) {
-        var e =
-            window.document.head ||
-            window.document.getElementsByTagName('head')[0],
+        var e = window.document.head || window.document.getElementsByTagName('head')[0],
           t = window.document.createElement('style');
         t.id = 'smooth-dnd-style-definitions';
         var n = re(oe);
         (t.type = 'text/css'),
-          t.styleSheet
-            ? (t.styleSheet.cssText = n)
-            : t.appendChild(window.document.createTextNode(n)),
+          t.styleSheet ? (t.styleSheet.cssText = n) : t.appendChild(window.document.createTextNode(n)),
           e.appendChild(t);
       }
     })();
@@ -1445,14 +1334,10 @@
       unregister: function (e) {
         !(function (e) {
           if ((pe.splice(pe.indexOf(e), 1), ve && me)) {
-            me.container === e && e.fireRemoveElement(),
-              me.targetElement === e.element && (me.targetElement = null);
+            me.container === e && e.fireRemoveElement(), me.targetElement === e.element && (me.targetElement = null);
             var t = de.indexOf(e);
             -1 < t &&
-              (de.splice(t, 1),
-              xe && xe({ reset: !0, draggableInfo: void 0 }),
-              (xe = Ze(e, de)),
-              (we = Qe(de)));
+              (de.splice(t, 1), xe && xe({ reset: !0, draggableInfo: void 0 }), (xe = Ze(e, de)), (we = Qe(de)));
           }
         })(e);
       },
@@ -1463,13 +1348,8 @@
     });
 
   function it(e, t) {
-    var n =
-      2 < arguments.length && void 0 !== arguments[2]
-        ? arguments[2]
-        : C.animationDuration;
-    t
-      ? (M(e, o), (e.style.transitionDuration = n + 'ms'))
-      : (j(e, o), e.style.removeProperty('transition-duration'));
+    var n = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : C.animationDuration;
+    t ? (M(e, o), (e.style.transitionDuration = n + 'ms')) : (j(e, o), e.style.removeProperty('transition-duration'));
   }
 
   function at(n) {
@@ -1482,12 +1362,7 @@
             (t = (function (e) {
               if (It.wrapChild) {
                 var t = window.document.createElement('div');
-                return (
-                  (t.className = ''.concat(f)),
-                  e.parentElement.insertBefore(t, e),
-                  t.appendChild(e),
-                  t
-                );
+                return (t.className = ''.concat(f)), e.parentElement.insertBefore(t, e), t.appendChild(e), t;
               }
               return e;
             })(e)),
@@ -1516,15 +1391,7 @@
           u = g.getBeginEnd(t[c]),
           d = u.begin,
           f = u.end;
-        return n < d
-          ? e(t, n, o, c - 1, i)
-          : f < n
-          ? e(t, n, c + 1, r, i)
-          : i
-          ? n < (f + d) / 2
-            ? c
-            : c + 1
-          : c;
+        return n < d ? e(t, n, o, c - 1, i) : f < n ? e(t, n, c + 1, r, i) : i ? (n < (f + d) / 2 ? c : c + 1) : c;
       })(e, t, 0, e.length - 1, n);
     };
   }
@@ -1555,9 +1422,7 @@
       var n = t.addedIndex,
         o = t.removedIndex,
         r = 2 < arguments.length && void 0 !== arguments[2] && arguments[2];
-      if (
-        (l(), !e.cancelDrop && (e.targetElement || a().removeOnDropOut || r))
-      ) {
+      if ((l(), !e.cancelDrop && (e.targetElement || a().removeOnDropOut || r))) {
         var i = {
           removedIndex: o,
           addedIndex: null !== n ? (null !== o && o < n ? n - 1 : n) : null,
@@ -1576,10 +1441,7 @@
       var t = e.draggableInfo,
         n = i;
       return (
-        null == i &&
-          t.container.element === o &&
-          'copy' !== r().behaviour &&
-          (n = i = t.elementIndex),
+        null == i && t.container.element === o && 'copy' !== r().behaviour && (n = i = t.elementIndex),
         { removedIndex: n }
       );
     };
@@ -1613,9 +1475,7 @@
       o = null;
     return function (e) {
       var t = e.draggableInfo;
-      return null === e.dragResult.pos
-        ? (o = null)
-        : { elementSize: (o = o || n.getSize(t.size)) };
+      return null === e.dragResult.pos ? (o = null) : { elementSize: (o = o || n.getSize(t.size)) };
     };
   }
 
@@ -1625,20 +1485,15 @@
       var t = e.draggableInfo,
         n = e.dragResult;
       !(function (e, t) {
-        var n =
-          !(2 < arguments.length && void 0 !== arguments[2]) || arguments[2];
-        t && n
-          ? (e.targetElement = t)
-          : e.targetElement === t && (e.targetElement = null);
+        var n = !(2 < arguments.length && void 0 !== arguments[2]) || arguments[2];
+        t && n ? (e.targetElement = t) : e.targetElement === t && (e.targetElement = null);
       })(t, o, !!n.pos);
     };
   }
 
   function mt() {
     return function (e) {
-      return null !== e.dragResult.pos
-        ? { addedIndex: 0 }
-        : { addedIndex: null };
+      return null !== e.dragResult.pos ? { addedIndex: 0 } : { addedIndex: null };
     };
   }
 
@@ -1673,12 +1528,7 @@
           s = l.animationDuration,
           c = l.className,
           u = l.showOnTop;
-        if (null === r)
-          return (
-            i && null !== v && m.removeChild(i),
-            (v = null),
-            { dropPlaceholderContainer: void 0 }
-          );
+        if (null === r) return i && null !== v && m.removeChild(i), (v = null), { dropPlaceholderContainer: void 0 };
         if (!i) {
           var d = document.createElement('div'),
             f = document.createElement('div');
@@ -1694,12 +1544,7 @@
             u ? m.appendChild(i) : m.insertBefore(i, m.firstElementChild);
         }
         return (
-          v !== r &&
-            o.dropArea &&
-            g.setBegin(
-              i.style,
-              o.dropArea.begin - g.getBeginEndOfContainer().begin + 'px',
-            ),
+          v !== r && o.dropArea && g.setBegin(i.style, o.dropArea.begin - g.getBeginEndOfContainer().begin + 'px'),
           (v = r),
           { dropPlaceholderContainer: i }
         );
@@ -1740,12 +1585,7 @@
     return function (e) {
       var t = e.dragResult,
         n = null;
-      return (
-        null !== t.pos &&
-          null === (n = o({ dragResult: t })) &&
-          (n = t.addedIndex),
-        { addedIndex: n }
-      );
+      return null !== t.pos && null === (n = o({ dragResult: t })) && (n = t.addedIndex), { addedIndex: n };
     };
   }
 
@@ -1775,34 +1615,18 @@
           if (!m) {
             var i = f.getBeginEndOfContainer();
             i.end = i.begin + f.getSize(u);
-            var a =
-                f.getScrollSize(u) > f.getSize(u)
-                  ? i.begin + f.getScrollSize(u) - f.getScrollValue(u)
-                  : i.end,
-              l =
-                0 < d.length
-                  ? f.getBeginEnd(d[d.length - 1]).end - d[d.length - 1][p]
-                  : i.begin;
+            var a = f.getScrollSize(u) > f.getSize(u) ? i.begin + f.getScrollSize(u) - f.getScrollValue(u) : i.end,
+              l = 0 < d.length ? f.getBeginEnd(d[d.length - 1]).end - d[d.length - 1][p] : i.begin;
             if (a < l + r) {
-              (m = window.document.createElement('div')).className =
-                h + ' ' + g().orientation;
+              (m = window.document.createElement('div')).className = h + ' ' + g().orientation;
               var s = 0 < d.length ? r + l - a : r;
-              return (
-                f.setSize(m.style, ''.concat(s, 'px')),
-                u.appendChild(m),
-                (u[y] = m),
-                { containerBoxChanged: !0 }
-              );
+              return f.setSize(m.style, ''.concat(s, 'px')), u.appendChild(m), (u[y] = m), { containerBoxChanged: !0 };
             }
           }
         } else if (m) {
           f.setTranslation(m, 0);
           var c = m;
-          return (
-            (m = null),
-            u.removeChild(c),
-            { containerBoxChanged: !(u[y] = null) }
-          );
+          return (m = null), u.removeChild(c), { containerBoxChanged: !(u[y] = null) };
         }
     };
   }
@@ -1822,9 +1646,7 @@
           if (i !== o) {
             var a = s[i],
               l = 0;
-            null !== o && o < i && (l -= r),
-              null !== n && n <= i && (l += r),
-              c.setTranslation(a, l);
+            null !== o && o < i && (l -= r), null !== n && n <= i && (l += r), c.setTranslation(a, l);
           }
         return { addedIndex: (u = n), removedIndex: (d = o) };
       }
@@ -1910,10 +1732,7 @@
       o = t();
     return function (e) {
       var t = !!e.dragResult.pos;
-      t !== n &&
-        ((n = t)
-          ? o.onDragEnter && o.onDragEnter()
-          : o.onDragLeave && o.onDragLeave());
+      t !== n && ((n = t) ? o.onDragEnter && o.onDragEnter() : o.onDragLeave && o.onDragLeave());
     };
   }
 
@@ -1950,8 +1769,7 @@
 
   function Rt(i) {
     return function () {
-      for (var e = arguments.length, t = new Array(e), n = 0; n < e; n++)
-        t[n] = arguments[n];
+      for (var e = arguments.length, t = new Array(e), n = 0; n < e; n++) t[n] = arguments[n];
       var o = t.map(function (e) {
           return e(i);
         }),
@@ -2007,8 +1825,7 @@
           return (
             (function () {
               var e = t;
-              for (; e; )
-                (R(e, 'x') || R(e, 'y')) && o.push(e), (e = e.parentElement);
+              for (; e; ) (R(e, 'x') || R(e, 'y')) && o.push(e), (e = e.parentElement);
             })(),
             {
               dispose: function () {
@@ -2029,8 +1846,7 @@
         });
 
       function s() {
-        null !== o &&
-          ((o.invalidateShadow = !0), (t = i(o)), (o.invalidateShadow = !1));
+        null !== o && ((o.invalidateShadow = !0), (t = i(o)), (o.invalidateShadow = !1));
       }
 
       function c(e, t) {
@@ -2050,14 +1866,12 @@
             i = e.getOptions;
           return function (e, t) {
             var n = i();
-            if (n.shouldAcceptDrop)
-              return n.shouldAcceptDrop(e.getOptions(), t);
+            if (n.shouldAcceptDrop) return n.shouldAcceptDrop(e.getOptions(), t);
             var o = e.getOptions();
             return (
               'copy' !== n.behaviour &&
               N(r, '.' + f) !== e.element &&
-              (e.element === r ||
-                !(!o.groupName || o.groupName !== n.groupName))
+              (e.element === r || !(!o.groupName || o.groupName !== n.groupName))
             );
           };
         })(r),
@@ -2088,9 +1902,7 @@
         },
         handleDrop: function (e) {
           l.stop(),
-            t &&
-              t.dropPlaceholderContainer &&
-              d.removeChild(t.dropPlaceholderContainer),
+            t && t.dropPlaceholderContainer && d.removeChild(t.dropPlaceholderContainer),
             (o = null),
             (i = Ot(r)),
             a(e, t),
@@ -2119,8 +1931,7 @@
         },
         getOptions: u,
         setOptions: function (e) {
-          var t =
-            !(1 < arguments.length && void 0 !== arguments[1]) || arguments[1];
+          var t = !(1 < arguments.length && void 0 !== arguments[1]) || arguments[1];
           n = !1 === t ? Object.assign({}, C, e) : Object.assign({}, C, n, e);
         },
       };
@@ -2163,12 +1974,7 @@
     });
 
   function Pt(e, t) {
-    return (
-      console.warn(
-        'default export is deprecated. please use named export "smoothDnD"',
-      ),
-      It(e, t)
-    );
+    return console.warn('default export is deprecated. please use named export "smoothDnD"'), It(e, t);
   }
 
   (Pt.cancelDrag = function () {

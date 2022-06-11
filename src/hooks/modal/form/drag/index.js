@@ -46,14 +46,7 @@ const Hook = ({
   return [
     handleShow,
     () =>
-      Modal((data) => (
-        <FormDrag
-          idElement={idElement}
-          items={data.length ? data : []}
-          onSave={handleSave}
-          {...prop}
-        />
-      )),
+      Modal((data) => <FormDrag idElement={idElement} items={data.length ? data : []} onSave={handleSave} {...prop} />),
     handleSave,
   ];
 };

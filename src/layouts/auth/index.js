@@ -67,9 +67,7 @@ const Layout = ({ children }) => {
           }}
         >
           <div className="absolute -translate-x-1/2  top-1/2 left-1/2 text-white">
-            <p className="hidden sm:block">
-              Powered By ARI Technology Co ., JSC{' '}
-            </p>
+            <p className="hidden sm:block">Powered By ARI Technology Co ., JSC </p>
           </div>
         </div>
       </div>

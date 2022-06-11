@@ -8,9 +8,7 @@ const Component = ({ value, onChange }) => {
   const [_color, set_color] = useState(value || '#000000');
   const [_borderColor, set_borderColor] = useState(null);
   useEffect(() => {
-    set_borderColor(
-      pickTextColorBasedOnBgColorAdvanced(_color, '#EFF5FF', '#555555'),
-    );
+    set_borderColor(pickTextColorBasedOnBgColorAdvanced(_color, '#EFF5FF', '#555555'));
   }, [_color]);
 
   return (

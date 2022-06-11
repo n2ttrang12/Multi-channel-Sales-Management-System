@@ -4,10 +4,4 @@ import ColumnConfirmPassword from './confirm-password';
 import ColumnSendOtp from './send-otp';
 import ColumnForgetPassword from './forget-password';
 
-export {
-  ColumnLogin,
-  ColumnResetPassword,
-  ColumnConfirmPassword,
-  ColumnSendOtp,
-  ColumnForgetPassword,
-};
+export { ColumnLogin, ColumnResetPassword, ColumnConfirmPassword, ColumnSendOtp, ColumnForgetPassword };

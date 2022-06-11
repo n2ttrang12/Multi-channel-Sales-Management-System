@@ -75,9 +75,7 @@ class NestableItem extends Component {
     }
 
     const collapseIcon = hasChildren ? (
-      <span onClick={() => options.onToggleCollapse(item)}>
-        {renderCollapseIcon({ isCollapsed })}
-      </span>
+      <span onClick={() => options.onToggleCollapse(item)}>{renderCollapseIcon({ isCollapsed })}</span>
     ) : null;
 
     const baseClassName = 'nestable-item' + (isCopy ? '-copy' : '');
@@ -109,16 +107,7 @@ class NestableItem extends Component {
         {hasChildren && !isCollapsed && (
           <ol className="nestable-list">
             {item[childrenProp].map((item, i) => {
-              return (
-                <NestableItem
-                  key={i}
-                  index={i}
-                  depth={depth + 1}
-                  item={item}
-                  options={options}
-                  isCopy={isCopy}
-                />
-              );
+              return <NestableItem key={i} index={i} depth={depth + 1} item={item} options={options} isCopy={isCopy} />;
             })}
           </ol>
         )}

@@ -13,12 +13,7 @@ const Component = ({ value, onChange }) => {
 
   return (
     <>
-      <Editor
-        value={value}
-        config={defaultConfig}
-        tabIndex={1}
-        onBlur={onChange}
-      />
+      <Editor value={value} config={defaultConfig} tabIndex={1} onBlur={onChange} />
       {/* <MediaManagement isVisible={isVisible} onSelect={onSelect} limit={1} onHide={() => setIsVisible(false)}/> */}
     </>
   );
@@ -27,9 +22,7 @@ const Component = ({ value, onChange }) => {
 const defaultConfig = {
   zIndex: 1,
   iframe: true,
-  iframeCSSLinks: [
-    'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css',
-  ],
+  iframeCSSLinks: ['https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css'],
   uploader: {
     insertImageAsBase64URI: true,
   },
@@ -37,8 +30,7 @@ const defaultConfig = {
     'source,fullsize,|,bold,italic,underline,paragraph,align,|,ul,ol,outdent,indent,hr,|,video,table,link,|,superscript,subscript,strikethrough,font,fontsize,brush,eraser',
   buttonsMD:
     'source,fullsize,|,bold,italic,underline,paragraph,align,|,ul,ol,outdent,indent,hr,|,video,table,link,|,dots',
-  buttonsSM:
-    'source,fullsize,|,bold,italic,underline,paragraph,align,|,ul,ol,outdent,indent,hr,|,dots',
+  buttonsSM: 'source,fullsize,|,bold,italic,underline,paragraph,align,|,ul,ol,outdent,indent,hr,|,dots',
   buttonsXS: 'bold,italic,underline,paragraph,align,|,dots',
   toolbarButtonSize: 'small',
   // extraButtons: [

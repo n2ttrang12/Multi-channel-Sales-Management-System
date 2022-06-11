@@ -6,8 +6,7 @@ const Util = (columns, values, form) => {
       if (
         item.formItem &&
         !item.formItem.notConvert &&
-        (!item.formItem.condition ||
-          item.formItem.condition(values[item.name], form))
+        (!item.formItem.condition || item.formItem.condition(values[item.name], form))
       ) {
         switch (item.formItem.type) {
           case 'switch':
@@ -19,16 +18,12 @@ const Util = (columns, values, form) => {
             if (values[item.name] && item.formItem.action === undefined) {
               values[item.name] = values[item.name]
                 .filter((_item) => _item.status === 'done' || !_item.status)
-                .map(
-                  (_item) => _item.response?.data?.id || _item.uid || _item.id,
-                );
+                .map((_item) => _item.response?.data?.id || _item.uid || _item.id);
             }
             break;
           case 'date':
             if (values[item.name]) {
-              values[item.name] = moment(values[item.name]).format(
-                'YYYY-MM-DDTHH:mm:ss',
-              );
+              values[item.name] = moment(values[item.name]).format('YYYY-MM-DDTHH:mm:ss');
             }
             break;
           case 'date_range':

@@ -1,13 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Dropdown } from 'antd';
 import { useTranslation } from 'react-i18next';
-import {
-  echartBar,
-  echartLine,
-  echartPie,
-  echartBarStack,
-  linearGradient,
-} from 'utils';
+import { echartBar, echartLine, echartPie, echartBarStack, linearGradient } from 'utils';
 import { useLocation } from 'react-router-dom';
 
 // import {useAuth} from "global";
@@ -23,20 +17,7 @@ const Page = () => {
   useEffect(() => {
     echartBar({
       id: 'chart-profile',
-      label: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dev',
-      ],
+      label: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dev'],
       tooltip: {
         backgroundColor: '#6B7280',
         textStyle: { color: '#ffffff' },
@@ -77,20 +58,7 @@ const Page = () => {
     });
     echartLine({
       id: 'chart-line1',
-      label: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dev',
-      ],
+      label: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dev'],
       color: ['#206DDF'],
       series: [
         {
@@ -112,20 +80,7 @@ const Page = () => {
     });
     echartLine({
       id: 'chart-purchasing',
-      label: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dev',
-      ],
+      label: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dev'],
       color: ['#206DDF', '#6B7280', '#F59E0B', '#10b981'],
       legend: {
         textStyle: {
@@ -194,9 +149,7 @@ const Page = () => {
           areaStyle: {
             color: linearGradient({ hex: '#F59E0B' }),
           },
-          data: [
-            184, 281, 114, 190, 199, 101, 239, 216, 231, 132, 102, 244, 257,
-          ],
+          data: [184, 281, 114, 190, 199, 101, 239, 216, 231, 132, 102, 244, 257],
         },
         {
           name: 'Platinum',
@@ -217,20 +170,7 @@ const Page = () => {
     });
     echartBar({
       id: 'chart-user',
-      label: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dev',
-      ],
+      label: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dev'],
       series: [
         {
           name: 'Total Payment',
@@ -260,9 +200,7 @@ const Page = () => {
             color: '#3B82F6',
             borderRadius: 4,
           },
-          data: [
-            184, 281, 114, 190, 199, 101, 239, 216, 231, 132, 102, 244, 257,
-          ],
+          data: [184, 281, 114, 190, 199, 101, 239, 216, 231, 132, 102, 244, 257],
         },
         {
           name: 'Activated Profile',
@@ -278,20 +216,7 @@ const Page = () => {
     });
     echartLine({
       id: 'chart-line2',
-      label: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dev',
-      ],
+      label: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dev'],
       color: ['#EF4444'],
       series: [
         {
@@ -342,26 +267,17 @@ const Page = () => {
   });
   return (
     <Fragment>
-      <Spin
-        className="grid grid-cols-2 xl:grid-cols-4 2xl:grid-cols-6 gap-5 intro-x"
-        spinning={false}
-      >
+      <Spin className="grid grid-cols-2 xl:grid-cols-4 2xl:grid-cols-6 gap-5 intro-x" spinning={false}>
         <div className="rounded-xl shadow bg-gray-50 col-span-2 row-span-2 grid">
           <div className="bg-red-400 rounded-xl">
             <div className="p-5 flex justify-between items-center">
-              <h2 className="text-lg text-white font-bold">
-                Active Profile Report
-              </h2>
+              <h2 className="text-lg text-white font-bold">Active Profile Report</h2>
               <div className="flex">
                 <Dropdown overlay={year} arrow placement="bottomRight">
-                  <div className="text-white bg-red-300 rounded p-2 mr-2">
-                    2020
-                  </div>
+                  <div className="text-white bg-red-300 rounded p-2 mr-2">2020</div>
                 </Dropdown>
                 <Dropdown overlay={nation} arrow placement="bottomRight">
-                  <div className="text-white bg-red-300 rounded p-2">
-                    Global
-                  </div>
+                  <div className="text-white bg-red-300 rounded p-2">Global</div>
                 </Dropdown>
               </div>
             </div>
@@ -420,14 +336,10 @@ const Page = () => {
         </div>
         <div className="rounded-xl shadow bg-blue-400 col-span-2 2xl:col-span-3">
           <div className="p-5 flex justify-between items-center">
-            <h2 className="text-lg text-white font-bold">
-              User Purchasing Report
-            </h2>
+            <h2 className="text-lg text-white font-bold">User Purchasing Report</h2>
             <div className="flex">
               <Dropdown overlay={year} arrow placement="bottomRight">
-                <div className="text-white bg-blue-300 rounded p-2 mr-2">
-                  2020
-                </div>
+                <div className="text-white bg-blue-300 rounded p-2 mr-2">2020</div>
               </Dropdown>
               <Dropdown overlay={nation} arrow placement="bottomRight">
                 <div className="text-white bg-blue-300 rounded p-2">Global</div>
@@ -442,14 +354,10 @@ const Page = () => {
             <h2 className="text-lg font-bold">User Purchasing Report</h2>
             <div className="flex">
               <Dropdown overlay={year} arrow placement="bottomRight">
-                <div className="text-black bg-green-300 rounded p-2 mr-2">
-                  2020
-                </div>
+                <div className="text-black bg-green-300 rounded p-2 mr-2">2020</div>
               </Dropdown>
               <Dropdown overlay={nation} arrow placement="bottomRight">
-                <div className="text-black bg-green-300 rounded p-2">
-                  Global
-                </div>
+                <div className="text-black bg-green-300 rounded p-2">Global</div>
               </Dropdown>
             </div>
           </div>
@@ -464,15 +372,11 @@ const Page = () => {
         </div>
 
         <div className="rounded-xl shadow col-span-2 2xl:col-span-3 bg-blue-500">
-          <h2 className="p-5 py-4 text-lg font-bold text-white">
-            Share of total 3454 active profiles
-          </h2>
+          <h2 className="p-5 py-4 text-lg font-bold text-white">Share of total 3454 active profiles</h2>
           <div className="h-80" id="total-active-profile" />
         </div>
         <div className="rounded-xl shadow bg-gray-50 col-span-2 2xl:col-span-3">
-          <h2 className="px-5 py-3 text-lg font-bold">
-            Total 6892 active profile in 2021
-          </h2>
+          <h2 className="px-5 py-3 text-lg font-bold">Total 6892 active profile in 2021</h2>
           <div className="h-80" id="total-active-profile-year" />
         </div>
 
@@ -481,9 +385,7 @@ const Page = () => {
             <h2 className="text-lg font-bold">Business Profiles Activity</h2>
             <div className="flex">
               <Dropdown overlay={year} arrow placement="bottomRight">
-                <div className="text-black bg-gray-200 rounded p-2 mr-2">
-                  2020
-                </div>
+                <div className="text-black bg-gray-200 rounded p-2 mr-2">2020</div>
               </Dropdown>
               <Dropdown overlay={nation} arrow placement="bottomRight">
                 <div className="text-black bg-gray-200 rounded p-2">Global</div>
@@ -541,9 +443,7 @@ const Page = () => {
             <h2 className="text-lg font-bold">Franchise Profiles Activity</h2>
             <div className="flex">
               <Dropdown overlay={year} arrow placement="bottomRight">
-                <div className="text-black bg-gray-200 rounded p-2 mr-2">
-                  2020
-                </div>
+                <div className="text-black bg-gray-200 rounded p-2 mr-2">2020</div>
               </Dropdown>
               <Dropdown overlay={nation} arrow placement="bottomRight">
                 <div className="text-black bg-gray-200 rounded p-2">Global</div>
@@ -601,9 +501,7 @@ const Page = () => {
             <h2 className="text-lg font-bold">Investor Profiles Activity</h2>
             <div className="flex">
               <Dropdown overlay={year} arrow placement="bottomRight">
-                <div className="text-black bg-gray-200 rounded p-2 mr-2">
-                  2020
-                </div>
+                <div className="text-black bg-gray-200 rounded p-2 mr-2">2020</div>
               </Dropdown>
               <Dropdown overlay={nation} arrow placement="bottomRight">
                 <div className="text-black bg-gray-200 rounded p-2">Global</div>
@@ -661,9 +559,7 @@ const Page = () => {
             <h2 className="text-lg font-bold">Monthly Profiles Activity</h2>
             <div className="flex">
               <Dropdown overlay={year} arrow placement="bottomRight">
-                <div className="text-black bg-gray-200 rounded p-2 mr-2">
-                  2020
-                </div>
+                <div className="text-black bg-gray-200 rounded p-2 mr-2">2020</div>
               </Dropdown>
               <Dropdown overlay={nation} arrow placement="bottomRight">
                 <div className="text-black bg-gray-200 rounded p-2">Global</div>

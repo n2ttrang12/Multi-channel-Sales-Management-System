@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  Fragment,
-  useCallback,
-} from 'react';
+import React, { useState, useEffect, useRef, Fragment, useCallback } from 'react';
 import { v4 } from 'uuid';
 import { Table, Radio, Checkbox, DatePicker } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -13,11 +7,7 @@ import moment from 'moment';
 import classNames from 'classnames';
 
 import { Pagination } from 'components';
-import {
-  checkTextToShort,
-  cleanObjectKeyNull,
-  getQueryStringParams,
-} from 'utils';
+import { checkTextToShort, cleanObjectKeyNull, getQueryStringParams } from 'utils';
 
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
@@ -53,8 +43,7 @@ const Hook = ({
   pageSizeOptions = [10, 20, 30, 40],
   pageSizeRender = (sizePage) => sizePage + ' / page',
   pageSizeWidth = '115px',
-  paginationDescription = (from, to, total) =>
-    from + '-' + to + ' of ' + total + ' items',
+  paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
   idElement = 'idTable',
   className = 'data-table',
   ...prop
@@ -137,17 +126,7 @@ const Hook = ({
       };
       await onChange(cleanObjectKeyNull(_data));
     }
-  }, [
-    filter,
-    fullTextSearch,
-    loadFirst,
-    onChange,
-    pageIndex,
-    pageSize,
-    params,
-    save,
-    sort,
-  ]);
+  }, [filter, fullTextSearch, loadFirst, onChange, pageIndex, pageSize, params, save, sort]);
 
   useEffect(() => {
     if (!mount.current) {
@@ -178,12 +157,7 @@ const Hook = ({
   const ref = useRef();
   // noinspection JSUnusedGlobalSymbols
   const getColumnSearchInput = (key) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div className="p-1">
         <input
           className="w-full h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-4 mb-1"
@@ -195,12 +169,7 @@ const Hook = ({
         {groupButton(confirm, clearFilters, key, selectedKeys)}
       </div>
     ),
-    filterIcon: (filtered) => (
-      <i
-        className="las la-lg la-search"
-        style={{ color: filtered ? '#3699FF' : undefined }}
-      />
-    ),
+    filterIcon: (filtered) => <i className="las la-lg la-search" style={{ color: filtered ? '#3699FF' : undefined }} />,
     onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
         setTimeout(() => ref.current.select());
@@ -209,60 +178,31 @@ const Hook = ({
   });
   // noinspection JSUnusedGlobalSymbols
   const getColumnSearchRadio = (filters, key) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <Fragment>
-        <RadioGroup
-          options={filters}
-          value={selectedKeys}
-          onChange={(e) => setSelectedKeys(e.target.value + '')}
-        />
+        <RadioGroup options={filters} value={selectedKeys} onChange={(e) => setSelectedKeys(e.target.value + '')} />
         {groupButton(confirm, clearFilters, key, selectedKeys)}
       </Fragment>
     ),
     filterIcon: (filtered) => (
-      <i
-        className="las la-lg la-dot-circle"
-        style={{ color: filtered ? '#3699FF' : undefined }}
-      />
+      <i className="las la-lg la-dot-circle" style={{ color: filtered ? '#3699FF' : undefined }} />
     ),
   });
   // noinspection JSUnusedGlobalSymbols
   const getColumnSearchCheckbox = (filters, key) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <Fragment>
-        <CheckboxGroup
-          options={filters}
-          value={selectedKeys}
-          onChange={(e) => setSelectedKeys(e)}
-        />
+        <CheckboxGroup options={filters} value={selectedKeys} onChange={(e) => setSelectedKeys(e)} />
         {groupButton(confirm, clearFilters, key, selectedKeys)}
       </Fragment>
     ),
     filterIcon: (filtered) => (
-      <i
-        className="las la-lg la-check-square"
-        style={{ color: filtered ? '#3699FF' : undefined }}
-      />
+      <i className="las la-lg la-check-square" style={{ color: filtered ? '#3699FF' : undefined }} />
     ),
   });
   // noinspection JSUnusedGlobalSymbols
   const getColumnSearchDate = (key) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <Fragment>
         <RangePicker
           renderExtraFooter={() => (
@@ -275,21 +215,14 @@ const Hook = ({
             </button>
           )}
           format={['DD/MM/YYYY', 'DD/MM/YY']}
-          value={
-            !!selectedKeys && selectedKeys.length
-              ? [moment(selectedKeys[0]), moment(selectedKeys[1])]
-              : []
-          }
+          value={!!selectedKeys && selectedKeys.length ? [moment(selectedKeys[0]), moment(selectedKeys[1])] : []}
           onChange={(e) => setSelectedKeys(e)}
         />
         {groupButton(confirm, clearFilters, key, selectedKeys)}
       </Fragment>
     ),
     filterIcon: (filtered) => (
-      <i
-        className="las la-lg la-calendar"
-        style={{ color: filtered ? '#3699FF' : undefined }}
-      />
+      <i className="las la-lg la-calendar" style={{ color: filtered ? '#3699FF' : undefined }} />
     ),
   });
 
@@ -327,11 +260,7 @@ const Hook = ({
 
       if (item.sorter && params[sort] && params[sort][col.name]) {
         item.defaultSortOrder =
-          params[sort][col.name] === 'ASC'
-            ? 'ascend'
-            : params[sort][col.name] === 'DESC'
-            ? 'descend'
-            : '';
+          params[sort][col.name] === 'ASC' ? 'ascend' : params[sort][col.name] === 'DESC' ? 'descend' : '';
       }
       if (!item.render) {
         item.render = (text) => checkTextToShort(text);
@@ -344,24 +273,14 @@ const Hook = ({
       };
     });
 
-  const handleTableChange = (
-    pagination,
-    filters = {},
-    sorts,
-    tempFullTextSearch,
-  ) => {
+  const handleTableChange = (pagination, filters = {}, sorts, tempFullTextSearch) => {
     let tempPageIndex = pagination ? pagination.current : params[pageIndex];
     const tempPageSize = pagination ? pagination.pageSize : params[pageSize];
 
     let tempSort =
       sorts && sorts?.field && sorts?.order
         ? {
-            [sorts.field]:
-              sorts.order === 'ascend'
-                ? 'ASC'
-                : sorts.order === 'descend'
-                ? 'DESC'
-                : '',
+            [sorts.field]: sorts.order === 'ascend' ? 'ASC' : sorts.order === 'descend' ? 'DESC' : '',
           }
         : sorts?.field
         ? null
@@ -371,8 +290,7 @@ const Hook = ({
     }
 
     let tempFilter = cleanObjectKeyNull(filters);
-    tempFilter =
-      Object.keys(tempFilter).length === 0 ? null : JSON.stringify(tempFilter);
+    tempFilter = Object.keys(tempFilter).length === 0 ? null : JSON.stringify(tempFilter);
     if (tempFullTextSearch !== params[fullTextSearch]) {
       tempPageIndex = 1;
     }
@@ -384,9 +302,7 @@ const Hook = ({
       [fullTextSearch]: tempFullTextSearch,
     });
     if (save) {
-      navigate(
-        location.pathname + '?' + new URLSearchParams(tempParams).toString(),
-      );
+      navigate(location.pathname + '?' + new URLSearchParams(tempParams).toString());
     }
     onChange && onChange(tempParams);
   };
@@ -410,18 +326,8 @@ const Hook = ({
                   className="w-52 h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-4"
                   defaultValue={params.fullTextSearch}
                   type="text"
-                  placeholder={
-                    searchPlaceholder ||
-                    t('components.datatable.pleaseEnterValueToSearch')
-                  }
-                  onChange={(event) =>
-                    handleTableChange(
-                      null,
-                      params[filter],
-                      params[sort],
-                      event.target.value,
-                    )
-                  }
+                  placeholder={searchPlaceholder || t('components.datatable.pleaseEnterValueToSearch')}
+                  onChange={(event) => handleTableChange(null, params[filter], params[sort], event.target.value)}
                 />
                 <i className="text-lg las la-search absolute top-1.5 right-3 z-10" />
               </div>
@@ -435,11 +341,7 @@ const Hook = ({
               <Table
                 onRow={onRow}
                 locale={{
-                  emptyText: (
-                    <div className="bg-gray-100 text-gray-400 py-4">
-                      {emptyText}
-                    </div>
-                  ),
+                  emptyText: <div className="bg-gray-100 text-gray-400 py-4">{emptyText}</div>,
                 }}
                 loading={isLoading}
                 columns={columns || cols}
@@ -465,12 +367,7 @@ const Hook = ({
                   pageSizeRender={pageSizeRender}
                   pageSizeWidth={pageSizeWidth}
                   queryParams={(pagination) =>
-                    handleTableChange(
-                      pagination,
-                      params[filter],
-                      params[sort],
-                      params.fullTextSearch,
-                    )
+                    handleTableChange(pagination, params[filter], params[sort], params.fullTextSearch)
                   }
                   paginationDescription={paginationDescription}
                   idElement={idElement}

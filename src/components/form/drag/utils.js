@@ -16,8 +16,7 @@ export const getOffsetRect = (elem) => {
 
   // (2)
   const scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
-  const scrollLeft =
-    window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
+  const scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
 
   // (3)
   const clientTop = docElem.clientTop || body.clientTop || 0;
@@ -54,9 +53,7 @@ export const listWithChildren = (list, childrenProp) => {
     .map((item) => {
       return {
         ...item,
-        [childrenProp]: item[childrenProp]
-          ? listWithChildren(item[childrenProp], childrenProp)
-          : [],
+        [childrenProp]: item[childrenProp] ? listWithChildren(item[childrenProp], childrenProp) : [],
       };
     });
 };
@@ -66,18 +63,13 @@ export const getAllNonEmptyNodesIds = (items, { idProp, childrenProp }) => {
   const ids = items
     .filter((item) => item[childrenProp].length)
     .map((item) => {
-      childrenIds = childrenIds.concat(
-        getAllNonEmptyNodesIds(item[childrenProp], { idProp, childrenProp }),
-      );
+      childrenIds = childrenIds.concat(getAllNonEmptyNodesIds(item[childrenProp], { idProp, childrenProp }));
       return item[idProp];
     });
 
   return ids.concat(childrenIds);
 };
 export const hasSomeParentTheClass = (element, classname) => {
-  if (element.className && element.className.split(' ').indexOf(classname) >= 0)
-    return true;
-  return (
-    element.parentNode && hasSomeParentTheClass(element.parentNode, classname)
-  );
+  if (element.className && element.className.split(' ').indexOf(classname) >= 0) return true;
+  return element.parentNode && hasSomeParentTheClass(element.parentNode, classname);
 };

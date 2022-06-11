@@ -16,7 +16,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js','test'],
   rules: {
     "react/prop-types": 0,
     "no-underscore-dangle": 0,

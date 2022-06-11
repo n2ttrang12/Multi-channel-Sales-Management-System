@@ -1,5 +1,6 @@
 import Addable from './addable';
 import ColorButton from './color-button';
+import Chips from './chips';
 import Editor from './editor';
 import DatePicker from './date-picker';
 import Password from './password';
@@ -12,6 +13,7 @@ import TableTransfer from './table-transfer';
 export {
   Addable,
   ColorButton,
+  Chips,
   Editor,
   DatePicker,
   Password,

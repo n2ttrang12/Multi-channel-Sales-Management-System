@@ -18,10 +18,7 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
         }),
         render: (text) =>
           text && (
-            <Avatar
-              src="https://hinhanhdep.org/wp-content/uploads/2016/07/anh-avatar-girl-xinh.jpg"
-              text={text}
-            />
+            <Avatar src="https://hinhanhdep.org/wp-content/uploads/2016/07/anh-avatar-girl-xinh.jpg" text={text} />
           ),
       },
       formItem: {
@@ -83,8 +80,7 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
                 },
                 {
                   fullName: 'Tân C',
-                  avatarPath:
-                    'https://hinhanhdep.org/wp-content/uploads/2016/07/anh-avatar-girl-xinh.jpg',
+                  avatarPath: 'https://hinhanhdep.org/wp-content/uploads/2016/07/anh-avatar-girl-xinh.jpg',
                 },
                 {
                   fullName: 'Nguyễn D',
@@ -141,8 +137,7 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
         rules: [{ type: 'required' }],
         type: 'tag',
         col: 24,
-        convert: (data) =>
-          data?.map ? data.map((_item) => _item?.id || _item) : data,
+        convert: (data) => (data?.map ? data.map((_item) => _item?.id || _item) : data),
         tag: {
           api: routerLinks('User', 'api') + '/brief',
           params: (form, fullTextSearch, value) => ({
@@ -171,10 +166,7 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
         render: (text, data) => (
           <Fragment>
             <Tooltip title={t('routes.admin.Layout.Edit')}>
-              <button
-                className="embed border border-gray-300 text-xs rounded-lg mr-2"
-                onClick={() => handleEdit(data)}
-              >
+              <button className="embed border border-gray-300 text-xs rounded-lg mr-2" onClick={() => handleEdit(data)}>
                 <EditIcon />
               </button>
             </Tooltip>
@@ -182,9 +174,7 @@ const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
               <Popconfirm
                 placement="left"
                 title={t('components.datatable.areYouSureWant')}
-                icon={
-                  <i className="las la-question-circle text-2xl text-yellow-500 absolute -top-0.5 -left-1" />
-                }
+                icon={<i className="las la-question-circle text-2xl text-yellow-500 absolute -top-0.5 -left-1" />}
                 onConfirm={() => handleDelete(data.id)}
                 okText={t('components.datatable.ok')}
                 cancelText={t('components.datatable.cancel')}

@@ -24,16 +24,12 @@ axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (
-      (!!error.response &&
-        !!error.response.data.errors &&
-        error.response.data.errors === 401) ||
+      (!!error.response && !!error.response.data.errors && error.response.data.errors === 401) ||
       error.response.status === 401
     ) {
       window.location.hash = '#' + routerLinks('Login');
     } else if (
-      (!!error.response &&
-        !!error.response.data.errors &&
-        error.response.data.errors === 303) ||
+      (!!error.response && !!error.response.data.errors && error.response.data.errors === 303) ||
       error.response.status === 303
     ) {
       const originalRequest = error.config;

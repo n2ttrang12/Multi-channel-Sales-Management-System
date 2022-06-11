@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  Fragment,
-  useCallback,
-  useRef,
-} from 'react';
+import React, { useState, useEffect, Fragment, useCallback, useRef } from 'react';
 import { TreeSelect, Checkbox } from 'antd';
 import axios from 'axios';
 
@@ -17,10 +11,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
   const loadData = useCallback(
     async (fullTextSearch) => {
       if (formItem.api) {
-        if (
-          !formItem.api.condition ||
-          formItem.api.condition(form.getFieldValue)
-        ) {
+        if (!formItem.api.condition || formItem.api.condition(form.getFieldValue)) {
           const url = formItem.api.link(form.getFieldValue);
           if (url) {
             const { data } = await axios.get(url, {
@@ -30,9 +21,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
             });
             const listData = data.data.map(formItem.api.format);
             if (formItem.mode === 'multiple' && value?.length) {
-              const array = formItem.api.convertData
-                ? formItem.api.convertData(listData)
-                : listData;
+              const array = formItem.api.convertData ? formItem.api.convertData(listData) : listData;
               set_checkAll(array.length === value.length);
             }
             set_list(listData);
@@ -46,10 +35,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
   );
 
   const initFunction = useCallback(async () => {
-    if (
-      value?.length > 0 &&
-      !value?.filter((item) => typeof item === 'object')?.length
-    ) {
+    if (value?.length > 0 && !value?.filter((item) => typeof item === 'object')?.length) {
       onChange(value.map((item) => ({ value: item, label: item })));
     }
     if (_list.length === 0) {
@@ -141,9 +127,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
           } else {
             onChange(
               data.map((__item) => {
-                const _data = _list.filter(
-                  (_item) => _item.id === __item.value,
-                )[0];
+                const _data = _list.filter((_item) => _item.id === __item.value)[0];
                 if (_data) {
                   return { ..._data, label: _data.fullTitle };
                 }
@@ -159,10 +143,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
         <Fragment>
           {formItem.mode === 'multiple' && (
             <Fragment>
-              <Checkbox
-                checked={checkAll}
-                onChange={() => onChange(allValue.current)}
-              >
+              <Checkbox checked={checkAll} onChange={() => onChange(allValue.current)}>
                 Select all
               </Checkbox>
               <Checkbox checked={unCheckAll} onChange={() => onChange([])}>
@@ -186,25 +167,15 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
           arrayValue.indexOf(props.value) > -1 &&
           !!item.length &&
           (arrayValue.indexOf(item[0].value) === -1 ||
-            arrayValue.indexOf(item[0].value) ===
-              arrayValue.indexOf(props.value))
+            arrayValue.indexOf(item[0].value) === arrayValue.indexOf(props.value))
         ) {
-          const arraySlice = arrayValue.slice(
-            0,
-            arrayValue.indexOf(props.value),
-          );
+          const arraySlice = arrayValue.slice(0, arrayValue.indexOf(props.value));
           let checkShow = true;
-          if (
-            !!arraySlice.length &&
-            arrayValue.indexOf(item[0]?.value) === -1
-          ) {
+          if (!!arraySlice.length && arrayValue.indexOf(item[0]?.value) === -1) {
             arraySlice.map((valueSlide) => {
               if (checkShow) {
                 const itemSlice = handleGetData(_list, valueSlide);
-                if (
-                  !!itemSlice.length &&
-                  item[0].value === itemSlice[0].value
-                ) {
+                if (!!itemSlice.length && item[0].value === itemSlice[0].value) {
                   checkShow = false;
                 }
               }

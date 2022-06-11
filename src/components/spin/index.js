@@ -1,12 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const Component = ({
-  spinning = true,
-  text = 'Now Loading...',
-  children,
-  className = '',
-}) => {
+const Component = ({ spinning = true, text = 'Now Loading...', children, className = '' }) => {
   return (
     <div className={classNames('relative min-h-[80px]')}>
       <div
@@ -25,9 +20,7 @@ const Component = ({
           <div className="bar bar3 w-24 h-5 absolute flex items-center" />
         </div>
       </div>
-      <div className={classNames(className, { 'opacity-50': spinning })}>
-        {children}
-      </div>
+      <div className={classNames(className, { 'opacity-50': spinning })}>{children}</div>
     </div>
   );
 };

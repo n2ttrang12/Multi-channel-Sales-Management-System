@@ -1,12 +1,4 @@
-const Util = ({
-  id,
-  label,
-  series,
-  tooltip = {},
-  grid = {},
-  legend = {},
-  xAxis = {},
-}) => {
+const Util = ({ id, label, series, tooltip = {}, grid = {}, legend = {}, xAxis = {} }) => {
   import('echarts').then((echarts) => {
     const element = document.getElementById(id);
     if (element) {

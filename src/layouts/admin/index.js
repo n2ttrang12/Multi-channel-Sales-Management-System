@@ -80,12 +80,7 @@ const Layout = ({ children }) => {
             trigger={['hover', 'click']}
             overlay={
               <ul className="bg-blue-50">
-                <li
-                  className="p-2 hover:bg-blue-100"
-                  onClick={() =>
-                    navigate(routerLinks('Login'), { replace: true })
-                  }
-                >
+                <li className="p-2 hover:bg-blue-100" onClick={() => navigate(routerLinks('Login'), { replace: true })}>
                   Sign Out
                 </li>
               </ul>
@@ -141,8 +136,7 @@ const Layout = ({ children }) => {
         <div onClick={() => set_isCollapsed(!isCollapsed)}>
           <img
             className={classNames('w-4 cursor-pointer', {
-              'rotate-180':
-                (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
+              'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
             })}
             src={arrow}
             alt=""
@@ -150,25 +144,19 @@ const Layout = ({ children }) => {
         </div>
       </div>
       <div
-        className={classNames(
-          'fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out',
-          {
-            'w-80': !isCollapsed,
-            'w-20': isCollapsed,
-            '-left-20': isCollapsed && !isDesktop,
-          },
-        )}
+        className={classNames('fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out', {
+          'w-80': !isCollapsed,
+          'w-20': isCollapsed,
+          '-left-20': isCollapsed && !isDesktop,
+        })}
       >
         <Menu isCollapsed={isCollapsed} />
       </div>
       <div
-        className={classNames(
-          'bg-gray-100 ml-80 px-5 transition-all duration-300 ease-in-out z-10',
-          {
-            'ml-80': !isCollapsed && isDesktop,
-            'ml-20': isCollapsed && isDesktop,
-          },
-        )}
+        className={classNames('bg-gray-100 ml-80 px-5 transition-all duration-300 ease-in-out z-10', {
+          'ml-80': !isCollapsed && isDesktop,
+          'ml-20': isCollapsed && isDesktop,
+        })}
       >
         {children}
         <footer className="text-center bg-blue-50 mt-10 -mx-5">

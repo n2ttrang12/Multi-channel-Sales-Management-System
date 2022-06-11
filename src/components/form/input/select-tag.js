@@ -10,22 +10,13 @@ const Component = ({ tag, onChange, form, value, ...prop }) => {
     async (fullTextSearch = '', value) => {
       const { data } = await axios.get(tag.api, {
         params: tag.params
-          ? tag.params(
-              form.getFieldValue,
-              fullTextSearch,
-              value && value.filter((item) => !!item),
-            )
+          ? tag.params(form.getFieldValue, fullTextSearch, value && value.filter((item) => !!item))
           : { fullTextSearch },
       });
       set_options(
         data.data.map((item, index) => ({
           label: tag.avatar ? (
-            <Avatar
-              key={index}
-              size="5"
-              src={item[tag.avatar]}
-              text={item[tag.label]}
-            />
+            <Avatar key={index} size="5" src={item[tag.avatar]} text={item[tag.label]} />
           ) : (
             item[tag.label]
           ),

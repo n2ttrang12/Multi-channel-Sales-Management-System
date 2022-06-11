@@ -12,29 +12,17 @@ const Column = ({ t }) => {
             validator: (form) => ({
               validator: async (rule, value) => {
                 if (value?.toString()?.length < 8) {
-                  return Promise.reject(
-                    new Error('Mật khẩu yêu cầu có 8 ký tự trở lên'),
-                  );
+                  return Promise.reject(new Error('Mật khẩu yêu cầu có 8 ký tự trở lên'));
                 }
-                if (
-                  form.getFieldValue('passwordComfirm') &&
-                  value !== form.getFieldValue('passwordComfirm')
-                ) {
-                  return Promise.reject(
-                    new Error('Xác nhận mật khẩu không chính xác'),
-                  );
+                if (form.getFieldValue('passwordComfirm') && value !== form.getFieldValue('passwordComfirm')) {
+                  return Promise.reject(new Error('Xác nhận mật khẩu không chính xác'));
                 }
                 if (!!value && value.trim() !== '' && value.length >= 8) {
                   let countvalidator = 0;
-                  if (/\s/.test(value))
-                    return Promise.reject(
-                      new Error('Mật khẩu không được có khoảng trắng'),
-                    );
+                  if (/\s/.test(value)) return Promise.reject(new Error('Mật khẩu không được có khoảng trắng'));
                   else countvalidator++;
                   if (!/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z])?.*$/.test(value))
-                    return Promise.reject(
-                      new Error('Mật khẩu chưa đạt yêu cầu'),
-                    );
+                    return Promise.reject(new Error('Mật khẩu chưa đạt yêu cầu'));
                   else countvalidator++;
                   if (countvalidator === 2) return Promise.resolve();
                 } else return Promise.resolve();
@@ -58,21 +46,14 @@ const Column = ({ t }) => {
             validator: (form) => ({
               validator: async (rule, value) => {
                 if (value !== form.getFieldValue('password')) {
-                  return Promise.reject(
-                    new Error('Xác nhận mật khẩu không chính xác'),
-                  );
+                  return Promise.reject(new Error('Xác nhận mật khẩu không chính xác'));
                 }
                 if (!!value && value.trim() !== '' && value.length >= 8) {
                   let countvalidator = 0;
-                  if (/\s/.test(value))
-                    return Promise.reject(
-                      new Error('Mật khẩu không được có khoảng trắng'),
-                    );
+                  if (/\s/.test(value)) return Promise.reject(new Error('Mật khẩu không được có khoảng trắng'));
                   else countvalidator++;
                   if (!/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z]).*$/.test(value))
-                    return Promise.reject(
-                      new Error('Mật khẩu chưa đạt yêu cầu'),
-                    );
+                    return Promise.reject(new Error('Mật khẩu chưa đạt yêu cầu'));
                   else countvalidator++;
                   if (countvalidator === 2) return Promise.resolve();
                 } else return Promise.resolve();

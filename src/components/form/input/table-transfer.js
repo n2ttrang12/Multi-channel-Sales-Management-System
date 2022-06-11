@@ -1,14 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Table, Transfer } from 'antd';
 
-const Component = ({
-  showSearch = true,
-  formItem,
-  onChange,
-  value,
-  form,
-  ...restProps
-}) => {
+const Component = ({ showSearch = true, formItem, onChange, value, form, ...restProps }) => {
   const [_dataSource, set_dataSource] = useState([]);
   const [_targetKeys, set_targetKeys] = useState([]);
 
@@ -49,10 +42,7 @@ const Component = ({
         selectedKeys: listSelectedKeys,
         disabled: listDisabled,
       }) => {
-        const columns =
-          direction === 'left'
-            ? formItem.transfer.leftColumns
-            : formItem.transfer.rightColumns;
+        const columns = direction === 'left' ? formItem.transfer.leftColumns : formItem.transfer.rightColumns;
 
         return (
           <Table
@@ -62,24 +52,14 @@ const Component = ({
               }),
               selectedRowKeys: listSelectedKeys,
               onSelectAll(selected, selectedRows) {
-                const treeSelectedKeys = selectedRows
-                  .filter((item) => !item.disabled)
-                  .map(({ key }) => key);
+                const treeSelectedKeys = selectedRows.filter((item) => !item.disabled).map(({ key }) => key);
                 const diffKeys = selected
                   ? treeSelectedKeys
                       .filter((x) => !listSelectedKeys.includes(x))
-                      .concat(
-                        listSelectedKeys.filter(
-                          (x) => !treeSelectedKeys.includes(x),
-                        ),
-                      )
+                      .concat(listSelectedKeys.filter((x) => !treeSelectedKeys.includes(x)))
                   : listSelectedKeys
                       .filter((x) => !treeSelectedKeys.includes(x))
-                      .concat(
-                        treeSelectedKeys.filter(
-                          (x) => !listSelectedKeys.includes(x),
-                        ),
-                      );
+                      .concat(treeSelectedKeys.filter((x) => !listSelectedKeys.includes(x)));
                 onItemSelectAll(diffKeys, selected);
               },
               onSelect({ key }, selected) {

@@ -14,27 +14,9 @@ const Util = ({ id }) => {
         { name: 'Malaysia', value: 500 },
         { name: 'India', value: 1000 },
       ];
-      const legenddata = [
-        'Korea',
-        'Japan',
-        'China',
-        'United States',
-        'Vietnam',
-        'Global',
-        'Malaysia',
-        'India',
-      ];
+      const legenddata = ['Korea', 'Japan', 'China', 'United States', 'Vietnam', 'Global', 'Malaysia', 'India'];
       const data = [];
-      const color = [
-        '#2563EB',
-        '#10B981',
-        '#F59E0B',
-        '#EF4444',
-        '#6B7280',
-        '#EC4899',
-        '#8B5CF6',
-        '#6366F1',
-      ];
+      const color = ['#2563EB', '#10B981', '#F59E0B', '#EF4444', '#6B7280', '#EC4899', '#8B5CF6', '#6366F1'];
       for (let i = 0; i < datasource.length; i++) {
         data.push(
           {
@@ -83,9 +65,7 @@ const Util = ({ id }) => {
               }
               const percent = ((params.value / total) * 100).toFixed(0);
               if (params.name !== '') {
-                return (
-                  params.name + '\n\n' + params.value + ': ' + percent + '%'
-                );
+                return params.name + '\n\n' + params.value + ': ' + percent + '%';
               } else {
                 return '';
               }

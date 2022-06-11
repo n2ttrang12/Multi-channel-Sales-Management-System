@@ -59,14 +59,9 @@ const Component = ({
   );
 
   const handleDownload = async (file) => {
-    const response = await axios.get(
-      file.response ? file.response.data.path : file.path,
-      { responseType: 'blob' },
-    );
+    const response = await axios.get(file.response ? file.response.data.path : file.path, { responseType: 'blob' });
     const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(
-      new Blob([response.data], { type: response.headers['content-type'] }),
-    );
+    link.href = window.URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] }));
     link.target = '_blank';
     link.download = file.response ? file.response.data.fileName : file.name;
     link.click();
@@ -116,9 +111,10 @@ const Component = ({
               const file = target.files[i];
               if (maxSize && file.size > maxSize * 1024 * 1024) {
                 await Message.warning({
-                  text: `${file.name} (${(file.size / (1024 * 1024)).toFixed(
-                    1,
-                  )}mb): ${t('components.form.ruleMaxSize', { max: maxSize })}`,
+                  text: `${file.name} (${(file.size / (1024 * 1024)).toFixed(1)}mb): ${t(
+                    'components.form.ruleMaxSize',
+                    { max: maxSize },
+                  )}`,
                 });
                 return false;
               }
@@ -162,9 +158,7 @@ const Component = ({
                         set_listFiles([
                           ...listFiles.map((item) => {
                             if (item.id === dataFile.id) {
-                              item.percent = parseInt(
-                                (event.loaded / event.total) * 100,
-                              );
+                              item.percent = parseInt((event.loaded / event.total) * 100);
                             }
                             return item;
                           }),
@@ -183,11 +177,8 @@ const Component = ({
                     ]);
                   } catch (e) {
                     set_isLoading(false);
-                    if (e.response.data.message)
-                      Message.error({ text: e.response.data.message });
-                    set_listFiles(
-                      listFiles.filter((_item) => _item.id !== dataFile.id),
-                    );
+                    if (e.response.data.message) Message.error({ text: e.response.data.message });
+                    set_listFiles(listFiles.filter((_item) => _item.id !== dataFile.id));
                   }
                 } else {
                   try {
@@ -196,9 +187,7 @@ const Component = ({
                         set_listFiles([
                           ...listFiles.map((item) => {
                             if (item.id === dataFile.id) {
-                              item.percent = parseInt(
-                                (event.loaded / event.total) * 100,
-                              );
+                              item.percent = parseInt((event.loaded / event.total) * 100);
                             }
                             return item;
                           }),
@@ -220,9 +209,7 @@ const Component = ({
                   }
                 }
                 setTimeout(() => {
-                  import('glightbox').then(
-                    ({ default: GLightbox }) => new GLightbox(),
-                  );
+                  import('glightbox').then(({ default: GLightbox }) => new GLightbox());
                 });
               }
             }
@@ -233,11 +220,7 @@ const Component = ({
           {onlyImage ? (
             value ? (
               <Spin spinning={isLoading}>
-                {prop.children ? (
-                  prop.children
-                ) : (
-                  <Avatar size={150} src={value?.thumb || value} />
-                )}
+                {prop.children ? prop.children : <Avatar size={150} src={value?.thumb || value} />}
               </Spin>
             ) : (
               <div className="avatar-uploader">
@@ -250,8 +233,7 @@ const Component = ({
                 type={'button'}
                 className="bg-blue-500 text-white px-4 h-10 rounded-xl hover:bg-blue-400 inline-flex items-center mb-3"
               >
-                <i className="las la-upload mr-1" />{' '}
-                {t('components.form.Upload')}
+                <i className="las la-upload mr-1" /> {t('components.form.Upload')}
               </button>
             )
           )}
@@ -268,20 +250,11 @@ const Component = ({
               })}
             >
               <Spin spinning={file.status === 'uploading'}>
-                <a
-                  href={
-                    file?.response ? file?.response?.data?.path : file?.path
-                  }
-                  className="glightbox"
-                >
+                <a href={file?.response ? file?.response?.data?.path : file?.path} className="glightbox">
                   <img
                     width="150"
                     className={'object-cover object-center h-20'}
-                    src={
-                      file?.response?.data?.thumb
-                        ? file.response.data.thumb
-                        : file.thumbUrl
-                    }
+                    src={file?.response?.data?.thumb ? file.response.data.thumb : file.thumbUrl}
                     alt={file.name}
                   />
                   {/* <i className="las la-play-circle text-8xl px-6 mr-1" /> */}
@@ -289,23 +262,13 @@ const Component = ({
               </Spin>
               <div className="flex-1 flex items-center relative">
                 <div className={'pl-5'}>
-                  <strong>
-                    {file?.response?.data?.fileName
-                      ? file.response.data.fileName
-                      : file.name}
-                  </strong>
-                  {file.status === 'error' && (
-                    <span className={'px-2 py-1 bg-red-500 text-white'}>
-                      Upload Error
-                    </span>
-                  )}
+                  <strong>{file?.response?.data?.fileName ? file.response.data.fileName : file.name}</strong>
+                  {file.status === 'error' && <span className={'px-2 py-1 bg-red-500 text-white'}>Upload Error</span>}
                   {(file?.response?.data?.createdDate || file.lastModified) && (
                     <div>
                       Added{' '}
                       {moment(
-                        file?.response?.data?.createdDate
-                          ? file.response.data.createdDate
-                          : file.lastModified,
+                        file?.response?.data?.createdDate ? file.response.data.createdDate : file.lastModified,
                       ).format(formatDate + ' - HH:mm')}{' '}
                       |&nbsp;
                       {file?.response?.data?.size
@@ -315,9 +278,7 @@ const Component = ({
                         : file.size}
                     </div>
                   )}
-                  {file.status === 'uploading' && (
-                    <Progress percent={file.percent} />
-                  )}
+                  {file.status === 'uploading' && <Progress percent={file.percent} />}
                 </div>
                 {(file.status === 'done' || !file.status) && (
                   <div className="absolute right-0 flex">
@@ -340,25 +301,17 @@ const Component = ({
                         }
                         onConfirm={async () => {
                           if (deleteFile && file?.response?.data?.id) {
-                            const data = await deleteFile(
-                              file?.response?.data?.id,
-                            );
+                            const data = await deleteFile(file?.response?.data?.id);
                             if (!data) {
                               return false;
                             }
                           }
-                          onChange &&
-                            onChange(
-                              listFiles.filter((_item) => _item.id !== file.id),
-                            );
+                          onChange && onChange(listFiles.filter((_item) => _item.id !== file.id));
                         }}
                         okText={t('components.datatable.ok')}
                         cancelText={t('components.datatable.cancel')}
                       >
-                        <button
-                          type={'button'}
-                          className="embed border border-gray-300 text-xs rounded-lg mr-2"
-                        >
+                        <button type={'button'} className="embed border border-gray-300 text-xs rounded-lg mr-2">
                           <RemoveIcon />
                         </button>
                       </Popconfirm>

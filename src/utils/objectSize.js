@@ -5,11 +5,7 @@ const Util = (obj, skipKeys = []) => {
   let size = 0;
   let key;
   for (key in tempObj) {
-    if (
-      Object.prototype.hasOwnProperty.call(tempObj, key) &&
-      skipKeys.indexOf(key) === -1
-    )
-      size++;
+    if (Object.prototype.hasOwnProperty.call(tempObj, key) && skipKeys.indexOf(key) === -1) size++;
   }
   return size;
 };

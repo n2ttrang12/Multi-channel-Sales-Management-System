@@ -67,28 +67,20 @@ const Hook = ({
               <button
                 type={'button'}
                 disabled={!firstChange}
-                className={classNames(
-                  'px-4 py-2.5 rounded-xl inline-flex items-center',
-                  {
-                    'bg-gray-100 hover:bg-gray-300 hover:text-white text-gray-400':
-                      !firstChange,
-                    'text-white bg-blue-500 hover:bg-blue-400': firstChange,
-                  },
-                )}
+                className={classNames('px-4 py-2.5 rounded-xl inline-flex items-center', {
+                  'bg-gray-100 hover:bg-gray-300 hover:text-white text-gray-400': !firstChange,
+                  'text-white bg-blue-500 hover:bg-blue-400': firstChange,
+                })}
                 onClick={handleOk}
               >
-                {isLoading && (
-                  <i className="las la-spinner mr-1 animate-spin" />
-                )}
+                {isLoading && <i className="las la-spinner mr-1 animate-spin" />}
                 {textSubmit || t('components.form.modal.save')}
               </button>
             </div>
           )
         }
       >
-        <Spin spinning={isLoading}>
-          {children(data, set_data, setIsVisible)}
-        </Spin>
+        <Spin spinning={isLoading}>{children(data, set_data, setIsVisible)}</Spin>
       </Modal>
     ),
     set_data,

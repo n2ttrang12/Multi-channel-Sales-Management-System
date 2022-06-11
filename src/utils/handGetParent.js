@@ -9,8 +9,7 @@ const Util = async (url) => {
         if (data.id === children.parent_id) {
           data.children.push(children);
           return data.children;
-        } else
-          data.children[i].children = findChildren(data.children[i], children);
+        } else data.children[i].children = findChildren(data.children[i], children);
       }
       return data.children;
     } else if (data.id === children.parent_id) return [children];
@@ -21,10 +20,7 @@ const Util = async (url) => {
       data[i].children = [];
       newData.push(data[i]);
     } else {
-      newData[newData.length - 1].children = findChildren(
-        newData[newData.length - 1],
-        data[i],
-      );
+      newData[newData.length - 1].children = findChildren(newData[newData.length - 1], data[i]);
     }
   }
   return newData;

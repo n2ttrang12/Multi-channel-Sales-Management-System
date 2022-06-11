@@ -9,12 +9,7 @@ const Components = ({ text_add = 'Add field', fieldsName = [], name }) => {
           {fields.map(({ key, name, ...restField }, i) => (
             <div className="w-full flex justify-between gap-3" key={i}>
               {fieldsName.map((ele, index) => (
-                <Form.Item
-                  {...restField}
-                  name={[name, ele.name]}
-                  key={index}
-                  className={'w-full'}
-                >
+                <Form.Item {...restField} name={[name, ele.name]} key={index} className={'w-full'}>
                   <input
                     className="border border-gray-400 rounded-xl w-full h-10 text-gray-600 bg-white px-4 ant-input"
                     placeholder={ele.placeholder}
