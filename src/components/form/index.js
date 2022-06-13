@@ -150,7 +150,7 @@ const Component = ({
                         }
                         key={index}
                       >
-                        {generateForm(column, key, [name, column.name])}
+                        {generateForm(column, index, [name, column.name])}
                       </div>
                     ))}
                     <i
