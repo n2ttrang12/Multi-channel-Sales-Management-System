@@ -665,9 +665,9 @@ const Component = ({
         {textSubmit && (
           <button
             className="bg-blue-500 text-white text-base p-2 w-full rounded-xl hover:bg-blue-400 mt-1"
-            type="button"
             id={idSubmit}
-            onClick={() => form.submit()}
+            type={form ? 'button' : 'submit'}
+            onClick={() => form && form.submit()}
           >
             {textSubmit}
           </button>
