@@ -150,7 +150,7 @@ const Component = ({
                         }
                         key={index}
                       >
-                        {generateForm(column, index)}
+                        {generateForm(column, key, [name, column.name])}
                       </div>
                     ))}
                     <i
@@ -306,7 +306,7 @@ const Component = ({
         );
     }
   };
-  const generateForm = (item, index) => {
+  const generateForm = (item, index, name) => {
     if (item.formItem) {
       if (item.formItem.type === 'title') {
         return <h4>{item.title}</h4>;
@@ -516,7 +516,7 @@ const Component = ({
       const otherProps = {
         key: index,
         label: item.title,
-        name: item.name,
+        name: name || item.name,
         labelAlign: 'left',
       };
       if (rules.length) {
