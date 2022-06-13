@@ -183,7 +183,7 @@ const Component = ({
         return (
           <Password
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
-            disabled={formItem.disabled && typeof values[item.name] !== 'undefined'}
+            disabled={formItem.disabled}
           />
         );
       case 'textarea':
@@ -192,7 +192,7 @@ const Component = ({
             className="ant-input px-4 py-3 w-full rounded-xl text-gray-600 bg-white border border-solid"
             rows="4"
             maxLength="1000"
-            disabled={formItem.disabled && typeof values[item.name] !== 'undefined'}
+            disabled={formItem.disabled}
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
           />
         );
@@ -256,14 +256,14 @@ const Component = ({
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             tag={formItem.tag}
             form={form}
-            disabled={formItem.disabled && typeof values[item.name] !== 'undefined'}
+            disabled={formItem.disabled}
           />
         );
       case 'chips':
         return (
           <Chips
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
-            disabled={formItem.disabled && typeof values[item.name] !== 'undefined'}
+            disabled={formItem.disabled}
           />
         );
       case 'select':
@@ -273,7 +273,7 @@ const Component = ({
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             formItem={formItem}
             form={form}
-            disabled={formItem.disabled && typeof values[item.name] !== 'undefined'}
+            disabled={formItem.disabled}
           />
         );
       case 'tree_select':
@@ -301,7 +301,7 @@ const Component = ({
             maxLength={formItem.maxLength}
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             onBlur={(e) => formItem.onBlur && formItem.onBlur(e, form)}
-            disabled={formItem.disabled && typeof values[item.name] !== 'undefined'}
+            disabled={formItem.disabled}
           />
         );
     }
