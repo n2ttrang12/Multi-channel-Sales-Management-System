@@ -87,7 +87,7 @@
     }
   },
   "layout": {
-    "footer": "React Software Ltd. ©{{year}}"
+    "footer": "Copyright ©{{year}} ARI Technology Co ., JSC. All rights reserved."
   },
   "routes": {
     "auth": {
