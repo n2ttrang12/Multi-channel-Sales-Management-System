@@ -210,7 +210,7 @@ const Component = ({
             {listFiles.length > 0
               ? prop.children ? prop.children : <Avatar size={150} src={listFiles[0][keyImage] || listFiles[0].thumbUrl} />
               : (
-              <div className="border-dashed border border-gray-300 rounded-2xl w-40 h-40 flex items-center justify-center">
+              <div className="avatar-uploader">
                 <i className="las la-plus la-3x" />
               </div>
             )}
