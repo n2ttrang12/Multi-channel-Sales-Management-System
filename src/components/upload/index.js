@@ -207,9 +207,9 @@ const Component = ({
         />
         <span onClick={() => ref.current.click()}>
           {onlyImage ? (<Spin spinning={isLoading}>
-            {listFiles.length > 0
-              ? prop.children ? prop.children : <Avatar size={150} src={listFiles[0][keyImage] || listFiles[0].thumbUrl} />
-              : prop.children ? prop.children : (
+            {prop.children
+              ? prop.children : listFiles.length > 0 ? <Avatar size={150} src={listFiles[0][keyImage] || listFiles[0].thumbUrl} />
+              : (
               <div className="avatar-uploader">
                 <i className="las la-plus la-3x" />
               </div>
