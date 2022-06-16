@@ -13,9 +13,14 @@ const Component = ({
   paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
   idElement = 'pagination',
   className = 'pagination',
+  firstPageDisabled = ({pageIndex}) => pageIndex - 10 < 0,
+  lastPageDisabled = ({pageIndex, lastIndex}) => pageIndex + 10 > lastIndex,
+  firstPage = ({pageIndex}) => pageIndex - 10,
+  lastPage = ({pageIndex}) => pageIndex + 10,
 }) => {
   const listOfPageItem = useRef([]);
   const [ranges, setRanges] = useState([]);
+  const [lastNumber, set_lastNumber] = useState(0);
   const buildIndexes = useCallback(() => {
     const lastIndex = getLastIndex(total, pageSize);
     listOfPageItem.current = getListOfPageItem(pageIndex, lastIndex);
@@ -41,13 +46,13 @@ const Component = ({
         index = pageIndex - 1;
         break;
       case 'prev_10':
-        index = pageIndex - 10;
+        index = firstPage({pageIndex, lastIndex: lastNumber});
         break;
       case 'next':
         index = pageIndex + 1;
         break;
       case 'next_10':
-        index = pageIndex + 10;
+        index = lastPage({pageIndex, lastIndex: lastNumber});
         break;
       default:
     }
@@ -58,7 +63,7 @@ const Component = ({
     const concatWithPrevNext = (listOfPage) => {
       const prev10Item = {
         type: 'prev_10',
-        disabled: pageIndex - 10 < 0,
+        disabled: firstPageDisabled({pageIndex, lastIndex}),
       };
       const prevItem = {
         type: 'prev',
@@ -70,8 +75,9 @@ const Component = ({
       };
       const next10Item = {
         type: 'next_10',
-        disabled: pageIndex + 10 > lastIndex,
+        disabled: lastPageDisabled({pageIndex, lastIndex}),
       };
+      set_lastNumber(listOfPage.length);
       return [prev10Item, prevItem, ...listOfPage, nextItem, next10Item];
     };
     const generatePage = (start, end) => {
@@ -86,6 +92,7 @@ const Component = ({
     };
 
     if (lastIndex <= 9) {
+      console.log(concatWithPrevNext(generatePage(1, lastIndex)));
       return concatWithPrevNext(generatePage(1, lastIndex));
     } else {
       const generateRangeItem = (selected, last) => {

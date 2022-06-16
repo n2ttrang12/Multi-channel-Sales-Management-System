@@ -371,6 +371,7 @@ const Hook = ({
                   }
                   paginationDescription={paginationDescription}
                   idElement={idElement}
+                  {...prop}
                 />
               )}
             </Fragment>
