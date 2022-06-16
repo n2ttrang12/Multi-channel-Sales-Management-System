@@ -21,12 +21,19 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1024);
+  const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1025);
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
 
   useEffect(() => {
+    if (window.innerWidth < 1024 && !isCollapsed) {
+      setTimeout(() => {
+        set_isCollapsed(true);
+      });
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     function handleResize() {
-      if (window.innerWidth < 1024 && !isCollapsed) {
+      if (window.innerWidth < 1025 && !isCollapsed) {
         set_isCollapsed(true);
       }
       if (window.innerWidth > 767 && !isDesktop) {
@@ -36,11 +43,6 @@ const Layout = ({ children }) => {
       }
     }
     window.addEventListener('resize', handleResize, true);
-    import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
-       new PerfectScrollbar(document.getElementById('root'), {
-        suppressScrollX: true,
-      });
-    });
     changeLanguage('vi');
 
     return () => window.removeEventListener('resize', handleResize, true);
@@ -153,7 +155,7 @@ const Layout = ({ children }) => {
         <Menu isCollapsed={isCollapsed} />
       </div>
       <div
-        className={classNames('bg-gray-100 ml-80 px-5 transition-all duration-300 ease-in-out z-10', {
+        className={classNames('bg-gray-100 px-5 transition-all duration-300 ease-in-out z-10', {
           'ml-80': !isCollapsed && isDesktop,
           'ml-20': isCollapsed && isDesktop,
         })}
