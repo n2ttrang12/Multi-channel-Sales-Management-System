@@ -9,11 +9,12 @@ export const UserService = {
   login: async (values) => {
     try {
       const { data } = await axios.post(`${routerLinks(UserService.nameLink, 'api')}/sign-in`, values);
+      if (data.message) Message.success({ text: data.message, title: 'Thành Công', cancelButtonText: 'Đóng' });
       return data;
     } catch (e) {
       console.error(e);
       if (e.response.data.message) {
-        Message.error({ text: e.response.data.message });
+        Message.error({ text: e.response.data.message, title: 'Thất bại', cancelButtonText: 'Đóng' });
       } else {
         Message.error('Có lỗi xảy ra trong quá trình đăng nhập');
       }
