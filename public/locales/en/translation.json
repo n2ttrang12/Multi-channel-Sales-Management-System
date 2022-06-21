@@ -54,9 +54,9 @@
       "onlyLettersAndDigitsAllowed": "Only letters and digits allowed"
     },
     "message": {
-      "Success": "Success",
-      "Fail": "Fail",
-      "Close": "Close"
+      "Success": "Thành công",
+      "Fail": "Thất bại",
+      "Close": "Đóng"
     }
   },
   "titles": {
