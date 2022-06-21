@@ -116,7 +116,7 @@ const Hook = ({
 
   const mount = useRef(false);
   const handleSearch = useCallback(async () => {
-    if (!!save || !!loadFirst) {
+    if (loadFirst) {
       const _data = {
         [pageIndex]: params[pageIndex],
         [pageSize]: params[pageSize],
