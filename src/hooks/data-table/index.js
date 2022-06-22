@@ -38,7 +38,7 @@ const Hook = ({
   xScroll = '100%',
   yScroll = null,
   emptyText = <div>No Data</div>,
-  loadFirst = false,
+  loadFirst = true,
   onRow = () => {},
   pageSizeOptions = [10, 20, 30, 40],
   pageSizeRender = (sizePage) => sizePage + ' / page',
@@ -56,10 +56,10 @@ const Hook = ({
     localStorage.getItem(idTable)
       ? JSON.parse(localStorage.getItem(idTable))
       : {
-          [pageIndex]: 1,
-          [pageSize]: 10,
-          ...defaultRequest,
-        },
+        [pageIndex]: 1,
+        [pageSize]: 10,
+        ...defaultRequest,
+      },
   );
 
   const { t } = useTranslation();
@@ -76,7 +76,16 @@ const Hook = ({
     async (request) => {
       if (request) {
         localStorage.setItem(idTable, JSON.stringify(request));
-        param.current = request;
+        param.current = { ...request };
+        if (save) {
+          if (request[sort]) {
+            request[sort] = JSON.stringify(request[sort]);
+          }
+          if (Object.keys(request[filter]).length > 0) {
+            request[filter] = JSON.stringify(request[filter]);
+          }
+          navigate(location.pathname + '?' + new URLSearchParams(request).toString());
+        }
       } else if (localStorage.getItem(idTable)) {
         param.current = JSON.parse(localStorage.getItem(idTable));
       }
@@ -103,8 +112,8 @@ const Hook = ({
   );
 
   const params =
-    save && location.search && location.search.indexOf(pageIndex + '=') > -1
-      ? getQueryStringParams(location.search)
+    save && location.search && location.search.indexOf('=') > -1
+      ? { ...param.current, ...getQueryStringParams(location.search) }
       : param.current;
 
   if (params[filter] && typeof params[filter] === 'string') {
@@ -117,14 +126,14 @@ const Hook = ({
   const mount = useRef(false);
   const handleSearch = useCallback(async () => {
     if (loadFirst) {
-      const _data = {
+      const _params = {
         [pageIndex]: params[pageIndex],
         [pageSize]: params[pageSize],
         [sort]: JSON.stringify(params[sort]),
         [filter]: JSON.stringify(params[filter]),
         [fullTextSearch]: params[fullTextSearch],
       };
-      await onChange(cleanObjectKeyNull(_data));
+      await onChange(cleanObjectKeyNull(_params));
     }
   }, [filter, fullTextSearch, loadFirst, onChange, pageIndex, pageSize, params, save, sort]);
 
@@ -277,20 +286,15 @@ const Hook = ({
     let tempPageIndex = pagination ? pagination.current : params[pageIndex];
     const tempPageSize = pagination ? pagination.pageSize : params[pageSize];
 
-    let tempSort =
+    const tempSort =
       sorts && sorts?.field && sorts?.order
         ? {
-            [sorts.field]: sorts.order === 'ascend' ? 'ASC' : sorts.order === 'descend' ? 'DESC' : '',
-          }
+          [sorts.field]: sorts.order === 'ascend' ? 'ASC' : sorts.order === 'descend' ? 'DESC' : '',
+        }
         : sorts?.field
-        ? null
-        : sorts;
-    if (tempSort) {
-      tempSort = JSON.stringify(tempSort);
-    }
+          ? null
+          : sorts;
 
-    let tempFilter = cleanObjectKeyNull(filters);
-    tempFilter = Object.keys(tempFilter).length === 0 ? null : JSON.stringify(tempFilter);
     if (tempFullTextSearch !== params[fullTextSearch]) {
       tempPageIndex = 1;
     }
@@ -298,12 +302,9 @@ const Hook = ({
       [pageIndex]: tempPageIndex,
       [pageSize]: tempPageSize,
       [sort]: tempSort,
-      [filter]: tempFilter,
+      [filter]: cleanObjectKeyNull(filters),
       [fullTextSearch]: tempFullTextSearch,
     });
-    if (save) {
-      navigate(location.pathname + '?' + new URLSearchParams(tempParams).toString());
-    }
     onChange && onChange(tempParams);
   };
 
@@ -380,6 +381,7 @@ const Hook = ({
         </div>
       );
     },
+    params,
   ];
 };
 export default Hook;
