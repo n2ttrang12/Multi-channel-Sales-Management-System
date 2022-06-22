@@ -81,7 +81,7 @@ const Hook = ({
           if (request[sort]) {
             request[sort] = JSON.stringify(request[sort]);
           }
-          if (Object.keys(request[filter]).length > 0) {
+          if (request[filter]) {
             request[filter] = JSON.stringify(request[filter]);
           }
           navigate(location.pathname + '?' + new URLSearchParams(request).toString());
