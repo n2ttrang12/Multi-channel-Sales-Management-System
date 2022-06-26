@@ -37,15 +37,19 @@ const Component = ({
   const { formatDate } = useAuth();
   const [isLoading, set_isLoading] = useState(false);
   const ref = useRef();
-  const [listFiles, set_listFiles] = useState(!onlyImage && typeof value === 'object'
-    ? value.map((_item) => {
-      if (_item.status) return _item;
-      return {
-        ..._item,
-        status: 'done',
-      };
-    })
-    : (typeof value === 'string' ? [{[keyImage]: value}] : value));
+  let [listFiles, set_listFiles] = useState(
+    !onlyImage && typeof value === 'object'
+      ? value.map((_item) => {
+          if (_item.status) return _item;
+          return {
+            ..._item,
+            status: 'done',
+          };
+        })
+      : typeof value === 'string'
+      ? [{ [keyImage]: value }]
+      : value,
+  );
 
   const handleDownload = async (file) => {
     const response = await axios.get(file[keyImage], { responseType: 'blob' });
@@ -66,8 +70,13 @@ const Component = ({
               status: 'done',
             };
           })
-        : (typeof value === 'string' ? [{[keyImage]: value}] : value);
-    if (JSON.stringify(listFiles) !== JSON.stringify(tempData) && listFiles.filter(item => item.status === 'uploading').length === 0) {
+        : typeof value === 'string'
+        ? [{ [keyImage]: value }]
+        : value;
+    if (
+      JSON.stringify(listFiles) !== JSON.stringify(tempData) &&
+      listFiles.filter((item) => item.status === 'uploading').length === 0
+    ) {
       // set_listFiles(tempData);
       setTimeout(() => {
         import('glightbox').then(({ default: GLightbox }) => GLightbox());
@@ -81,16 +90,15 @@ const Component = ({
     });
   }, []);
 
-
   const onUpload = async ({ target }) => {
+    set_isLoading(true);
     for (let i = 0; i < target.files.length; i++) {
       const file = target.files[i];
       if (maxSize && file.size > maxSize * 1024 * 1024) {
         await Message.warning({
-          text: `${file.name} (${(file.size / (1024 * 1024)).toFixed(1)}mb): ${t(
-            'components.form.ruleMaxSize',
-            { max: maxSize },
-          )}`,
+          text: `${file.name} (${(file.size / (1024 * 1024)).toFixed(1)}mb): ${t('components.form.ruleMaxSize', {
+            max: maxSize,
+          })}`,
         });
         return false;
       }
@@ -118,13 +126,12 @@ const Component = ({
       };
       if (onlyImage) {
         listFiles[0] = dataFile;
-      }else {
+      } else {
         listFiles.push(dataFile);
       }
-      set_listFiles([...listFiles]);
+      set_listFiles(listFiles);
 
       if (action) {
-        set_isLoading(true);
         if (typeof action === 'string') {
           const bodyFormData = new FormData();
           bodyFormData.append('file', file);
@@ -134,68 +141,67 @@ const Component = ({
               method,
               url: action,
               data: bodyFormData,
-              onUploadProgress: function (event) {
-                set_listFiles([
-                  ...listFiles.map((item) => {
-                    if (item.id === dataFile.id) {
-                      item.percent = parseInt((event.loaded / event.total) * 100);
-                      item.status = item.percent === 100 ? 'done' : 'uploading';
-                    }
-                    return item;
-                  }),
-                ]);
+              onUploadProgress: (event) => {
+                listFiles = listFiles.map((item) => {
+                  if (item.id === dataFile.id) {
+                    item.percent = parseInt((event.loaded / event.total) * 100);
+                    item.status = item.percent === 100 ? 'done' : 'uploading';
+                  }
+                  return item;
+                });
+                set_listFiles(listFiles);
               },
             });
-            set_isLoading(false);
-            onChange(!onlyImage ? [
-              ...listFiles.map((item) => {
-                if (item.id === dataFile.id) {
-                  return {...item, ...data.data, status: 'done'};
-                }
-                return item;
-              })
-            ] : [{...data.data, status: 'done'}]);
+            listFiles = !onlyImage
+              ? listFiles.map((item) => {
+                  if (item.id === dataFile.id) {
+                    item = { ...item, ...data.data, status: 'done' };
+                  }
+                  return item;
+                })
+              : [{ ...data.data, status: 'done' }];
+            set_listFiles(listFiles);
+            await onChange(listFiles);
           } catch (e) {
-            set_isLoading(false);
             if (e.response.data.message) Message.error({ text: e.response.data.message });
             set_listFiles(listFiles.filter((_item) => _item.id !== dataFile.id));
           }
         } else {
           try {
             const data = await action(file, {
-              onUploadProgress: function (event) {
-                set_listFiles([
-                  ...listFiles.map((item) => {
-                    if (item.id === dataFile.id) {
-                      item.percent = parseInt((event.loaded / event.total) * 100);
-                    }
-                    return item;
-                  }),
-                ]);
+              onUploadProgress: (event) => {
+                listFiles = listFiles.map((item) => {
+                  if (item.id === dataFile.id) {
+                    item.percent = parseInt((event.loaded / event.total) * 100);
+                    item.status = item.percent === 100 ? 'done' : 'uploading';
+                  }
+                  return item;
+                });
+                set_listFiles(listFiles);
               },
             });
-            set_isLoading(false);
-            onChange(!onlyImage ? [
-              ...listFiles.map((item) => {
-                if (item.id === dataFile.id) {
-                  return {...item, ...data.data, status: 'done'};
-                }
-                return item;
-              })
-            ] : [{...data.data, status: 'done'}]);
-          } catch (e) {
-            set_isLoading(false);
-          }
+            listFiles = !onlyImage
+              ? listFiles.map((item) => {
+                  if (item.id === dataFile.id) {
+                    item = { ...item, ...data.data, status: 'done' };
+                  }
+                  return item;
+                })
+              : [{ ...data.data, status: 'done' }];
+            set_listFiles(listFiles);
+            await onChange(listFiles);
+          } catch (e) {}
         }
         setTimeout(() => {
           import('glightbox').then(({ default: GLightbox }) => new GLightbox());
         });
       }
     }
+    set_isLoading(false);
     ref.current.value = '';
-  }
+  };
   return (
-    <div>
+    <Spin spinning={isLoading}>
       <div className={classNames({ 'text-right': right })}>
         <input
           type="file"
@@ -206,15 +212,18 @@ const Component = ({
           onChange={onUpload}
         />
         <span onClick={() => ref.current.click()}>
-          {onlyImage ? (<Spin spinning={isLoading}>
-            {prop.children
-              ? prop.children : listFiles.length > 0 ? <Avatar size={150} src={listFiles[0][keyImage] || listFiles[0].thumbUrl} />
-              : (
-              <div className="border-dashed border border-gray-300 rounded-2xl w-40 h-40 flex items-center justify-center">
-                <i className="las la-plus la-3x" />
-              </div>
-            )}
-            </Spin>
+          {onlyImage ? (
+            <div>
+              {prop.children ? (
+                prop.children
+              ) : listFiles.length > 0 ? (
+                <Avatar size={150} src={listFiles[0][keyImage] || listFiles[0].thumbUrl} />
+              ) : (
+                <div className="border-dashed border border-gray-300 rounded-2xl w-40 h-40 flex items-center justify-center">
+                  <i className="las la-plus la-3x" />
+                </div>
+              )}
+            </div>
           ) : (
             showBtnUpload && (
               <button
@@ -237,7 +246,7 @@ const Component = ({
                 'bg-yellow-100': file.status === 'error',
               })}
             >
-              <Spin spinning={file.status === 'uploading'} className={'w-20'}>
+              <div className={'w-20'}>
                 <a href={file[keyImage]} className="glightbox">
                   <img
                     className={'object-cover object-center h-20 w-20'}
@@ -246,7 +255,7 @@ const Component = ({
                   />
                   {/* <i className="las la-play-circle text-8xl px-6 mr-1" /> */}
                 </a>
-              </Spin>
+              </div>
               <div className="flex-1 flex items-center relative">
                 <div className={'pl-5'}>
                   <strong>{file?.fileName ? file.fileName : file.name}</strong>
@@ -254,13 +263,9 @@ const Component = ({
                   {(file?.createdDate || file.lastModified) && (
                     <div>
                       Added{' '}
-                      {moment(
-                        file?.createdDate ? file.createdDate : file.lastModified,
-                      ).format(formatDate + ' - HH:mm')}{' '}
+                      {moment(file?.createdDate ? file.createdDate : file.lastModified).format(formatDate + ' - HH:mm')}{' '}
                       |&nbsp;
-                      {typeof file.size === 'number'
-                        ? (file.size / (1024 * 1024)).toFixed(2) + 'MB'
-                        : file.size}
+                      {typeof file.size === 'number' ? (file.size / (1024 * 1024)).toFixed(2) + 'MB' : file.size}
                     </div>
                   )}
                   {file.status === 'uploading' && <Progress percent={file.percent} />}
@@ -307,7 +312,7 @@ const Component = ({
             </div>
           ))}
       </div>
-    </div>
+    </Spin>
   );
 };
 export default Component;

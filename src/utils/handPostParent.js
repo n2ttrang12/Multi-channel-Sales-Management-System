@@ -30,17 +30,15 @@ const Util = async (url, { data, requestDelete }) => {
   const newData = await loop(data);
   if (requestPut.length > 0) {
     const { data } = await axios.put(url, requestPut);
-    // + "all"
-    if (data.message) await Message.success(data.message);
+    if (data.message) await Message.success({ text: data.message });
   }
   if (requestPost.length > 0) {
     const { data } = await axios.post(url, requestPost);
-    if (data.message) await Message.success(data.message);
+    if (data.message) await Message.success({ text: data.message });
   }
   if (requestDelete.length > 0) {
-    // + "all"
     const { data } = await axios.delete(url, { params: requestDelete });
-    if (data.message) await Message.success(data.message);
+    if (data.message) await Message.success({ text: data.message });
   }
   return newData;
 };

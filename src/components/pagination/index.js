@@ -13,10 +13,10 @@ const Component = ({
   paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
   idElement = 'pagination',
   className = 'pagination',
-  firstPageDisabled = ({pageIndex}) => pageIndex - 10 < 0,
-  lastPageDisabled = ({pageIndex, lastIndex}) => pageIndex + 10 > lastIndex,
-  firstPage = ({pageIndex}) => pageIndex - 10,
-  lastPage = ({pageIndex}) => pageIndex + 10,
+  firstPageDisabled = ({ pageIndex }) => pageIndex - 10 < 0,
+  lastPageDisabled = ({ pageIndex, lastIndex }) => pageIndex + 10 > lastIndex,
+  firstPage = ({ pageIndex }) => pageIndex - 10,
+  lastPage = ({ pageIndex }) => pageIndex + 10,
 }) => {
   const listOfPageItem = useRef([]);
   const [ranges, setRanges] = useState([]);
@@ -46,13 +46,13 @@ const Component = ({
         index = pageIndex - 1;
         break;
       case 'prev_10':
-        index = firstPage({pageIndex, lastIndex: lastNumber});
+        index = firstPage({ pageIndex, lastIndex: lastNumber });
         break;
       case 'next':
         index = pageIndex + 1;
         break;
       case 'next_10':
-        index = lastPage({pageIndex, lastIndex: lastNumber});
+        index = lastPage({ pageIndex, lastIndex: lastNumber });
         break;
       default:
     }
@@ -63,7 +63,7 @@ const Component = ({
     const concatWithPrevNext = (listOfPage) => {
       const prev10Item = {
         type: 'prev_10',
-        disabled: firstPageDisabled({pageIndex, lastIndex}),
+        disabled: firstPageDisabled({ pageIndex, lastIndex }),
       };
       const prevItem = {
         type: 'prev',
@@ -75,7 +75,7 @@ const Component = ({
       };
       const next10Item = {
         type: 'next_10',
-        disabled: lastPageDisabled({pageIndex, lastIndex}),
+        disabled: lastPageDisabled({ pageIndex, lastIndex }),
       };
       set_lastNumber(listOfPage.length);
       return [prev10Item, prevItem, ...listOfPage, nextItem, next10Item];

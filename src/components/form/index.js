@@ -572,56 +572,17 @@ const Component = ({
   ));
 
   const handFinish = (values) => {
-    values = convertFormValue(columns, values, form);
+    values = convertFormValue(columns, values);
     handSubmit && handSubmit(values);
   };
 
-  const handleConvertData = (values) => {
-    columns
-      .filter(
-        (item) => !!item && !!item.formItem,
-        // && (!item.formItem.condition || item.formItem.condition(values, form))
-      )
-      .map((item) => {
-        if (item.formItem && item.formItem.convert && values[item.name]) {
-          values[item.name] = item.formItem.convert(values[item.name]);
-        } else {
-          switch (item.formItem.type) {
-            case 'date':
-              if (values && values[item.name]) {
-                values[item.name] = moment(values[item.name]);
-              } else if (item.formItem.value) {
-                values[item.name] = moment(item.value);
-              }
-              break;
-            case 'date_range':
-              if (values && values[item.name]) {
-                values[item.name] = [moment(values[item.name][0]), moment(values[item.name][1])];
-              }
-              break;
-            case 'number':
-              if (values[item.name]) {
-                values[item.name] = parseFloat(values[item.name]);
-              }
-              break;
-            default:
-              if (!values[item.name]) {
-                values[item.name] = item.value;
-              }
-              break;
-          }
-        }
-        return item;
-      });
-    return values;
-  };
   return (
     <Form
       className={className}
       form={form}
       layout={!widthLabel ? 'vertical' : 'horizontal'}
       onFinish={handFinish}
-      initialValues={handleConvertData(values)}
+      initialValues={convertFormValue(columns, values)}
       onValuesChange={async (objValue) => {
         onFirstChange();
         if (form && checkHidden) {

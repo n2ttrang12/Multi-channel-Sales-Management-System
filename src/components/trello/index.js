@@ -44,10 +44,10 @@ const Component = ({
     localStorage.getItem(idTable)
       ? JSON.parse(localStorage.getItem(idTable))
       : {
-        [pageIndex]: 1,
-        [pageSize]: 10,
-        ...defaultRequest,
-      },
+          [pageIndex]: 1,
+          [pageSize]: 10,
+          ...defaultRequest,
+        },
   );
 
   const params =
@@ -128,10 +128,10 @@ const Component = ({
               data.splice(payload, 1);
               data.splice(addedIndex, 0, column);
               !!ChangeColumn &&
-              (await ChangeColumn(
-                idRequest,
-                data.map((item, index) => ({ id: item.id, position: index })),
-              ));
+                (await ChangeColumn(
+                  idRequest,
+                  data.map((item, index) => ({ id: item.id, position: index })),
+                ));
             },
           });
         }

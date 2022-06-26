@@ -56,10 +56,10 @@ const Hook = ({
     localStorage.getItem(idTable)
       ? JSON.parse(localStorage.getItem(idTable))
       : {
-        [pageIndex]: 1,
-        [pageSize]: 10,
-        ...defaultRequest,
-      },
+          [pageIndex]: 1,
+          [pageSize]: 10,
+          ...defaultRequest,
+        },
   );
 
   const { t } = useTranslation();
@@ -289,11 +289,11 @@ const Hook = ({
     const tempSort =
       sorts && sorts?.field && sorts?.order
         ? {
-          [sorts.field]: sorts.order === 'ascend' ? 'ASC' : sorts.order === 'descend' ? 'DESC' : '',
-        }
+            [sorts.field]: sorts.order === 'ascend' ? 'ASC' : sorts.order === 'descend' ? 'DESC' : '',
+          }
         : sorts?.field
-          ? null
-          : sorts;
+        ? null
+        : sorts;
 
     if (tempFullTextSearch !== params[fullTextSearch]) {
       tempPageIndex = 1;

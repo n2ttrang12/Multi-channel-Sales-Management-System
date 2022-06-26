@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from "classnames";
+import classNames from 'classnames';
 
 const Component = ({ onChange, value = [], placeholder, disabled, ...prop }) => {
   const handleKeyDown = (event) => {
@@ -14,7 +14,7 @@ const Component = ({ onChange, value = [], placeholder, disabled, ...prop }) => 
     <div
       className={classNames(
         'chips flex flex-wrap bg-white rounded-xl border px-4 border-solid border-gray-300 py-1.5 min-h-[2.65rem] items-center',
-        {'bg-gray-100': disabled}
+        { 'bg-gray-100': disabled },
       )}
     >
       {value.map((item, index) => (

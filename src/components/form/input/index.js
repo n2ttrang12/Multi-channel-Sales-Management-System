@@ -9,15 +9,4 @@ import Select from './select';
 import TreeSelect from './tree-select';
 import TableTransfer from './table-transfer';
 
-export {
-  ColorButton,
-  Chips,
-  Editor,
-  DatePicker,
-  Password,
-  Mask,
-  SelectTag,
-  Select,
-  TreeSelect,
-  TableTransfer,
-};
+export { ColorButton, Chips, Editor, DatePicker, Password, Mask, SelectTag, Select, TreeSelect, TableTransfer };
