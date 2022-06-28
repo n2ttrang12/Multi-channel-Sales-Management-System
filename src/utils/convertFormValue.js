@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const Util = (columns, values) => {
+const Util = (columns, values, exportData = true) => {
   columns
     .filter((item) => !!item && !!item.formItem)
     .map((item) => {
@@ -86,26 +86,34 @@ const Util = (columns, values) => {
                 switch (item.name.length) {
                   case 2:
                     if (values[item.name[0]][item.name[1]]) {
-                      values[item.name[0]][item.name[1]] = moment(values[item.name[0]][item.name[1]]).format(
-                        'YYYY-MM-DDTHH:mm:ss[Z]',
-                      );
+                      values[item.name[0]][item.name[1]] = moment(values[item.name[0]][item.name[1]])
+                      if (exportData) {
+                        values[item.name[0]][item.name[1]] = values[item.name[0]][item.name[1]].format('YYYY-MM-DDTHH:mm:ss[Z]',);
+                      }
                     }
                     break;
                   case 3:
                     if (values[item.name[0]][item.name[1]]) {
-                      values[item.name[0]][item.name[1]][item.name[2]] = moment(
-                        values[item.name[0]][item.name[1]][item.name[2]],
-                      ).format('YYYY-MM-DDTHH:mm:ss[Z]');
+                      values[item.name[0]][item.name[1]][item.name[2]] = moment(values[item.name[0]][item.name[1]][item.name[2]])
+                      if (exportData) {
+                        values[item.name[0]][item.name[1]][item.name[2]]  = values[item.name[0]][item.name[1]][item.name[2]].format('YYYY-MM-DDTHH:mm:ss[Z]',);
+                      }
                     }
                     break;
                   default:
                     if (values[item.name[0]]) {
-                      values[item.name[0]] = moment(values[item.name[0]]).format('YYYY-MM-DDTHH:mm:ss[Z]');
+                      values[item.name[0]] = moment(values[item.name[0]]);
+                      if (exportData) {
+                        values[item.name[0]]  = values[item.name[0]].format('YYYY-MM-DDTHH:mm:ss[Z]',);
+                      }
                     }
                     break;
                 }
               } else {
-                values[item.name] = moment(values[item.name]).format('YYYY-MM-DDTHH:mm:ss[Z]');
+                values[item.name] = moment(values[item.name])
+                if (exportData) {
+                  values[item.name] = values[item.name].format('YYYY-MM-DDTHH:mm:ss[Z]');
+                }
               }
             }
             break;
@@ -115,41 +123,97 @@ const Util = (columns, values) => {
                 switch (item.name.length) {
                   case 2:
                     if (values[item.name[0]][item.name[1]]) {
-                      values[item.name[0]][item.name[1]] = [
-                        moment(values[item.name[0]][item.name[1]][0]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
-                        moment(values[item.name[0]][item.name[1]][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
-                      ];
+                      if (exportData) {
+                        values[item.name[0]][item.name[1]] = [
+                          moment(values[item.name[0]][item.name[1]][0]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
+                          moment(values[item.name[0]][item.name[1]][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
+                        ];
+                      } else {
+                        values[item.name[0]][item.name[1]] = [
+                          moment(values[item.name[0]][item.name[1]][0]),
+                          moment(values[item.name[0]][item.name[1]][1]),
+                        ];
+                      }
                     }
                     break;
                   case 3:
                     if (values[item.name[0]][item.name[1]][item.name[2]]) {
-                      values[item.name[0]][item.name[1]][item.name[2]] = [
-                        moment(values[item.name[0]][item.name[1]][item.name[2]][0]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
-                        moment(values[item.name[0]][item.name[1]][item.name[2]][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
-                      ];
+                      if (exportData) {
+                        values[item.name[0]][item.name[1]][item.name[2]] = [
+                          moment(values[item.name[0]][item.name[1]][item.name[2]][0]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
+                          moment(values[item.name[0]][item.name[1]][item.name[2]][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
+                        ];
+                      } else {
+                        values[item.name[0]][item.name[1]][item.name[2]] = [
+                          moment(values[item.name[0]][item.name[1]][item.name[2]][0]),
+                          moment(values[item.name[0]][item.name[1]][item.name[2]][1]),
+                        ];
+                      }
                     }
                     break;
                   default:
                     if (values[item.name[0]]) {
-                      values[item.name[0]] = [
-                        moment(values[item.name[0]][0]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
-                        moment(values[item.name[0]][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
-                      ];
+                      if (exportData) {
+                        values[item.name[0]] = [
+                          moment(values[item.name[0]][0]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
+                          moment(values[item.name[0]][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
+                        ];
+                      } else {
+                        values[item.name[0]] = [
+                          moment(values[item.name[0]][0]),
+                          moment(values[item.name[0]][1]),
+                        ];
+                      }
                     }
                     break;
                 }
               } else {
-                values[item.name] = [
-                  moment(values[item.name][0]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
-                  moment(values[item.name][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
-                ];
+                if (exportData) {
+                  values[item.name] = [
+                    moment(values[item.name][0]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
+                    moment(values[item.name][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
+                  ];
+                } else {
+                  values[item.name] = [
+                    moment(values[item.name][0]),
+                    moment(values[item.name][1]),
+                  ];
+                }
+
+              }
+            }
+            break;
+          case "number":
+            if (!exportData && values && (values[item.name] || typeof item.name === 'object')) {
+              if (typeof item.name === 'object' && item.name.length) {
+                switch (item.name.length) {
+                  case 2:
+                    if (values[item.name[0]][item.name[1]]) {
+                      values[item.name[0]][item.name[1]] = parseFloat(values[item.name[0]][item.name[1]]);
+                    }
+                    break;
+                  case 3:
+                    if (values[item.name[0]][item.name[1]][item.name[2]]) {
+                      values[item.name[0]][item.name[1]][item.name[2]] = parseFloat(values[item.name[0]][item.name[1]][item.name[3]]);
+                    }
+                    break;
+                  default:
+                    if (values[item.name[0]]) {
+                      values[item.name[0]] = parseFloat(values[item.name[0]]);
+                    }
+                    break;
+                }
+              } else {
+                if (values[item.name]) {
+                  values[item.name] = parseFloat(values[item.name]);
+                }
               }
             }
             break;
         }
       }
-    return item;
-  });
+      return item;
+    });
   return values;
 };
 export default Util;

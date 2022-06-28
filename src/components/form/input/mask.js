@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
-const Component = ({ mask, addonBefore, addonAfter, ...prop }) => {
+const Component = ({ mask, addonBefore, addonAfter, form, ...prop }) => {
   const input = useRef();
-
+  if (prop.condition) {
+    delete prop.condition;
+  }
   useEffect(() => {
     if (mask) {
       import('inputmask').then(({ default: Inputmask }) => Inputmask(mask).mask(input.current));
@@ -11,7 +13,7 @@ const Component = ({ mask, addonBefore, addonAfter, ...prop }) => {
   }, [mask]);
   return (
     <div className={'border rounded-xl ant-input flex items-center'}>
-      {!!addonBefore && <div className={'h-10 rounded-l-xl bg-gray-200 p-2'}>{addonBefore}</div>}
+      {!!addonBefore && <div>{addonBefore(form)}</div>}
       <input
         ref={input}
         className={classNames('w-full h-10 text-gray-600 bg-white pr-9 pl-4 ant-input', {
@@ -22,7 +24,7 @@ const Component = ({ mask, addonBefore, addonAfter, ...prop }) => {
         })}
         {...prop}
       />
-      {!!addonAfter && <div className={'h-10 rounded-r-xl bg-gray-200 p-2'}>{addonAfter}</div>}
+      {!!addonAfter && <div>{addonAfter(form)}</div>}
     </div>
   );
 };

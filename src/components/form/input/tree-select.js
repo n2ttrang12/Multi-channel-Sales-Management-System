@@ -43,10 +43,10 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
         await loadData('');
       }
     }
-    if (value.length > 0 && value.length === allValue.current.length) {
+    if (value?.length > 0 && value?.length === allValue.current.length) {
       set_checkAll(true);
       set_unCheckAll(false);
-    } else if (value.length === 0) {
+    } else if (value?.length === 0) {
       set_checkAll(false);
       set_unCheckAll(true);
     } else {

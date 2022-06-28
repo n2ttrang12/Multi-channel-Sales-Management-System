@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, {Fragment, useCallback, useEffect, useRef, useState} from 'react';
 import { Form, Checkbox, Radio, Switch, Slider, DatePicker as DateAntDesign } from 'antd';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
@@ -41,6 +41,7 @@ const Component = ({
   const { t } = useTranslation();
   const { formatDate } = useAuth();
   const [_columns, set_columns] = useState([]);
+  const timeout = useRef();
 
   const handleFilter = useCallback(async () => {
     let $columns = [];
@@ -77,6 +78,7 @@ const Component = ({
 
         if (item.formItem.type === 'password' && !!item.formItem.confirm) {
           const rules = [
+            { type: 'required' },
             {
               type: 'custom',
               validator: ({ getFieldValue }) => ({
@@ -89,9 +91,6 @@ const Component = ({
               }),
             },
           ];
-          if (item.formItem.confirmRequired) {
-            rules.push({ type: 'required' });
-          }
           const confirmItem = {
             name: 'confirm' + item.name,
             title: t('components.form.confirm') + ' ' + item.title.toLowerCase(),
@@ -106,7 +105,7 @@ const Component = ({
         }
         return item;
       });
-    if (JSON.stringify(_columns) !== JSON.stringify($columns)) {
+    if (JSON.stringify(_columns.map(item => item.name)) !== JSON.stringify($columns.map(item => item.name))) {
       set_columns($columns);
     }
   }, [columns, values, _columns, form, t]);
@@ -294,6 +293,7 @@ const Component = ({
       default:
         return (
           <Mask
+            form={form}
             mask={formItem.mask}
             addonBefore={formItem.addonBefore}
             addonAfter={formItem.addonAfter}
@@ -532,15 +532,9 @@ const Component = ({
         otherProps.hidden = true;
       }
 
-      // return (
-      //   <Form.Item {...otherProps}>
-      //     {generateInput(item.formItem, item, values)}
-      //   </Form.Item>
-      // );
       return item.formItem.type !== 'addable' ? (
         <Form.Item {...otherProps} className={item.formItem.wrapClassName}>
           {generateInput(item.formItem, item, values)}
-          {/* {item?.formItem?.additional? (<span className="ant-form-text ml-2">{item.formItem.additional}</span>) : null} */}
         </Form.Item>
       ) : (
         generateInput(item.formItem, item, values)
@@ -581,22 +575,25 @@ const Component = ({
       form={form}
       layout={!widthLabel ? 'vertical' : 'horizontal'}
       onFinish={handFinish}
-      initialValues={convertFormValue(columns, values)}
+      initialValues={convertFormValue(columns, values, false)}
       onValuesChange={async (objValue) => {
         onFirstChange();
         if (form && checkHidden) {
-          for (const key in objValue) {
-            if (Object.prototype.hasOwnProperty.call(objValue, key)) {
-              columns
-                .filter((_item) => _item.name === key)
-                .forEach((item) => {
-                  if (item.formItem && item.formItem.onChange) {
-                    item.formItem.onChange(objValue[key], form);
-                  }
-                });
+          clearTimeout(timeout.current)
+          timeout.current = setTimeout(async () => {
+            for (const key in objValue) {
+              if (Object.prototype.hasOwnProperty.call(objValue, key)) {
+                columns
+                  .filter((_item) => _item.name === key)
+                  .forEach((item) => {
+                    if (item.formItem && item.formItem.onChange) {
+                      item.formItem.onChange(objValue[key], form);
+                    }
+                  });
+              }
             }
-          }
-          await handleFilter({ ...values, ...form.getFieldsValue() });
+            await handleFilter({ ...values, ...form.getFieldsValue() });
+          }, 500)
         }
       }}
     >
