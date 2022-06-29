@@ -118,7 +118,7 @@ const Util = (columns, values, exportData = true) => {
             }
             break;
           case 'date_range':
-            if (values[item.name] || typeof item.name === 'object') {
+            if (!!values[item.name] || typeof item.name === 'object') {
               if (typeof item.name === 'object' && item.name.length) {
                 switch (item.name.length) {
                   case 2:
