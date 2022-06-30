@@ -5,7 +5,6 @@ import axios from 'axios';
 const Component = ({ formItem, placeholder, onChange, value, form }) => {
   const [_list, set_list] = useState(formItem.list || []);
   const [checkAll, set_checkAll] = useState(false);
-  const [unCheckAll, set_unCheckAll] = useState(false);
   const allValue = useRef([]);
 
   const loadData = useCallback(
@@ -45,13 +44,10 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
     }
     if (value?.length > 0 && value?.length === allValue.current.length) {
       set_checkAll(true);
-      set_unCheckAll(false);
     } else if (value?.length === 0) {
       set_checkAll(false);
-      set_unCheckAll(true);
     } else {
       set_checkAll(false);
-      set_unCheckAll(false);
     }
   }, [formItem, loadData, _list, allValue, value, onChange]);
 
@@ -143,11 +139,8 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
         <Fragment>
           {formItem.mode === 'multiple' && (
             <Fragment>
-              <Checkbox checked={checkAll} onChange={() => onChange(allValue.current)}>
+              <Checkbox checked={checkAll} onChange={() => !checkAll ? onChange(allValue.current) : onChange([])}>
                 Select all
-              </Checkbox>
-              <Checkbox checked={unCheckAll} onChange={() => onChange([])}>
-                Deselect all
               </Checkbox>
             </Fragment>
           )}
@@ -155,7 +148,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
         </Fragment>
       )}
       labelInValue={true}
-      value={value || []}
+      value={value}
       placeholder={placeholder}
       treeCheckable={formItem.mode === 'multiple'}
       loadData={loadDataTree}

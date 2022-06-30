@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
-const Component = ({ mask, addonBefore, addonAfter, form, ...prop }) => {
+const Component = ({ mask, value, addonBefore, addonAfter, form, ...prop }) => {
   const input = useRef();
   if (prop.condition) {
     delete prop.condition;
@@ -22,6 +22,7 @@ const Component = ({ mask, addonBefore, addonAfter, form, ...prop }) => {
           'rounded-r-xl border-l': !!addonBefore && !addonAfter,
           'border-r border-l': !!addonBefore && !!addonAfter,
         })}
+        value={value || ''}
         {...prop}
       />
       {!!addonAfter && <div>{addonAfter(form)}</div>}

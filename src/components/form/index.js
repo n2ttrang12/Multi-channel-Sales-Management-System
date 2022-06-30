@@ -571,6 +571,7 @@ const Component = ({
 
   return (
     <Form
+      validateTrigger="onBlur"
       className={className}
       form={form}
       layout={!widthLabel ? 'vertical' : 'horizontal'}

@@ -61,6 +61,7 @@ const Hook = ({
           ...defaultRequest,
         },
   );
+  const timeoutSearch = useRef()
 
   const { t } = useTranslation();
   const location = useLocation();
@@ -78,10 +79,10 @@ const Hook = ({
         localStorage.setItem(idTable, JSON.stringify(request));
         param.current = { ...request };
         if (save) {
-          if (request[sort]) {
+          if (request[sort] && typeof request[sort] === 'object') {
             request[sort] = JSON.stringify(request[sort]);
           }
-          if (request[filter]) {
+          if (request[filter] && typeof request[filter] === 'object') {
             request[filter] = JSON.stringify(request[filter]);
           }
           navigate(location.pathname + '?' + new URLSearchParams(request).toString());
@@ -328,9 +329,38 @@ const Hook = ({
                   defaultValue={params.fullTextSearch}
                   type="text"
                   placeholder={searchPlaceholder || t('components.datatable.pleaseEnterValueToSearch')}
-                  onChange={(event) => handleTableChange(null, params[filter], params[sort], event.target.value)}
+                  onChange={() => {
+                    clearTimeout(timeoutSearch.current);
+                    timeoutSearch.current = setTimeout(() => {
+                      handleTableChange(
+                        null,
+                        params[filter],
+                        params[sort],
+                        document.getElementById(idElement + '_input_search').value
+                      );
+                    }, 500)
+                  }}
+                  onKeyPress={(e) => {
+                    e.key === "Enter" && handleTableChange(
+                      null,
+                      params[filter],
+                      params[sort],
+                      document.getElementById(idElement + '_input_search').value
+                    );
+                  }}
                 />
-                <i className="text-lg las la-search absolute top-1.5 right-3 z-10" />
+                <i
+                  className={classNames('text-lg las absolute top-1.5 right-3 z-10', {
+                    'la-search': !params.fullTextSearch,
+                    'la-times': !!params.fullTextSearch,
+                  })}
+                  onClick={() => {
+                    if (params.fullTextSearch) {
+                      document.getElementById(idElement + '_input_search').value = '';
+                      handleTableChange(null, params[filter], params[sort], null);
+                    }
+                  }}
+                />
               </div>
             )}
             {!!leftHeader && <div>{leftHeader}</div>}

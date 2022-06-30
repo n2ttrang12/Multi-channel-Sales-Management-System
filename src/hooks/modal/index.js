@@ -47,6 +47,7 @@ const Hook = ({
     handleShow,
     (children) => (
       <Modal
+        maskClosable={false}
         destroyOnClose={true}
         centered={true}
         width={widthModal}
