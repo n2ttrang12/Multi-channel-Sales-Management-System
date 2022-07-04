@@ -61,9 +61,15 @@ main {
 
 .ant-form-item-control-input-content{
   input{
-    @apply bg-gray-100;
+    @apply bg-white;
+  }
+  input:disabled{
+    @apply !bg-gray-100;
   }
   .ant-select-selector{
+    @apply bg-white;
+  }
+  .ant-select-selector:disabled{
     @apply !bg-gray-100;
   }
 }
