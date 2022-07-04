@@ -16,7 +16,7 @@ const Component = ({ formItem, placeholder, form, onChange, value, ...prop }) =>
                 ? formItem.api.params(form.getFieldValue, fullTextSearch, value)
                 : { fullTextSearch },
             });
-            set_list(data.data.map(formItem.api.format));
+            set_list(data.data.map(formItem.api.format).filter(item => !!item.value));
           }
         }
       } else if (formItem.renderList) {

@@ -86,33 +86,42 @@ const Util = (columns, values, exportData = true) => {
                 switch (item.name.length) {
                   case 2:
                     if (values[item.name[0]][item.name[1]]) {
-                      values[item.name[0]][item.name[1]] = moment(values[item.name[0]][item.name[1]])
                       if (exportData) {
-                        values[item.name[0]][item.name[1]] = values[item.name[0]][item.name[1]].format('YYYY-MM-DDTHH:mm:ss[Z]',);
+                        values[item.name[0]][item.name[1]] =
+                          values[item.name[0]][item.name[1]].format('YYYY-MM-DDTHH:mm:ss[Z]');
+                      } else {
+                        values[item.name[0]][item.name[1]] = moment(values[item.name[0]][item.name[1]]).utc();
                       }
                     }
                     break;
                   case 3:
                     if (values[item.name[0]][item.name[1]]) {
-                      values[item.name[0]][item.name[1]][item.name[2]] = moment(values[item.name[0]][item.name[1]][item.name[2]])
+
                       if (exportData) {
-                        values[item.name[0]][item.name[1]][item.name[2]]  = values[item.name[0]][item.name[1]][item.name[2]].format('YYYY-MM-DDTHH:mm:ss[Z]',);
+                        values[item.name[0]][item.name[1]][item.name[2]] =
+                          values[item.name[0]][item.name[1]][item.name[2]].format('YYYY-MM-DDTHH:mm:ss[Z]');
+                      } else {
+                        values[item.name[0]][item.name[1]][item.name[2]] = moment(
+                          values[item.name[0]][item.name[1]][item.name[2]],
+                        ).utc();
                       }
                     }
                     break;
                   default:
                     if (values[item.name[0]]) {
-                      values[item.name[0]] = moment(values[item.name[0]]);
                       if (exportData) {
-                        values[item.name[0]]  = values[item.name[0]].format('YYYY-MM-DDTHH:mm:ss[Z]',);
+                        values[item.name[0]] = values[item.name[0]].format('YYYY-MM-DDTHH:mm:ss[Z]');
+                      } else {
+                        values[item.name[0]] = moment(values[item.name[0]]).utc();
                       }
                     }
                     break;
                 }
               } else {
-                values[item.name] = moment(values[item.name])
                 if (exportData) {
                   values[item.name] = values[item.name].format('YYYY-MM-DDTHH:mm:ss[Z]');
+                } else {
+                  values[item.name] = moment(values[item.name]).utc();
                 }
               }
             }
@@ -130,8 +139,8 @@ const Util = (columns, values, exportData = true) => {
                         ];
                       } else {
                         values[item.name[0]][item.name[1]] = [
-                          moment(values[item.name[0]][item.name[1]][0]),
-                          moment(values[item.name[0]][item.name[1]][1]),
+                          moment(values[item.name[0]][item.name[1]][0]).utc(),
+                          moment(values[item.name[0]][item.name[1]][1]).utc(),
                         ];
                       }
                     }
@@ -145,8 +154,8 @@ const Util = (columns, values, exportData = true) => {
                         ];
                       } else {
                         values[item.name[0]][item.name[1]][item.name[2]] = [
-                          moment(values[item.name[0]][item.name[1]][item.name[2]][0]),
-                          moment(values[item.name[0]][item.name[1]][item.name[2]][1]),
+                          moment(values[item.name[0]][item.name[1]][item.name[2]][0]).utc(),
+                          moment(values[item.name[0]][item.name[1]][item.name[2]][1]).utc(),
                         ];
                       }
                     }
@@ -159,10 +168,7 @@ const Util = (columns, values, exportData = true) => {
                           moment(values[item.name[0]][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
                         ];
                       } else {
-                        values[item.name[0]] = [
-                          moment(values[item.name[0]][0]),
-                          moment(values[item.name[0]][1]),
-                        ];
+                        values[item.name[0]] = [moment(values[item.name[0]][0]).utc(), moment(values[item.name[0]][1]).utc()];
                       }
                     }
                     break;
@@ -174,16 +180,12 @@ const Util = (columns, values, exportData = true) => {
                     moment(values[item.name][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
                   ];
                 } else {
-                  values[item.name] = [
-                    moment(values[item.name][0]),
-                    moment(values[item.name][1]),
-                  ];
+                  values[item.name] = [moment(values[item.name][0]).utc(), moment(values[item.name][1]).utc()];
                 }
-
               }
             }
             break;
-          case "number":
+          case 'number':
             if (!exportData && values && (values[item.name] || typeof item.name === 'object')) {
               if (typeof item.name === 'object' && item.name.length) {
                 switch (item.name.length) {
@@ -194,7 +196,9 @@ const Util = (columns, values, exportData = true) => {
                     break;
                   case 3:
                     if (values[item.name[0]][item.name[1]][item.name[2]]) {
-                      values[item.name[0]][item.name[1]][item.name[2]] = parseFloat(values[item.name[0]][item.name[1]][item.name[3]]);
+                      values[item.name[0]][item.name[1]][item.name[2]] = parseFloat(
+                        values[item.name[0]][item.name[1]][item.name[3]],
+                      );
                     }
                     break;
                   default:
@@ -214,6 +218,7 @@ const Util = (columns, values, exportData = true) => {
       }
       return item;
     });
+  // console.log(columns, values);
   return values;
 };
 export default Util;

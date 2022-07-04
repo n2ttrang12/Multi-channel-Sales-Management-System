@@ -61,7 +61,7 @@ const Hook = ({
           ...defaultRequest,
         },
   );
-  const timeoutSearch = useRef()
+  const timeoutSearch = useRef();
 
   const { t } = useTranslation();
   const location = useLocation();
@@ -336,17 +336,18 @@ const Hook = ({
                         null,
                         params[filter],
                         params[sort],
-                        document.getElementById(idElement + '_input_search').value
+                        document.getElementById(idElement + '_input_search').value,
                       );
-                    }, 500)
+                    }, 500);
                   }}
                   onKeyPress={(e) => {
-                    e.key === "Enter" && handleTableChange(
-                      null,
-                      params[filter],
-                      params[sort],
-                      document.getElementById(idElement + '_input_search').value
-                    );
+                    e.key === 'Enter' &&
+                      handleTableChange(
+                        null,
+                        params[filter],
+                        params[sort],
+                        document.getElementById(idElement + '_input_search').value,
+                      );
                   }}
                 />
                 <i

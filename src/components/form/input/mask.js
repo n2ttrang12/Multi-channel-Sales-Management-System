@@ -10,7 +10,7 @@ const Component = ({ mask, value, addonBefore, addonAfter, form, ...prop }) => {
     if (mask) {
       import('inputmask').then(({ default: Inputmask }) => Inputmask(mask).mask(input.current));
     }
-  }, [mask]);
+  }, []);
   return (
     <div className={'border rounded-xl ant-input flex items-center'}>
       {!!addonBefore && <div>{addonBefore(form)}</div>}

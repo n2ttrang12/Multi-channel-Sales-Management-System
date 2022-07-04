@@ -1,4 +1,4 @@
-import React, {Fragment, useCallback, useEffect, useRef, useState} from 'react';
+import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { Form, Checkbox, Radio, Switch, Slider, DatePicker as DateAntDesign } from 'antd';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
@@ -44,38 +44,9 @@ const Component = ({
   const timeout = useRef();
 
   const handleFilter = useCallback(async () => {
-    let $columns = [];
-    columns
+    columns = columns
       .filter((item) => !!item && !!item.formItem)
       .map((item, index) => {
-        if (item.formItem && item.formItem.condition && !item.formItem.condition(values[item.name], form)) {
-          return item;
-        }
-        if (!!item.formItem && item.formItem.type === 'title') {
-          if (!$columns) {
-            $columns = [[item]];
-          } else {
-            $columns.push([item]);
-          }
-        } else if (
-          $columns &&
-          $columns.length &&
-          !!$columns[$columns.length - 1][0] &&
-          $columns[$columns.length - 1][0].formItem.type === 'title'
-        ) {
-          $columns.push([item]);
-        } else {
-          if ($columns && $columns.length) {
-            $columns[$columns.length - 1].push(item);
-          } else {
-            if (!$columns) {
-              $columns = [[item]];
-            } else {
-              $columns.push([item]);
-            }
-          }
-        }
-
         if (item.formItem.type === 'password' && !!item.formItem.confirm) {
           const rules = [
             { type: 'required' },
@@ -91,6 +62,7 @@ const Component = ({
               }),
             },
           ];
+
           const confirmItem = {
             name: 'confirm' + item.name,
             title: t('components.form.confirm') + ' ' + item.title.toLowerCase(),
@@ -105,8 +77,21 @@ const Component = ({
         }
         return item;
       });
-    if (JSON.stringify(_columns.map(item => item.name)) !== JSON.stringify($columns.map(item => item.name))) {
-      set_columns($columns);
+    if (
+      JSON.stringify(
+        _columns.map(({ name, formItem }) => ({
+          name,
+          formItem: { list: formItem?.list?.map(({ value }) => value) || [] },
+        })),
+      ) !==
+      JSON.stringify(
+        columns.map(({ name, formItem }) => ({
+          name,
+          formItem: { list: formItem?.list?.map(({ value }) => value) || [] },
+        })),
+      )
+    ) {
+      set_columns(columns);
     }
   }, [columns, values, _columns, form, t]);
 
@@ -542,27 +527,6 @@ const Component = ({
     }
     return null;
   };
-  const generateCol = _columns.map(($column, i) => (
-    <div className={'grid gap-x-5'} key={i}>
-      {$column.map((column, index) => (
-        <div
-          className={
-            'col-span-12' +
-            (' sm:col-span-' +
-              (column.formItem.colTablet
-                ? column.formItem.colTablet
-                : column.formItem.col
-                ? column.formItem.col
-                : 12)) +
-            (' lg:col-span-' + (column.formItem.col ? column.formItem.col : 12))
-          }
-          key={index}
-        >
-          {generateForm(column, index)}
-        </div>
-      ))}
-    </div>
-  ));
 
   const handFinish = (values) => {
     values = convertFormValue(columns, values);
@@ -580,7 +544,7 @@ const Component = ({
       onValuesChange={async (objValue) => {
         onFirstChange();
         if (form && checkHidden) {
-          clearTimeout(timeout.current)
+          clearTimeout(timeout.current);
           timeout.current = setTimeout(async () => {
             for (const key in objValue) {
               if (Object.prototype.hasOwnProperty.call(objValue, key)) {
@@ -590,11 +554,12 @@ const Component = ({
                     if (item.formItem && item.formItem.onChange) {
                       item.formItem.onChange(objValue[key], form);
                     }
+                    set_columns(columns);
                   });
               }
             }
             await handleFilter({ ...values, ...form.getFieldsValue() });
-          }, 500)
+          }, 500);
         }
       }}
     >
@@ -607,7 +572,27 @@ const Component = ({
       {extendTopForm && extendTopForm(values)}
       <div className={'flex items-center'}>
         {extendFirstForm && extendFirstForm(values)}
-        <div className={'grow'}>{generateCol}</div>
+        <div className={'grow'}>
+          <div className={'grid gap-x-5 grid-cols-12'}>
+            {_columns.map((column, index) => (
+              (!column?.formItem?.condition || !!column?.formItem?.condition(values[column.name], form)) && <div
+                className={
+                  'col-span-12' +
+                  (' sm:col-span-' +
+                    (column?.formItem?.colTablet
+                      ? column?.formItem?.colTablet
+                      : column?.formItem?.col
+                      ? column?.formItem?.col
+                      : 12)) +
+                  (' lg:col-span-' + (column?.formItem?.col ? column?.formItem?.col : 12))
+                }
+                key={index}
+              >
+                {generateForm(column, index)}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       {extendForm && extendForm(values)}
 

@@ -139,7 +139,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
         <Fragment>
           {formItem.mode === 'multiple' && (
             <Fragment>
-              <Checkbox checked={checkAll} onChange={() => !checkAll ? onChange(allValue.current) : onChange([])}>
+              <Checkbox checked={checkAll} onChange={() => (!checkAll ? onChange(allValue.current) : onChange([]))}>
                 Select all
               </Checkbox>
             </Fragment>
