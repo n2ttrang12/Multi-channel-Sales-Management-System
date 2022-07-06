@@ -28,7 +28,7 @@ const Page = () => {
       if (res.data) {
         auth.login(res.data);
         const page = res.data.menu[0];
-        if (page && page.children.length > 0) {
+        if (page && page.children && page.children.length > 0) {
           const childPage = page.children[0];
           navigate(childPage.pageUrl, { replace: true });
         } else {
