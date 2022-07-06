@@ -5,11 +5,13 @@ import { routerLinks } from 'utils';
 import { useNavigate, useLocation } from 'react-router';
 import './index.less';
 import listMenu from '../menus';
+import { useAuth } from '../../../global';
 
 const Layout = ({ isCollapsed = false }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const refMenu = useRef();
+  const { menu } = useAuth();
 
   useEffect(() => {
     import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
@@ -26,7 +28,8 @@ const Layout = ({ isCollapsed = false }) => {
   }, [isCollapsed]);
   return (
     <ul className="menu relative h-[calc(100vh-5rem)]" id={'menu-sidebar'} ref={refMenu}>
-      {listMenu().map((item, index) => {
+      {listMenu().filter((item) => menu.filter((subItem) => subItem.pageUrl === routerLinks(item.name)).length)
+        .map((item, index) => {
         if (!item.child) {
           return (
             <li
