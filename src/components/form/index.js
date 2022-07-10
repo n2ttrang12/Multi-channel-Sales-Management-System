@@ -81,13 +81,13 @@ const Component = ({
       JSON.stringify(
         _columns.map(({ name, formItem }) => ({
           name,
-          formItem: { list: formItem?.list?.map(({ value }) => value) || [] },
+          formItem: { list: formItem?.list?.map(({ value }) => value) || [], readOnly: formItem?.readOnly },
         })),
       ) !==
       JSON.stringify(
         columns.map(({ name, formItem }) => ({
           name,
-          formItem: { list: formItem?.list?.map(({ value }) => value) || [] },
+          formItem: { list: formItem?.list?.map(({ value }) => value) || [], readOnly: formItem?.readOnly },
         })),
       )
     ) {

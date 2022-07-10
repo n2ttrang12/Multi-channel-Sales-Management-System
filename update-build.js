@@ -1,6 +1,7 @@
 const fs = require("fs");
 const jsonData = {
   buildDate: new Date().getTime(),
+  buildDateName: new Date().toLocaleString(),
 };
 
 const jsonContent = JSON.stringify(jsonData);
