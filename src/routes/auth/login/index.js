@@ -27,7 +27,14 @@ const Page = () => {
       setLoading(false);
       if (res.data) {
         auth.login(res.data);
-        navigate(routerLinks('Dashboard'), { replace: true });
+        const page = res.data.menu[0];
+        if (page && page.children && page.children.length > 0) {
+          const childPage = page.children[0];
+          navigate(childPage.pageUrl, { replace: true });
+        } else {
+          navigate(page.pageUrl, { replace: true });
+        }
+        // navigate(routerLinks('Dashboard'), { replace: true });
       }
     } catch (err) {
       console.log('Error is:', err);

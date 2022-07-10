@@ -7,11 +7,12 @@ import enUS from 'antd/lib/locale/en_US';
 import moment from 'moment';
 import 'moment/locale/vi';
 
-import { keyRefreshToken, keyToken, keyUser } from 'variable';
+import { keyMenu, keyRefreshToken, keyToken, keyUser } from 'variable';
 
 export const AuthContext = React.createContext({
   user: {},
   permission: {},
+  menu: [],
   title: '',
   formatDate: 'YYYY-MM-DD',
   setTitlePage: () => {},
@@ -19,6 +20,7 @@ export const AuthContext = React.createContext({
   logout: () => {},
   changeLanguage: () => {},
   changePermission: () => {},
+  set_menu: () => {},
 });
 
 export const useAuth = () => {
@@ -32,12 +34,17 @@ const Global = ({ children }) => {
   const [permission, set_permission] = useState({});
   const [formatDate, set_formatDate] = useState('YYYY-MM-DD');
   const { t, i18n } = useTranslation();
+  const [menu, set_menu] = useState(JSON.parse(localStorage.getItem(keyMenu)));
 
   const login = (data) => {
     localStorage.setItem(keyUser, JSON.stringify(data));
     setUser(data);
     localStorage.setItem(keyToken, data.accessToken);
     localStorage.setItem(keyRefreshToken, data.refreshToken);
+    if (data.menu) {
+      localStorage.setItem(keyMenu, JSON.stringify(data.menu));
+      set_menu(data.menu);
+    }
   };
 
   const logout = () => {
@@ -109,6 +116,8 @@ const Global = ({ children }) => {
         logout,
         changeLanguage,
         changePermission,
+        menu,
+        set_menu,
       }}
     >
       <ConfigProvider locale={locale}>{children}</ConfigProvider>
