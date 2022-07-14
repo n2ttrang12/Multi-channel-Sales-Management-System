@@ -16,7 +16,7 @@ const Component = ({ formItem, placeholder, form, onChange, value, ...prop }) =>
                 ? formItem.api.params(form.getFieldValue, fullTextSearch, value)
                 : { fullTextSearch },
             });
-            set_list(data.data.map(formItem.api.format).filter(item => !!item.value));
+            set_list(data.data.map(formItem.api.format).filter((item) => !!item.value));
           }
         }
       } else if (formItem.renderList) {
@@ -52,6 +52,7 @@ const Component = ({ formItem, placeholder, form, onChange, value, ...prop }) =>
       placeholder={placeholder}
       mode={formItem.mode}
       optionFilterProp="label"
+      onSelect={(value) => formItem?.onSelect && formItem?.onSelect(value, form)}
     >
       {formItem &&
         _list.map((item, index) => (

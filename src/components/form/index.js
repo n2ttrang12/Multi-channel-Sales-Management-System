@@ -81,13 +81,19 @@ const Component = ({
       JSON.stringify(
         _columns.map(({ name, formItem }) => ({
           name,
-          formItem: { list: formItem?.list?.map(({ value }) => value) || [], disabled: formItem?.disabled },
+          formItem: {
+            list: formItem?.list?.map(({ value }) => value) || [],
+            disabled: formItem?.disabled ? formItem?.disabled(values, form) : false,
+          },
         })),
       ) !==
       JSON.stringify(
         columns.map(({ name, formItem }) => ({
           name,
-          formItem: { list: formItem?.list?.map(({ value }) => value) || [], disabled: formItem?.disabled },
+          formItem: {
+            list: formItem?.list?.map(({ value }) => value) || [],
+            disabled: formItem?.disabled ? formItem?.disabled(values, form) : false,
+          },
         })),
       )
     ) {
@@ -155,7 +161,7 @@ const Component = ({
           </Form.List>
         );
       case 'editor':
-        return <Editor readOnly={formItem.disabled} />;
+        return <Editor readOnly={!!formItem.disabled && formItem.disabled(values, form)} />;
       case 'color_button':
         return <ColorButton />;
       case 'upload':
@@ -166,7 +172,7 @@ const Component = ({
         return (
           <Password
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
-            disabled={formItem.disabled}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
       case 'textarea':
@@ -175,7 +181,7 @@ const Component = ({
             className="ant-input px-4 py-3 w-full rounded-xl text-gray-600 bg-white border border-solid"
             rows="4"
             maxLength="1000"
-            disabled={formItem.disabled}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
           />
         );
@@ -201,7 +207,7 @@ const Component = ({
             disabledDate={(current) => formItem.disabledDate && formItem.disabledDate(current, form)}
             showTime={formItem.showTime}
             picker={formItem.picker || 'date'}
-            disabled={!!formItem.disabled && formItem.disabled(values)}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
       case 'date_range':
@@ -211,7 +217,7 @@ const Component = ({
             disabledDate={(current) => formItem.disabledDate && formItem.disabledDate(current, form)}
             defaultValue={formItem.initialValues && [formItem.initialValues.start, formItem.initialValues.end]}
             showTime={formItem.showTime}
-            disabled={!!formItem.disabled && formItem.disabled(values)}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
       case 'checkbox':
@@ -239,14 +245,14 @@ const Component = ({
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             tag={formItem.tag}
             form={form}
-            disabled={formItem.disabled}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
       case 'chips':
         return (
           <Chips
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
-            disabled={formItem.disabled}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
       case 'select':
@@ -256,7 +262,7 @@ const Component = ({
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             formItem={formItem}
             form={form}
-            disabled={formItem.disabled}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
       case 'tree_select':
@@ -285,15 +291,15 @@ const Component = ({
             maxLength={formItem.maxLength}
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             onBlur={(e) => formItem.onBlur && formItem.onBlur(e, form)}
-            disabled={formItem.disabled}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
     }
   };
   const generateForm = (item, index, name) => {
     if (item.formItem) {
-      if (item.formItem.type === 'title') {
-        return <h4>{item.title}</h4>;
+      if (item.formItem.type === 'text-only') {
+        return item.formItem.text(form);
       }
       const rules = [];
       switch (item.formItem.type) {
@@ -574,23 +580,27 @@ const Component = ({
         {extendFirstForm && extendFirstForm(values)}
         <div className={'grow'}>
           <div className={'grid gap-x-5 grid-cols-12'}>
-            {_columns.map((column, index) => (
-              (!column?.formItem?.condition || !!column?.formItem?.condition(values[column.name], form)) && <div
-                className={
-                  'col-span-12' +
-                  (' sm:col-span-' +
-                    (column?.formItem?.colTablet
-                      ? column?.formItem?.colTablet
-                      : column?.formItem?.col
-                      ? column?.formItem?.col
-                      : 12)) +
-                  (' lg:col-span-' + (column?.formItem?.col ? column?.formItem?.col : 12))
-                }
-                key={index}
-              >
-                {generateForm(column, index)}
-              </div>
-            ))}
+            {_columns.map(
+              (column, index) =>
+                (!column?.formItem?.condition || !!column?.formItem?.condition(values[column.name], form)) && (
+                  <div
+                    className={classNames(
+                      column?.formItem?.classItem,
+                      'col-span-12' +
+                        (' sm:col-span-' +
+                          (column?.formItem?.colTablet
+                            ? column?.formItem?.colTablet
+                            : column?.formItem?.col
+                            ? column?.formItem?.col
+                            : 12)) +
+                        (' lg:col-span-' + (column?.formItem?.col ? column?.formItem?.col : 12)),
+                    )}
+                    key={index}
+                  >
+                    {generateForm(column, index)}
+                  </div>
+                ),
+            )}
           </div>
         </div>
       </div>
