@@ -15,7 +15,7 @@ const Component = ({
   className = 'pagination',
   firstPageDisabled = ({ pageIndex }) => pageIndex - 10 < 0,
   lastPageDisabled = ({ pageIndex, lastIndex }) => pageIndex + 10 > lastIndex,
-  firstPage = ({ pageIndex }) => pageIndex - 10,
+  firstPage = ({ pageIndex }) => pageIndex - 10 <= 0 ? 1 : pageIndex - 10,
   lastPage = ({ pageIndex }) => pageIndex + 10,
 }) => {
   const listOfPageItem = useRef([]);
