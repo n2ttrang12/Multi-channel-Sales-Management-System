@@ -23,6 +23,8 @@ const Hook = ({
   columns,
   textSubmit,
   idElement,
+  className = '',
+  footerCustom,
   ...propForm
 }) => {
   const [form] = FormAnt.useForm();
@@ -35,6 +37,8 @@ const Hook = ({
     firstChange,
     idElement: 'modal-form-' + idElement,
     textSubmit,
+    className,
+    footerCustom,
     title: (data) => title(data),
     onOk: async (data) => {
       return form

@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment, useCallback, useRef } from 'react
 import { TreeSelect, Checkbox } from 'antd';
 import axios from 'axios';
 
-const Component = ({ formItem, placeholder, onChange, value, form }) => {
+const Component = ({ formItem, placeholder, onChange, value, form, disabled }) => {
   const [_list, set_list] = useState(formItem.list || []);
   const [checkAll, set_checkAll] = useState(false);
   const allValue = useRef([]);
@@ -149,6 +149,7 @@ const Component = ({ formItem, placeholder, onChange, value, form }) => {
       )}
       labelInValue={true}
       value={value}
+      disabled={disabled}
       placeholder={placeholder}
       treeCheckable={formItem.mode === 'multiple'}
       loadData={loadDataTree}

@@ -270,6 +270,7 @@ const Component = ({
           <TreeSelect
             formItem={formItem}
             form={form}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
           />
         );
