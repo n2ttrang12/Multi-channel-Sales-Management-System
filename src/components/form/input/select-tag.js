@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { Avatar } from 'components';
 
-const Component = ({ tag, onChange, form, value, ...prop }) => {
+const Component = ({ tag, onChange, form, value, maxTagCount, ...prop }) => {
   const [_options, set_options] = useState([]);
   const loadData = useCallback(
     async (fullTextSearch = '', value) => {
@@ -36,6 +36,7 @@ const Component = ({ tag, onChange, form, value, ...prop }) => {
     <Select
       {...prop}
       listHeight={200}
+      maxTagCount
       value={value || []}
       onSearch={(fullTextSearch) => loadData(fullTextSearch, value)}
       onBlur={() => loadData()}

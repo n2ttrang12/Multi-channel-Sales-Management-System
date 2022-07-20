@@ -32,8 +32,6 @@ const Component = ({
   checkHidden = false,
   extendForm = () => {},
   isShowCancel = false,
-  extendTopForm = null,
-  extendFirstForm = null,
   extendButton = null,
   idSubmit = 'idSubmit',
   classGroupButton = 'justify-center items-center',
@@ -171,18 +169,23 @@ const Component = ({
       case 'password':
         return (
           <Password
-            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
+            placeholder={formItem.placeholder}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
       case 'textarea':
         return (
           <textarea
-            className="ant-input px-4 py-3 w-full rounded-xl text-gray-600 bg-white border border-solid"
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
+            className={classNames(
+              'ant-input px-4 py-3 w-full rounded-xl text-gray-600 bg-white border border-solid border-gray-400 input-description',
+              {
+                'bg-gray-100 text-gray-400': !!formItem.disabled && formItem.disabled(values, form),
+              },
+            )}
             rows="4"
             maxLength="1000"
-            disabled={!!formItem.disabled && formItem.disabled(values, form)}
-            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
+            placeholder={formItem.placeholder}
           />
         );
       case 'slider_number':
@@ -237,12 +240,14 @@ const Component = ({
             options={formItem.list}
             buttonStyle={formItem.style}
             optionType={formItem.style ? 'button' : ''}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
       case 'tag':
         return (
           <SelectTag
-            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
+            maxTagCount={formItem.maxTagCount || 'responsive'}
+            placeholder={formItem.placeholder}
             tag={formItem.tag}
             form={form}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
@@ -250,16 +255,14 @@ const Component = ({
         );
       case 'chips':
         return (
-          <Chips
-            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
-            disabled={!!formItem.disabled && formItem.disabled(values, form)}
-          />
+          <Chips placeholder={formItem.placeholder} disabled={!!formItem.disabled && formItem.disabled(values, form)} />
         );
       case 'select':
         return (
           <Select
+            maxTagCount={formItem.maxTagCount || 'responsive'}
             onChange={(value) => formItem.onChange && formItem.onChange(value, form)}
-            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
+            placeholder={formItem.placeholder}
             formItem={formItem}
             form={form}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
@@ -271,7 +274,7 @@ const Component = ({
             formItem={formItem}
             form={form}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
-            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
+            placeholder={formItem.placeholder}
           />
         );
       case 'switch':
@@ -290,8 +293,9 @@ const Component = ({
             addonBefore={formItem.addonBefore}
             addonAfter={formItem.addonAfter}
             maxLength={formItem.maxLength}
-            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
+            placeholder={formItem.placeholder}
             onBlur={(e) => formItem.onBlur && formItem.onBlur(e, form)}
+            onChange={(value) => formItem.onChange && formItem.onChange(value, form)}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
@@ -509,6 +513,7 @@ const Component = ({
         label: item.title,
         name: name || item.name,
         labelAlign: 'left',
+        validateTrigger: 'onBlur',
       };
       if (rules.length) {
         otherProps.rules = rules;
@@ -522,6 +527,9 @@ const Component = ({
       }
       if (item.formItem.type === 'hidden') {
         otherProps.hidden = true;
+      }
+      if (item.formItem.type === 'select') {
+        otherProps.validateTrigger = 'onChange';
       }
 
       return item.formItem.type !== 'addable' ? (
@@ -542,7 +550,6 @@ const Component = ({
 
   return (
     <Form
-      validateTrigger="onBlur"
       className={className}
       form={form}
       layout={!widthLabel ? 'vertical' : 'horizontal'}
@@ -576,9 +583,7 @@ const Component = ({
           'lg:col-span-1 lg:col-span-2 lg:col-span-3 lg:col-span-4 lg:col-span-5 lg:col-span-6 lg:col-span-7 lg:col-span-8 lg:col-span-9 lg:col-span-10 lg:col-span-11 lg:col-span-12'
         }
       />
-      {extendTopForm && extendTopForm(values)}
       <div className={'flex items-center'}>
-        {extendFirstForm && extendFirstForm(values)}
         <div className={'grow'}>
           <div className={'grid gap-x-5 grid-cols-12'}>
             {_columns.map(

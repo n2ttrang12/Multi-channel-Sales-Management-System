@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
-const Component = ({ mask, value, addonBefore, addonAfter, form, ...prop }) => {
+const Component = ({ mask, value, addonBefore, addonAfter, form, disabled, ...prop }) => {
   const input = useRef();
   if (prop.condition) {
     delete prop.condition;
@@ -16,12 +16,17 @@ const Component = ({ mask, value, addonBefore, addonAfter, form, ...prop }) => {
       {!!addonBefore && <div>{addonBefore(form)}</div>}
       <input
         ref={input}
-        className={classNames('w-full h-10 text-gray-600 bg-white pr-9 pl-4 ant-input', {
-          'rounded-xl border-none': !addonBefore && !addonAfter,
-          'rounded-l-xl border-r': !addonBefore && !!addonAfter,
-          'rounded-r-xl border-l': !!addonBefore && !addonAfter,
-          'border-r border-l': !!addonBefore && !!addonAfter,
-        })}
+        className={classNames(
+          'w-full h-10 text-gray-600 bg-white pr-9 pl-4 ant-input',
+          {
+            'rounded-xl border-none': !addonBefore && !addonAfter,
+            'rounded-l-xl border-r': !addonBefore && !!addonAfter,
+            'rounded-r-xl border-l': !!addonBefore && !addonAfter,
+            'border-r border-l': !!addonBefore && !!addonAfter,
+          },
+          disabled && 'bg-gray-100 text-gray-400',
+        )}
+        readOnly={disabled}
         value={value || ''}
         {...prop}
       />

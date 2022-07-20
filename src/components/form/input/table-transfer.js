@@ -47,9 +47,7 @@ const Component = ({ showSearch = true, formItem, onChange, value, form, ...rest
         return (
           <Table
             rowSelection={{
-              getCheckboxProps: (item) => ({
-                disabled: listDisabled || item.disabled,
-              }),
+              getCheckboxProps: (item) => ({ disabled: listDisabled || item.disabled }),
               selectedRowKeys: listSelectedKeys,
               onSelectAll(selected, selectedRows) {
                 const treeSelectedKeys = selectedRows.filter((item) => !item.disabled).map(({ key }) => key);

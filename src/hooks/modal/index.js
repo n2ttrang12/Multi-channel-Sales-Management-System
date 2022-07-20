@@ -15,7 +15,7 @@ const Hook = ({
   firstChange = true,
   textSubmit,
   className = '',
-  footerCustom
+  footerCustom,
 }) => {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
@@ -59,7 +59,7 @@ const Hook = ({
         onCancel={handleCancel}
         wrapClassName={className}
         footer={
-          (!!onOk && !footerCustom) ? (
+          !!onOk && !footerCustom ? (
             <div className="flex justify-end">
               <button
                 type={'button'}
@@ -81,7 +81,9 @@ const Hook = ({
                 {textSubmit || t('components.form.modal.save')}
               </button>
             </div>
-          ): (footerCustom && footerCustom(handleOk, handleCancel))
+          ) : (
+            footerCustom && footerCustom(handleOk, handleCancel)
+          )
         }
       >
         <Spin spinning={isLoading}>{children(data, set_data, setIsVisible)}</Spin>

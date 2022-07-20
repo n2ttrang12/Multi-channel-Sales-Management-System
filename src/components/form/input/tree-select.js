@@ -181,6 +181,7 @@ const Component = ({ formItem, placeholder, onChange, value, form, disabled }) =
               <div className="bg-blue-100 rounded-xl py-1 px-2 relative mr-2.5 -left-2.5">
                 <button
                   type={'button'}
+                  disabled={disabled}
                   className="absolute rounded-full -top-1 -right-2 bg-red-100 text-red-500 p-0.5 leading-none z-10"
                   onClick={() => onChange(clearTag(item[0], value))}
                 >
