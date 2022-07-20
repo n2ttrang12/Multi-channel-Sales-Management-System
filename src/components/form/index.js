@@ -303,9 +303,6 @@ const Component = ({
   };
   const generateForm = (item, index, name) => {
     if (item.formItem) {
-      if (item.formItem.type === 'text-only') {
-        return item.formItem.text(form);
-      }
       const rules = [];
       switch (item.formItem.type) {
         case 'number':
