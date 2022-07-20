@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Select } from 'antd';
 import axios from 'axios';
 
-const Component = ({ formItem, placeholder, form, onChange, value, maxTagCount, ...prop }) => {
+const Component = ({ formItem, form, value, ...prop }) => {
   const [_list, set_list] = useState(formItem.list ? formItem.list : []);
 
   const loadData = useCallback(
@@ -53,11 +53,9 @@ const Component = ({ formItem, placeholder, form, onChange, value, maxTagCount, 
       onBlur={() => loadData('')}
       onSearch={(value) => loadData(value)}
       value={value}
-      onChange={onChange}
-      placeholder={placeholder}
       mode={formItem.mode}
       optionFilterProp="label"
-      maxTagCount
+      maxTagPlaceholder={(array) => '+' + array.length}
       onSelect={(value) => formItem?.onSelect && formItem?.onSelect(value, form)}
     >
       {formItem &&

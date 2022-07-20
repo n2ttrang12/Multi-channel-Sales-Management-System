@@ -531,6 +531,9 @@ const Component = ({
       if (item.formItem.type === 'select') {
         otherProps.validateTrigger = 'onChange';
       }
+      if (item.formItem.type === 'select' || item.formItem.type === 'upload') {
+        otherProps.validateTrigger = 'onChange';
+      }
 
       return item.formItem.type !== 'addable' ? (
         <Form.Item {...otherProps} className={item.formItem.wrapClassName}>
@@ -568,8 +571,8 @@ const Component = ({
                     if (item.formItem && item.formItem.onChange) {
                       item.formItem.onChange(objValue[key], form);
                     }
-                    set_columns(columns);
                   });
+                set_columns(columns);
               }
             }
             await handleFilter({ ...values, ...form.getFieldsValue() });
@@ -603,7 +606,7 @@ const Component = ({
                     )}
                     key={index}
                   >
-                    {generateForm(column, index)}
+                    {!column?.formItem?.render ? generateForm(column, index) : column?.formItem?.render(form, values)}
                   </div>
                 ),
             )}

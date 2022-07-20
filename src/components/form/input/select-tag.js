@@ -62,6 +62,7 @@ const Component = ({ tag, onChange, form, value, maxTagCount, ...prop }) => {
           )
         );
       }}
+      maxTagPlaceholder={(array) => '+' + array.length}
       onChange={(value) => {
         onChange(value);
         loadData('', value);
