@@ -3,21 +3,21 @@ import { Select } from 'antd';
 import classNames from 'classnames';
 
 const Component = ({
-  total = 4,
-  pageSizeOptions = [],
-  pageSize = 10,
-  pageIndex = 1,
-  queryParams = () => {},
-  pageSizeRender = (sizePage) => sizePage + ' / page',
-  pageSizeWidth = '115px',
-  paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
-  idElement = 'pagination',
-  className = 'pagination',
-  firstPageDisabled = ({ pageIndex }) => pageIndex - 10 < 0,
-  lastPageDisabled = ({ pageIndex, lastIndex }) => pageIndex + 10 > lastIndex,
-  firstPage = ({ pageIndex }) => pageIndex - 10,
-  lastPage = ({ pageIndex }) => pageIndex + 10,
-}) => {
+                     total = 4,
+                     pageSizeOptions = [],
+                     pageSize = 10,
+                     pageIndex = 1,
+                     queryParams = () => {},
+                     pageSizeRender = (sizePage) => sizePage + ' / page',
+                     pageSizeWidth = '115px',
+                     paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
+                     idElement = 'pagination',
+                     className = 'pagination',
+                     firstPageDisabled = ({ pageIndex }) => pageIndex - 10 < 0,
+                     lastPageDisabled = ({ pageIndex, lastIndex }) => pageIndex + 10 > lastIndex,
+                     firstPage = ({ pageIndex }) => pageIndex - 10,
+                     lastPage = ({ pageIndex }) => pageIndex + 10,
+                   }) => {
   const listOfPageItem = useRef([]);
   const [ranges, setRanges] = useState([]);
   const [lastNumber, set_lastNumber] = useState(0);
@@ -92,7 +92,6 @@ const Component = ({
     };
 
     if (lastIndex <= 9) {
-      console.log(concatWithPrevNext(generatePage(1, lastIndex)));
       return concatWithPrevNext(generatePage(1, lastIndex));
     } else {
       const generateRangeItem = (selected, last) => {
@@ -106,11 +105,11 @@ const Component = ({
         const firstPageItem = generatePage(1, 1);
         const lastPageItem = generatePage(lastIndex, lastIndex);
         if (selected < 4) {
-          listOfRange = [...generatePage(2, 5), nextFiveItem];
+          listOfRange = [...generatePage(2, 4), nextFiveItem];
         } else if (selected < last - 3) {
-          listOfRange = [prevFiveItem, ...generatePage(selected - 2, selected + 2), nextFiveItem];
+          listOfRange = [prevFiveItem, ...generatePage(selected - 1, selected + 1), nextFiveItem];
         } else {
-          listOfRange = [prevFiveItem, ...generatePage(last - 4, last - 1)];
+          listOfRange = [prevFiveItem, ...generatePage(last - 3, last - 1)];
         }
         return [...firstPageItem, ...listOfRange, ...lastPageItem];
       };
@@ -141,8 +140,8 @@ const Component = ({
             {listOfPageItem.current.map((page, index) => (
               <button
                 type={'button'}
-                key={index}
                 disabled={page.disabled}
+                key={index}
                 id={idElement + '_' + page.type}
                 className={classNames(
                   'text-center duration-300 transition-all py-1 px-2.5 text-sm font-medium leading-normal',
@@ -150,6 +149,7 @@ const Component = ({
                     'text-blue-700 hover:text-blue-500': pageIndex !== page.index,
                     'bg-blue-500 rounded-full text-white hover:text-white': pageIndex === page.index,
                     'pointer-events-none': page.disabled || ['next_5', 'prev_5'].includes(page.type),
+                    'text-blue-300': page.disabled,
                   },
                 )}
                 onClick={() => onPageIndexChange(page)}
