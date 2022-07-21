@@ -33,15 +33,9 @@ const Component = ({ formItem, form, value, ...prop }) => {
     [form, formItem, value],
   );
 
-  const initFunction = useCallback(async () => {
-    if (formItem.api || formItem.renderList) {
-      await loadData('');
-    }
-  }, [formItem, loadData]);
-
-  useEffect(() => {
-    initFunction();
-  }, [value, initFunction]);
+  useEffect(async () => {
+    await loadData('');
+  }, [value, formItem]);
 
   return (
     <Select
