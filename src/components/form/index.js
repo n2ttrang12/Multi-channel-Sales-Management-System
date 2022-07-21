@@ -211,6 +211,8 @@ const Component = ({
             showTime={formItem.showTime}
             picker={formItem.picker || 'date'}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
+            form={form}
+            name={item.name}
           />
         );
       case 'date_range':

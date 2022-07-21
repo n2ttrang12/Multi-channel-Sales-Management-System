@@ -3,7 +3,7 @@ import { DatePicker } from 'antd';
 import moment from 'moment';
 import { v4 } from 'uuid';
 
-const Component = ({ ...props }) => {
+const Component = ({ form, name, ...props }) => {
   if (!props.id) {
     props.id = 'date-picker-' + v4();
   }
@@ -14,7 +14,7 @@ const Component = ({ ...props }) => {
         if (!e) {
           const value = document.getElementById(props.id).value;
           const selectDate = moment(value, props.format || 'DD/MM/YYYY');
-          if (selectDate.isValid() && props.onChange) {
+          if (selectDate.isValid() && props.onChange && form.getFieldValue(name).format(props.format || 'DD/MM/YYYY') !== selectDate.format(props.format || 'DD/MM/YYYY')) {
             props.onChange(selectDate, value);
           }
         }
