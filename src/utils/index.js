@@ -4,6 +4,8 @@ import echartLine from './echart/line';
 import echartPie from './echart/pie';
 import linearGradient from './echart/linearGradient';
 
+import maskNumberVietnam from './mask/numberVietnam';
+
 import handGetParent from './handGetParent';
 import handPostParent from './handPostParent';
 import slugify from './slugify';
@@ -31,6 +33,7 @@ export {
   echartLine,
   echartPie,
   linearGradient,
+  maskNumberVietnam,
   handGetParent,
   handPostParent,
   slugify,

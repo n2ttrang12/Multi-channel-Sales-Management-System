@@ -8,5 +8,18 @@ import SelectTag from './select-tag';
 import Select from './select';
 import TreeSelect from './tree-select';
 import TableTransfer from './table-transfer';
+import Addable from './addable';
 
-export { ColorButton, Chips, Editor, DatePicker, Password, Mask, SelectTag, Select, TreeSelect, TableTransfer };
+export {
+  ColorButton,
+  Chips,
+  Editor,
+  DatePicker,
+  Password,
+  Mask,
+  SelectTag,
+  Select,
+  TreeSelect,
+  TableTransfer,
+  Addable,
+};

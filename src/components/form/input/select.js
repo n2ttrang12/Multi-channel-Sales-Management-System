@@ -47,9 +47,9 @@ const Component = ({ formItem, form, value, ...prop }) => {
       onBlur={() => loadData('')}
       onSearch={(value) => loadData(value)}
       value={value}
+      maxTagPlaceholder={(array) => '+' + array.length}
       mode={formItem.mode}
       optionFilterProp="label"
-      maxTagPlaceholder={(array) => '+' + array.length}
       onSelect={(value) => formItem?.onSelect && formItem?.onSelect(value, form)}
     >
       {formItem &&

@@ -26,29 +26,40 @@
     @apply relative ~'-top-0.5';
   }
   &-multiple .ant-select-selection-item {
-    @apply bg-blue-100 rounded-xl py-1 px-2 my-0 relative -left-2 ~'min-h-[1.88rem]';
+    @apply bg-blue-100 rounded-xl py-1 px-2 my-0 -ml-1 ~'min-h-[1.88rem]';
   }
 }
 .ant-form {
+
   input[type='file'] { @apply hidden; }
-  .ant-form-item-label {
-    @apply overflow-visible pr-2;
-    > label.ant-form-item-required:not(.ant-form-item-required-mark-optional){
-      &::before { content: none; }
-      &::after {
-        content: '*'!important;
-        @apply contents text-red-500;
+
+  .ant-form-item {
+    @apply mb-4;
+    &-label {
+      @apply overflow-visible pr-2;
+      > label.ant-form-item-required:not(.ant-form-item-required-mark-optional){
+        &::before { content: none; }
+        &::after {
+          content: '*'!important;
+          @apply contents text-red-500;
+        }
       }
     }
   }
   .ant-checkbox-inner,
   .ant-checkbox-checked:after{
-  @apply w-5 h-5 rounded border-2;
+    @apply w-5 h-5 rounded border-2;
   }
-  .ant-checkbox {
-  @apply top-1;
+  .ant-checkbox { @apply top-1; }
+  .table .ant-form-item {
+    @apply mb-0;
+    .ant-input,
+    .ant-picker,
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+      @apply border-0 rounded-none;
+    }
   }
 }
 .ant-picker {
-@apply rounded-xl border px-4 border-solid border-gray-300 h-10 items-center;
+  @apply rounded-xl border px-4 border-solid border-gray-300 h-10 items-center w-full;
 }

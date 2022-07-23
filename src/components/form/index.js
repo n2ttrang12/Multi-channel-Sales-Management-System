@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Form, Checkbox, Radio, Switch, Slider, DatePicker as DateAntDesign } from 'antd';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
@@ -16,6 +16,7 @@ import {
   TableTransfer,
   Password,
   Mask,
+  Addable,
   DatePicker,
 } from './input';
 
@@ -75,12 +76,13 @@ const Component = ({
         }
         return item;
       });
+
     if (
       JSON.stringify(
         _columns.map(({ name, formItem }) => ({
           name,
           formItem: {
-            list: formItem?.list?.map(({ value }) => value) || [],
+            list: formItem?.list?.map(({ value, disabled }) => ({ value, disabled })) || [],
             disabled: formItem?.disabled ? formItem?.disabled(values, form) : false,
           },
         })),
@@ -89,7 +91,7 @@ const Component = ({
         columns.map(({ name, formItem }) => ({
           name,
           formItem: {
-            list: formItem?.list?.map(({ value }) => value) || [],
+            list: formItem?.list?.map(({ value, disabled }) => ({ value, disabled })) || [],
             disabled: formItem?.disabled ? formItem?.disabled(values, form) : false,
           },
         })),
@@ -117,47 +119,7 @@ const Component = ({
       // case "media":
       //   return <Media limit={formItem.limit} />;
       case 'addable':
-        return (
-          <Form.List name={item.name}>
-            {(fields, { add, remove }) => (
-              <Fragment>
-                {fields.map(({ key, name, ...restField }, i) => (
-                  <div className="w-full flex justify-between gap-3" key={i}>
-                    {formItem.column.map((column, index) => (
-                      <div
-                        className={
-                          'col-span-12' +
-                          (' sm:col-span-' +
-                            (column.formItem.colTablet
-                              ? column.formItem.colTablet
-                              : column.formItem.col
-                              ? column.formItem.col
-                              : 12)) +
-                          (' lg:col-span-' + (column.formItem.col ? column.formItem.col : 12))
-                        }
-                        key={index}
-                      >
-                        {generateForm(column, index, [name, column.name])}
-                      </div>
-                    ))}
-                    <i
-                      className="las la-minus-circle text-2xl mt-1.5 hover:text-blue-400 cursor-pointer"
-                      onClick={() => remove(name)}
-                    />
-                  </div>
-                ))}
-                <button
-                  type="button"
-                  className="rounded-xl border h-8 text-white bg-blue-500 hover:bg-blue-400 px-5"
-                  onClick={() => add()}
-                >
-                  <i className="las la-plus mr-1" />
-                  {formItem.text_add}
-                </button>
-              </Fragment>
-            )}
-          </Form.List>
-        );
+        return <Addable name={item.name} formItem={formItem} generateForm={generateForm} form={form} />;
       case 'editor':
         return <Editor readOnly={!!formItem.disabled && formItem.disabled(values, form)} />;
       case 'color_button':
@@ -169,7 +131,7 @@ const Component = ({
       case 'password':
         return (
           <Password
-            placeholder={formItem.placeholder}
+            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
@@ -185,7 +147,7 @@ const Component = ({
             )}
             rows="4"
             maxLength="1000"
-            placeholder={formItem.placeholder}
+            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
           />
         );
       case 'slider_number':
@@ -249,7 +211,7 @@ const Component = ({
         return (
           <SelectTag
             maxTagCount={formItem.maxTagCount || 'responsive'}
-            placeholder={formItem.placeholder}
+            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             tag={formItem.tag}
             form={form}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
@@ -257,14 +219,17 @@ const Component = ({
         );
       case 'chips':
         return (
-          <Chips placeholder={formItem.placeholder} disabled={!!formItem.disabled && formItem.disabled(values, form)} />
+          <Chips
+            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
+            disabled={!!formItem.disabled && formItem.disabled(values, form)}
+          />
         );
       case 'select':
         return (
           <Select
             maxTagCount={formItem.maxTagCount || 'responsive'}
             onChange={(value) => formItem.onChange && formItem.onChange(value, form)}
-            placeholder={formItem.placeholder}
+            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             formItem={formItem}
             form={form}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
@@ -276,7 +241,7 @@ const Component = ({
             formItem={formItem}
             form={form}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
-            placeholder={formItem.placeholder}
+            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
           />
         );
       case 'switch':
@@ -295,15 +260,16 @@ const Component = ({
             addonBefore={formItem.addonBefore}
             addonAfter={formItem.addonAfter}
             maxLength={formItem.maxLength}
-            placeholder={formItem.placeholder}
+            placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             onBlur={(e) => formItem.onBlur && formItem.onBlur(e, form)}
             onChange={(value) => formItem.onChange && formItem.onChange(value, form)}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
+            onFirstChange={onFirstChange}
           />
         );
     }
   };
-  const generateForm = (item, index, name) => {
+  const generateForm = (item, index, name, isTable) => {
     if (item.formItem) {
       const rules = [];
       switch (item.formItem.type) {
@@ -509,7 +475,7 @@ const Component = ({
 
       const otherProps = {
         key: index,
-        label: item.title,
+        label: !isTable && item.title,
         name: name || item.name,
         labelAlign: 'left',
         validateTrigger: 'onBlur',
@@ -527,17 +493,12 @@ const Component = ({
       if (item.formItem.type === 'hidden') {
         otherProps.hidden = true;
       }
-      if (item.formItem.type === 'select') {
-        otherProps.validateTrigger = 'onChange';
-      }
       if (item.formItem.type === 'select' || item.formItem.type === 'upload') {
         otherProps.validateTrigger = 'onChange';
       }
 
-      return item.formItem.type !== 'addable' ? (
-        <Form.Item {...otherProps} className={item.formItem.wrapClassName}>
-          {generateInput(item.formItem, item, values)}
-        </Form.Item>
+      return item.formItem.type !== 'addable' && item.formItem.type !== 'addable-2' ? (
+        <Form.Item {...otherProps}>{generateInput(item.formItem, item, values)}</Form.Item>
       ) : (
         generateInput(item.formItem, item, values)
       );
@@ -605,7 +566,9 @@ const Component = ({
                     )}
                     key={index}
                   >
-                    {!column?.formItem?.render ? generateForm(column, index) : column?.formItem?.render(form, values)}
+                    {!column?.formItem?.render
+                      ? generateForm(column, index)
+                      : column?.formItem?.render(form, values, generateForm, index)}
                   </div>
                 ),
             )}

@@ -3,21 +3,21 @@ import { Select } from 'antd';
 import classNames from 'classnames';
 
 const Component = ({
-                     total = 4,
-                     pageSizeOptions = [],
-                     pageSize = 10,
-                     pageIndex = 1,
-                     queryParams = () => {},
-                     pageSizeRender = (sizePage) => sizePage + ' / page',
-                     pageSizeWidth = '115px',
-                     paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
-                     idElement = 'pagination',
-                     className = 'pagination',
-                     firstPageDisabled = ({ pageIndex }) => pageIndex - 10 < 0,
-                     lastPageDisabled = ({ pageIndex, lastIndex }) => pageIndex + 10 > lastIndex,
-                     firstPage = ({ pageIndex }) => pageIndex - 10,
-                     lastPage = ({ pageIndex }) => pageIndex + 10,
-                   }) => {
+  total = 4,
+  pageSizeOptions = [],
+  pageSize = 10,
+  pageIndex = 1,
+  queryParams = () => {},
+  pageSizeRender = (sizePage) => sizePage + ' / page',
+  pageSizeWidth = '115px',
+  paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
+  idElement = 'pagination',
+  className = 'pagination',
+  firstPageDisabled = ({ pageIndex }) => pageIndex - 10 < 0,
+  lastPageDisabled = ({ pageIndex, lastIndex }) => pageIndex + 10 > lastIndex,
+  firstPage = ({ pageIndex }) => pageIndex - 10,
+  lastPage = ({ pageIndex }) => pageIndex + 10,
+}) => {
   const listOfPageItem = useRef([]);
   const [ranges, setRanges] = useState([]);
   const [lastNumber, set_lastNumber] = useState(0);

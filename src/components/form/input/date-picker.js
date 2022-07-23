@@ -14,7 +14,12 @@ const Component = ({ form, name, ...props }) => {
         if (!e) {
           const value = document.getElementById(props.id).value;
           const selectDate = moment(value, props.format || 'DD/MM/YYYY');
-          if (selectDate.isValid() && props.onChange && form.getFieldValue(name).format(props.format || 'DD/MM/YYYY') !== selectDate.format(props.format || 'DD/MM/YYYY')) {
+          if (
+            selectDate.isValid() &&
+            props.onChange &&
+            form.getFieldValue(name).format(props.format || 'DD/MM/YYYY') !==
+              selectDate.format(props.format || 'DD/MM/YYYY')
+          ) {
             props.onChange(selectDate, value);
           }
         }

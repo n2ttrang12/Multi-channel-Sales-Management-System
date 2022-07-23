@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { Avatar } from 'components';
 
-const Component = ({ tag, onChange, form, value, maxTagCount, ...prop }) => {
+const Component = ({ tag, onChange, form, value, ...prop }) => {
   const [_options, set_options] = useState([]);
   const loadData = useCallback(
     async (fullTextSearch = '', value) => {
@@ -36,7 +36,6 @@ const Component = ({ tag, onChange, form, value, maxTagCount, ...prop }) => {
     <Select
       {...prop}
       listHeight={200}
-      maxTagCount
       value={value || []}
       onSearch={(fullTextSearch) => loadData(fullTextSearch, value)}
       onBlur={() => loadData()}
@@ -44,6 +43,7 @@ const Component = ({ tag, onChange, form, value, maxTagCount, ...prop }) => {
       optionFilterProp="label"
       showArrow
       filterOption={false}
+      maxTagPlaceholder={(array) => '+' + array.length}
       tagRender={({ label, value, closable, onClose }) => {
         return (
           label && (
@@ -62,7 +62,6 @@ const Component = ({ tag, onChange, form, value, maxTagCount, ...prop }) => {
           )
         );
       }}
-      maxTagPlaceholder={(array) => '+' + array.length}
       onChange={(value) => {
         onChange(value);
         loadData('', value);
