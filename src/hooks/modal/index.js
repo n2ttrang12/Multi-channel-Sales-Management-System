@@ -59,11 +59,12 @@ const Hook = ({
         onCancel={handleCancel}
         wrapClassName={className}
         footer={
-          !!onOk && !footerCustom ? (
+          !!onOk &&
+          ((footerCustom && footerCustom(handleOk, handleCancel)) || (
             <div className="flex justify-end">
               <button
                 type={'button'}
-                className="bg-blue-100 px-4 py-2.5 rounded-xl hover:bg-blue-500 hover:text-white mr-2"
+                className="bg-blue-100 px-4 py-2.5 rounded-xl hover:bg-blue-500 hover:text-white mr-2 btn-cancel"
                 onClick={handleCancel}
               >
                 {t('components.form.modal.cancel')}
@@ -71,7 +72,7 @@ const Hook = ({
               <button
                 type={'button'}
                 disabled={!firstChange}
-                className={classNames('px-4 py-2.5 rounded-xl inline-flex items-center', {
+                className={classNames('px-4 py-2.5 rounded-xl inline-flex items-center btn-save', {
                   'bg-gray-100 hover:bg-gray-300 hover:text-white text-gray-400': !firstChange,
                   'text-white bg-blue-500 hover:bg-blue-400': firstChange,
                 })}
@@ -81,9 +82,7 @@ const Hook = ({
                 {textSubmit || t('components.form.modal.save')}
               </button>
             </div>
-          ) : (
-            footerCustom && footerCustom(handleOk, handleCancel)
-          )
+          ))
         }
       >
         <Spin spinning={isLoading}>{children(data, set_data, setIsVisible)}</Spin>

@@ -99,7 +99,7 @@ const Component = ({
     ) {
       set_columns(columns);
     }
-  }, [columns, values, _columns, form, t]);
+  }, [columns, values, _columns]);
 
   useEffect(() => {
     if (form) {
@@ -525,16 +525,10 @@ const Component = ({
           timeout.current = setTimeout(async () => {
             for (const key in objValue) {
               if (Object.prototype.hasOwnProperty.call(objValue, key)) {
-                columns
-                  .filter((_item) => _item.name === key)
-                  .forEach((item) => {
-                    if (item.formItem && item.formItem.onChange) {
-                      item.formItem.onChange(objValue[key], form);
-                    }
-                  });
-                set_columns(columns);
+                columns.filter((_item) => _item.name === key);
               }
             }
+            set_columns(columns);
             await handleFilter({ ...values, ...form.getFieldsValue() });
           }, 500);
         }

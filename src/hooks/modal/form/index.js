@@ -65,7 +65,7 @@ const Hook = ({
           return true;
         })
         .catch(() => false);
-    },
+    }
   });
 
   const handleEdit = async (item = {}) => {
@@ -99,6 +99,7 @@ const Hook = ({
         />
       )),
     handleDelete,
+    form,
   ];
 };
 export default Hook;

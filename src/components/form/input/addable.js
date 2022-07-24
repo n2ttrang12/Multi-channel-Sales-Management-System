@@ -38,17 +38,19 @@ const Component = ({ name, formItem, generateForm, form }) => {
               </div>
             ))}
           </div>
-          <button
-            type="button"
-            className="rounded-xl font-medium text-white bg-blue-500 hover:bg-blue-400 py-1.5 px-4 my-2 float-right addable-add"
-            onClick={() => {
-              add();
-              formItem.onAdd && formItem.onAdd(form.getFieldValue(name), form);
-            }}
-          >
-            <i className="las la-plus mr-1 text-lg" />
-            <span className={'relative -top-0.5'}>{formItem.textAdd}</span>
-          </button>
+          <div className={'flex justify-end'}>
+            <button
+              type="button"
+              className="rounded-xl font-medium text-white bg-blue-500 hover:bg-blue-400 py-1.5 px-4 my-2 addable-add"
+              onClick={() => {
+                add();
+                formItem.onAdd && formItem.onAdd(form.getFieldValue(name), form);
+              }}
+            >
+              <i className="las la-plus mr-1 text-lg" />
+              <span className={'relative -top-0.5'}>{formItem.textAdd}</span>
+            </button>
+          </div>
         </Fragment>
       )}
     </Form.List>

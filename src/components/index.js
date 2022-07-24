@@ -1,4 +1,5 @@
 import Avatar from './avatar';
+import Calendar from './calendar';
 import Collapse from './collapse';
 import Editor from './editor';
 import Pagination from './pagination';
@@ -8,4 +9,4 @@ import Message from './message';
 import Spin from './spin';
 import Upload from './upload';
 
-export { Avatar, Collapse, Editor, Pagination, Form, FormDrag, Message, Spin, Upload };
+export { Avatar, Calendar, Collapse, Editor, Pagination, Form, FormDrag, Message, Spin, Upload };
