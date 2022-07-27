@@ -497,7 +497,7 @@ const Component = ({
         otherProps.validateTrigger = 'onChange';
       }
 
-      return item.formItem.type !== 'addable' && item.formItem.type !== 'addable-2' ? (
+      return item.formItem.type !== 'addable' ? (
         <Form.Item {...otherProps}>{generateInput(item.formItem, item, values)}</Form.Item>
       ) : (
         generateInput(item.formItem, item, values)
@@ -517,6 +517,9 @@ const Component = ({
       form={form}
       layout={!widthLabel ? 'vertical' : 'horizontal'}
       onFinish={handFinish}
+      onFinishFailed={({errorFields}) =>
+        errorFields.length && form.scrollToField(errorFields[0].name, { behavior: 'smooth' })
+      }
       initialValues={convertFormValue(columns, values, false)}
       onValuesChange={async (objValue) => {
         onFirstChange();
