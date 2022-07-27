@@ -114,7 +114,7 @@ const Layout = ({ children }) => {
         <div>
           <a href="/" className="flex items-center">
             <img
-              className={classNames('w-10', {
+              className={classNames('w-12 rounded ml-2', {
                 hidden: !!isCollapsed || !isDesktop,
               })}
               src={logo}
@@ -123,7 +123,7 @@ const Layout = ({ children }) => {
             <div
               id={'name-application'}
               className={classNames(
-                'transition-all text-white duration-300 ease-in-out absolute left-16 w-48 overflow-ellipsis overflow-hidden ml-2',
+                'transition-all text-white duration-300 ease-in-out absolute left-16 w-48 overflow-ellipsis overflow-hidden ml-7',
                 {
                   'opacity-100 text-3xl': !isCollapsed && !!isDesktop,
                   'opacity-0 text-[0px] invisible': !!isCollapsed || !isDesktop,
