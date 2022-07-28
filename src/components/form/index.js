@@ -43,39 +43,7 @@ const Component = ({
   const timeout = useRef();
 
   const handleFilter = useCallback(async () => {
-    columns = columns
-      .filter((item) => !!item && !!item.formItem)
-      .map((item, index) => {
-        if (item.formItem.type === 'password' && !!item.formItem.confirm) {
-          const rules = [
-            { type: 'required' },
-            {
-              type: 'custom',
-              validator: ({ getFieldValue }) => ({
-                validator(rule, value) {
-                  if (!value || getFieldValue(item.name) === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(t('components.form.rulesConfirmPassword'));
-                },
-              }),
-            },
-          ];
-
-          const confirmItem = {
-            name: 'confirm' + item.name,
-            title: t('components.form.confirm') + ' ' + item.title.toLowerCase(),
-            formItem: {
-              type: 'password',
-              rules,
-            },
-          };
-          if (JSON.stringify(columns[index + 1]) !== JSON.stringify(confirmItem)) {
-            columns.splice(index + 1, 0, confirmItem);
-          }
-        }
-        return item;
-      });
+    columns = columns.filter((item) => !!item && !!item.formItem);
 
     if (
       JSON.stringify(
