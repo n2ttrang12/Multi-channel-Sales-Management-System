@@ -65,7 +65,7 @@ const Hook = ({
           return true;
         })
         .catch(() => false);
-    }
+    },
   });
 
   const handleEdit = async (item = {}) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Select } from 'antd';
 import axios from 'axios';
 
-const Component = ({ formItem, form, value, ...prop }) => {
+const Component = ({ formItem, form, value, showSearch = true, ...prop }) => {
   const [_list, set_list] = useState(formItem.list ? formItem.list : []);
 
   const loadData = useCallback(
@@ -42,7 +42,7 @@ const Component = ({ formItem, form, value, ...prop }) => {
       {...prop}
       listHeight={200}
       filterOption={false}
-      showSearch
+      showSearch={showSearch}
       allowClear
       onBlur={() => loadData('')}
       onSearch={(value) => loadData(value)}

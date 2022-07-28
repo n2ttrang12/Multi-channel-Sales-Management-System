@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Form } from 'antd';
-import classNames from "classnames";
+import classNames from 'classnames';
 
 const Component = ({ name, formItem, generateForm, form }) => {
   return (
@@ -11,14 +11,17 @@ const Component = ({ name, formItem, generateForm, form }) => {
             <div className="table-row">
               <div className={'table-cell border bg-gray-300 font-bold p-1 text-center w-10'}>STT</div>
               {formItem.column.map((column, index) => (
-                <div key={index} className={classNames('table-cell border bg-gray-300 font-bold p-1 text-center', {
-                  'w-full': formItem.column.length === 1,
-                  'w-1/2': formItem.column.length === 2,
-                  'w-1/3': formItem.column.length === 3,
-                  'w-1/4': formItem.column.length === 4,
-                  'w-1/5': formItem.column.length === 5,
-                  'w-1/6': formItem.column.length === 6,
-                })}>
+                <div
+                  key={index}
+                  className={classNames('table-cell border bg-gray-300 font-bold p-1 text-center', {
+                    'w-full': formItem.column.length === 1,
+                    'w-1/2': formItem.column.length === 2,
+                    'w-1/3': formItem.column.length === 3,
+                    'w-1/4': formItem.column.length === 4,
+                    'w-1/5': formItem.column.length === 5,
+                    'w-1/6': formItem.column.length === 6,
+                  })}
+                >
                   {column.title}
                 </div>
               ))}

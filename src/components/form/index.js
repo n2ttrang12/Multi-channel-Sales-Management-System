@@ -195,6 +195,7 @@ const Component = ({
       case 'select':
         return (
           <Select
+            showSearch={formItem.showSearch}
             maxTagCount={formItem.maxTagCount || 'responsive'}
             onChange={(value) => formItem.onChange && formItem.onChange(value, form)}
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
@@ -485,7 +486,7 @@ const Component = ({
       form={form}
       layout={!widthLabel ? 'vertical' : 'horizontal'}
       onFinish={handFinish}
-      onFinishFailed={({errorFields}) =>
+      onFinishFailed={({ errorFields }) =>
         errorFields.length && form.scrollToField(errorFields[0].name, { behavior: 'smooth' })
       }
       initialValues={convertFormValue(columns, values, false)}

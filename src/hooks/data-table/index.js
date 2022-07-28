@@ -44,11 +44,12 @@ const Hook = ({
   pageSizeRender = (sizePage) => sizePage + ' / page',
   pageSizeWidth = '115px',
   paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
-  idElement = 'idTable',
+  idElement = 'temp-' + v4(),
   className = 'data-table',
   ...prop
 }) => {
   const [idTable] = useState('temp-' + v4());
+  const idE = useRef(idElement);
   const [objData, setObjData] = useState({});
   const [dataSource, setDataSource] = useState([]);
   const [totalData, setTotalData] = useState(0);
@@ -324,7 +325,7 @@ const Hook = ({
             {!!showSearch && (
               <div className="relative">
                 <input
-                  id={idElement + '_input_search'}
+                  id={idE.current + '_input_search'}
                   className="w-52 h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-4"
                   defaultValue={params.fullTextSearch}
                   type="text"
@@ -336,7 +337,7 @@ const Hook = ({
                         null,
                         params[filter],
                         params[sort],
-                        document.getElementById(idElement + '_input_search').value,
+                        document.getElementById(idE.current + '_input_search').value,
                       );
                     }, 500);
                   }}
@@ -346,7 +347,7 @@ const Hook = ({
                         null,
                         params[filter],
                         params[sort],
-                        document.getElementById(idElement + '_input_search').value,
+                        document.getElementById(idE.current + '_input_search').value,
                       );
                   }}
                 />
@@ -357,7 +358,7 @@ const Hook = ({
                   })}
                   onClick={() => {
                     if (params.fullTextSearch) {
-                      document.getElementById(idElement + '_input_search').value = '';
+                      document.getElementById(idE.current + '_input_search').value = '';
                       handleTableChange(null, params[filter], params[sort], null);
                     }
                   }}
@@ -402,7 +403,7 @@ const Hook = ({
                     handleTableChange(pagination, params[filter], params[sort], params.fullTextSearch)
                   }
                   paginationDescription={paginationDescription}
-                  idElement={idElement}
+                  idElement={idE.current}
                   {...prop}
                 />
               )}

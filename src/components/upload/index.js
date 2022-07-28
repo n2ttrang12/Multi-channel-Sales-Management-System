@@ -77,7 +77,7 @@ const Component = ({
       JSON.stringify(listFiles) !== JSON.stringify(tempData) &&
       listFiles.filter((item) => item.status === 'uploading').length === 0
     ) {
-      // set_listFiles(tempData);
+      set_listFiles(tempData);
       setTimeout(() => {
         import('glightbox').then(({ default: GLightbox }) => GLightbox());
       });
