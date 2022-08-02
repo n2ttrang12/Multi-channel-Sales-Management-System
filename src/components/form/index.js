@@ -41,6 +41,7 @@ const Component = ({
   const { formatDate } = useAuth();
   const [_columns, set_columns] = useState([]);
   const timeout = useRef();
+  const refLoad = useRef(true);
 
   const handleFilter = useCallback(async () => {
     columns = columns.filter((item) => !!item && !!item.formItem);
@@ -70,11 +71,12 @@ const Component = ({
   }, [columns, values, _columns]);
 
   useEffect(() => {
-    if (form) {
+    if (form && refLoad.current) {
       form.resetFields();
       form.setFieldsValue(values);
     }
-  }, [form, values]);
+    refLoad.current = true;
+  }, [values]);
 
   useEffect(() => {
     handleFilter(values);
@@ -87,7 +89,15 @@ const Component = ({
       // case "media":
       //   return <Media limit={formItem.limit} />;
       case 'addable':
-        return <Addable name={item.name} formItem={formItem} generateForm={generateForm} form={form} />;
+        return (
+          <Addable
+            name={item.name}
+            formItem={formItem}
+            generateForm={generateForm}
+            form={form}
+            isTable={formItem.isTable}
+          />
+        );
       case 'editor':
         return <Editor readOnly={!!formItem.disabled && formItem.disabled(values, form)} />;
       case 'color_button':
@@ -238,7 +248,10 @@ const Component = ({
         );
     }
   };
-  const generateForm = (item, index, name, isTable) => {
+  const generateForm = (item, index, showLabel = true, name) => {
+    if (!!item?.formItem?.condition && !item?.formItem?.condition(values[item.name], form)) {
+      return;
+    }
     if (item.formItem) {
       const rules = [];
       switch (item.formItem.type) {
@@ -444,7 +457,7 @@ const Component = ({
 
       const otherProps = {
         key: index,
-        label: !isTable && item.title,
+        label: showLabel && item.title,
         name: name || item.name,
         labelAlign: 'left',
         validateTrigger: 'onBlur',
@@ -485,10 +498,10 @@ const Component = ({
       className={className}
       form={form}
       layout={!widthLabel ? 'vertical' : 'horizontal'}
-      onFinish={handFinish}
       onFinishFailed={({ errorFields }) =>
         errorFields.length && form.scrollToField(errorFields[0].name, { behavior: 'smooth' })
       }
+      onFinish={handFinish}
       initialValues={convertFormValue(columns, values, false)}
       onValuesChange={async (objValue) => {
         onFirstChange();
@@ -500,6 +513,7 @@ const Component = ({
                 columns.filter((_item) => _item.name === key);
               }
             }
+            refLoad.current = false;
             set_columns(columns);
             await handleFilter({ ...values, ...form.getFieldsValue() });
           }, 500);

@@ -8,5 +8,6 @@ import FormDrag from './form/drag';
 import Message from './message';
 import Spin from './spin';
 import Upload from './upload';
+import Wizard from './wizard';
 
-export { Avatar, Calendar, Collapse, Editor, Pagination, Form, FormDrag, Message, Spin, Upload };
+export { Avatar, Calendar, Collapse, Editor, Pagination, Form, FormDrag, Message, Spin, Upload, Wizard };
