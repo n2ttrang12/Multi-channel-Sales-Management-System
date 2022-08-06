@@ -96,7 +96,6 @@ const Util = (columns, values, exportData = true) => {
                     break;
                   case 3:
                     if (values[item.name[0]][item.name[1]]) {
-
                       if (exportData) {
                         values[item.name[0]][item.name[1]][item.name[2]] =
                           values[item.name[0]][item.name[1]][item.name[2]].format('YYYY-MM-DDTHH:mm:ss[Z]');
@@ -168,7 +167,10 @@ const Util = (columns, values, exportData = true) => {
                           moment(values[item.name[0]][1]).format('YYYY-MM-DDTHH:mm:ss[Z]'),
                         ];
                       } else {
-                        values[item.name[0]] = [moment(values[item.name[0]][0]).utc(), moment(values[item.name[0]][1]).utc()];
+                        values[item.name[0]] = [
+                          moment(values[item.name[0]][0]).utc(),
+                          moment(values[item.name[0]][1]).utc(),
+                        ];
                       }
                     }
                     break;
@@ -214,11 +216,14 @@ const Util = (columns, values, exportData = true) => {
               }
             }
             break;
+          default:
+            if (typeof values[item.name] === 'string') {
+              values[item.name] = values[item.name].trim();
+            }
         }
       }
       return item;
     });
-  // console.log(columns, values);
   return values;
 };
 export default Util;

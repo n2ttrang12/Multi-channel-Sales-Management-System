@@ -33,7 +33,7 @@ const Component = ({ name, formItem, generateForm, form, isTable = true }) => {
                   <div className={'table-cell border bg-gray-300 text-center'}>{i + 1}</div>
                   {formItem.column.map((column, index) => (
                     <div className={'table-cell border'} key={index}>
-                      {generateForm(column, index, false, [n, column.name])}
+                      {generateForm(column, index + '_' + i, false, [n, column.name])}
                     </div>
                   ))}
                   <div className={'table-cell align-middle w-8'}>
@@ -81,7 +81,7 @@ const Component = ({ name, formItem, generateForm, form, isTable = true }) => {
                     )}
                     key={index}
                   >
-                    {generateForm(column, index, true, [n, column.name])}
+                    {generateForm(column, index + '_' + i, true, [n, column.name])}
                   </div>
                 ))}
                 <div className={'table-cell align-middle w-8'}>

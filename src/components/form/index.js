@@ -252,6 +252,9 @@ const Component = ({
     if (!!item?.formItem?.condition && !item?.formItem?.condition(values[item.name], form)) {
       return;
     }
+    if (item?.formItem?.render) {
+      return item?.formItem?.render(form, values, generateForm, index);
+    }
     if (item.formItem) {
       const rules = [];
       switch (item.formItem.type) {
@@ -306,7 +309,7 @@ const Component = ({
                   validator(_, value) {
                     const regexEmail =
                       /^(([^<>()[\]\\.,;:$%^&*\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                    if (!value || (typeof value === 'string' && regexEmail.test(value))) {
+                    if (!value || (typeof value === 'string' && regexEmail.test(value.trim()))) {
                       return Promise.resolve();
                     } else if (
                       typeof value === 'object' &&
@@ -546,9 +549,7 @@ const Component = ({
                     )}
                     key={index}
                   >
-                    {!column?.formItem?.render
-                      ? generateForm(column, index)
-                      : column?.formItem?.render(form, values, generateForm, index)}
+                    {generateForm(column, index)}
                   </div>
                 ),
             )}

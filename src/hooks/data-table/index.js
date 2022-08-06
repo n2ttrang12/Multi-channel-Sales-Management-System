@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 import moment from 'moment';
 import classNames from 'classnames';
+import { Resizable } from 'react-resizable';
 
 import { Pagination } from 'components';
 import { checkTextToShort, cleanObjectKeyNull, getQueryStringParams } from 'utils';
@@ -12,6 +13,35 @@ import { checkTextToShort, cleanObjectKeyNull, getQueryStringParams } from 'util
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
 const { RangePicker } = DatePicker;
+const ResizableTitle = (props) => {
+  const { onResize, width, minWidth, ...restProps } = props;
+
+  if (!width) {
+    return <th {...restProps} />;
+  }
+
+  return (
+    <Resizable
+      minConstraints={[minWidth, 0]}
+      width={width}
+      height={0}
+      handle={
+        <span
+          className="react-resizable-handle"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        />
+      }
+      onResize={onResize}
+      draggableOpts={{
+        enableUserSelectHack: false,
+      }}
+    >
+      <th {...restProps} />
+    </Resizable>
+  );
+};
 
 const Hook = ({
   isLoading,
@@ -63,7 +93,7 @@ const Hook = ({
         },
   );
   const timeoutSearch = useRef();
-
+  const cols = useRef();
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
@@ -236,10 +266,9 @@ const Hook = ({
       <i className="las la-lg la-calendar" style={{ color: filtered ? '#3699FF' : undefined }} />
     ),
   });
-
-  const cols = columns
+  cols.current = columns
     .filter((col) => !!col && !!col.tableItem)
-    .map((col) => {
+    .map((col, index) => {
       let item = col.tableItem;
 
       if (item.filter) {
@@ -276,14 +305,31 @@ const Hook = ({
       if (!item.render) {
         item.render = (text) => checkTextToShort(text);
       }
+      if (item.width) {
+        item.minWidth = item.width;
+      }
 
       return {
         title: col.title,
         dataIndex: col.name,
+        onHeaderCell: (column) => ({
+          minWidth: column.width,
+          width: column.width,
+          onResize: handleResize(index),
+        }),
         ...item,
       };
     });
 
+  const [_columns, set_columns] = useState(cols.current.map((item) => item.width));
+  // const cols = ;
+  const handleResize =
+    (index) =>
+    (_, { size }) => {
+      _columns[index] = size.width;
+      cols.current[index].width = size.width;
+      set_columns([..._columns]);
+    };
   const handleTableChange = (pagination, filters = {}, sorts, tempFullTextSearch) => {
     let tempPageIndex = pagination ? pagination.current : params[pageIndex];
     const tempPageSize = pagination ? pagination.pageSize : params[pageSize];
@@ -326,7 +372,7 @@ const Hook = ({
               <div className="relative">
                 <input
                   id={idE.current + '_input_search'}
-                  className="w-52 h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-8"
+                  className="w-52 h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-4"
                   defaultValue={params.fullTextSearch}
                   type="text"
                   placeholder={searchPlaceholder || t('components.datatable.pleaseEnterValueToSearch')}
@@ -372,12 +418,25 @@ const Hook = ({
           {!!showList && (
             <Fragment>
               <Table
+                components={{
+                  header: {
+                    cell: ResizableTitle,
+                  },
+                }}
                 onRow={onRow}
                 locale={{
                   emptyText: <div className="bg-gray-100 text-gray-400 py-4">{emptyText}</div>,
                 }}
                 loading={isLoading}
-                columns={columns || cols}
+                columns={
+                  columns ||
+                  _columns.map((item, index) => {
+                    if (item) {
+                      cols.current[index].width = item;
+                    }
+                    return cols.current[index];
+                  })
+                }
                 pagination={false}
                 dataSource={(data || dataSource).map((item) => ({
                   ...item,
