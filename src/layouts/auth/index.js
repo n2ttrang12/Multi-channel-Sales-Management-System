@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
       break;
   }
   return (
-    <div className="h-full overflow-scroll layout-auth">
+    <div className="layout-auth h-screen min-h-screen w-full drop-shadow-2xl flex flex-col relative">
       <div className="bg-white bg-cover bg-center h-full relative min-h-[600px] ">
         <div className="block lg:flex  h-full">
           <div className="w-full lg:w-1/2  relative lg:flex justify-between flex-col hidden !bg-green-900">
