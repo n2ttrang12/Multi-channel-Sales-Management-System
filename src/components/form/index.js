@@ -42,6 +42,12 @@ const Component = ({
   const [_columns, set_columns] = useState([]);
   const timeout = useRef();
   const refLoad = useRef(true);
+  const [_render, set_render] = useState(false);
+
+  const reRender = () => {
+    set_render(!_render);
+    refLoad.current = false;
+  };
 
   const handleFilter = useCallback(async () => {
     columns = columns.filter((item) => !!item && !!item.formItem);
@@ -92,10 +98,9 @@ const Component = ({
         return (
           <Addable
             name={item.name}
-            formItem={formItem}
             generateForm={generateForm}
             form={form}
-            isTable={formItem.isTable}
+            {...formItem}
           />
         );
       case 'editor':
@@ -183,6 +188,7 @@ const Component = ({
             buttonStyle={formItem.style}
             optionType={formItem.style ? 'button' : ''}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
+            onChange={({target}) => formItem.onChange && formItem.onChange(target.value, form)}
           />
         );
       case 'tag':
@@ -249,11 +255,11 @@ const Component = ({
     }
   };
   const generateForm = (item, index, showLabel = true, name) => {
-    if (!!item?.formItem?.condition && !item?.formItem?.condition(values[item.name], form)) {
+    if (!!item?.formItem?.condition && !item?.formItem?.condition(values[item.name], form, index)) {
       return;
     }
     if (item?.formItem?.render) {
-      return item?.formItem?.render(form, values, generateForm, index);
+      return item?.formItem?.render(form, values, generateForm, index, reRender, onFirstChange);
     }
     if (item.formItem) {
       const rules = [];

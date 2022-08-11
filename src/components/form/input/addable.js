@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Form } from 'antd';
 import classNames from 'classnames';
 
-const Component = ({ name, formItem, generateForm, form, isTable = true }) => {
+const Component = ({ name, column = [], textAdd = 'Thêm dòng',onAdd = () => {},  generateForm, form, isTable = true, showRemove = () => true }) => {
   return (
     <Form.List name={name}>
       {(fields, { add, remove }) =>
@@ -11,19 +11,19 @@ const Component = ({ name, formItem, generateForm, form, isTable = true }) => {
             <div className={'table w-full border-collapse addable'}>
               <div className="table-row">
                 <div className={'table-cell border bg-gray-300 font-bold p-1 text-center w-10'}>STT</div>
-                {formItem.column.map((column, index) => (
+                {column.map((col, index) => (
                   <div
                     key={index}
                     className={classNames('table-cell border bg-gray-300 font-bold p-1 text-center', {
-                      'w-full': formItem.column.length === 1,
-                      'w-1/2': formItem.column.length === 2,
-                      'w-1/3': formItem.column.length === 3,
-                      'w-1/4': formItem.column.length === 4,
-                      'w-1/5': formItem.column.length === 5,
-                      'w-1/6': formItem.column.length === 6,
+                      'w-full': column.length === 1,
+                      'w-1/2': column.length === 2,
+                      'w-1/3': column.length === 3,
+                      'w-1/4': column.length === 4,
+                      'w-1/5': column.length === 5,
+                      'w-1/6': column.length === 6,
                     })}
                   >
-                    {column.title}
+                    {col.title}
                   </div>
                 ))}
                 <div className={'w-8 h-1'} />
@@ -31,19 +31,21 @@ const Component = ({ name, formItem, generateForm, form, isTable = true }) => {
               {fields.map(({ key, name: n, ...restField }, i) => (
                 <div className="table-row" key={i}>
                   <div className={'table-cell border bg-gray-300 text-center'}>{i + 1}</div>
-                  {formItem.column.map((column, index) => (
+                  {column.map((col, index) => (
                     <div className={'table-cell border'} key={index}>
-                      {generateForm(column, index + '_' + i, false, [n, column.name])}
+                      {generateForm(col, index + '_' + i, false, [n, col.name])}
                     </div>
                   ))}
                   <div className={'table-cell align-middle w-8'}>
-                    <i
-                      className="las la-trash-alt text-red-500 hover:text-red-400 cursor-pointer text-3xl"
-                      onClick={() => {
-                        remove(n);
-                        formItem.onAdd && formItem.onAdd(form.getFieldValue(name), form);
-                      }}
-                    />
+                    {showRemove(form.getFieldValue([[name],n]), n) && (
+                      <i
+                        className="las la-trash-alt text-red-500 hover:text-red-400 cursor-pointer text-3xl"
+                        onClick={() => {
+                          remove(n);
+                          onAdd(form.getFieldValue(name), form)
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
               ))}
@@ -54,44 +56,46 @@ const Component = ({ name, formItem, generateForm, form, isTable = true }) => {
                 className="rounded-xl font-medium text-white bg-blue-500 hover:bg-blue-400 py-1.5 px-4 my-2 addable-add"
                 onClick={() => {
                   add();
-                  formItem.onAdd && formItem.onAdd(form.getFieldValue(name), form);
+                  onAdd(form.getFieldValue(name), form);
                 }}
               >
                 <i className="las la-plus mr-1 text-lg" />
-                <span className={'relative -top-0.5'}>{formItem.textAdd}</span>
+                <span className={'relative -top-0.5'}>{textAdd}</span>
               </button>
             </div>
           </Fragment>
         ) : (
-          <Fragment>
+          <div className={'addable'}>
             {fields.map(({ key, name: n, ...restField }, i) => (
               <div className={'grid gap-x-5 grid-cols-12'} key={i}>
-                {formItem.column.map((column, index) => (
+                {column.map((col, index) => (
                   <div
                     className={classNames(
-                      column?.formItem?.classItem,
+                      col?.formItem?.classItem,
                       'col-span-12' +
-                        (' sm:col-span-' +
-                          (column?.formItem?.colTablet
-                            ? column?.formItem?.colTablet
-                            : column?.formItem?.col
-                            ? column?.formItem?.col
+                      (' sm:col-span-' +
+                        (col?.formItem?.colTablet
+                          ? col?.formItem?.colTablet
+                          : col?.formItem?.col
+                            ? col?.formItem?.col
                             : 12)) +
-                        (' lg:col-span-' + (column?.formItem?.col ? column?.formItem?.col : 12)),
+                      (' lg:col-span-' + (col?.formItem?.col ? col?.formItem?.col : 12)),
                     )}
                     key={index}
                   >
-                    {generateForm(column, index + '_' + i, true, [n, column.name])}
+                    {generateForm(col, index + '_' + i, true, [n, col.name])}
                   </div>
                 ))}
                 <div className={'table-cell align-middle w-8'}>
-                  <i
-                    className="las la-trash-alt text-red-500 hover:text-red-400 cursor-pointer text-3xl"
-                    onClick={() => {
-                      remove(n);
-                      formItem.onAdd && formItem.onAdd(form.getFieldValue(name), form);
-                    }}
-                  />
+                  {showRemove(form.getFieldValue([[name],n]), n) && (
+                    <i
+                      className="las la-trash-alt text-red-500 hover:text-red-400 cursor-pointer text-3xl"
+                      onClick={() => {
+                        remove(n);
+                        onAdd(form.getFieldValue(name), form)
+                      }}
+                    />
+                  )}
                 </div>
               </div>
             ))}
@@ -101,14 +105,14 @@ const Component = ({ name, formItem, generateForm, form, isTable = true }) => {
                 className="rounded-xl font-medium text-white bg-blue-500 hover:bg-blue-400 py-1.5 px-4 my-2 addable-add"
                 onClick={() => {
                   add();
-                  formItem.onAdd && formItem.onAdd(form.getFieldValue(name), form);
+                  onAdd(form.getFieldValue(name), form)
                 }}
               >
                 <i className="las la-plus mr-1 text-lg" />
-                <span className={'relative -top-0.5'}>{formItem.textAdd}</span>
+                <span className={'relative -top-0.5'}>{textAdd}</span>
               </button>
             </div>
-          </Fragment>
+          </div>
         )
       }
     </Form.List>

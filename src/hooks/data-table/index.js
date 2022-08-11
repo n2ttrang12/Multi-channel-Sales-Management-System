@@ -159,11 +159,9 @@ const Hook = ({
   const handleSearch = useCallback(async () => {
     if (loadFirst) {
       const _params = {
-        [pageIndex]: params[pageIndex],
-        [pageSize]: params[pageSize],
+        ...params,
         [sort]: JSON.stringify(params[sort]),
         [filter]: JSON.stringify(params[filter]),
-        [fullTextSearch]: params[fullTextSearch],
       };
       await onChange(cleanObjectKeyNull(_params));
     }
@@ -373,7 +371,7 @@ const Hook = ({
                 <input
                   id={idE.current + '_input_search'}
                   className="w-52 h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-4"
-                  defaultValue={params.fullTextSearch}
+                  defaultValue={params[fullTextSearch]}
                   type="text"
                   placeholder={searchPlaceholder || t('components.datatable.pleaseEnterValueToSearch')}
                   onChange={() => {
@@ -399,11 +397,11 @@ const Hook = ({
                 />
                 <i
                   className={classNames('text-lg las absolute top-1.5 right-3 z-10', {
-                    'la-search': !params.fullTextSearch,
-                    'la-times': !!params.fullTextSearch,
+                    'la-search': !params[fullTextSearch],
+                    'la-times': !!params[fullTextSearch],
                   })}
                   onClick={() => {
-                    if (params.fullTextSearch) {
+                    if (params[fullTextSearch]) {
                       document.getElementById(idE.current + '_input_search').value = '';
                       handleTableChange(null, params[filter], params[sort], null);
                     }
@@ -443,7 +441,7 @@ const Hook = ({
                   key: item.id || v4(),
                 }))}
                 onChange={(pagination, filters, sorts) =>
-                  handleTableChange(null, filters, sorts, params.fullTextSearch)
+                  handleTableChange(null, filters, sorts, params[fullTextSearch])
                 }
                 showSorterTooltip={false}
                 scroll={{ x: xScroll, y: yScroll }}
@@ -459,7 +457,7 @@ const Hook = ({
                   pageSizeRender={pageSizeRender}
                   pageSizeWidth={pageSizeWidth}
                   queryParams={(pagination) =>
-                    handleTableChange(pagination, params[filter], params[sort], params.fullTextSearch)
+                    handleTableChange(pagination, params[filter], params[sort], params[fullTextSearch])
                   }
                   paginationDescription={paginationDescription}
                   idElement={idE.current}
