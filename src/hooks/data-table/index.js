@@ -320,7 +320,10 @@ const Hook = ({
     });
 
   const [_columns, set_columns] = useState(cols.current.map((item) => item.width));
-  // const cols = ;
+  if (_columns.length !== cols.current.length) {
+    set_columns(cols.current.map((item) => item.width))
+  }
+
   const handleResize =
     (index) =>
     (_, { size }) => {
