@@ -26,12 +26,11 @@ export const UserService = {
       const refreshToken = localStorage.getItem(keyRefreshToken);
       if (refreshToken) {
         const { data } = await axios.post(
-          `${routerLinks(UserService.nameLink, 'api')}/refresh-token`,
-          {},
-          { params: { refreshToken: 'Bearer ' + refreshToken } },
+          `${routerLinks(UserService.nameLink, 'api')}/refresh-token` ,{ refreshToken },
         );
-        axios.defaults.headers.common.Authorization = 'Bearer ' + data.accessToken;
-        localStorage.setItem(keyToken, data.accessToken);
+        axios.defaults.headers.common.Authorization = 'Bearer ' + data.data.accessToken;
+        localStorage.setItem(keyToken, data.data.accessToken);
+        localStorage.setItem(keyRefreshToken, data.data.refreshToken);
         return data;
       }
       return null;
