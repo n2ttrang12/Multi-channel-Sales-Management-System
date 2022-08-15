@@ -104,7 +104,7 @@ const Layout = ({ children }) => {
         className={classNames(
           't-10 rounded-tr-3xl flex items-center text-gray-800 hover:text-gray-500 h-20 fixed top-0 left-0 px-5 font-bold transition-all duration-300 ease-in-out z-10',
           {
-            'w-80 justify-between': !isCollapsed && isDesktop,
+            'w-72 justify-between': !isCollapsed && isDesktop,
             'w-20 justify-center': isCollapsed,
             'bg-teal-900': isDesktop,
             'bg-blue-50': !isDesktop,
@@ -147,7 +147,7 @@ const Layout = ({ children }) => {
       </div>
       <div
         className={classNames('fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out', {
-          'w-80': !isCollapsed,
+          'w-72': !isCollapsed,
           'w-20': isCollapsed,
           '-left-20': isCollapsed && !isDesktop,
         })}
