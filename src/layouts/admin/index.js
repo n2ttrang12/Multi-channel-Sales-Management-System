@@ -156,7 +156,7 @@ const Layout = ({ children }) => {
       </div>
       <div
         className={classNames('bg-gray-100 px-5 transition-all duration-300 ease-in-out z-10', {
-          'ml-80': !isCollapsed && isDesktop,
+          'ml-72': !isCollapsed && isDesktop,
           'ml-20': isCollapsed && isDesktop,
         })}
       >
