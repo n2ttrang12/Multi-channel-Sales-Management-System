@@ -53,7 +53,7 @@ const Layout = ({ children }) => {
       className={classNames(
         'bg-gray-100 w-full header h-16 transition-all duration-300 ease-in-out sticky top-0 block z-10',
         {
-          'pl-80': !isCollapsed && isDesktop,
+          'pl-72': !isCollapsed && isDesktop,
           'pl-32': isCollapsed && isDesktop,
           'pl-28': !isDesktop,
         },
@@ -123,7 +123,7 @@ const Layout = ({ children }) => {
             <div
               id={'name-application'}
               className={classNames(
-                'transition-all text-white duration-300 ease-in-out absolute left-16 w-48 overflow-ellipsis overflow-hidden ml-7',
+                'transition-all text-white duration-300 ease-in-out absolute left-16 w-40 overflow-ellipsis overflow-hidden ml-7',
                 {
                   'opacity-100 text-3xl': !isCollapsed && !!isDesktop,
                   'opacity-0 text-[0px] invisible': !!isCollapsed || !isDesktop,
