@@ -172,6 +172,16 @@ body {
 .ant-table-content .ant-table-thead > tr > th {
   @apply font-normal;
 }
+.ant-table-content {
+  overflow: hidden !important;
+}
+.ant-table{
+  &-content {
+    .ant-table-thead > tr > th {
+      font-weight: 700 !important;
+    }
+  }
+}
 
 footer{
   @apply !bg-white p-4 flex pl-5 ;
