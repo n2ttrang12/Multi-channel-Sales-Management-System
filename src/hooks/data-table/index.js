@@ -373,7 +373,7 @@ const Hook = ({
               <div className="relative">
                 <input
                   id={idE.current + '_input_search'}
-                  className="w-52 h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-4"
+                  className="w-52 h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-8"
                   defaultValue={params[fullTextSearch]}
                   type="text"
                   placeholder={searchPlaceholder || t('components.datatable.pleaseEnterValueToSearch')}

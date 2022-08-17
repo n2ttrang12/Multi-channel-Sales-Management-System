@@ -6,7 +6,7 @@ const Util = (text) => {
     text
   ) : (
     <span>
-      {text.substr(0, 40)}
+      {text.substr(0, 60)}
       <Popover trigger="hover" overlayClassName="table-tooltip" content={text}>
         <i className="las la-lg la-info-circle link-click" />
       </Popover>

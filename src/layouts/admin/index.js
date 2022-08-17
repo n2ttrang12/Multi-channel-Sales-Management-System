@@ -53,7 +53,7 @@ const Layout = ({ children }) => {
       className={classNames(
         'bg-gray-100 w-full header h-16 transition-all duration-300 ease-in-out sticky top-0 block z-10',
         {
-          'pl-80': !isCollapsed && isDesktop,
+          'pl-72': !isCollapsed && isDesktop,
           'pl-32': isCollapsed && isDesktop,
           'pl-28': !isDesktop,
         },
@@ -104,7 +104,7 @@ const Layout = ({ children }) => {
         className={classNames(
           't-10 rounded-tr-3xl flex items-center text-gray-800 hover:text-gray-500 h-20 fixed top-0 left-0 px-5 font-bold transition-all duration-300 ease-in-out z-10',
           {
-            'w-80 justify-between': !isCollapsed && isDesktop,
+            'w-72 justify-between': !isCollapsed && isDesktop,
             'w-20 justify-center': isCollapsed,
             'bg-teal-900': isDesktop,
             'bg-blue-50': !isDesktop,
@@ -123,7 +123,7 @@ const Layout = ({ children }) => {
             <div
               id={'name-application'}
               className={classNames(
-                'transition-all text-white duration-300 ease-in-out absolute left-16 w-48 overflow-ellipsis overflow-hidden ml-7',
+                'transition-all text-white duration-300 ease-in-out absolute left-16 w-40 overflow-ellipsis overflow-hidden ml-7',
                 {
                   'opacity-100 text-3xl': !isCollapsed && !!isDesktop,
                   'opacity-0 text-[0px] invisible': !!isCollapsed || !isDesktop,
@@ -147,7 +147,7 @@ const Layout = ({ children }) => {
       </div>
       <div
         className={classNames('fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out', {
-          'w-80': !isCollapsed,
+          'w-72': !isCollapsed,
           'w-20': isCollapsed,
           '-left-20': isCollapsed && !isDesktop,
         })}
@@ -156,7 +156,7 @@ const Layout = ({ children }) => {
       </div>
       <div
         className={classNames('bg-gray-100 px-5 transition-all duration-300 ease-in-out z-10', {
-          'ml-80': !isCollapsed && isDesktop,
+          'ml-72': !isCollapsed && isDesktop,
           'ml-20': isCollapsed && isDesktop,
         })}
       >
