@@ -2,7 +2,16 @@ import React, { Fragment } from 'react';
 import { Form } from 'antd';
 import classNames from 'classnames';
 
-const Component = ({ name, column = [], textAdd = 'Thêm dòng',onAdd = () => {},  generateForm, form, isTable = true, showRemove = () => true }) => {
+const Component = ({
+  name,
+  column = [],
+  textAdd = 'Thêm dòng',
+  onAdd = () => {},
+  generateForm,
+  form,
+  isTable = true,
+  showRemove = () => true,
+}) => {
   return (
     <Form.List name={name}>
       {(fields, { add, remove }) =>
@@ -37,12 +46,12 @@ const Component = ({ name, column = [], textAdd = 'Thêm dòng',onAdd = () => {}
                     </div>
                   ))}
                   <div className={'table-cell align-middle w-8'}>
-                    {showRemove(form.getFieldValue([[name],n]), n) && (
+                    {showRemove(form.getFieldValue([[name], n]), n) && (
                       <i
                         className="las la-trash-alt text-red-500 hover:text-red-400 cursor-pointer text-3xl"
                         onClick={() => {
                           remove(n);
-                          onAdd(form.getFieldValue(name), form)
+                          onAdd(form.getFieldValue(name), form);
                         }}
                       />
                     )}
@@ -73,13 +82,13 @@ const Component = ({ name, column = [], textAdd = 'Thêm dòng',onAdd = () => {}
                     className={classNames(
                       col?.formItem?.classItem,
                       'col-span-12' +
-                      (' sm:col-span-' +
-                        (col?.formItem?.colTablet
-                          ? col?.formItem?.colTablet
-                          : col?.formItem?.col
+                        (' sm:col-span-' +
+                          (col?.formItem?.colTablet
+                            ? col?.formItem?.colTablet
+                            : col?.formItem?.col
                             ? col?.formItem?.col
                             : 12)) +
-                      (' lg:col-span-' + (col?.formItem?.col ? col?.formItem?.col : 12)),
+                        (' lg:col-span-' + (col?.formItem?.col ? col?.formItem?.col : 12)),
                     )}
                     key={index}
                   >
@@ -87,12 +96,12 @@ const Component = ({ name, column = [], textAdd = 'Thêm dòng',onAdd = () => {}
                   </div>
                 ))}
                 <div className={'table-cell align-middle w-8'}>
-                  {showRemove(form.getFieldValue([[name],n]), n) && (
+                  {showRemove(form.getFieldValue([[name], n]), n) && (
                     <i
                       className="las la-trash-alt text-red-500 hover:text-red-400 cursor-pointer text-3xl"
                       onClick={() => {
                         remove(n);
-                        onAdd(form.getFieldValue(name), form)
+                        onAdd(form.getFieldValue(name), form);
                       }}
                     />
                   )}
@@ -105,7 +114,7 @@ const Component = ({ name, column = [], textAdd = 'Thêm dòng',onAdd = () => {}
                 className="rounded-xl font-medium text-white bg-blue-500 hover:bg-blue-400 py-1.5 px-4 my-2 addable-add"
                 onClick={() => {
                   add();
-                  onAdd(form.getFieldValue(name), form)
+                  onAdd(form.getFieldValue(name), form);
                 }}
               >
                 <i className="las la-plus mr-1 text-lg" />

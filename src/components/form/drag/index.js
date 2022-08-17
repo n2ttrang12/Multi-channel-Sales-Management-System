@@ -1,10 +1,10 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useRef } from 'react';
 import { Popconfirm, Tooltip } from 'antd';
 import { v4 } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 
-import { HookModalForm } from 'hooks';
+import { ModalForm } from 'components';
 import Nestable from './Nestable';
 import EditIcon from 'assets/svg/edit';
 import RemoveIcon from 'assets/svg/remove';
@@ -110,26 +110,14 @@ const Component = ({
     return array.filter((item) => !!item);
   };
 
-  const [handleEditForm, ModalForm] = HookModalForm({
-    title: (data) => (!data?.id ? t('routes.admin.Layout.Add') : t('routes.admin.Layout.Edit')),
-    isLoading,
-    setIsLoading,
-    columns,
-    Post,
-    Put,
-    GetById,
-    widthModal: widthForm,
-    idElement,
-    handleChange: (values, oldData) => handleSubmit(values, oldData?.id),
-    ...propForm,
-  });
+  const modalForm = useRef();
 
   const renderRow = (item, collapseIcon) =>
     (!condition || condition(item)) && (
       <div className="item-drag flex justify-between items-center" key={item.id}>
         <div className="flex flex-1 items-center justify-between py-2 pl-3">
           {!!collapseIcon && <div className="w-7">{collapseIcon}</div>}
-          {showName ? showName(item, handleEditForm) : item.name}
+          {showName ? showName(item, modalForm?.current?.handleEdit) : item.name}
         </div>
         {!readOnly && (
           <div
@@ -149,7 +137,7 @@ const Component = ({
                     className={classNames('embed border border-gray-300 text-xs rounded-lg', {
                       'mr-2': !!conditionDelete(item),
                     })}
-                    onClick={() => handleEditForm(item)}
+                    onClick={() => modalForm?.current?.handleEdit(item)}
                   >
                     <EditIcon />
                   </button>
@@ -192,7 +180,7 @@ const Component = ({
                 'bg-blue-500 text-white px-4 h-10 rounded-xl hover:bg-blue-400 inline-flex items-center',
                 { 'mr-2': !!onMoreAdd },
               )}
-              onClick={() => handleEditForm(initAddNew)}
+              onClick={() => modalForm?.current?.handleEdit(initAddNew)}
             >
               <i className="las la-plus mr-1" />
               {t('routes.admin.Layout.Add')}
@@ -216,7 +204,20 @@ const Component = ({
           />
         </Fragment>
       )}
-      {ModalForm()}
+      <ModalForm
+        ref={modalForm}
+        title={(data) => (!data?.id ? t('routes.admin.Layout.Add') : t('routes.admin.Layout.Edit'))}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        handleChange={(values, oldData) => handleSubmit(values, oldData?.id)}
+        columns={columns}
+        GetById={GetById}
+        Post={Post}
+        Put={Put}
+        widthModal={widthForm}
+        idElement={idElement}
+        {...propForm}
+      />
     </Fragment>
   ) : (
     <div>No Data</div>

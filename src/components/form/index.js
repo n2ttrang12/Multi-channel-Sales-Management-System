@@ -35,6 +35,7 @@ const Component = ({
   isShowCancel = false,
   extendButton = null,
   idSubmit = 'idSubmit',
+  disableSubmit = false,
   classGroupButton = 'justify-center items-center',
 }) => {
   const { t } = useTranslation();
@@ -95,14 +96,7 @@ const Component = ({
       // case "media":
       //   return <Media limit={formItem.limit} />;
       case 'addable':
-        return (
-          <Addable
-            name={item.name}
-            generateForm={generateForm}
-            form={form}
-            {...formItem}
-          />
-        );
+        return <Addable name={item.name} generateForm={generateForm} form={form} {...formItem} />;
       case 'editor':
         return <Editor readOnly={!!formItem.disabled && formItem.disabled(values, form)} />;
       case 'color_button':
@@ -163,6 +157,7 @@ const Component = ({
       case 'date_range':
         return (
           <DateAntDesign.RangePicker
+            onChange={(date) => formItem.onChange && formItem.onChange(date, form)}
             format={formatDate + (formItem.showTime ? ' HH:mm' : '')}
             disabledDate={(current) => formItem.disabledDate && formItem.disabledDate(current, form)}
             defaultValue={formItem.initialValues && [formItem.initialValues.start, formItem.initialValues.end]}
@@ -188,7 +183,7 @@ const Component = ({
             buttonStyle={formItem.style}
             optionType={formItem.style ? 'button' : ''}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
-            onChange={({target}) => formItem.onChange && formItem.onChange(target.value, form)}
+            onChange={({ target }) => formItem.onChange && formItem.onChange(target.value, form)}
           />
         );
       case 'tag':
@@ -576,10 +571,14 @@ const Component = ({
         )}
         {textSubmit && (
           <button
-            className="bg-blue-500 text-white text-base p-2 w-full rounded-xl hover:bg-blue-400 mt-1"
+            className={classNames("text-white text-base p-2 w-full rounded-xl hover:bg-blue-400 mt-1", {
+              'bg-blue-500': !disableSubmit,
+              'bg-blue-400': disableSubmit,
+            })}
             id={idSubmit}
             type={form ? 'button' : 'submit'}
             onClick={() => form && form.submit()}
+            disabled={disableSubmit}
           >
             {textSubmit}
           </button>
