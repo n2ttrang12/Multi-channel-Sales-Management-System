@@ -15,12 +15,14 @@ export const AuthContext = React.createContext({
   menu: [],
   title: '',
   formatDate: 'YYYY-MM-DD',
+  isAdmin: false,
   setTitlePage: () => {},
   login: () => {},
   logout: () => {},
   changeLanguage: () => {},
   changePermission: () => {},
   set_menu: () => {},
+  set_isAdmin: () => false
 });
 
 export const useAuth = () => {
@@ -35,6 +37,7 @@ const Global = ({ children }) => {
   const [formatDate, set_formatDate] = useState('YYYY-MM-DD');
   const { t, i18n } = useTranslation();
   const [menu, set_menu] = useState(JSON.parse(localStorage.getItem(keyMenu)));
+  const [isAdmin, set_isAdmin] = useState(false);
 
   const login = (data) => {
     localStorage.setItem(keyUser, JSON.stringify(data));
@@ -44,6 +47,9 @@ const Global = ({ children }) => {
     if (data.menu) {
       localStorage.setItem(keyMenu, JSON.stringify(data.menu));
       set_menu(data.menu);
+    }
+    if (data.userInfor && data.userInfor.roleCode === 'ADMIN') {
+      set_isAdmin(true);
     }
   };
 
@@ -118,6 +124,8 @@ const Global = ({ children }) => {
         changePermission,
         menu,
         set_menu,
+        isAdmin,
+        set_isAdmin
       }}
     >
       <ConfigProvider locale={locale}>{children}</ConfigProvider>

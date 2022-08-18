@@ -12,6 +12,7 @@ const Layout = ({ isCollapsed = false }) => {
   const location = useLocation();
   const refMenu = useRef();
   const { menu } = useAuth();
+  const { isAdmin } = useAuth();
 
   useEffect(() => {
     import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
@@ -28,7 +29,7 @@ const Layout = ({ isCollapsed = false }) => {
   }, [isCollapsed]);
   return (
     <ul className="menu relative h-[calc(100vh-5rem)]" id={'menu-sidebar'} ref={refMenu}>
-      {listMenu().filter((item) => menu.filter((subItem) => subItem.pageUrl === routerLinks(item.name)).length)
+      {listMenu(isAdmin).filter((item) => menu.filter((subItem) => subItem.pageUrl === routerLinks(item.name)).length)
         // eslint-disable-next-line array-callback-return
         .map((item, index) => {
         if (!item.child) {
