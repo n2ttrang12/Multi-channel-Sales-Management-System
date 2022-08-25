@@ -9,7 +9,7 @@ export const UserService = {
   login: async (values) => {
     try {
       const { data } = await axios.post(`${routerLinks(UserService.nameLink, 'api')}/sign-in`, values);
-      if (data.message) Message.success({ text: data.message, title: 'Thành Công', cancelButtonText: 'Đóng' });
+      // if (data.message) Message.success({ text: data.message, title: 'Thành Công', cancelButtonText: 'Đóng' });
       return data;
     } catch (e) {
       console.error(e);
