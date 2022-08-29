@@ -135,7 +135,7 @@ const Component = ({
           </Select>
           <span className="ml-3 text-black">{paginationDescription(ranges[0], ranges[1], total)}</span>
         </div>
-        <div className="right flex justify-center border border-gray-100 p-1 rounded-xl bg-white">
+        <div className="right flex justify-center border-gray-100 p-1 rounded-xl bg-white">
           <div className="flex flex-wrap justify-center duration-300 transition-all">
             {listOfPageItem.current.map((page, index) => (
               <button
