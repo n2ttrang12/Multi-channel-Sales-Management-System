@@ -17,8 +17,8 @@ const Component = ({ ...prop }) => {
       <i
         onClick={() => set_toggle(!toggle)}
         className={classNames('text-lg las absolute top-1.5 right-3 z-10', {
-          'la-eye-slash': toggle,
-          'la-eye': !toggle,
+          'la-eye-slash': !toggle,
+          'la-eye': toggle,
         })}
       />
     </div>
