@@ -35,7 +35,7 @@ const Page = () => {
 
   return (
     <Fragment>
-      <div className="mb-8 mt-14 title-auth">
+      <div className="mb-8 mt-24 title-auth">
         <h1>{'Đặt Lại Mật Khẩu'}</h1>
         <h5>{'Mật khẩu yêu cầu có 8 ký tự trở lên, có ít nhất 1 chữ hoa và 1 chữ số.'}</h5>
       </div>
