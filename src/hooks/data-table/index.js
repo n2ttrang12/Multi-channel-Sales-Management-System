@@ -65,7 +65,7 @@ const Hook = ({
   save = true,
   searchPlaceholder,
   subHeader,
-  xScroll = '100%',
+  xScroll,
   yScroll = null,
   emptyText = <div>No Data</div>,
   loadFirst = true,
@@ -303,16 +303,13 @@ const Hook = ({
       if (!item.render) {
         item.render = (text) => checkTextToShort(text);
       }
-      if (item.width) {
-        item.minWidth = item.width;
-      }
 
       return {
         title: col.title,
         dataIndex: col.name,
         onHeaderCell: (column) => ({
-          minWidth: column.width,
-          width: column.width,
+          minWidth: xScroll && item.width,
+          width: xScroll && column.width,
           onResize: handleResize(index),
         }),
         ...item,
@@ -320,6 +317,7 @@ const Hook = ({
     });
 
   const [_columns, set_columns] = useState(cols.current.map((item) => item.width));
+  const xScrollRef = useRef(xScroll);
   if (_columns.length !== cols.current.length) {
     set_columns(cols.current.map((item) => item.width))
   }
@@ -329,6 +327,9 @@ const Hook = ({
     (_, { size }) => {
       _columns[index] = size.width;
       cols.current[index].width = size.width;
+      const sumColumns = columns.reduce((partialSum, a) => partialSum + (a?.tableItem?.width || 0), 0);
+      const sumCols = cols.current.reduce((partialSum, a) => partialSum + (a?.width || 0), 0);
+      xScrollRef.current = xScroll + (sumCols - sumColumns);
       set_columns([..._columns]);
     };
   const handleTableChange = (pagination, filters = {}, sorts, tempFullTextSearch) => {
@@ -447,7 +448,7 @@ const Hook = ({
                   handleTableChange(null, filters, sorts, params[fullTextSearch])
                 }
                 showSorterTooltip={false}
-                scroll={{ x: xScroll, y: yScroll }}
+                scroll={{ x: xScrollRef.current, y: yScroll }}
                 size="small"
                 {...prop}
               />
