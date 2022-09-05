@@ -21,8 +21,12 @@ const Column = ({ t }) => {
                   let countvalidator = 0;
                   if (/\s/.test(value)) return Promise.reject(new Error('Mật khẩu không được có khoảng trắng'));
                   else countvalidator++;
-                  if (!/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z])?.*$/.test(value))
-                    return Promise.reject(new Error('Mật khẩu chưa đạt yêu cầu'));
+                  if (!/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z])(?=.*[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]).*$/.test(value))
+                    return Promise.reject(
+                      new Error(
+                        'Mật khẩu yêu cầu có 8 ký tự trở lên, có ít nhất 1 chữ hoa, 1 chữ số và 1 kí tự đặc biệt',
+                      ),
+                    );
                   else countvalidator++;
                   if (countvalidator === 2) return Promise.resolve();
                 } else return Promise.resolve();
@@ -52,8 +56,12 @@ const Column = ({ t }) => {
                   let countvalidator = 0;
                   if (/\s/.test(value)) return Promise.reject(new Error('Mật khẩu không được có khoảng trắng'));
                   else countvalidator++;
-                  if (!/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z]).*$/.test(value))
-                    return Promise.reject(new Error('Mật khẩu chưa đạt yêu cầu'));
+                  if (!/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z])(?=.*[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]).*$/.test(value))
+                    return Promise.reject(
+                      new Error(
+                        'Mật khẩu yêu cầu có 8 ký tự trở lên, có ít nhất 1 chữ hoa, 1 chữ số và 1 kí tự đặc biệt',
+                      ),
+                    );
                   else countvalidator++;
                   if (countvalidator === 2) return Promise.resolve();
                 } else return Promise.resolve();
