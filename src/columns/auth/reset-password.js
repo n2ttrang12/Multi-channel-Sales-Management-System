@@ -24,7 +24,7 @@ const Column = ({ t }) => {
                   if (!/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z])(?=.*[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]).*$/.test(value))
                     return Promise.reject(
                       new Error(
-                        'Mật khẩu yêu cầu có 8 ký tự trở lên, có ít nhất 1 chữ hoa, 1 chữ số và 1 kí tự đặc biệt',
+                        'Mật khẩu yêu cầu có 8 ký tự trở lên, có ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 kí tự đặc biệt',
                       ),
                     );
                   else countvalidator++;
@@ -59,7 +59,7 @@ const Column = ({ t }) => {
                   if (!/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*[a-z])(?=.*[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]).*$/.test(value))
                     return Promise.reject(
                       new Error(
-                        'Mật khẩu yêu cầu có 8 ký tự trở lên, có ít nhất 1 chữ hoa, 1 chữ số và 1 kí tự đặc biệt',
+                        'Mật khẩu yêu cầu có 8 ký tự trở lên, có ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 kí tự đặc biệt',
                       ),
                     );
                   else countvalidator++;
