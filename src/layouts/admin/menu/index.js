@@ -56,7 +56,7 @@ const Layout = ({ isCollapsed = false }) => {
             return (
               <Collapse
                 key={index}
-                classNameParent="py-1"
+                classNameParent="py-1 my-2 items-center"
                 title={
                   <Fragment>
                     <i
