@@ -93,12 +93,13 @@ export const UserService = {
     try {
       console.log(values);
       const { data } = await axios.put(`${routerLinks(UserService.nameLink, 'api')}/set-password`, values);
-      if (data.message)
+      if (data.message) {
         Message.success({
           text: data.message,
           title: 'Thành Công',
           cancelButtonText: 'Đóng',
         });
+      }
       return data;
     } catch (e) {
       console.log(e);

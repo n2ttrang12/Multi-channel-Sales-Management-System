@@ -23,7 +23,11 @@ const Page = () => {
         uuid: location.state.uuid,
       });
       if (res.statusCode === 200) {
-        Message.success('Đổi mật khẩu thành công!');
+        Message.success({
+          text: res.message,
+          title: 'Thành Công',
+          cancelButtonText: 'Đóng',
+        });
         navigate(routerLinks('Login'));
       }
       setLoading(false);
