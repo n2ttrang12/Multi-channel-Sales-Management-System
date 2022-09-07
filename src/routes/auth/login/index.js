@@ -44,7 +44,7 @@ const Page = () => {
 
   return (
     <div className="relative bottom-0 right-0">
-      <div className="mb-8 mt-24 title-auth">
+      <div className="mb-8 mt-32 title-auth">
         <h1>{'Đăng nhập'}</h1>
         <h5>{'Vui lòng đăng nhập bằng tài khoản được cung cấp bởi quản lý hệ thống'}</h5>
       </div>
