@@ -35,7 +35,7 @@ const Page = () => {
 
   return (
     <Fragment>
-      <div className="mb-8 mt-32 title-auth">
+      <div className="mb-8 mt-28 title-auth">
         <h1>{'Quên Mật Khẩu'}</h1>
         <h5>{'Vui lòng nhập mã OTP đã gửi đến email của bạn'}</h5>
       </div>
