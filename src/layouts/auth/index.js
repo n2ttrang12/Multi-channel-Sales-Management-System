@@ -57,7 +57,7 @@ const Layout = ({ children }) => {
               <img src={logo} alt="logoUhouse" className="w-10 sm:w-20 p-4" />
             </div>
           </div>
-          <div className="mx-auto p-10 flex flex-col ">{children}</div>
+          <div className="mx-auto p-10 flex flex-col grid m-auto">{children}</div>
         </div>
         <div
           className="absolute w-full z-10 bottom-0 h-28"
