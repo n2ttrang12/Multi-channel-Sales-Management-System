@@ -14,7 +14,7 @@ const Column = ({ t }) => {
       formItem: {
         placeholder: 'Nhập mật khẩu',
         type: 'password',
-        rules: [{ type: 'required' }, { type: 'min', value: 6 }],
+        rules: [{ type: 'required' }],
       },
     },
   ];
