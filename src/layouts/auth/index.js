@@ -54,7 +54,7 @@ const Layout = ({ children }) => {
                 'opacity-60 bg-cover bg-center w-full  lg:min-h-full  min-h-[600px] relative overflow-hidden flex justify-between flex-col',
               )}
             >
-              <img src={logo} alt="logoUhouse" className="w-10 sm:w-20 p-4" />
+              <img src={logo} alt="logoUhouse" className="w-32 sm:w-24 p-4" />
             </div>
           </div>
           <div className="mx-auto p-10 flex flex-col grid m-auto">{children}</div>
