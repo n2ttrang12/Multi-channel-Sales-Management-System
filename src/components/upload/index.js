@@ -31,6 +31,7 @@ const Component = ({
   accept = 'image/*',
   extendButton = () => null,
   validation = async () => true,
+  viewGrid = false,
   ...prop
 }) => {
   const { t } = useTranslation();
@@ -237,41 +238,53 @@ const Component = ({
         </span>
       </div>
 
-      <div>
+      <div
+        className={classNames({
+          'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4':
+            viewGrid,
+        })}
+      >
         {!onlyImage &&
           listFiles.map((file, index) => (
             <div
               key={index}
-              className={classNames('flex items-center py-1', {
+              className={classNames({
                 'bg-yellow-100': file.status === 'error',
+                'flex items-center py-1': !viewGrid,
+                'pb-6': viewGrid,
               })}
             >
-              <div className={'w-20'}>
+              <div className={classNames({ 'w-20': !viewGrid })}>
                 <a href={file[keyImage]} className="glightbox">
                   <img
-                    className={'object-cover object-center h-20 w-20'}
+                    className={classNames({ 'object-cover object-center h-20 w-20': !viewGrid })}
                     src={file[keyImage] ? file[keyImage] : file.thumbUrl}
                     alt={file.name}
                   />
                   {/* <i className="las la-play-circle text-8xl px-6 mr-1" /> */}
                 </a>
               </div>
-              <div className="flex-1 flex items-center relative">
-                <div className={'pl-5'}>
-                  <strong>{file?.fileName ? file.fileName : file.name}</strong>
-                  {file.status === 'error' && <span className={'px-2 py-1 bg-red-500 text-white'}>Upload Error</span>}
-                  {(file?.createdDate || file.lastModified) && (
-                    <div>
-                      Added{' '}
-                      {moment(file?.createdDate ? file.createdDate : file.lastModified).format(formatDate + ' - HH:mm')}{' '}
-                      |&nbsp;
-                      {typeof file.size === 'number' ? (file.size / (1024 * 1024)).toFixed(2) + 'MB' : file.size}
-                    </div>
-                  )}
-                  {file.status === 'uploading' && <Progress percent={file.percent} />}
-                </div>
+              <div className={classNames('relative', { 'flex-1 flex items-center': !viewGrid })}>
+                {!viewGrid && (
+                  <div className={'pl-5'}>
+                    <strong>{file?.fileName ? file.fileName : file.name}</strong>
+                    {file.status === 'error' && <span className={'px-2 py-1 bg-red-500 text-white'}>Upload Error</span>}
+                    {(file?.createdDate || file.lastModified) && (
+                      <div>
+                        Added{' '}
+                        {moment(file?.createdDate ? file.createdDate : file.lastModified).format(
+                          formatDate + ' - HH:mm',
+                        )}{' '}
+                        |&nbsp;
+                        {typeof file.size === 'number' ? (file.size / (1024 * 1024)).toFixed(2) + 'MB' : file.size}
+                      </div>
+                    )}
+                    {file.status === 'uploading' && <Progress percent={file.percent} />}
+                  </div>
+                )}
+
                 {(file.status === 'done' || !file.status) && (
-                  <div className="absolute right-0 flex">
+                  <div className={classNames('absolute right-0 flex', { 'w-full justify-center top-1': viewGrid })}>
                     {extendButton(file)}
                     {!!showBtnDownload(file) && (
                       <button
@@ -301,7 +314,12 @@ const Component = ({
                         okText={t('components.datatable.ok')}
                         cancelText={t('components.datatable.cancel')}
                       >
-                        <button type={'button'} className="embed border border-gray-300 text-xs rounded-lg mr-2">
+                        <button
+                          type={'button'}
+                          className={classNames('embed border border-gray-300 text-xs rounded-lg', {
+                            'mr-2': !viewGrid,
+                          })}
+                        >
                           <RemoveIcon />
                         </button>
                       </Popconfirm>
