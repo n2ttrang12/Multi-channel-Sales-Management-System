@@ -106,8 +106,8 @@ const Layout = ({ children }) => {
           {
             'w-72 justify-between': !isCollapsed && isDesktop,
             'w-20 justify-center': isCollapsed,
-            'bg-teal-900': isDesktop,
-            'bg-blue-50': !isDesktop,
+            'bg-teal-900': isDesktop || !isDesktop,
+            // 'bg-blue-50': !isDesktop,
           },
         )}
       >
@@ -135,21 +135,34 @@ const Layout = ({ children }) => {
           </a>
         </div>
         {/* className={classNames("hamburger", )} */}
-        <div onClick={() => set_isCollapsed(!isCollapsed)}>
-          <img
-            className={classNames('w-4 cursor-pointer', {
-              'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
-            })}
-            src={arrow}
-            alt=""
-          ></img>
-        </div>
+        {isDesktop ?
+          <div onClick={() => { set_isCollapsed(!isCollapsed) }}>
+            <img
+              className={classNames('w-4 cursor-pointer', {
+                'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
+              })}
+
+              src={arrow}
+              alt=""
+            ></img>
+          </div> :
+          <div onClick={() => { set_isCollapsed(!isCollapsed); set_isDesktop(!isDesktop) }}>
+            <img
+              className={classNames('w-4 cursor-pointer', {
+                'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
+              })}
+
+              src={arrow}
+              alt=""
+            ></img>
+          </div>
+        }
       </div>
       <div
         className={classNames('fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out', {
           'w-72': !isCollapsed,
           'w-20': isCollapsed,
-          '-left-20': isCollapsed && !isDesktop,
+          // '-left-20': isCollapsed && !isDesktop,
         })}
       >
         <Menu isCollapsed={isCollapsed} />
