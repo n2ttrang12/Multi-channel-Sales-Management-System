@@ -45,8 +45,10 @@ const Page = () => {
   return (
     <div className="relative bottom-0 right-0 allColor">
       <div className="mb-8 -mt-28 title-auth">
-        <h1 className='colorText'>{'Đăng Nhập'}</h1>
-        <h5 className='text-teal-900 colorText'>{'Vui lòng đăng nhập bằng tài khoản được cung cấp bởi quản lý hệ thống'}</h5>
+        <h1 className="colorText">{'Đăng Nhập'}</h1>
+        <h5 className="text-teal-900 colorText">
+          {'Vui lòng đăng nhập bằng tài khoản được cung cấp bởi quản lý hệ thống'}
+        </h5>
       </div>
       <Spin spinning={loading}>
         <Form

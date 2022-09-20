@@ -64,7 +64,7 @@ const Util = (columns, values, exportData = true) => {
                     if (values[item.name[0]][item.name[1]][item.name[2]]) {
                       values[item.name[0]][item.name[1]][item.name[2]] = values[item.name[0]][item.name[1]][
                         item.name[2]
-                        ].filter((_item) => _item.status === 'done' || !_item.status);
+                      ].filter((_item) => _item.status === 'done' || !_item.status);
                     }
                     break;
                   default:

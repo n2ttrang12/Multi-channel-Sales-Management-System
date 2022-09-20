@@ -20,7 +20,7 @@ export const AuthContext = React.createContext({
   logout: () => {},
   changeLanguage: () => {},
   changePermission: () => {},
-  set_menu: () => {}
+  set_menu: () => {},
 });
 
 export const useAuth = () => {

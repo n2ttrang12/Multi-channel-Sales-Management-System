@@ -135,28 +135,36 @@ const Layout = ({ children }) => {
           </a>
         </div>
         {/* className={classNames("hamburger", )} */}
-        {isDesktop ?
-          <div onClick={() => { set_isCollapsed(!isCollapsed) }}>
+        {isDesktop ? (
+          <div
+            onClick={() => {
+              set_isCollapsed(!isCollapsed);
+            }}
+          >
             <img
               className={classNames('w-4 cursor-pointer', {
                 'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
               })}
-
-              src={arrow}
-              alt=""
-            ></img>
-          </div> :
-          <div onClick={() => { set_isCollapsed(!isCollapsed); set_isDesktop(!isDesktop) }}>
-            <img
-              className={classNames('w-4 cursor-pointer', {
-                'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
-              })}
-
               src={arrow}
               alt=""
             ></img>
           </div>
-        }
+        ) : (
+          <div
+            onClick={() => {
+              set_isCollapsed(!isCollapsed);
+              set_isDesktop(!isDesktop);
+            }}
+          >
+            <img
+              className={classNames('w-4 cursor-pointer', {
+                'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
+              })}
+              src={arrow}
+              alt=""
+            ></img>
+          </div>
+        )}
       </div>
       <div
         className={classNames('fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out', {

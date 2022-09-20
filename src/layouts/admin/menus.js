@@ -103,5 +103,3 @@ const Layout = (roleCode) => [
   },
 ];
 export default Layout;
-
-

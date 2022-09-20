@@ -571,7 +571,7 @@ const Component = ({
         )}
         {textSubmit && (
           <button
-            className={classNames("text-white text-base p-2 w-full rounded-xl hover:bg-blue-400 mt-1", {
+            className={classNames('text-white text-base p-2 w-full rounded-xl hover:bg-blue-400 mt-1', {
               'bg-blue-500': !disableSubmit,
               'bg-blue-400': disableSubmit,
             })}

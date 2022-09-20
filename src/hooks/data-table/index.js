@@ -319,7 +319,7 @@ const Hook = ({
   const [_columns, set_columns] = useState(cols.current.map((item) => item.width));
   const xScrollRef = useRef(xScroll);
   if (_columns.length !== cols.current.length) {
-    set_columns(cols.current.map((item) => item.width))
+    set_columns(cols.current.map((item) => item.width));
   }
 
   const handleResize =
