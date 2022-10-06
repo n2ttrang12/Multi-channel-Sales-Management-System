@@ -24,7 +24,7 @@ const Component = ({ mask, value, addonBefore, addonAfter, form, disabled, onFir
           'bg-gray-100 text-gray-400': disabled,
         })}
         readOnly={disabled}
-        value={value || ''}
+        value={value}
         {...prop}
       />
       {!!addonAfter && <div>{addonAfter(form, onFirstChange)}</div>}
