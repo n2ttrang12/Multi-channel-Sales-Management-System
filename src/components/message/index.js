@@ -10,6 +10,7 @@ const Component = {
     showConfirmButton = false,
     padding = 0,
     timer = 3000,
+    reverseButtons = true,
   }) =>
     import('sweetalert2').then(({ default: Swal }) =>
       Swal.fire({
@@ -22,6 +23,7 @@ const Component = {
         showCancelButton,
         showConfirmButton,
         padding,
+        reverseButtons,
       }),
     ),
   warning: ({
@@ -33,6 +35,7 @@ const Component = {
     showCancelButton = true,
     showConfirmButton = true,
     padding = 0,
+    reverseButtons = true,
   }) =>
     import('sweetalert2').then(({ default: Swal }) =>
       Swal.fire({
@@ -45,6 +48,7 @@ const Component = {
         showCancelButton,
         showConfirmButton,
         padding,
+        reverseButtons,
       }),
     ),
   error: ({
@@ -55,6 +59,7 @@ const Component = {
     showCancelButton = true,
     showConfirmButton = false,
     padding = 0,
+    reverseButtons = true,
   }) =>
     import('sweetalert2').then(({ default: Swal }) =>
       Swal.fire({
@@ -67,6 +72,7 @@ const Component = {
         showConfirmButton,
         padding,
         focusCancel: showCancelButton,
+        reverseButtons,
       }),
     ),
   confirm: ({
@@ -82,6 +88,7 @@ const Component = {
     showCancelButton = true,
     showConfirmButton = true,
     padding = 0,
+    reverseButtons = true,
   }) =>
     import('sweetalert2').then(({ default: Swal }) =>
       Swal.fire({
@@ -96,6 +103,7 @@ const Component = {
         showConfirmButton,
         showCloseButton,
         padding,
+        reverseButtons,
       }).then((result) => {
         if (result.isConfirmed) {
           onConfirm();
