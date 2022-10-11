@@ -69,6 +69,10 @@ const Layout = (roleCode) => [
     icon: 'las la-clipboard-list',
     name: 'Quản lý đơn hàng',
   },
+  roleCode === 'OWNER_SUPPLIER' && {
+    iconSvg: '/images/return.svg',
+    name: 'Quản lý trả hàng',
+  },
   {
     icon: 'las la-link',
     name: 'Quản lý hợp đồng',

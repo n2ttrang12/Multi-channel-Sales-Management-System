@@ -42,7 +42,11 @@ const Layout = ({ isCollapsed = false }) => {
                 })}
                 onClick={() => navigate(routerLinks(item.name))}
               >
-                <i className={classNames('text-3xl mr-2.5', item.icon)} />
+                {
+                  item.icon ? <i className={classNames('text-3xl mr-2.5', item.icon)} /> : 
+                  <img width={30} height={30} className={classNames('text-3xl mr-2.5')} src={item.iconSvg} />
+                }
+                
                 <span
                   className={classNames(
                     'text-gray-300 text-base  transition-all duration-300 ease-in-out font-medium',
