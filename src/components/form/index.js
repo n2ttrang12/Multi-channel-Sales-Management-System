@@ -37,6 +37,7 @@ const Component = ({
   idSubmit = 'idSubmit',
   disableSubmit = false,
   classGroupButton = 'justify-center items-center',
+  isResetForm = true,
 }) => {
   const { t } = useTranslation();
   const { formatDate } = useAuth();
@@ -79,7 +80,9 @@ const Component = ({
 
   useEffect(() => {
     if (form && refLoad.current) {
-      form.resetFields();
+      if (isResetForm){
+        form.resetFields();
+      }
       form.setFieldsValue(values);
     }
     refLoad.current = true;
