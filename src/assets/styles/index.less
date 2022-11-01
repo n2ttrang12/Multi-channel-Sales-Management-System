@@ -172,9 +172,41 @@ body {
 .ant-table-content .ant-table-thead > tr > th {
   @apply font-normal;
 }
-.ant-table-content {
-  overflow: hidden !important;
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+    .ant-table-content {
+      overflow: hidden !important;
+    }
 }
+// @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+//   .ipad-portrait { color: red; } /* your css rules for ipad portrait */
+// }
+// @media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
+//   .ipad-landscape { color: blue; } /* your css rules for ipad landscape */
+// }
+//  tablet
+@media only screen and (min-width : 46.25em) and (max-width: 63.9375em) {
+  .ant-table-content {
+      overflow: scroll !important;
+      overflow-y: visible !important;
+    }
+    .ant-table table {
+      width: 900px;
+  }
+ }
+//  Mobile 
+ @media only screen and (max-width: 46.1875em){
+  .ant-table-content {
+    overflow: scroll !important;
+    overflow-y: visible !important;
+  }
+  .ant-table table {
+    width: 900px;
+}
+ }
+ 
 .ant-table{
   &-content {
     .ant-table-thead > tr > th {
