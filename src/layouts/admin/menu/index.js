@@ -27,6 +27,7 @@ const Layout = ({ isCollapsed = false }) => {
       refMenu.current.scrollTop = 0;
     }
   }, [isCollapsed]);
+
   return (
     <ul className="menu relative h-[calc(100vh-5rem)]" id={'menu-sidebar'} ref={refMenu}>
       {listMenu(roleCode)
@@ -37,16 +38,16 @@ const Layout = ({ isCollapsed = false }) => {
             return (
               <li
                 key={index}
-                className={classNames('text-gray-300 flex items-center px-3 py-1 m-3', {
+                className={classNames('text-gray-300 flex items-center px-1 py-1 m-3', {
                   'bg-teal-700 text-white rounded-2xl  ': location.pathname === routerLinks(item.name),
                 })}
                 onClick={() => navigate(routerLinks(item.name))}
               >
                 {
-                  item.icon ? <i className={classNames('text-3xl mr-2.5', item.icon)} /> : 
-                  <img width={30} height={30} className={classNames('text-3xl mr-2.5')} src={item.iconSvg} />
+                  item.icon ? <i className={classNames('text-3xl mr-3', item.icon)} /> :
+                    <img width={30} height={30} className={classNames('text-3xl mr-3')} src={item.iconSvg} />
                 }
-                
+
                 <span
                   className={classNames(
                     'text-gray-300 text-base  transition-all duration-300 ease-in-out font-medium',
