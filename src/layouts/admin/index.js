@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 import logo from 'assets/images/logo.png';
 import arrow from 'assets/images/arrow.svg';
+import back from 'assets/images/return.png';
 import menu from 'assets/images/menuIcon.png';
 import avatar from 'assets/images/avatar.jpeg';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +25,8 @@ const Layout = ({ children }) => {
 
   const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1025);
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
-  console.log(isDesktop)
+  const [isCheckMenu,setIsCheckMenu]= useState(false)
+  console.log(isCheckMenu)
   useEffect(() => {
     if (window.innerWidth < 1024 && !isCollapsed) {
       setTimeout(() => {
@@ -159,18 +161,19 @@ const Layout = ({ children }) => {
           <div
             onClick={() => {
               set_isCollapsed(!isCollapsed);
+              setIsCheckMenu(!isCheckMenu)
               // set_isDesktop(!isDesktop);
             }}
           >
             
             <img
-              className={classNames('w-8 cursor-pointer', 
+              className={classNames('w-8 cursor-pointer text-teal-400', 
               // {
               //   'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
               // }
               )
             }
-              src={menu}
+              src={!isCheckMenu ? menu : back}
               alt=""
             ></img>
           </div>
