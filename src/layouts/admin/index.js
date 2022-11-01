@@ -32,13 +32,13 @@ const Layout = ({ children }) => {
       });
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // if (window.innerWidth > 1024) {
-    //   import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
-    //     new PerfectScrollbar(document.getElementById('root'), {
-    //       suppressScrollX: true,
-    //     });
-    //   });
-    // }
+    if (window.innerWidth > 1024) {
+      import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
+        new PerfectScrollbar(document.getElementById('root'), {
+          suppressScrollX: true,
+        });
+      });
+    }
     function handleResize() {
       if (window.innerWidth < 1025 && !isCollapsed) {
         set_isCollapsed(true);
@@ -188,7 +188,7 @@ const Layout = ({ children }) => {
       <div
         className={classNames('bg-gray-100 sm:px-5 px-2 transition-all duration-300 ease-in-out z-10', {
           'sm:ml-72': !isCollapsed && isDesktop,
-          'sm:ml-20 ml-14': isCollapsed && isDesktop,
+          'ml-14 sm:ml-20 md:ml-14 ': isCollapsed && isDesktop,
         })}
       >
         {children}
