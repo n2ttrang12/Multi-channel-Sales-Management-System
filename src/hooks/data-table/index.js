@@ -369,7 +369,7 @@ const Hook = ({
       }
       return (
         <div className={classNames(className, 'intro-x')}>
-          <div className="flex justify-between mb-2.5">
+          <div className="lg:flex lg:justify-between lg:mb-2.5">
             {!!showSearch && (
               <div className="relative">
                 <input
@@ -414,7 +414,7 @@ const Hook = ({
               </div>
             )}
             {!!leftHeader && <div>{leftHeader}</div>}
-            {!!rightHeader && <div>{rightHeader}</div>}
+            {!!rightHeader && <div className='my-4 lg:my-0 text-right'>{rightHeader}</div>}
           </div>
           {subHeader && subHeader(totalData)}
           {!!showList && (
