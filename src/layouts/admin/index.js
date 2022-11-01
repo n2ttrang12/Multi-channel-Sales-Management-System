@@ -195,7 +195,7 @@ const Layout = ({ children }) => {
         })}
       >
         {children}
-        <footer className="text-center bg-blue-50 mt-10 -mx-5">
+        <footer className="text-center bg-blue-50 mt-10 sm:-mx-5">
           {t('layout.footer', { year: new Date().getFullYear() })}
         </footer>
       </div>
