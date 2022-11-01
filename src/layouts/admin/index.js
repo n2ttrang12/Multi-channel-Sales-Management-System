@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 import logo from 'assets/images/logo.png';
 import arrow from 'assets/images/arrow.svg';
+import menu from 'assets/images/menuIcon.png';
 import avatar from 'assets/images/avatar.jpeg';
 import { useTranslation } from 'react-i18next';
 
@@ -23,7 +24,7 @@ const Layout = ({ children }) => {
 
   const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1025);
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
-
+  console.log(isDesktop)
   useEffect(() => {
     if (window.innerWidth < 1024 && !isCollapsed) {
       setTimeout(() => {
@@ -31,16 +32,18 @@ const Layout = ({ children }) => {
       });
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
+    // if (window.innerWidth > 1024) {
+    //   import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
+    //     new PerfectScrollbar(document.getElementById('root'), {
+    //       suppressScrollX: true,
+    //     });
+    //   });
+    // }
     function handleResize() {
       if (window.innerWidth < 1025 && !isCollapsed) {
         set_isCollapsed(true);
       }
-      if (window.innerWidth > 767 && !isDesktop) {
-        set_isDesktop(true);
-      } else if (window.innerWidth <= 767 && isDesktop) {
-        set_isDesktop(false);
-      }
+      set_isDesktop(window.innerWidth > 767);
     }
     window.addEventListener('resize', handleResize, true);
     changeLanguage('vi');
@@ -51,7 +54,7 @@ const Layout = ({ children }) => {
   const Header = ({ isCollapsed, isDesktop }) => (
     <header
       className={classNames(
-        'bg-gray-100 w-full header h-16 transition-all duration-300 ease-in-out sticky top-0 block z-10',
+        'sm:bg-gray-100 bg-white w-full header h-18 transition-all duration-300 ease-in-out sticky top-0 block z-10 mb-2',
         {
           'pl-72': !isCollapsed && isDesktop,
           'pl-32': isCollapsed && isDesktop,
@@ -100,14 +103,16 @@ const Layout = ({ children }) => {
   return (
     <main>
       <Header isCollapsed={isCollapsed} isDesktop={isDesktop} />
+      {/* <div className={`${isCollapsed ? 'nav_overlay' : ''}`}>
+      </div> */}
       <div
         className={classNames(
-          't-10 rounded-tr-3xl flex items-center text-gray-800 hover:text-gray-500 h-20 fixed top-0 left-0 px-5 font-bold transition-all duration-300 ease-in-out z-10',
+          't-10 sm:rounded-tr-3xl flex items-center text-gray-800 hover:text-gray-500 h-20 fixed top-0 left-0 px-5 font-bold transition-all duration-300 ease-in-out z-10',
           {
-            'w-72 justify-between': !isCollapsed && isDesktop,
-            'w-20 justify-center': isCollapsed,
-            'bg-teal-900': isDesktop || !isDesktop,
-            // 'bg-blue-50': !isDesktop,
+            'sm:w-72 justify-between': !isCollapsed && isDesktop,
+            'sm:w-[64px] justify-center': isCollapsed,
+            'bg-teal-900': isDesktop ,
+            'bg-blue-50': !isDesktop,
           },
         )}
       >
@@ -139,11 +144,12 @@ const Layout = ({ children }) => {
           <div
             onClick={() => {
               set_isCollapsed(!isCollapsed);
+              // set_isDesktop(!isDesktop);
             }}
           >
             <img
               className={classNames('w-4 cursor-pointer', {
-                'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
+                'rotate-180': (!isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
               })}
               src={arrow}
               alt=""
@@ -153,32 +159,36 @@ const Layout = ({ children }) => {
           <div
             onClick={() => {
               set_isCollapsed(!isCollapsed);
-              set_isDesktop(!isDesktop);
+              // set_isDesktop(!isDesktop);
             }}
           >
+            
             <img
-              className={classNames('w-4 cursor-pointer', {
-                'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
-              })}
-              src={arrow}
+              className={classNames('w-8 cursor-pointer', 
+              // {
+              //   'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
+              // }
+              )
+            }
+              src={menu}
               alt=""
             ></img>
           </div>
         )}
       </div>
       <div
-        className={classNames('fixed z-10 top-20 left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out', {
+        className={classNames('fixed z-10 top-20 sm:left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out', {
           'w-72': !isCollapsed,
-          'w-20': isCollapsed,
-          // '-left-20': isCollapsed && !isDesktop,
+          'w-[64px]': isCollapsed,
+          '-left-20': isCollapsed && !isDesktop,
         })}
       >
         <Menu isCollapsed={isCollapsed} />
       </div>
       <div
-        className={classNames('bg-gray-100 px-5 transition-all duration-300 ease-in-out z-10', {
-          'ml-72': !isCollapsed && isDesktop,
-          'ml-20': isCollapsed && isDesktop,
+        className={classNames('bg-gray-100 sm:px-5 px-2 transition-all duration-300 ease-in-out z-10', {
+          'sm:ml-72': !isCollapsed && isDesktop,
+          'sm:ml-20 ml-14': isCollapsed && isDesktop,
         })}
       >
         {children}
