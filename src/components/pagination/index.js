@@ -119,7 +119,7 @@ const Component = ({
 
   return (
     total > 0 && (
-      <div className={classNames(className, 'flex items-center justify-between mt-3 select-none')}>
+      <div className={classNames(className, 'sm:flex sm:flex-row items-center justify-between mt-3 select-none')}>
         <div className={'left'}>
           <Select
             id={idElement + '_page_size'}
@@ -135,7 +135,8 @@ const Component = ({
           </Select>
           <span className="ml-3 text-black">{paginationDescription(ranges[0], ranges[1], total)}</span>
         </div>
-        <div className="right flex justify-center border-gray-100 p-1 rounded-xl bg-white">
+        <div className=" mt-3 sm:mt-0 right flex justify-center  p-1 rounded-xl bg-white">
+        {/* mt-3 sm:mt-0 right flex justify-center border border-gray-100 p-1 rounded-xl bg-white */}
           <div className="flex flex-wrap justify-center duration-300 transition-all">
             {listOfPageItem.current.map((page, index) => (
               <button
