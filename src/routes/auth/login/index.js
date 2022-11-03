@@ -44,8 +44,8 @@ const Page = () => {
 
   return (
     <div className="relative bottom-0 right-0 allColor">
-      <div className="mb-8 -mt-28 title-auth">
-        <h1 className="colorText">{'Đăng Nhập'}</h1>
+      <div className="mb-8 title-auth">
+        <h1 className="colorText !text-[30px] md:!text-[48px] ">{'Đăng Nhập'}</h1>
         <h5 className="text-teal-900 colorText">
           {'Vui lòng đăng nhập bằng tài khoản được cung cấp bởi quản lý hệ thống'}
         </h5>
@@ -60,7 +60,7 @@ const Page = () => {
         />
       </Spin>
       <div
-        className="intro-x pt-1 -mt-28 bottom-16 right-12 sm:right-[6rem] lg:right-16 
+        className="intro-x pt-1 -mt-28 bottom-16 right-12 sm:right-[6rem] lg:right-16
        md:mt-1 absolute xl:absolute  xl:pt-1 xl:-mt-32"
       >
         <Link className=" underline colorText " id="reset-pass-link" to={routerLinks('ForgotPass')}>
