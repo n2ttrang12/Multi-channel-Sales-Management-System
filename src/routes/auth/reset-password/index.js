@@ -39,8 +39,8 @@ const Page = () => {
 
   return (
     <Fragment>
-      <div className="mb-8 -mt-28 title-auth">
-        <h1>{'Đặt Lại Mật Khẩu'}</h1>
+      <div className="mb-8 title-auth">
+        <h1 className='!text-[30px] md:!text-[48px]'>{'Đặt Lại Mật Khẩu'}</h1>
         <h5>
           Mật khẩu yêu cầu có 8 ký tự trở lên, có ít nhất 1 chữ hoa, 1 chữ thường,<br></br> 1 chữ số và 1 kí tự đặc
           biệt.
@@ -58,7 +58,7 @@ const Page = () => {
       {/* <div className="text-center mt-4"
        >
          {/* absolute xl:absolute */}
-      {/* <Link className="text-cyan-700 underline" 
+      {/* <Link className="text-cyan-700 underline"
         to={routerLinks("Login")}
         >
           {'Quay trở lại Đăng nhập'}

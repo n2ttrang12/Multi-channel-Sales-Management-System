@@ -34,8 +34,8 @@ const Page = ({ location }) => {
 
   return (
     <Fragment>
-      <div className="mb-8 -mt-28 title-auth">
-        <h1>{'Quên Mật Khẩu'}</h1>
+      <div className="mb-8 title-auth">
+        <h1 className='!text-[30px] md:!text-[48px]'>{'Quên Mật Khẩu'}</h1>
         <h5>{'Vui lòng nhập e-mail của bạn. Mã xác minh OTP sẽ được gửi cho bạn'}</h5>
       </div>
       <Spin spinning={loading}>
