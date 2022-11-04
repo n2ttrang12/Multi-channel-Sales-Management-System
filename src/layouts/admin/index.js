@@ -189,7 +189,13 @@ const Layout = ({ children }) => {
         <Menu isCollapsed={isCollapsed} />
       </div>
       {!isCollapsed && !isDesktop && (
-        <div className={'w-full h-full fixed bg-black opacity-50 z-[1]'} onClick={() => set_isCollapsed(true)} />
+        <div className={'w-full h-full fixed bg-black opacity-50 z-[1]'} 
+        onClick={() =>
+          {
+            set_isCollapsed(true)
+            setIsCheckMenu(!isCheckMenu)
+          } 
+        } />
       )}
       <div
         className={classNames('bg-gray-100 sm:px-5 px-2 transition-all duration-300 ease-in-out z-10', {
