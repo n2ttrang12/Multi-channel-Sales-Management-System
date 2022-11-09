@@ -16,17 +16,22 @@ import { useAuth } from 'global';
 import { routerLinks } from 'utils';
 import { Avatar } from 'components';
 import Menu from './menu';
+import { useCart } from 'cartContext';
+import { ProfileService } from 'services/profile';
 
 const Layout = ({ children }) => {
   // menuVertical, permission,
-  const { changeLanguage } = useAuth();
+  const { changeLanguage, user } = useAuth();
+  const roleCode = user?.userInfor?.roleCode
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { cart, fetchListCart } = useCart();
 
-  const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1025);
+  const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1024);
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
+  const [data, setData] = useState({});
   const [isCheckMenu,setIsCheckMenu]= useState(false)
-  console.log(isCheckMenu)
+  
   useEffect(() => {
     if (window.innerWidth < 1024 && !isCollapsed) {
       setTimeout(() => {
@@ -34,23 +39,41 @@ const Layout = ({ children }) => {
       });
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (window.innerWidth > 1024) {
-      import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
-        new PerfectScrollbar(document.getElementById('root'), {
-          suppressScrollX: true,
-        });
-      });
-    }
+    // if (window.innerWidth > 1024) {
+    //   import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
+    //     new PerfectScrollbar(document.getElementById('root'), {
+    //       suppressScrollX: true,
+    //     });
+    //   });
+    // }
     function handleResize() {
-      if (window.innerWidth < 1025 && !isCollapsed) {
+      if (window.innerWidth < 1024 && !isCollapsed) {
         set_isCollapsed(true);
       }
       set_isDesktop(window.innerWidth > 767);
     }
     window.addEventListener('resize', handleResize, true);
+    import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
+      new PerfectScrollbar(document.getElementById('root'), {
+        suppressScrollX: true,
+      });
+    });
     changeLanguage('vi');
 
     return () => window.removeEventListener('resize', handleResize, true);
+  }, []);
+
+  const fetchInfo = async () => {
+    try {
+      const res = await ProfileService.get();
+      setData(res);
+    } catch (err) {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    fetchInfo();
   }, []);
 
   const Header = ({ isCollapsed, isDesktop }) => (
@@ -64,13 +87,25 @@ const Layout = ({ children }) => {
         },
       )}
     >
-      {/* <div className="flex items-center justify-end px-5 h-16"> */}
+      {/* {/ <div className="flex items-center justify-end px-5 h-16"> /} */}
       {/* <Select value={i18n.language} onChange={(value) => changeLanguage(value)}>
           <Select.Option value="en"><img src={us} alt="US" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.English')}</Select.Option>
           <Select.Option value="vi"><img src={vn} alt="VN" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.Vietnam')}</Select.Option>
         </Select> */}
       <div className="flex items-center justify-end px-5 h-20">
         <div className="flex items-center">
+        {roleCode === 'OWNER_STORE' && (<div className="mr-5 relative flex group">
+            <div className="rounded-full text-white w-5 h-5 bg-blue-400 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
+              {cart ? cart?.length : 0}
+            </div>
+            <i
+              className="las la-shopping-cart text-4xl text-gray-500 cursor-pointer"
+              onClick={() => {
+                navigate(`${routerLinks('CartDetail')}`)
+                fetchListCart()
+              }}
+            />
+          </div>)}
           {/* <div className="mr-5 relative flex group">
             <div className="rounded-full text-white w-5 h-5 bg-blue-400 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
               1
@@ -84,18 +119,53 @@ const Layout = ({ children }) => {
             <i className="las la-comment text-4xl text-gray-500" />
           </div> */}
           <Dropdown
-            trigger={['hover', 'click']}
+            trigger={['click']}
             overlay={
-              <ul className="bg-blue-50">
-                <li className="p-2 hover:bg-blue-100" onClick={() => navigate(routerLinks('Login'), { replace: true })}>
-                  Sign Out
+              <ul className="bg-white">
+                <li className="p-2 flex items-center pl-4 cursor-pointer border-b border-solid border-gray-200">
+                  <img
+                    className="w-[35px] h-[35px] rounded-full object-cover mr-2"
+                    src={data?.profileImage || avatar}
+                    alt="profile_pic"
+                  ></img>
+                  <div>
+                    <h1 className="font-bold text-sm">{data?.name}</h1>
+                    <p className="text-[0.6rem]">{data?.email}</p>
+                  </div>
+                </li>
+                <li
+                  className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer"
+                  onClick={() => navigate(routerLinks('Profile'))}
+                >
+                  <i className="las la-user text-lg mr-2"></i> Thông tin cá nhân
+                </li>
+                <li
+                  className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer"
+                  onClick={() => navigate(routerLinks('Profile') + `?tab=2`)}
+                >
+                  <i className="las la-key text-lg mr-2"></i> Đổi mật khẩu
+                </li>
+                <li
+                  className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer border-t border-solid border-gray-200"
+                  onClick={() => navigate(routerLinks('Login'), { replace: true })}
+                >
+                  <i className="las la-sign-out-alt text-lg mr-2"></i> Đăng xuất
                 </li>
               </ul>
             }
             placement="bottomRight"
+            overlayClassName="rounded-md shadow-md w-[200px]  overflow-hidden"
           >
             <section className="flex items-center" id={'dropdown-profile'}>
-              <Avatar src={avatar} size={10} />
+              {data?.profileImage ? (
+                <img
+                  className="w-[35px] h-[35px] rounded-full object-cover mr-2"
+                  src={data?.profileImage}
+                  alt="profile_pic"
+                ></img>
+              ) : (
+                <Avatar src={avatar} size={10} />
+              )}
             </section>
           </Dropdown>
         </div>
@@ -141,7 +211,7 @@ const Layout = ({ children }) => {
             </div>
           </a>
         </div>
-        {/* className={classNames("hamburger", )} */}
+        {/* {/ className={classNames("hamburger", )} /} */}
         {isDesktop ? (
           <div
             onClick={() => {
@@ -167,7 +237,7 @@ const Layout = ({ children }) => {
           >
             
             <img
-              className={classNames('w-8 cursor-pointer text-teal-400', 
+              className={classNames('w-8 cursor-pointer', 
               // {
               //   'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
               // }

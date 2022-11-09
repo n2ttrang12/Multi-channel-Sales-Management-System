@@ -5,17 +5,16 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-
 import AuthProvider from 'global';
 import { Spin, Message } from 'components';
 import Router from 'routes';
 import { routerLinks } from 'utils';
 import { linkApi } from 'variable';
-
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import withClearCache from './clear-cache';
 import { UserService } from './services/user';
+import { CartProvider } from 'cartContext';
 
 const ClearCacheComponent = withClearCache(Router);
 
@@ -67,7 +66,9 @@ function App() {
     >
       <Styling>
         <AuthProvider>
-          <ClearCacheComponent />
+          <CartProvider>
+            <ClearCacheComponent />
+          </CartProvider>
         </AuthProvider>
       </Styling>
     </Suspense>
