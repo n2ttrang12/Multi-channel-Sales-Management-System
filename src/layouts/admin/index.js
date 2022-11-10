@@ -50,7 +50,8 @@ const Layout = ({ children }) => {
       if (window.innerWidth < 1024 && !isCollapsed) {
         set_isCollapsed(true);
       }
-      set_isDesktop(window.innerWidth > 767);
+      // set_isDesktop(window.innerWidth > 767);
+      set_isDesktop(window.innerWidth > 640);
     }
     window.addEventListener('resize', handleResize, true);
     import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
