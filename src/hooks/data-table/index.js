@@ -65,9 +65,9 @@ const Hook = ({
   save = true,
   searchPlaceholder,
   subHeader,
-  xScroll,
+  xScroll = '100%',
   yScroll = null,
-  emptyText = <div>No Data</div>,
+  emptyText = <div>Trống</div>,
   loadFirst = true,
   onRow = () => {},
   pageSizeOptions = [10, 20, 30, 40],
@@ -448,7 +448,7 @@ const Hook = ({
                   handleTableChange(null, filters, sorts, params[fullTextSearch])
                 }
                 showSorterTooltip={false}
-                scroll={{ x: xScrollRef.current, y: yScroll }}
+                scroll={{ x: xScroll, y: yScroll }}
                 size="small"
                 {...prop}
               />
