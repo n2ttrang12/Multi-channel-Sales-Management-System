@@ -11,11 +11,15 @@ const Util = (name, type) => {
     CategoryCreate: '/category/create',
     CategoryEdit: '/category/edit',
     CategoryDetail: '/category/detail',
+    
   }; // 💬 generate link to here
 
   const apis = {
     Dashboard: '/dashboard',
     User: '/user-admin',
+    StoreSupplier: '/sub-organization',
+    Cart: '/cart',
+    OrderManagement: '/orders',
   }; // 💬 generate api to here
 
   switch (type) {
