@@ -54,11 +54,11 @@ const Layout = ({ children }) => {
       set_isDesktop(window.innerWidth > 640);
     }
     window.addEventListener('resize', handleResize, true);
-    import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
-      new PerfectScrollbar(document.getElementById('root'), {
-        suppressScrollX: true,
-      });
-    });
+    // import('perfect-scrollbar').then(({ default: PerfectScrollbar }) => {
+    //   new PerfectScrollbar(document.getElementById('root'), {
+    //     suppressScrollX: true,
+    //   });
+    // });
     changeLanguage('vi');
 
     return () => window.removeEventListener('resize', handleResize, true);

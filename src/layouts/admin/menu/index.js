@@ -38,7 +38,7 @@ const Layout = ({ isCollapsed = false }) => {
             return (
               <li
                 key={index}
-                className={classNames('text-gray-300 flex items-center px-1 py-1 m-3', {
+                className={classNames('text-gray-300 flex items-center px-1 py-[5px] m-3', {
                   'bg-teal-700 text-white rounded-2xl  ': location.pathname === routerLinks(item.name),
                 })}
                 onClick={() => navigate(routerLinks(item.name))}
@@ -90,7 +90,7 @@ const Layout = ({ isCollapsed = false }) => {
                     </span>
                   </Fragment>
                 }
-                className="flex items-center px-6 sm:py-1 py-[17px] text-gray-300"
+                className="flex items-center px-3 py-1 text-gray-300"
                 showArrow={!isCollapsed}
                 popover={isCollapsed}
                 isExpand={location.pathname.indexOf(routerLinks(item.name)) === 0}
