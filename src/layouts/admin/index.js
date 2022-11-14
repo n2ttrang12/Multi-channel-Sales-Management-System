@@ -226,9 +226,7 @@ const Layout = ({ children }) => {
         {!isDesktop && (
           <div className="mr-3">
             <img
-              className={classNames('w-10 rounded', {
-                '-left-10': !isDesktop,
-              })}
+              className={classNames('w-10 rounded')}
               src={logo}
               alt=""
             />
