@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
   const [data, setData] = useState({});
   const [isCheckMenu,setIsCheckMenu]= useState(false)
-  const [showTopBtn,setShowTopBtn] = useState(true)
+  const [showTopBtn,setShowTopBtn] = useState(false)
   useEffect(() => {
     if (window.innerWidth < 1024 && !isCollapsed) {
       setTimeout(() => {
