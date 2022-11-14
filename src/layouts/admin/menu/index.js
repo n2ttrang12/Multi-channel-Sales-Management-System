@@ -7,7 +7,7 @@ import './index.less';
 import listMenu from '../menus';
 import { useAuth } from '../../../global';
 
-const Layout = ({ isCollapsed = false }) => {
+const Layout = ({ isCollapsed = false, set_isCollapsed, setIsCheckMenu, isCheckMenu }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const refMenu = useRef();
@@ -41,7 +41,11 @@ const Layout = ({ isCollapsed = false }) => {
                 className={classNames('text-gray-300 flex items-center px-1 py-[5px] m-3', {
                   'bg-teal-700 text-white rounded-2xl  ': location.pathname === routerLinks(item.name),
                 })}
-                onClick={() => navigate(routerLinks(item.name))}
+                onClick={() => {
+                  navigate(routerLinks(item.name));
+                  set_isCollapsed(!isCollapsed)
+                  setIsCheckMenu(!isCheckMenu)
+                }}
               >
                 {
                   item.icon ? <i className={classNames('text-3xl mr-3', item.icon)} /> :

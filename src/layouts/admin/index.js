@@ -31,8 +31,8 @@ const Layout = ({ children }) => {
   const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1024);
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
   const [data, setData] = useState({});
-  const [isCheckMenu,setIsCheckMenu]= useState(false)
-  const [showTopBtn,setShowTopBtn] = useState(false)
+  const [isCheckMenu, setIsCheckMenu] = useState(false)
+  const [showTopBtn, setShowTopBtn] = useState(false)
   useEffect(() => {
     if (window.innerWidth < 1024 && !isCollapsed) {
       setTimeout(() => {
@@ -113,7 +113,7 @@ const Layout = ({ children }) => {
   const Header = ({ isCollapsed, isDesktop }) => (
     <header
       className={classNames(
-        'sm:bg-gray-100 bg-white w-full header h-18 transition-all duration-300 ease-in-out sticky top-0 block z-10 mb-2',
+        'sm:bg-gray-100 bg-white w-full header  h-18 transition-all duration-300 ease-in-out sticky top-0 block z-10 ',
         {
           'pl-72': !isCollapsed && isDesktop,
           'pl-32': isCollapsed && isDesktop,
@@ -128,7 +128,7 @@ const Layout = ({ children }) => {
         </Select> */}
       <div className="flex items-center justify-end px-5 h-20">
         <div className="flex items-center">
-        {roleCode === 'OWNER_STORE' && (<div className="mr-5 relative flex group">
+          {roleCode === 'OWNER_STORE' && (<div className="mr-5 relative flex group">
             <div className="rounded-full text-white w-5 h-5 bg-blue-400 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
               {cart ? cart?.length : 0}
             </div>
@@ -209,22 +209,31 @@ const Layout = ({ children }) => {
   return (
     <main>
       <Header isCollapsed={isCollapsed} isDesktop={isDesktop} />
-      {/* <div className={`${isCollapsed ? 'nav_overlay' : ''}`}>
-      </div> */}
-       <div
+      <div
         className={classNames(
           `t-10 sm:rounded-tr-3xl flex
            items-center text-gray-800 hover:text-gray-500 h-20 
-            ${!isDesktop ? 'absolute top-0 left-0' : ' fixed top-0 left-0'} 
+            fixed top-0 left-0 
              px-5 font-bold transition-all duration-300 ease-in-out z-10`,
           {
             'sm:w-72 justify-between': !isCollapsed && isDesktop,
             'sm:w-[64px] justify-center': isCollapsed,
             'bg-teal-900': isDesktop,
-            'bg-blue-50': !isDesktop,
+            'bg-white': !isDesktop,
           },
         )}
       >
+        {!isDesktop && (
+          <div className="mr-3">
+            <img
+              className={classNames('w-10 rounded', {
+                '-left-10': !isDesktop,
+              })}
+              src={logo}
+              alt=""
+            />
+          </div>
+        )}
         <div>
           <a href="/" className="flex items-center">
             <img
@@ -248,7 +257,6 @@ const Layout = ({ children }) => {
             </div>
           </a>
         </div>
-        {/* {/ className={classNames("hamburger", )} /} */}
         {isDesktop ? (
           <div
             onClick={() => {
@@ -269,17 +277,16 @@ const Layout = ({ children }) => {
             onClick={() => {
               set_isCollapsed(!isCollapsed);
               setIsCheckMenu(!isCheckMenu)
-              // set_isDesktop(!isDesktop);
             }}
           >
-            
+
             <img
-              className={classNames('w-8 cursor-pointer', 
-              // {
-              //   'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
-              // }
+              className={classNames('w-8 cursor-pointer translate-x-1',
+                // {
+                //   'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
+                // }
               )
-            }
+              }
               src={!isCheckMenu ? menu : back}
               alt=""
             ></img>
@@ -293,18 +300,21 @@ const Layout = ({ children }) => {
           '-left-20': isCollapsed && !isDesktop,
         })}
       >
-        <Menu isCollapsed={isCollapsed} />
+        <Menu isCollapsed={isCollapsed}
+          set_isCollapsed={set_isCollapsed}
+          isCheckMenu={isCheckMenu}
+          setIsCheckMenu={isCheckMenu}
+        />
       </div>
       {!isCollapsed && !isDesktop && (
-        <div className={'w-full h-full fixed bg-black opacity-50 z-[1]'} 
-        onClick={() =>
-          {
+        <div className={'w-full h-full fixed bg-black opacity-50 z-[1]'}
+          onClick={() => {
             set_isCollapsed(true)
             setIsCheckMenu(!isCheckMenu)
-          } 
-        } />
+          }
+          } />
       )}
-       <ScrolltoTop showTopBtn={showTopBtn} />
+      <ScrolltoTop showTopBtn={showTopBtn} />
       <div
         className={classNames('bg-gray-100 sm:px-5 px-2 transition-all duration-300 ease-in-out z-10', {
           'sm:ml-72': !isCollapsed && isDesktop,
