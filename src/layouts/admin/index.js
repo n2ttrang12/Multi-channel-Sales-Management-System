@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import logo from 'assets/images/logo.png';
 import arrow from 'assets/images/arrow.svg';
 import back from 'assets/images/return.png';
+import up from 'assets/images/uptotop.png';
 import menu from 'assets/images/menuIcon.png';
 import avatar from 'assets/images/avatar.jpeg';
 import { useTranslation } from 'react-i18next';
@@ -31,7 +32,7 @@ const Layout = ({ children }) => {
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
   const [data, setData] = useState({});
   const [isCheckMenu,setIsCheckMenu]= useState(false)
-  
+  const [showTopBtn,setShowTopBtn] = useState(true)
   useEffect(() => {
     if (window.innerWidth < 1024 && !isCollapsed) {
       setTimeout(() => {
@@ -64,6 +65,15 @@ const Layout = ({ children }) => {
     return () => window.removeEventListener('resize', handleResize, true);
   }, []);
 
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
+    });
+  }, []);
   const fetchInfo = async () => {
     try {
       const res = await ProfileService.get();
@@ -76,6 +86,29 @@ const Layout = ({ children }) => {
   useEffect(() => {
     fetchInfo();
   }, []);
+  const ScrolltoTop = ({ showTopBtn }) => {
+    return (
+      <div className='top-to-btm'>
+        {showTopBtn && (
+          <img
+            // className={classNames('w-12 rounded ml-2', {
+            //   hidden: !!isCollapsed || !isDesktop,
+            // })}
+            className='icon-position icon-style'
+            src={up}
+            alt=""
+            onClick={goToTop}
+          />
+        )}
+      </div>
+    )
+  }
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   const Header = ({ isCollapsed, isDesktop }) => (
     <header
@@ -178,13 +211,16 @@ const Layout = ({ children }) => {
       <Header isCollapsed={isCollapsed} isDesktop={isDesktop} />
       {/* <div className={`${isCollapsed ? 'nav_overlay' : ''}`}>
       </div> */}
-      <div
+       <div
         className={classNames(
-          't-10 sm:rounded-tr-3xl flex items-center text-gray-800 hover:text-gray-500 h-20 fixed top-0 left-0 px-5 font-bold transition-all duration-300 ease-in-out z-10',
+          `t-10 sm:rounded-tr-3xl flex
+           items-center text-gray-800 hover:text-gray-500 h-20 
+            ${!isDesktop ? 'absolute top-0 left-0' : ' fixed top-0 left-0'} 
+             px-5 font-bold transition-all duration-300 ease-in-out z-10`,
           {
             'sm:w-72 justify-between': !isCollapsed && isDesktop,
             'sm:w-[64px] justify-center': isCollapsed,
-            'bg-teal-900': isDesktop ,
+            'bg-teal-900': isDesktop,
             'bg-blue-50': !isDesktop,
           },
         )}
@@ -268,6 +304,7 @@ const Layout = ({ children }) => {
           } 
         } />
       )}
+       <ScrolltoTop showTopBtn={showTopBtn} />
       <div
         className={classNames('bg-gray-100 sm:px-5 px-2 transition-all duration-300 ease-in-out z-10', {
           'sm:ml-72': !isCollapsed && isDesktop,
