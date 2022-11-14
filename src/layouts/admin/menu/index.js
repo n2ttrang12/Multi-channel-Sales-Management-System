@@ -90,7 +90,7 @@ const Layout = ({ isCollapsed = false }) => {
                     </span>
                   </Fragment>
                 }
-                className="flex items-center px-3 py-1 text-gray-300"
+                className="flex items-center pr-3 pl-[15px] py-1 text-gray-300"
                 showArrow={!isCollapsed}
                 popover={isCollapsed}
                 isExpand={location.pathname.indexOf(routerLinks(item.name)) === 0}
