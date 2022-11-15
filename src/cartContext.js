@@ -171,7 +171,7 @@ export const CartProvider = ({ children }) => {
         const { id, _codeBar } = data
         const barCodeTemp = cart.map((item, index) => {
             if (item.productId === id) {
-                return { ...item, storeBarcode: _codeBar }
+                return { ...item, StoreBarcode: _codeBar }
             }
             return item
         })

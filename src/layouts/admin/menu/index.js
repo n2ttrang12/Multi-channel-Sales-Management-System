@@ -43,8 +43,10 @@ const Layout = ({ isCollapsed = false, set_isCollapsed, setIsCheckMenu, isCheckM
                 })}
                 onClick={() => {
                   navigate(routerLinks(item.name));
-                  set_isCollapsed(!isCollapsed)
-                  setIsCheckMenu(!isCheckMenu)
+                  if(window.innerWidth < 640 ){
+                    set_isCollapsed(!isCollapsed)
+                    setIsCheckMenu(!isCheckMenu)
+                  }
                 }}
               >
                 {
@@ -116,7 +118,13 @@ const Layout = ({ isCollapsed = false, set_isCollapsed, setIsCheckMenu, isCheckM
                         className={classNames('py-2 text-gray-300 my-2 font-medium text-base', {
                           'bg-teal-700 !text-white rounded-2xl  ': location.pathname === routerLinks(subItem.name),
                         })}
-                        onClick={() => navigate(routerLinks(subItem.name))}
+                        onClick={() => {
+                          navigate(routerLinks(subItem.name))
+                          if(window.innerWidth < 640 ){
+                            set_isCollapsed(!isCollapsed)
+                            setIsCheckMenu(!isCheckMenu)
+                          }
+                        }}
                       >
                         {subItem.name}
                       </li>
