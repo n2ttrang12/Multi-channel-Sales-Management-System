@@ -77,7 +77,7 @@ export const CartService = {
         list : values.map((item)=>{
           return {
            productId: item?.productId,
-           storeBarcode : item?.storeBarcode ? item?.storeBarcode : item?._storeBarcode
+           storeBarcode : item?.storeBarcode ? item?.storeBarcode : item?.StoreBarcode
           }
      })
       }
