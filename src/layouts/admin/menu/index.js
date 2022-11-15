@@ -43,8 +43,10 @@ const Layout = ({ isCollapsed = false, set_isCollapsed, setIsCheckMenu, isCheckM
                 })}
                 onClick={() => {
                   navigate(routerLinks(item.name));
-                  set_isCollapsed(!isCollapsed)
-                  setIsCheckMenu(!isCheckMenu)
+                  if(window.innerWidth < 640 ){
+                    set_isCollapsed(!isCollapsed)
+                    setIsCheckMenu(!isCheckMenu)
+                  }
                 }}
               >
                 {
@@ -118,8 +120,10 @@ const Layout = ({ isCollapsed = false, set_isCollapsed, setIsCheckMenu, isCheckM
                         })}
                         onClick={() => {
                           navigate(routerLinks(subItem.name))
-                          set_isCollapsed(!isCollapsed)
-                          setIsCheckMenu(!isCheckMenu)
+                          if(window.innerWidth < 640 ){
+                            set_isCollapsed(!isCollapsed)
+                            setIsCheckMenu(!isCheckMenu)
+                          }
                         }}
                       >
                         {subItem.name}
