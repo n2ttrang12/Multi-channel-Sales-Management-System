@@ -213,7 +213,7 @@ const Layout = ({ children }) => {
         className={classNames(
           `t-10 sm:rounded-tr-3xl flex
            items-center text-gray-800 hover:text-gray-500 h-20 
-            fixed top-0 left-0 
+           ${!isDesktop ? 'absolute top-0 left-0 ' : 'fixed top-0 left-0 ' }
              px-5 font-bold transition-all duration-300 ease-in-out z-10`,
           {
             'sm:w-72 justify-between': !isCollapsed && isDesktop,
