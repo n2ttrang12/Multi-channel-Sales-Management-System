@@ -385,7 +385,7 @@ const Hook = ({
                         null,
                         params[filter],
                         params[sort],
-                        document.getElementById(idE.current + '_input_search').value,
+                        document.getElementById(idE.current + '_input_search').value.trim(),
                       );
                     }, 500);
                   }}
@@ -395,7 +395,7 @@ const Hook = ({
                         null,
                         params[filter],
                         params[sort],
-                        document.getElementById(idE.current + '_input_search').value,
+                        document.getElementById(idE.current + '_input_search').value.trim(),
                       );
                   }}
                 />
