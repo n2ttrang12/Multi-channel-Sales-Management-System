@@ -223,15 +223,7 @@ const Layout = ({ children }) => {
           },
         )}
       >
-        {!isDesktop && (
-          <div className="mr-3">
-            <img
-              className={classNames('w-10 rounded')}
-              src={logo}
-              alt=""
-            />
-          </div>
-        )}
+       
         <div>
           <a href="/" className="flex items-center">
             <img
@@ -255,6 +247,7 @@ const Layout = ({ children }) => {
             </div>
           </a>
         </div>
+      
         {isDesktop ? (
           <div
             onClick={() => {
@@ -279,7 +272,7 @@ const Layout = ({ children }) => {
           >
 
             <img
-              className={classNames('w-8 cursor-pointer translate-x-1',
+              className={classNames('w-7 cursor-pointer translate-x-1',
                 // {
                 //   'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
                 // }
@@ -290,7 +283,17 @@ const Layout = ({ children }) => {
             ></img>
           </div>
         )}
+         {!isDesktop && (
+          <div className="ml-3">
+            <img
+              className={classNames('w-12 rounded')}
+              src={logo}
+              alt=""
+            />
+          </div>
+        )}
       </div>
+       
       <div
         className={classNames('fixed z-10 top-20 sm:left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out', {
           'w-72': !isCollapsed,
