@@ -113,7 +113,7 @@ const Layout = ({ children }) => {
   const Header = ({ isCollapsed, isDesktop }) => (
     <header
       className={classNames(
-        'sm:bg-gray-100 bg-white w-full header  h-18 transition-all duration-300 ease-in-out sticky top-0 block z-10 ',
+        'sm:bg-gray-100 bg-white w-full header  h-18 transition-all duration-300 ease-in-out sticky top-0 block z-10  sm:mb-0 mb-2',
         {
           'pl-72': !isCollapsed && isDesktop,
           'pl-32': isCollapsed && isDesktop,
