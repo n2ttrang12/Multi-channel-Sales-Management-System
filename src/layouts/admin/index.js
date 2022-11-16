@@ -304,7 +304,7 @@ const Layout = ({ children }) => {
         <Menu isCollapsed={isCollapsed}
           set_isCollapsed={set_isCollapsed}
           isCheckMenu={isCheckMenu}
-          setIsCheckMenu={isCheckMenu}
+          setIsCheckMenu={setIsCheckMenu}
         />
       </div>
       {!isCollapsed && !isDesktop && (
