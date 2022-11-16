@@ -6,6 +6,7 @@ import { routerLinks } from 'utils';
 import { UserService } from 'services/user';
 import { ColumnSendOtp } from 'columns/auth';
 import { Link } from 'react-router-dom';
+import './index.less'
 
 const Page = () => {
   const { t } = useTranslation();
@@ -43,9 +44,10 @@ const Page = () => {
         <Form
           className="mx-auto form-login"
           columns={ColumnSendOtp({ t })}
+          classGroupButton="sm:mt-2"
           textSubmit={'Gửi OTP'}
           handSubmit={submit}
-          idSubmit={'submit-btn'}
+          idSubmit={'sendotp-btn'}
         />
       </Spin>
       <div className="text-center mt-4">
