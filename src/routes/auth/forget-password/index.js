@@ -6,7 +6,7 @@ import { routerLinks } from 'utils';
 import { UserService } from 'services/user';
 import { ColumnForgetPassword } from 'columns/auth';
 import { Link } from 'react-router-dom';
-
+import './index.less'
 const Page = ({ location }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -43,6 +43,7 @@ const Page = ({ location }) => {
           className="w-3/4 mx-auto form-login"
           columns={ColumnForgetPassword({ t })}
           textSubmit={'Lấy mã OTP'}
+          classGroupButton="sm:mt-3"
           handSubmit={submit}
           idSubmit={'submit-btn'}
         />
