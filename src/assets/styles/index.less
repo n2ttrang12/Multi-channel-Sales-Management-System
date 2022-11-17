@@ -178,8 +178,11 @@ body {
   and (max-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 1) { 
     .ant-table-content {
-      overflow: hidden !important;
+      overflow-x: scroll !important;
     }
+    .ant-table table {
+      width: 90vw;
+  }
 }
 // @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
 //   .ipad-portrait { color: red; } /* your css rules for ipad portrait */
