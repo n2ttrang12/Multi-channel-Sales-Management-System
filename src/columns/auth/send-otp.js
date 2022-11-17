@@ -2,9 +2,9 @@ const Column = ({ t }) => {
   return [
     {
       name: 'otp',
-      title: 'Mã Otp',
+      title: 'Mã OTP',
       formItem: {
-        placeholder: 'Mã Otp',
+        placeholder: 'Mã OTP',
         rules: [{ type: 'required' }],
       },
     },
