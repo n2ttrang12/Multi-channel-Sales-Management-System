@@ -43,9 +43,9 @@ const Page = ({ location }) => {
           className="w-3/4 mx-auto form-login"
           columns={ColumnForgetPassword({ t })}
           textSubmit={'Lấy mã OTP'}
-          classGroupButton="sm:mt-3"
+          classGroupButton="sm:!mt-3"
           handSubmit={submit}
-          idSubmit={'submit-btn'}
+          idSubmit={'forgot-password-btn'}
         />
       </Spin>
       <div className="text-center mt-4">

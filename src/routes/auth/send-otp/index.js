@@ -44,7 +44,7 @@ const Page = () => {
         <Form
           className="mx-auto form-login"
           columns={ColumnSendOtp({ t })}
-          classGroupButton="sm:mt-2"
+          classGroupButton="sm:!mt-2"
           textSubmit={'Gửi OTP'}
           handSubmit={submit}
           idSubmit={'sendotp-btn'}
