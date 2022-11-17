@@ -51,7 +51,7 @@ const Page = () => {
           className="w-3/4 mx-auto form-login"
           columns={ColumnResetPassword({ t })}
           textSubmit={'Đổi mật khẩu'}
-          classGroupButton="sm:mt-3"
+          classGroupButton="sm:!mt-3"
           handSubmit={submit}
           idSubmit={'submit-btn'}
         />
