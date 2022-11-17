@@ -119,8 +119,8 @@ const Component = ({
 
   return (
     total > 0 && (
-      <div className={classNames(className, 'sm:flex sm:flex-row items-center justify-between mt-3 select-none')}>
-        <div className={'left'}>
+      <div className={classNames(className, 'sm:flex lg:flex-row flex-col items-center lg:justify-between  mt-3 select-none')}>
+        <div className={`left ${  ( window.innerWidth > 740 && window.innerWidth <=1023 )  ? 'absolute left-0' :''} `}>
           <Select
             id={idElement + '_page_size'}
             defaultValue={pageSize}
@@ -133,11 +133,11 @@ const Component = ({
               </Select.Option>
             ))}
           </Select>
-          <span className="ml-3 text-black">{paginationDescription(ranges[0], ranges[1], total)}</span>
+          <span className="lg:ml-3  text-black">{paginationDescription(ranges[0], ranges[1], total)}</span>
         </div>
-        <div className=" mt-3 sm:mt-0 right flex justify-center  p-1 rounded-xl bg-white">
+        <div className="  md:mt-10 lg:mt-0 mt-3 right flex justify-center  lg:p-1 rounded-xl bg-white">
         {/* mt-3 sm:mt-0 right flex justify-center border border-gray-100 p-1 rounded-xl bg-white */}
-          <div className="flex flex-wrap justify-center duration-300 transition-all">
+          <div className="flex flex-wrap justify-center duration-300  transition-all">
             {listOfPageItem.current.map((page, index) => (
               <button
                 type={'button'}
