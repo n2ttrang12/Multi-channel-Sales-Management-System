@@ -73,7 +73,7 @@ export const CartProvider = ({ children }) => {
 
   const caculatePrice = (qty, data) => {
     if (!qty || !data || +qty === 0) return;
-    if (+qty > 0 && +qty > +data[0].minQuantity ) {
+    if (+qty > 0 && +qty >= +data[0].minQuantity ) {
       const tempData = data.sort((a, b) => b.minQuantity - a.minQuantity);
       for (let i = 0; i < tempData.length; i++) {
         if (+qty >= tempData[i]?.minQuantity) {
