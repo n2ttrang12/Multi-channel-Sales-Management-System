@@ -133,11 +133,11 @@ const Component = ({
               </Select.Option>
             ))}
           </Select>
-          <span className="lg:ml-3  text-black">{paginationDescription(ranges[0], ranges[1], total)}</span>
+          <span className="lg:ml-3 ml-[4px] text-black">{paginationDescription(ranges[0], ranges[1], total)}</span>
         </div>
         <div className="  md:mt-10 lg:mt-0 mt-3 right flex justify-center  lg:p-1 rounded-xl bg-white">
           {/* mt-3 sm:mt-0 right flex justify-center border border-gray-100 p-1 rounded-xl bg-white */}
-          <div className="flex flex-wrap justify-center duration-300  transition-all">
+          <div className="flex md:flex-wrap justify-center duration-300  transition-all">
             {listOfPageItem.current.map((page, index) => (
               <button
                 type={'button'}
