@@ -111,100 +111,104 @@ const Layout = ({ children }) => {
   };
 
   const Header = ({ isCollapsed, isDesktop }) => (
-    <header
-      className={classNames(
-        'sm:bg-gray-100 bg-white w-full header  h-18 transition-all duration-300 ease-in-out sticky top-0 block z-10  sm:mb-0 mb-2',
-        {
-          'pl-72': !isCollapsed && isDesktop,
-          'pl-32': isCollapsed && isDesktop,
-          'pl-28': !isDesktop,
-        },
-      )}
-    >
-      {/* {/ <div className="flex items-center justify-end px-5 h-16"> /} */}
-      {/* <Select value={i18n.language} onChange={(value) => changeLanguage(value)}>
+    <div className=' '>
+      <div className=' relative lg:mb-0 sm:pb-0 pb-24  !bg-gray-100'></div>
+      <header
+        className={classNames(
+          `sm:bg-gray-100 bg-white w-full header  h-18 transition-all duration-300 ease-in-out lg:sticky lg:top-0 block z-10  sm:mb-0 mb-2  
+         fixed top-0 left-0 `,
+          {
+            'pl-72': !isCollapsed && isDesktop,
+            'pl-32': isCollapsed && isDesktop,
+            'pl-28': !isDesktop,
+          },
+        )}
+      >
+        {/* {/ <div className="flex items-center justify-end px-5 h-16"> /} */}
+        {/* <Select value={i18n.language} onChange={(value) => changeLanguage(value)}>
           <Select.Option value="en"><img src={us} alt="US" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.English')}</Select.Option>
           <Select.Option value="vi"><img src={vn} alt="VN" className="mr-1 w-4 inline-block relative -top-0.5"/> {t('routes.admin.Layout.Vietnam')}</Select.Option>
         </Select> */}
-      <div className="flex items-center justify-end px-5 h-20">
-        <div className="flex items-center">
-          {roleCode === 'OWNER_STORE' && (<div className="mr-5 relative flex group">
-            <div className="rounded-full text-white w-5 h-5 bg-blue-400 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
-              {cart ? cart?.length : 0}
-            </div>
-            <i
-              className="las la-shopping-cart text-4xl text-gray-500 cursor-pointer"
-              onClick={() => {
-                navigate(`${routerLinks('CartDetail')}`)
-                fetchListCart()
-              }}
-            />
-          </div>)}
-          {/* <div className="mr-5 relative flex group">
+        <div className="flex items-center justify-end px-5 h-20">
+          <div className="flex items-center">
+            {roleCode === 'OWNER_STORE' && (<div className="mr-5 relative flex group">
+              <div className="rounded-full text-white w-5 h-5 bg-blue-400 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
+                {cart ? cart?.length : 0}
+              </div>
+              <i
+                className="las la-shopping-cart text-4xl text-gray-500 cursor-pointer"
+                onClick={() => {
+                  navigate(`${routerLinks('CartDetail')}`)
+                  fetchListCart()
+                }}
+              />
+            </div>)}
+            {/* <div className="mr-5 relative flex group">
             <div className="rounded-full text-white w-5 h-5 bg-blue-400 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
               1
             </div>
             <i className="las la-bell text-4xl text-gray-500" />
           </div> */}
-          {/* <div className="mr-5 relative flex group">
+            {/* <div className="mr-5 relative flex group">
             <div className="rounded-full text-white w-5 h-5 bg-yellow-500 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
               76
             </div>
             <i className="las la-comment text-4xl text-gray-500" />
           </div> */}
-          <Dropdown
-            trigger={['click']}
-            overlay={
-              <ul className="bg-white">
-                <li className="p-2 flex items-center pl-4 cursor-pointer border-b border-solid border-gray-200">
+            <Dropdown
+              trigger={['click']}
+              overlay={
+                <ul className="bg-white">
+                  <li className="p-2 flex items-center pl-4 cursor-pointer border-b border-solid border-gray-200">
+                    <img
+                      className="w-[35px] h-[35px] rounded-full object-cover mr-2"
+                      src={data?.profileImage || avatar}
+                      alt="profile_pic"
+                    ></img>
+                    <div>
+                      <h1 className="font-bold text-sm">{data?.name}</h1>
+                      <p className="text-[0.6rem]">{data?.email}</p>
+                    </div>
+                  </li>
+                  <li
+                    className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer"
+                    onClick={() => navigate(routerLinks('Profile'))}
+                  >
+                    <i className="las la-user text-lg mr-2"></i> Thông tin cá nhân
+                  </li>
+                  <li
+                    className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer"
+                    onClick={() => navigate(routerLinks('Profile') + `?tab=2`)}
+                  >
+                    <i className="las la-key text-lg mr-2"></i> Đổi mật khẩu
+                  </li>
+                  <li
+                    className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer border-t border-solid border-gray-200"
+                    onClick={() => navigate(routerLinks('Login'), { replace: true })}
+                  >
+                    <i className="las la-sign-out-alt text-lg mr-2"></i> Đăng xuất
+                  </li>
+                </ul>
+              }
+              placement="bottomRight"
+              overlayClassName="rounded-md shadow-md w-[200px]  overflow-hidden"
+            >
+              <section className="flex items-center" id={'dropdown-profile'}>
+                {data?.profileImage ? (
                   <img
                     className="w-[35px] h-[35px] rounded-full object-cover mr-2"
-                    src={data?.profileImage || avatar}
+                    src={data?.profileImage}
                     alt="profile_pic"
                   ></img>
-                  <div>
-                    <h1 className="font-bold text-sm">{data?.name}</h1>
-                    <p className="text-[0.6rem]">{data?.email}</p>
-                  </div>
-                </li>
-                <li
-                  className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer"
-                  onClick={() => navigate(routerLinks('Profile'))}
-                >
-                  <i className="las la-user text-lg mr-2"></i> Thông tin cá nhân
-                </li>
-                <li
-                  className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer"
-                  onClick={() => navigate(routerLinks('Profile') + `?tab=2`)}
-                >
-                  <i className="las la-key text-lg mr-2"></i> Đổi mật khẩu
-                </li>
-                <li
-                  className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer border-t border-solid border-gray-200"
-                  onClick={() => navigate(routerLinks('Login'), { replace: true })}
-                >
-                  <i className="las la-sign-out-alt text-lg mr-2"></i> Đăng xuất
-                </li>
-              </ul>
-            }
-            placement="bottomRight"
-            overlayClassName="rounded-md shadow-md w-[200px]  overflow-hidden"
-          >
-            <section className="flex items-center" id={'dropdown-profile'}>
-              {data?.profileImage ? (
-                <img
-                  className="w-[35px] h-[35px] rounded-full object-cover mr-2"
-                  src={data?.profileImage}
-                  alt="profile_pic"
-                ></img>
-              ) : (
-                <Avatar src={avatar} size={10} />
-              )}
-            </section>
-          </Dropdown>
+                ) : (
+                  <Avatar src={avatar} size={10} />
+                )}
+              </section>
+            </Dropdown>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
   );
   return (
     <main>
@@ -213,7 +217,7 @@ const Layout = ({ children }) => {
         className={classNames(
           `t-10 sm:rounded-tr-3xl flex
            items-center text-gray-800 hover:text-gray-500 h-20 
-           ${!isDesktop ? 'absolute top-0 left-0 ' : 'fixed top-0 left-0 ' }
+           ${!isDesktop ? 'fixed top-0 left-0 ' : 'fixed top-0 left-0 '}
              px-5 font-bold transition-all duration-300 ease-in-out z-10`,
           {
             'sm:w-72 justify-between': !isCollapsed && isDesktop,
@@ -223,7 +227,7 @@ const Layout = ({ children }) => {
           },
         )}
       >
-       
+
         <div>
           <a href="/" className="flex items-center">
             <img
@@ -247,7 +251,7 @@ const Layout = ({ children }) => {
             </div>
           </a>
         </div>
-      
+
         {isDesktop ? (
           <div
             onClick={() => {
@@ -283,7 +287,7 @@ const Layout = ({ children }) => {
             ></img>
           </div>
         )}
-         {!isDesktop && (
+        {!isDesktop && (
           <div className="ml-3">
             <img
               className={classNames('w-12 rounded')}
@@ -293,7 +297,7 @@ const Layout = ({ children }) => {
           </div>
         )}
       </div>
-       
+
       <div
         className={classNames('fixed z-10 top-20 sm:left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out', {
           'w-72': !isCollapsed,
@@ -308,7 +312,7 @@ const Layout = ({ children }) => {
         />
       </div>
       {!isCollapsed && !isDesktop && (
-        <div className={'w-full h-full fixed bg-black opacity-50 z-[1]'}
+        <div className={'w-full h-[100%] fixed top-0 bg-black opacity-50 z-[2]'}
           onClick={() => {
             set_isCollapsed(true)
             setIsCheckMenu(!isCheckMenu)
