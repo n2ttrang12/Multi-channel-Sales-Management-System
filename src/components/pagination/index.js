@@ -7,13 +7,13 @@ const Component = ({
   pageSizeOptions = [],
   pageSize = 10,
   pageIndex = 1,
-  queryParams = () => {},
+  queryParams = () => { },
   pageSizeRender = (sizePage) => sizePage + ' / page',
   pageSizeWidth = '115px',
   paginationDescription = (from, to, total) => from + '-' + to + ' of ' + total + ' items',
   idElement = 'pagination',
   className = 'pagination',
-  firstPageDisabled = ({ pageIndex }) => pageIndex - 10 < 0,
+  firstPageDisabled = ({ pageIndex }) => pageIndex - 10 <= 0,
   lastPageDisabled = ({ pageIndex, lastIndex }) => pageIndex + 10 > lastIndex,
   firstPage = ({ pageIndex }) => pageIndex - 10,
   lastPage = ({ pageIndex }) => pageIndex + 10,
@@ -120,7 +120,7 @@ const Component = ({
   return (
     total > 0 && (
       <div className={classNames(className, 'sm:flex lg:flex-row flex-col items-center lg:justify-between  mt-3 select-none')}>
-        <div className={`left ${  ( window.innerWidth > 740 && window.innerWidth <=1023 )  ? 'absolute left-0' :''} `}>
+        <div className={`left ${(window.innerWidth > 740 && window.innerWidth <= 1023) ? 'absolute left-0' : ''} `}>
           <Select
             id={idElement + '_page_size'}
             defaultValue={pageSize}
@@ -136,7 +136,7 @@ const Component = ({
           <span className="lg:ml-3  text-black">{paginationDescription(ranges[0], ranges[1], total)}</span>
         </div>
         <div className="  md:mt-10 lg:mt-0 mt-3 right flex justify-center  lg:p-1 rounded-xl bg-white">
-        {/* mt-3 sm:mt-0 right flex justify-center border border-gray-100 p-1 rounded-xl bg-white */}
+          {/* mt-3 sm:mt-0 right flex justify-center border border-gray-100 p-1 rounded-xl bg-white */}
           <div className="flex flex-wrap justify-center duration-300  transition-all">
             {listOfPageItem.current.map((page, index) => (
               <button

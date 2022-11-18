@@ -43,7 +43,7 @@ const Layout = ({ isCollapsed = false, set_isCollapsed, setIsCheckMenu, isCheckM
                 })}
                 onClick={() => {
                   navigate(routerLinks(item.name));
-                  if(window.innerWidth < 640 ){
+                  if (window.innerWidth < 640) {
                     set_isCollapsed(!isCollapsed)
                     setIsCheckMenu(!isCheckMenu)
                   }
@@ -101,7 +101,7 @@ const Layout = ({ isCollapsed = false, set_isCollapsed, setIsCheckMenu, isCheckM
                 popover={isCollapsed}
                 isExpand={location.pathname.indexOf(routerLinks(item.name)) === 0}
               >
-                <div className="px-4 mx-4">
+                <div className="px-2 mx-2">
                   {item.child.map((subItem, index) => {
                     let check = false;
                     menu.filter((menuItem) => {
@@ -115,12 +115,12 @@ const Layout = ({ isCollapsed = false, set_isCollapsed, setIsCheckMenu, isCheckM
                     return check ? (
                       <li
                         key={index}
-                        className={classNames('py-2 text-gray-300 my-2 font-medium text-base', {
-                          'bg-teal-700 !text-white rounded-2xl  ': location.pathname === routerLinks(subItem.name),
+                        className={classNames('py-2 text-gray-400  font-medium text-base', {
+                          'bg-teal-700 !text-white rounded-2xl px-3  ': location.pathname === routerLinks(subItem.name),
                         })}
                         onClick={() => {
                           navigate(routerLinks(subItem.name))
-                          if(window.innerWidth < 640 ){
+                          if (window.innerWidth < 640) {
                             set_isCollapsed(!isCollapsed)
                             setIsCheckMenu(!isCheckMenu)
                           }
