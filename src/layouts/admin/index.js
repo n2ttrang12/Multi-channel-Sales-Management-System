@@ -112,7 +112,7 @@ const Layout = ({ children }) => {
 
   const Header = ({ isCollapsed, isDesktop }) => (
     <div className=' '>
-      <div className=' relative lg:mb-0 sm:pb-0 pb-24  !bg-gray-100'></div>
+      <div className=' relative lg:mb-0 lg:pb-0  pb-24  !bg-gray-100'></div>
       <header
         className={classNames(
           `sm:bg-gray-100 bg-white w-full header  h-18 transition-all duration-300 ease-in-out lg:sticky lg:top-0 block z-10  sm:mb-0 mb-2  
