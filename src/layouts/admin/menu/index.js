@@ -115,7 +115,7 @@ const Layout = ({ isCollapsed = false, set_isCollapsed, setIsCheckMenu, isCheckM
                     return check ? (
                       <li
                         key={index}
-                        className={classNames('py-2 text-gray-400  font-medium text-base', {
+                        className={classNames('py-2 text-gray-300  font-medium text-base', {
                           'bg-teal-700 !text-white rounded-2xl px-3  ': location.pathname === routerLinks(subItem.name),
                         })}
                         onClick={() => {

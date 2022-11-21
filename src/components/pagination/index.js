@@ -120,7 +120,8 @@ const Component = ({
   return (
     total > 0 && (
       <div className={classNames(className, 'sm:flex lg:flex-row flex-col items-center lg:justify-between  mt-3 select-none')}>
-        <div className={`left ${(window.innerWidth > 740 && window.innerWidth <= 1023) ? 'absolute left-0' : ''} `}>
+
+        <div className={`left ${window.innerWidth <= 640 ? 'flex lg:flex-row  flex-row' : ''}    ${(window.innerWidth > 740 && window.innerWidth <= 1023) ? 'absolute left-0' : ''} `}>
           <Select
             id={idElement + '_page_size'}
             defaultValue={pageSize}
