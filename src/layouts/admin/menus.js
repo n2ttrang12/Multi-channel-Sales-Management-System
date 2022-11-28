@@ -17,7 +17,14 @@ const Layout = (roleCode) => [
       {
         name: 'Danh mục',
       },
+      {
+        name: 'Thuế',
+      },
     ],
+  },
+  roleCode === 'OWNER_STORE' && {
+    icon: 'las la-luggage-cart',
+    name: 'Quản lý NCC',
   },
   roleCode === 'ADMIN'
     ? {
@@ -30,6 +37,9 @@ const Layout = (roleCode) => [
         child: [
           {
             name: 'Thông tin cửa hàng',
+          },
+          {
+            name: 'Quản lý chi nhánh',
           },
           {
             name: 'Doanh thu theo SP',
@@ -45,14 +55,14 @@ const Layout = (roleCode) => [
   roleCode === 'ADMIN'
     ? {
         icon: 'las la-luggage-cart',
-        name: 'Quản lý nhà cung ứng',
+        name: 'Quản lý nhà cung cấp',
       }
     : {
         icon: 'las la-luggage-cart',
-        name: 'Quản lý nhà cung ứng',
+        name: 'Quản lý nhà cung cấp',
         child: [
           {
-            name: 'Thông tin nhà cung ứng',
+            name: 'Thông tin NCC',
           },
           {
             name: 'Doanh thu',
@@ -85,9 +95,10 @@ const Layout = (roleCode) => [
     icon: 'las la-boxes',
     name: 'Đặt hàng',
   },
-  roleCode === 'OWNER_STORE' && {
+  // roleCode === 'OWNER_STORE' && 
+  {
     icon: 'las la-clipboard-list',
-    name: 'Nhập hàng',
+    name: 'Quản lý kho',
     child: [
       {
         name: 'Quản lý đơn hàng',
@@ -95,7 +106,20 @@ const Layout = (roleCode) => [
       {
         name: 'Nhập hàng KM',
       },
+      {
+        name: 'Hủy hàng',
+      },
+      {
+        name: 'Trả hàng',
+      },
+      roleCode === 'OWNER_STORE' && {
+        name: 'Tồn kho',
+      },
     ],
+  },
+  roleCode === 'OWNER_STORE' &&  {
+    icon: 'las la-ban',
+    name: 'Hủy hàng',
   },
   {
     icon: 'las la-link',
