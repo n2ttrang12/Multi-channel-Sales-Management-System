@@ -126,7 +126,7 @@ const Component = ({
               },
             )}
             rows="4"
-            maxLength="1000"
+            maxLength="3000"
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
           />
         );
