@@ -28,10 +28,10 @@ const Component = ({
   handSubmit,
   values = {},
   form,
-  onFirstChange = () => {},
+  onFirstChange = () => { },
   widthLabel = null,
   checkHidden = false,
-  extendForm = () => {},
+  extendForm = () => { },
   isShowCancel = false,
   extendButton = null,
   idSubmit = 'idSubmit',
@@ -80,7 +80,7 @@ const Component = ({
 
   useEffect(() => {
     if (form && refLoad.current) {
-      if (isResetForm){
+      if (isResetForm) {
         form.resetFields();
       }
       form.setFieldsValue(values);
@@ -215,6 +215,8 @@ const Component = ({
             placeholder={formItem.placeholder || t('components.form.Enter') + ' ' + item.title.toLowerCase()}
             formItem={formItem}
             form={form}
+            onFocus={() => formItem.onFocus && formItem.onFocus()}
+            loading={formItem.loading}
             disabled={!!formItem.disabled && formItem.disabled(values, form)}
           />
         );
@@ -543,13 +545,13 @@ const Component = ({
                     className={classNames(
                       column?.formItem?.classItem,
                       'col-span-12' +
-                        (' sm:col-span-' +
-                          (column?.formItem?.colTablet
-                            ? column?.formItem?.colTablet
-                            : column?.formItem?.col
+                      (' sm:col-span-' +
+                        (column?.formItem?.colTablet
+                          ? column?.formItem?.colTablet
+                          : column?.formItem?.col
                             ? column?.formItem?.col
                             : 12)) +
-                        (' lg:col-span-' + (column?.formItem?.col ? column?.formItem?.col : 12)),
+                      (' lg:col-span-' + (column?.formItem?.col ? column?.formItem?.col : 12)),
                     )}
                     key={index}
                   >
