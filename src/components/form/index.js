@@ -564,7 +564,7 @@ const Component = ({
       </div>
       {extendForm && extendForm(values)}
 
-      <div className={classNames('flex sm:flex-row flex-col items-center w-full sm:mt-10 mt-2', classGroupButton)}>
+      <div className={classNames('flex sm:flex-row flex-col items-center w-full mt-2', classGroupButton)}>
         {extendButton && extendButton(values)}
         {isShowCancel && (
           <button
