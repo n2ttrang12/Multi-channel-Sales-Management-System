@@ -96,13 +96,13 @@ const Component = ({
           visible={visiblePopover}
           onMouseEnter={() => set_visiblePopover(true)}
           onMouseLeave={() => {
-            if (window.innerWidth > 1024) {
+            if (window.innerWidth > 640) {
               visibleChild.current = false;
               setTimeout(() => {
                 if (visibleChild.current === false) {
                   set_visiblePopover(false);
                 }
-              }, 200);
+              }, 500);
             }
           }}
         >
