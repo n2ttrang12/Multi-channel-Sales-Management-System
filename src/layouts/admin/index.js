@@ -259,13 +259,16 @@ const Layout = ({ children }) => {
               // set_isDesktop(!isDesktop);
             }}
           >
+
             <img
               className={classNames('w-4 cursor-pointer', {
-                'rotate-180': (!isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
+                'rotate-360': (!isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
+                'rotate-180': (isCollapsed && !isDesktop) || (isCollapsed && isDesktop)
               })}
               src={arrow}
               alt=""
             ></img>
+
           </div>
         ) : (
           <div
