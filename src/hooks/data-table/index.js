@@ -175,17 +175,17 @@ const Hook = ({
   }, [mount, handleSearch, location.search, showList]);
 
   const groupButton = (confirm, clearFilters, key, value) => (
-    <div className="grid grid-cols-2 gap-1">
+    <div className="grid grid-cols-2 gap-2 mt-1">
       <button
         type={'button'}
-        className="bg-blue-100 px-4 py-2.5 rounded-xl hover:bg-blue-500 hover:text-white"
+        className="bg-gray-200 p-2 sm:px-4 sm:py-2.5 rounded-xl hover:bg-gray-300 "
         onClick={() => clearFilters()}
       >
         {t('components.datatable.reset')}
       </button>
       <button
         type={'button'}
-        className="bg-blue-500 text-white px-4 py-2.5 rounded-xl hover:bg-blue-400 inline-flex items-center"
+        className="bg-teal-900 text-white p-2 sm:px-4 sm:py-2.5 rounded-xl hover:bg-teal-700 inline-flex items-center justify-center"
         onClick={() => confirm(value)}
       >
         <i className="las la-search mr-1" />
@@ -199,7 +199,7 @@ const Hook = ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div className="p-1">
         <input
-          className="w-full h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-100 pr-9 pl-4 mb-1"
+          className="w-full h-10 rounded-xl text-gray-600 bg-white border border-solid border-gray-300 pr-9 pl-4 mb-1"
           value={selectedKeys}
           type="text"
           placeholder={t('components.datatable.pleaseEnterValueToSearch')}
@@ -273,7 +273,6 @@ const Hook = ({
         if (params[filter] && params[filter][col.name]) {
           item = { ...item, defaultFilteredValue: params[filter][col.name] };
         }
-
         switch (item.filter.type) {
           case 'radio':
             item = {
@@ -290,8 +289,11 @@ const Hook = ({
           case 'date':
             item = { ...item, ...getColumnSearchDate(col.name) };
             break;
+            case 'search':
+              item = { ...item, ...getColumnSearchInput(col.name) };
+              break;
           default:
-            item = { ...item, ...getColumnSearchInput(col.name) };
+             item= {...item}
         }
         delete item.filter;
       }
