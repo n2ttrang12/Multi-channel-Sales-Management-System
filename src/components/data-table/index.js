@@ -292,8 +292,11 @@ const Hook = forwardRef(
             case 'date':
               item = { ...item, ...getColumnSearchDate(col.name) };
               break;
-            default:
+            case 'search':
               item = { ...item, ...getColumnSearchInput(col.name) };
+              break;
+            default:
+              item = { ...item };
           }
           delete item.filter;
         }
