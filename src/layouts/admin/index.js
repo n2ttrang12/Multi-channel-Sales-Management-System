@@ -23,7 +23,7 @@ import { ProfileService } from 'services/profile';
 const Layout = ({ children }) => {
   // menuVertical, permission,
   const { changeLanguage, user } = useAuth();
-  const roleCode = user?.userInfor?.roleCode
+  const roleCode = user?.userInfor?.roleCode;
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { cart, fetchListCart } = useCart();
@@ -31,8 +31,8 @@ const Layout = ({ children }) => {
   const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1024);
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
   const [data, setData] = useState({});
-  const [isCheckMenu, setIsCheckMenu] = useState(false)
-  const [showTopBtn, setShowTopBtn] = useState(false)
+  const [isCheckMenu, setIsCheckMenu] = useState(false);
+  const [showTopBtn, setShowTopBtn] = useState(false);
   useEffect(() => {
     if (window.innerWidth < 1024 && !isCollapsed) {
       setTimeout(() => {
@@ -88,21 +88,21 @@ const Layout = ({ children }) => {
   }, []);
   const ScrolltoTop = ({ showTopBtn }) => {
     return (
-      <div className='top-to-btm'>
+      <div className="top-to-btm">
         {showTopBtn && (
           <img
             // className={classNames('w-12 rounded ml-2', {
             //   hidden: !!isCollapsed || !isDesktop,
             // })}
-            className='icon-position icon-style'
+            className="icon-position icon-style"
             src={up}
             alt=""
             onClick={goToTop}
           />
         )}
       </div>
-    )
-  }
+    );
+  };
   const goToTop = () => {
     window.scrollTo({
       top: 0,
@@ -111,8 +111,8 @@ const Layout = ({ children }) => {
   };
 
   const Header = ({ isCollapsed, isDesktop }) => (
-    <div className=' '>
-      <div className=' relative lg:mb-0 lg:pb-0  pb-24  !bg-gray-100'></div>
+    <div className=" ">
+      <div className=" relative lg:mb-0 lg:pb-0  pb-24  !bg-gray-100"></div>
       <header
         className={classNames(
           `sm:bg-gray-100 bg-white w-full header  h-18 transition-all duration-300 ease-in-out lg:sticky lg:top-0 block z-10  sm:mb-0 mb-2  
@@ -131,18 +131,20 @@ const Layout = ({ children }) => {
         </Select> */}
         <div className="flex items-center justify-end px-5 h-20">
           <div className="flex items-center">
-            {roleCode === 'OWNER_STORE' && (<div className="mr-5 relative flex group">
-              <div className="rounded-full text-white w-5 h-5 bg-blue-400 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
-                {cart ? cart?.length : 0}
+            {roleCode === 'OWNER_STORE' && (
+              <div className="mr-5 relative flex group">
+                <div className="rounded-full text-white w-5 h-5 bg-blue-400 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
+                  {cart ? cart?.length : 0}
+                </div>
+                <i
+                  className="las la-shopping-cart text-4xl text-gray-500 cursor-pointer"
+                  onClick={() => {
+                    navigate(`${routerLinks('CartDetail')}`);
+                    fetchListCart();
+                  }}
+                />
               </div>
-              <i
-                className="las la-shopping-cart text-4xl text-gray-500 cursor-pointer"
-                onClick={() => {
-                  navigate(`${routerLinks('CartDetail')}`)
-                  fetchListCart()
-                }}
-              />
-            </div>)}
+            )}
             {/* <div className="mr-5 relative flex group">
             <div className="rounded-full text-white w-5 h-5 bg-blue-400 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
               1
@@ -159,7 +161,12 @@ const Layout = ({ children }) => {
               trigger={['click']}
               overlay={
                 <ul className="bg-white">
-                  <li className="p-2 flex items-center pl-4 cursor-pointer border-b border-solid border-gray-200">
+                  <li
+                    className="p-2 flex items-center pl-4 cursor-pointer border-b border-solid border-gray-200"
+                    style={{
+                      wordBreak: 'break-word',
+                    }}
+                  >
                     <img
                       className="w-[35px] h-[35px] rounded-full object-cover mr-2"
                       src={data?.profileImage || avatar}
@@ -191,7 +198,7 @@ const Layout = ({ children }) => {
                 </ul>
               }
               placement="bottomRight"
-              overlayClassName="rounded-md shadow-md w-[200px]  overflow-hidden"
+              overlayClassName="rounded-md shadow-md w-[210px]  overflow-hidden"
             >
               <section className="flex items-center" id={'dropdown-profile'}>
                 {data?.profileImage ? (
@@ -227,7 +234,6 @@ const Layout = ({ children }) => {
           },
         )}
       >
-
         <div>
           <a href="/" className="flex items-center">
             <img
@@ -259,32 +265,29 @@ const Layout = ({ children }) => {
               // set_isDesktop(!isDesktop);
             }}
           >
-
             <img
               className={classNames('w-4 cursor-pointer', {
                 'rotate-360': (!isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
-                'rotate-180': (isCollapsed && !isDesktop) || (isCollapsed && isDesktop)
+                'rotate-180': (isCollapsed && !isDesktop) || (isCollapsed && isDesktop),
               })}
               src={arrow}
               alt=""
             ></img>
-
           </div>
         ) : (
           <div
             onClick={() => {
               set_isCollapsed(!isCollapsed);
-              setIsCheckMenu(!isCheckMenu)
+              setIsCheckMenu(!isCheckMenu);
             }}
           >
-
             <img
-              className={classNames('w-7 cursor-pointer translate-x-1',
+              className={classNames(
+                'w-7 cursor-pointer translate-x-1',
                 // {
                 //   'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
                 // }
-              )
-              }
+              )}
               src={!isCheckMenu ? menu : back}
               alt=""
             ></img>
@@ -292,35 +295,36 @@ const Layout = ({ children }) => {
         )}
         {!isDesktop && (
           <div className="ml-3">
-            <img
-              className={classNames('w-12 rounded')}
-              src={logo}
-              alt=""
-            />
+            <img className={classNames('w-12 rounded')} src={logo} alt="" />
           </div>
         )}
       </div>
 
       <div
-        className={classNames('fixed z-10 top-20 sm:left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out', {
-          'w-72': !isCollapsed,
-          'w-[64px]': isCollapsed,
-          '-left-20': isCollapsed && !isDesktop,
-        })}
+        className={classNames(
+          'fixed z-10 top-20 sm:left-0 h-screen bg-teal-900 transition-all duration-300 ease-in-out',
+          {
+            'w-72': !isCollapsed,
+            'w-[64px]': isCollapsed,
+            '-left-20': isCollapsed && !isDesktop,
+          },
+        )}
       >
-        <Menu isCollapsed={isCollapsed}
+        <Menu
+          isCollapsed={isCollapsed}
           set_isCollapsed={set_isCollapsed}
           isCheckMenu={isCheckMenu}
           setIsCheckMenu={setIsCheckMenu}
         />
       </div>
       {!isCollapsed && !isDesktop && (
-        <div className={'w-full h-[100%] fixed top-0 bg-black opacity-50 z-[2]'}
+        <div
+          className={'w-full h-[100%] fixed top-0 bg-black opacity-50 z-[2]'}
           onClick={() => {
-            set_isCollapsed(true)
-            setIsCheckMenu(!isCheckMenu)
-          }
-          } />
+            set_isCollapsed(true);
+            setIsCheckMenu(!isCheckMenu);
+          }}
+        />
       )}
       <ScrolltoTop showTopBtn={showTopBtn} />
       <div
